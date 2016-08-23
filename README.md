@@ -3,6 +3,8 @@
 * Push ex) [NewsingIT Project 2016/08/23 11:20]
 
 -----------------------------------------
+< Android Using Library list (updating...) >
+*
 
 < Update Content >
 
