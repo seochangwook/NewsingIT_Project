@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MainActivity BottomMenu id list -->
+    <item name="bottom_bar_newslist_main" type="id"></item>
+    <item name="bottom_bar_my_info" type="id"></item>
+</resources>
