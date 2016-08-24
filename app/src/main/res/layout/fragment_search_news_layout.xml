@@ -2,19 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.apple.newsingit_project.view.view_fragment.MainNewsListFragment">
+    tools:context="com.example.apple.newsingit_project.view.view_fragment.SearchNewsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="메인 뉴스 기사 화면" />
-
-    <Button
-        android:id="@+id/news_click_buton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="click" />
+        android:text="@string/fragment_1" />
 
 </FrameLayout>

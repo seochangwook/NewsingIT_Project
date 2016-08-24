@@ -15,9 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.apple.newsingit_project.Create_Folder_Activity;
+import com.example.apple.newsingit_project.CreateFolderActivity;
 import com.example.apple.newsingit_project.EditMyInfoActivity;
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.UserScrapContentListActivity;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FolderListAdapter;
@@ -30,7 +31,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyInfo_Fragment extends Fragment {
+public class MyInfoFragment extends Fragment {
     //나의 정보 뷰 관련 변수/
     ImageView profile_imageview;
     TextView profile_name_textview;
@@ -48,7 +49,7 @@ public class MyInfo_Fragment extends Fragment {
     private FamiliarRefreshRecyclerView folder_recyclerrefreshview;
     private FamiliarRecyclerView folder_recyclerview;
 
-    public MyInfo_Fragment() {
+    public MyInfoFragment() {
         // Required empty public constructor
     }
 
@@ -121,6 +122,34 @@ public class MyInfo_Fragment extends Fragment {
                 .transform(new CropCircleTransformation())
                 .into(profile_imageview);
 
+        /** RecyclerView 이벤트 처리 **/
+        folder_recyclerrefreshview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
+            @Override
+            public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
+                String select_folder_name = folderData.folder_list.get(position).get_folder_name();
+
+                Toast.makeText(getActivity(), select_folder_name + "폴더로 이동", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity(), UserScrapContentListActivity.class);
+
+                intent.putExtra("KEY_FOLDER_NAME", select_folder_name);
+
+                startActivity(intent);
+            }
+        });
+
+        folder_recyclerrefreshview.setOnItemLongClickListener(new FamiliarRecyclerView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
+                String folder_name = folderData.folder_list.get(position).get_folder_name();
+
+                Toast.makeText(getActivity(), folder_name + "폴더 제거", Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
+
+        /** 일반 버튼 처리 **/
         scrapt_count_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,7 +187,7 @@ public class MyInfo_Fragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "폴더 추가", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(getActivity(), Create_Folder_Activity.class);
+                Intent intent = new Intent(getActivity(), CreateFolderActivity.class);
 
                 startActivity(intent);
             }

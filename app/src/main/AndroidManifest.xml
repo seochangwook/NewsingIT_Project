@@ -43,10 +43,9 @@
             android:label="@string/title_activity_alarm_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Create_Folder_Activity"
+            android:name=".CreateFolderActivity"
             android:label="@string/title_activity_create__folder_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FollowerListActivity"
             android:exported="true"
@@ -65,6 +64,15 @@
         <activity
             android:name=".SelectNewsDetailActivity"
             android:label="@string/title_activity_select_news_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SearchTabActivity"
+            android:exported="true"
+            android:label="@string/title_activity_search_tab"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserScrapContentListActivity"
+            android:label="@string/title_activity_user_scrap_content_list"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

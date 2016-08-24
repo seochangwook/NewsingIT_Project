@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.dialog.KeywordListActivity;
 import com.example.apple.newsingit_project.view.view_fragment.MainNewsListFragment;
-import com.example.apple.newsingit_project.view.view_fragment.MyInfo_Fragment;
+import com.example.apple.newsingit_project.view.view_fragment.MyInfoFragment;
 import com.example.apple.newsingit_project.widget.menuwidget.BottomMenu;
 import com.squareup.picasso.Picasso;
 
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "나의 정보 페이지 이동", Toast.LENGTH_SHORT).show();
 
                     //프래그먼트 변경.//
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyInfo_Fragment())
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyInfoFragment())
                             .commit();
 
                     //프래그먼트 변경 시 타이틀 변경.//
@@ -164,6 +164,10 @@ public class MainActivity extends AppCompatActivity {
         if (item_id == R.id.search_menu_item)
         {
             Toast.makeText(MainActivity.this, "검색 화면으로 이동", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(MainActivity.this, SearchTabActivity.class);
+
+            startActivity(intent);
         }
 
         if (item_id == android.R.id.home) {

@@ -5,6 +5,9 @@
     <!-- Dummy String -->
     <string name="folder_temp_name">폴더이름</string>
     <string name="folder_create_textname">폴더 이름</string>
+    <string name="fragment_1">뉴스검색</string>
+    <string name="fragment_2">사용자 검색</string>
+    <string name="fragment_3">태그 검색</string>
 
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_keyword">KeywordActivity</string>
@@ -41,5 +44,12 @@
     <string name="following">팔로우</string>
     <string name="title_activity_notice">공지사항</string>
     <string name="title_activity_select_news_detail">SelectNewsDetailActivity</string>
+    <string name="title_activity_search_tab">SearchTabActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- menu string list -->
+    <string name="cancel_menu">취소</string>
+    <string name="title_activity_user_scrap_content_list">UserScrapContentListActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
 </resources>
