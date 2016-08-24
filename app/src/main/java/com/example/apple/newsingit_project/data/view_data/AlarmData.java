@@ -22,7 +22,7 @@ public class AlarmData {
         return this.name;
     }
 
-    public String date(){
+    public String getDate(){
         return this.date;
     }
 }

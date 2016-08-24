@@ -1,4 +1,4 @@
-package com.example.apple.newsingit_project.view.view_list;
+package com.example.apple.newsingit_project.data.view_data;
 
 import java.util.ArrayList;
 import java.util.Arrays;
