@@ -58,7 +58,6 @@ public class DrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_drawer, container, false);
         View drawerHeader = inflater.inflate(R.layout.view_drawer_header, container, false);
 
@@ -66,11 +65,12 @@ public class DrawerFragment extends Fragment {
         expandableListView.addHeaderView(drawerHeader);
         expandableListView.setAdapter(mAdapter);
 
-       // expandableListView.setGroupIndicator(getResources().getDrawable(R.drawable.expandable_state_list));
 
+        //expandablelistview의 group indicator를 cusotom해주기 위해 기본 indicator를 제거한다//
         expandableListView.setGroupIndicator(null);
 
-        //그룹이 닫혔을 때
+
+        //그룹을 닫았을 때 이벤트//
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int i) {
@@ -78,7 +78,7 @@ public class DrawerFragment extends Fragment {
             }
         });
 
-        //그룹이 펼쳐졌을 때
+        //그룹을 펼쳤을 때 이벤트//
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int i) {
@@ -87,7 +87,7 @@ public class DrawerFragment extends Fragment {
             }
         });
 
-        //차일드 클릭 이벤트
+        //차일드 클릭 이벤트//
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView listView, View view, int groupposition, int childposition, long id) {

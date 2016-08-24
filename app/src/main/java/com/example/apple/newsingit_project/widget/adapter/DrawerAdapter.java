@@ -73,6 +73,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             groupView = (TextView)view.findViewById(R.id.text_group);
             imageView= (ImageView)view.findViewById(R.id.img_indicator);
 
+            //child를 포함하고 있는 group에만 indicator로 쓸 image를 VISIBLE로 설정한다//
             if(items[groupPosition].name.equals("알림 설정"))
             {
                 imageView.setImageResource(android.R.drawable.arrow_down_float);
@@ -94,13 +95,13 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         }
         groupView.setText(items[groupPosition].name);
 
-        /*groupView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                imageView.setImageResource(android.R.drawable.arrow_up_float);
-            }
-        });*/
+        //group indicator를 custom한다//
+        if(expanded){ //group이 펼쳐졌을 때 indicator 이미지//
+            imageView.setImageResource(android.R.drawable.arrow_up_float);
+        }else {  //group이 닫혔을 때 indicator 이미지//
+            imageView.setImageResource(android.R.drawable.arrow_down_float);
+        }
+
         return view;
     }
 
@@ -115,9 +116,10 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             mSwitch = (Switch)view.findViewById(R.id.switch_alarm);
             childView = (TextView)view.findViewById(R.id.text_child);
 
-            //알림 설정 그룹일 경우//
+            //child를 포함하고 있는 group에만 switch를 VISIBLE로 설정한다//
             if(groupname.equals("알림 설정")){
-                mSwitch.setVisibility(View.VISIBLE);//스위치 보이도록 설정//
+                mSwitch.setVisibility(View.VISIBLE);
+                //switch의 상태가 바뀔 때 이벤트//
                 mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {

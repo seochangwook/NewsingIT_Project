@@ -37,7 +37,7 @@ public class DrawerActivity extends AppCompatActivity {
 
     }
 
-    //메뉴 열고 닫기
+    //drawer 열고 닫기//
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
