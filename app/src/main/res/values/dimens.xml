@@ -13,7 +13,7 @@
     <dimen name="imageview_layout_margin_top">1dp</dimen>
     <dimen name="imageview_layout_margin_left">15dp</dimen>
 
-    <!-- profile name textview dimens -->
+    <!-- profile title textview dimens -->
     <dimen name="name_textview_layout_margin_top">105dp</dimen>
     <dimen name="name_textview_layout_matgin_left">43dp</dimen>
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
-import com.example.apple.newsingit_project.view.view_list.DrawerGroup;
+import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
 
 /**
  * Created by Tacademy on 2016-08-23.
