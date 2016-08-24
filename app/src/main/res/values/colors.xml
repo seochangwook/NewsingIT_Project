@@ -4,11 +4,22 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="black_color">#000000</color>
+    <color name="white_color">#ffffff</color>
 
     <!-- bottome menu color -->
     <color name="bottom_bar_bg">#fefefe</color>
     <color name="bottom_bar_unselected">#bdbdbd</color>
     <color name="bottom_bar_selected">#757575</color>
+
+    <!-- background color -->
+    <color name="button_transparent_background">#00000000</color>
+    <color name="my_info_linearlayout_background">#DCDCDC</color>
+
+    <!--drawer mennu color-->
+    <color name="drawer_group">#FFE6E6E6</color>
+    <color name="drawer_child">#FFFEFEFE</color>
+    <color name="drawer_text">#FFFEFEFE</color>
 
 
 </resources>

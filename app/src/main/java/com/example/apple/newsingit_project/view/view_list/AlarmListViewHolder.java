@@ -25,8 +25,8 @@ public class AlarmListViewHolder extends RecyclerView.ViewHolder {
 
     public void setAlarmData(AlarmData alarmData) {
         this.alarmData = alarmData;
-        nameView.setText(alarmData.name);
-        contentView.setText(alarmData.content);
-        dateView.setText(alarmData.date);
+        nameView.setText(alarmData.getName());
+        contentView.setText(alarmData.getContent());
+        dateView.setText(alarmData.getDate());
     }
 }

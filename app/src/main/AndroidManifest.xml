@@ -16,13 +16,7 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".dialog.KeywordListActivity"
             android:label="@string/title_activity_keyword_list"
@@ -31,7 +25,13 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".DrawerActivity"
             android:exported="true"
@@ -45,6 +45,16 @@
             android:name=".AlarmListActivity"
             android:exported="true"
             android:label="@string/title_activity_alarm_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FollowerListActivity"
+            android:exported="true"
+            android:label="@string/title_activity_follower_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FollowingListActivity"
+            android:label="@string/title_activity_following_list"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
