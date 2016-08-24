@@ -45,8 +45,7 @@
         <activity
             android:name=".Create_Folder_Activity"
             android:label="@string/title_activity_create__folder_"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FollowerListActivity"
             android:exported="true"
@@ -64,7 +63,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SelectNewsDetailActivity"
+            android:exported="true"
             android:label="@string/title_activity_select_news_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserSelectScrapContentActivity"
+            android:exported="true"
+            android:label="@string/title_activity_user_select_scrap_content"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditScrapContentActivity"
+            android:label="@string/title_activity_edit_scrap_content"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

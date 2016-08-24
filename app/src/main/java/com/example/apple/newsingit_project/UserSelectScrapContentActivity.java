@@ -6,31 +6,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-public class SelectNewsDetailActivity extends AppCompatActivity {
+public class UserSelectScrapContentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_news_detail_activity_layout);
+        setContentView(R.layout.user_select_scrap_content_activity_layout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button btn = (Button)findViewById(R.id.btn_go_detail);
-        btn.setOnClickListener(new View.OnClickListener() {
+        //back 버튼 추가//
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast.makeText(SelectNewsDetailActivity.this, "해당 뉴스 링크로 이동", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
+
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_scrap, menu); //xml로 작성된 메뉴를 팽창//
+        getMenuInflater().inflate(R.menu.menu_select_scrap, menu); //xml로 작성된 메뉴를 팽창//
         return true;
     }
 
@@ -39,12 +42,13 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         //헤더뷰와 푸터뷰의 뷰 레이아웃 삽입.//
         int item_id = item.getItemId();
 
-        if (item_id == R.id.scrap_news) {
-            Toast.makeText(SelectNewsDetailActivity.this, "뉴스 스크랩", Toast.LENGTH_SHORT).show();
+        if (item_id == R.id.share_scrap) {
+            Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 공유", Toast.LENGTH_SHORT).show();
+        }else if(item_id == R.id.setting_scrap){
+            Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 설정", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }
