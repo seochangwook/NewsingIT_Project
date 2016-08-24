@@ -6,6 +6,92 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.apple.newsingit_project.LoginActivity">
 
-    <include layout="@layout/content_login" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.example.apple.newsingit_project.LoginActivity"
+        tools:showIn="@layout/login_activity_layout">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/textView"
+            android:layout_marginBottom="57dp"
+            android:layout_toLeftOf="@+id/btn_google_login"
+            android:layout_toStartOf="@+id/btn_google_login"
+            android:src="@android:drawable/ic_input_get" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:text="NEWSING"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <Button
+            android:id="@+id/btn_facebook_login"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="54dp"
+            android:layout_toLeftOf="@+id/btn_twitter_login"
+            android:layout_toStartOf="@+id/btn_twitter_login"
+            android:text="facebook" />
+
+        <Button
+            android:id="@+id/btn_twitter_login"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btn_facebook_login"
+            android:layout_centerHorizontal="true"
+            android:text="twitter" />
+
+        <Button
+            android:id="@+id/btn_google_login"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btn_twitter_login"
+            android:layout_toEndOf="@+id/btn_twitter_login"
+            android:layout_toRightOf="@+id/btn_twitter_login"
+            android:text="google" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:text="IT, 키워드로 읽다"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            android:id="@+id/btn_keyword"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="keyword" />
+
+
+    </RelativeLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

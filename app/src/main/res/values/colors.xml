@@ -10,5 +10,10 @@
     <color name="bottom_bar_unselected">#bdbdbd</color>
     <color name="bottom_bar_selected">#757575</color>
 
+    <!-- drawer menu color -->
+    <color name="drawer_group">#FFE6E6E6</color>
+    <color name="drawer_child">#ffffff</color>
+    <color name="drawer_text">#ffffff</color>
+
 
 </resources>
