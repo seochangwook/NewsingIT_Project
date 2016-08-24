@@ -1,12 +1,34 @@
 <resources>
+    <!-- default title -->
     <string name="app_name">NewsingIT_Project</string>
-    <string name="action_settings">Settings</string>
 
+    <!-- String dummy data -->
+    <string name="replace_myinfo_string">내 정보 수정하기</string>
+    <string name="folder_add_string">+폴더 만들기</string>
+    <string name="folder_temp_name">사회이슈</string>
+
+    <!-- activity title -->
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_keyword">KeywordActivity</string>
     <string name="title_activity_keyword_list">KeywordListActivity</string>
+    <string name="title_activity_main">키워드 뉴스</string>
+    <string name="title_fragment_myinfo">마이페이지</string>
 
+    <!-- fragment dummy title -->
     <string name="fragment_dummy_data_1">fragment 1</string>
     <string name="fragment_dummy_data_2">fragment 2</string>
-    <string name="title_activity_main">MainAcivity</string>
+
+    <!-- Menu title -->
+
+
+    <!-- scrapt/follower/following count_button textview -->
+    <string name="scrapt_textview">스크랩수</string>
+    <string name="follower_textview">팔로워</string>
+    <string name="following_textview">팔로잉</string>
+
+    <!-- LoadMoreView 관련 String 변수 -->
+    <string name="load_more_normal">새로고침</string>
+    <string name="load_more_loading">새로고침중...</string>
+    <string name="load_more_error">새로고침 에러</string>
+
 </resources>

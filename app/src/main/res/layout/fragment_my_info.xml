@@ -1,13 +1,137 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.apple.newsingit_project.view.view_fragment.MyInfo_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/profile_imageview"
+        android:layout_width="@dimen/imageview_width"
+        android:layout_height="@dimen/imageview_height"
+        android:layout_marginLeft="@dimen/imageview_layout_margin_left"
+        android:layout_marginTop="@dimen/imageview_layout_margin_top"
+        android:src="@mipmap/ic_launcher" />
+
     <TextView
+        android:id="@+id/profile_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/name_textview_layout_matgin_left"
+        android:layout_marginTop="@dimen/name_textview_layout_margin_top"
+        android:text="서창욱"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/myinfo_replace_button"
+        android:layout_width="@dimen/profile_replace_button_width"
+        android:layout_height="@dimen/profile_replace_button_height"
+        android:layout_marginLeft="@dimen/profile_replace_button_layout_left"
+        android:layout_marginTop="@dimen/profile_replace_button_layout_top"
+        android:text="@string/replace_myinfo_string" />
+
+    <TextView
+        android:id="@+id/profile_my_introduce_textview"
+        android:layout_width="@dimen/introduce_my_textview_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/introduce_my_textview_layout_margin_left"
+        android:layout_marginTop="@dimen/introduce_my_textview_layout_margin_top"
+        android:text="안녕하세요!! 안드로이드 개발반 서창욱 입니다."
+        android:textSize="10dp" />
+
+    <Button
+        android:id="@+id/scrapt_count_button"
+        android:layout_width="@dimen/scrapt_button_width"
+        android:layout_height="@dimen/scrapt_button_height"
+        android:layout_marginLeft="@dimen/scrapt_button_layout_margin_left"
+        android:layout_marginTop="@dimen/scrapt_button_layout_margin_top"
+        android:background="@color/button_transparent_background"
+        android:gravity="center"
+        android:text="33" />
+
+    <Button
+        android:id="@+id/follower_button"
+        android:layout_width="@dimen/follower_button_width"
+        android:layout_height="@dimen/follower_button_height"
+        android:layout_marginLeft="@dimen/follower_button_layout_margin_left"
+        android:layout_marginTop="@dimen/follower_button_layout_margin_top"
+        android:background="@color/button_transparent_background"
+        android:text="303" />
+
+    <Button
+        android:id="@+id/following_button"
+        android:layout_width="@dimen/following_button_width"
+        android:layout_height="@dimen/following_button_height"
+        android:layout_marginLeft="@dimen/following_button_layout_margin_left"
+        android:layout_marginTop="@dimen/following_button_layout_margin_top"
+        android:background="@color/button_transparent_background"
+        android:text="312" />
+
+    <TextView
+        android:layout_width="@dimen/scrapt_textview_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/scrapt_textview_layout_margin_left"
+        android:layout_marginTop="@dimen/scrapt_textview_layout_margin_top"
+        android:gravity="center"
+        android:text="@string/scrapt_textview"
+        android:textSize="@dimen/scrapt_button_textsize" />
+
+    <TextView
+        android:layout_width="@dimen/follower_textview_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/follower_textview_layout_margin_left"
+        android:layout_marginTop="@dimen/follower_textview_layout_margin_top"
+        android:gravity="center"
+        android:text="@string/follower_textview"
+        android:textSize="@dimen/follower_button_textsize" />
+
+    <TextView
+        android:layout_width="@dimen/following_textview_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/following_textview_layout_margin_left"
+        android:layout_marginTop="@dimen/following_textview_layout_margin_top"
+        android:gravity="center"
+        android:text="@string/following_textview"
+        android:textSize="@dimen/scrapt_button_textsize" />
+
+    <!-- Category view layout -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/fragment_dummy_data_2" />
+        android:layout_marginTop="@dimen/my_info_linearlayout_layout_margintop"
+        android:background="@color/my_info_linearlayout_background"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/category_add_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_transparent_background"
+            android:text="@string/folder_add_string"
+            android:textColor="@color/black_color"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/folder_rv_list_empty"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#EEAADD"
+            android:gravity="center"
+            android:text="생성된 폴더가 없습니다. 폴더 만들기 버튼을 눌러 폴더를 생성해주세요!!"
+            android:visibility="gone" />
+
+        <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
+            android:id="@+id/folder_rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:frv_dividerHeight="0.5dp"
+            app:frv_emptyView="@id/folder_rv_list_empty"
+            app:frv_isEmptyViewKeepShowHeadOrFooter="true"
+            app:frv_layoutManager="grid"
+            app:frv_layoutManagerOrientation="vertical" />
+    </LinearLayout>
+</RelativeLayout>

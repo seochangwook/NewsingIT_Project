@@ -34,8 +34,10 @@ public class KeywordListActivity extends Activity {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String userSelectKeyword = keywordData.keywordDataList.get(position).getKeyword().toString();
-                Toast.makeText(KeywordListActivity.this, "" + userSelectKeyword, Toast.LENGTH_SHORT).show();
 
+                Toast.makeText(KeywordListActivity.this, "[" + userSelectKeyword + "]로 리스트 이동", Toast.LENGTH_SHORT).show();
+
+                finish();
             }
         });
 
@@ -51,6 +53,7 @@ public class KeywordListActivity extends Activity {
             new_keywordData.keyword = keywordDummyList[i];
             keywordData.keywordDataList.add(new_keywordData);
         }
+
         mAdapter.setKeywordDataList(keywordData);
     }
 

@@ -7,26 +7,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.apple.newsingit_project.dialog.KeywordListActivity;
-
 public class LoginActivity extends AppCompatActivity {
+    /**
+     * Facebook 관련 변수
+     **/
+    Button facebook_login_button;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity_layout);
+
+        facebook_login_button = (Button) findViewById(R.id.btn_facebook_login);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
-        Button btn = (Button) findViewById(R.id.btn_keyword);
-        btn.setOnClickListener(new View.OnClickListener() {
-
+        facebook_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, KeywordListActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
                 startActivity(intent);
             }
         });
     }
-
 }

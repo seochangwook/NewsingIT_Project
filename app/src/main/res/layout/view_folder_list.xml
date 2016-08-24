@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--카드뷰로 감싸기(Metrial Design적용) -->
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card:cardBackgroundColor="@color/my_info_linearlayout_background"
+        card:cardCornerRadius="8dp"
+        card:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/folder_imageview"
+            android:layout_width="@dimen/folder_imageview_width"
+            android:layout_height="@dimen/folder_imageview_height"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/folder_name_textview"
+            android:layout_width="@dimen/folder_imageview_width"
+            android:layout_height="@dimen/folder_name_textview_height"
+            android:layout_marginTop="@dimen/folder_name_textview_layout_margin_top"
+            android:background="@color/white_color"
+            android:gravity="center"
+            android:text="@string/folder_temp_name"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/folder_private_button"
+            android:layout_width="@dimen/folder_button_width"
+            android:layout_height="@dimen/folder_button_height"
+            android:background="@android:drawable/ic_secure" />
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
