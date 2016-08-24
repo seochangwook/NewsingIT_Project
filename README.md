@@ -7,6 +7,12 @@
 
 * com.github.iwgang:familiarrecyclerview:1.3.0
 * com.yqritc:recyclerview-flexibledivider:1.4.0
+* compile 'jp.wasabeef:picasso-transformations:2.1.0'
+* compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+* compile 'com.github.bumptech.glide:glide:3.7.0'
+* compile 'com.android.support:cardview-v7:24.2.0'
+* compile 'com.android.support:design:24.2.0'
+* compile 'com.android.support:support-v4:24.2.0'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 
@@ -22,3 +28,4 @@
 * FollowerActivity / FollowingActivity 추가 - 임지수(16/08/24 15:45)
 * NoticeActivity 추가 - 임지수 (16/08/24 17:33)
 * SelectNewsDetailActivity / EditScrapContentActivity / UserSelectScrapContentActivity 추가 - 임지수 (16/08/24 19:44)
+* UI시나리오 테스트를 위한 전반적인 구성 - 서창욱 (16/08/25 00:43)
