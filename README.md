@@ -5,7 +5,8 @@
 -----------------------------------------
 < Android Using Library list (updating...) >
 
-* 
+* com.github.iwgang:familiarrecyclerview:1.3.0
+* com.yqritc:recyclerview-flexibledivider:1.4.0
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 
@@ -15,3 +16,4 @@
 * 패키지 파일 추가 - 서창욱 (16/08/23 11:47)
 * 패키지 더미파일 추가 - 서창욱 (16/08/23 11:53)
 * MainActivity / BottomMenu 추가 - 서창욱 (16/08/23 16:10)
+* SplashActivity / LoginActivity / KeywordListActivity 추가 - 임지수 (16/08/23 16:27)
