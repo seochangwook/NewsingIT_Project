@@ -17,4 +17,29 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="PopupAnimation" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@animator/popup_in</item>
+        <item name="android:windowExitAnimation">@animator/popup_out</item>
+    </style>
+
+    <style name="PopupAnimationLeft" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@animator/popup_leftin</item>
+        <item name="android:windowExitAnimation">@animator/popup_leftout</item>
+    </style>
+
+    <style name="PopupAnimationRight" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@animator/popup_rightin</item>
+        <item name="android:windowExitAnimation">@animator/popup_rightout</item>
+    </style>
+
+    <style name="PopupAnimationTop" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@animator/popup_topin</item>
+        <item name="android:windowExitAnimation">@animator/popup_topout</item>
+    </style>
+
+    <style name="PopupAnimationBottom" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@animator/popup_bottom_up</item>
+        <item name="android:windowExitAnimation">@animator/popup_bottom_down</item>
+    </style>
+
 </resources>

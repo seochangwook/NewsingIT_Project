@@ -65,7 +65,6 @@ public class DrawerFragment extends Fragment {
         expandableListView.addHeaderView(drawerHeader);
         expandableListView.setAdapter(mAdapter);
 
-
         //expandablelistview의 group indicator를 cusotom해주기 위해 기본 indicator를 제거한다//
         expandableListView.setGroupIndicator(null);
 
@@ -99,8 +98,6 @@ public class DrawerFragment extends Fragment {
                 return true;
             }
         });
-
-
 
         return view;
     }

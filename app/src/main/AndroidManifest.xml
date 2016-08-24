@@ -33,10 +33,6 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DrawerActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".EditMyInfoActivity"
             android:exported="true"
             android:label="@string/title_activity_edit_my_info"
@@ -45,6 +41,10 @@
             android:name=".AlarmListActivity"
             android:exported="true"
             android:label="@string/title_activity_alarm_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Create_Folder_Activity"
+            android:label="@string/title_activity_create__folder_"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

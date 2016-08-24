@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.view.view_fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.Create_Folder_Activity;
+import com.example.apple.newsingit_project.EditMyInfoActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
 import com.example.apple.newsingit_project.view.LoadMoreView;
@@ -143,6 +146,10 @@ public class MyInfo_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "내 정보 수정하기 화면으로 이동", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
+
+                startActivity(intent);
             }
         });
 
@@ -151,8 +158,9 @@ public class MyInfo_Fragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "폴더 추가", Toast.LENGTH_SHORT).show();
 
-                //팝업창이 생성//
+                Intent intent = new Intent(getActivity(), Create_Folder_Activity.class);
 
+                startActivity(intent);
             }
         });
 

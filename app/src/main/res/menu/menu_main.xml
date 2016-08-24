@@ -6,6 +6,7 @@
         android:id="@+id/keyword_menu_item"
         android:icon="@mipmap/sample_key"
         android:orderInCategory="101"
+        android:title=""
         app:showAsAction="always" />
 
     <item
@@ -14,4 +15,5 @@
         android:orderInCategory="100"
         android:title=""
         app:showAsAction="always" />
+
 </menu>

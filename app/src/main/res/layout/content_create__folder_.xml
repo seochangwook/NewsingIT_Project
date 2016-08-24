@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.apple.newsingit_project.Create_Folder_Activity"
+    tools:showIn="@layout/create_folder_activity_layout">
+
+    <!--카드뷰로 감싸기(Metrial Design적용) -->
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card:cardBackgroundColor="@color/white_color"
+        card:cardCornerRadius="8dp"
+        card:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/folder_imageview"
+            android:layout_width="@dimen/folder_create_image_layout_width"
+            android:layout_height="@dimen/folder_create_image_layout_height" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/folder_create_line_1_margin_top"
+        android:background="@drawable/line_draw" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/folder_craate_name_textview_margin_top"
+        android:text="폴더 이름" />
+
+    <EditText
+        android:id="@+id/folder_name_edittext"
+        android:layout_width="@dimen/folder_create_name_edittext_layout_width"
+        android:layout_height="@dimen/folder_create_name_edittext_layout_height"
+        android:layout_marginTop="@dimen/folder_create_name_edittext_margin_top"
+        android:background="@android:drawable/editbox_background_normal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/folder_create_line_2_margin_top"
+        android:background="@drawable/line_draw" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/folder_craate_name_textview2_margin_top"
+        android:text="대표 이미지 선택" />
+
+    <ImageButton
+        android:id="@+id/image_select_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="290dp"
+        android:layout_marginTop="243dp"
+        android:background="@color/button_transparent_background"
+        android:src="@android:drawable/ic_input_add" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/folder_create_line_3_margin_top"
+        android:background="@drawable/line_draw" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/folder_craate_name_textview3_margin_top"
+        android:text="비공개 설정" />
+
+    <Switch
+        android:id="@+id/private_switch_button"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="303dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/folder_create_line_4_margin_top"
+        android:background="@drawable/line_draw" />
+
+    <Button
+        android:id="@+id/enroll_button"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="460dp"
+        android:text="완료" />
+</RelativeLayout>

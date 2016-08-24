@@ -97,12 +97,17 @@
         android:text="@string/following_textview"
         android:textSize="@dimen/scrapt_button_textsize" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/line_margin_top"
+        android:background="@drawable/line_draw" />
+
     <!-- Category view layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/my_info_linearlayout_layout_margintop"
-        android:background="@color/my_info_linearlayout_background"
         android:orientation="vertical">
 
         <Button

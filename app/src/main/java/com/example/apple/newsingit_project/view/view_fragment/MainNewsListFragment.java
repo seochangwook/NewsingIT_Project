@@ -25,7 +25,10 @@ public class MainNewsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main_news_list, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_main_news_list, container, false);
 
+        setHasOptionsMenu(true); //메뉴를 적용한다.//
+
+        return view;
+    }
 }
