@@ -17,3 +17,4 @@
 * 패키지 더미파일 추가 - 서창욱 (16/08/23 11:53)
 * MainActivity / BottomMenu 추가 - 서창욱 (16/08/23 16:10)
 * SplashActivity / LoginActivity / KeywordListActivity 추가 - 임지수 (16/08/23 16:27)
+* DrawerActivity / EditMyInfoActivity /AlarmListActivity 추가 - 임지수 (16/0824 10:26)
