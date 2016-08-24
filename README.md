@@ -21,3 +21,4 @@
 * DrawerActivity의 ExpandableListView Group Indicator customizing - 임지수 (16/08/24 11:14)
 * FollowerActivity / FollowingActivity 추가 - 임지수(16/08/24 15:45)
 * NoticeActivity 추가 - 임지수 (16/08/24 17:33)
+* SelectNewsDetailActivity / EditScrapContentActivity / UserSelectScrapContentActivity 추가 - 임지수 (16/08/24 19:44)

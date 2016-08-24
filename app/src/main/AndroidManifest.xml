@@ -43,7 +43,7 @@
             android:label="@string/title_activity_alarm_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CreateFolderActivity"
+            android:name=".Create_Folder_Activity"
             android:label="@string/title_activity_create__folder_"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -63,16 +63,18 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SelectNewsDetailActivity"
+            android:exported="true"
             android:label="@string/title_activity_select_news_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SearchTabActivity"
+            android:name=".UserSelectScrapContentActivity"
             android:exported="true"
-            android:label="@string/title_activity_search_tab"
+            android:label="@string/title_activity_user_select_scrap_content"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UserScrapContentListActivity"
-            android:label="@string/title_activity_user_scrap_content_list"
+            android:name=".EditScrapContentActivity"
+            android:label="@string/title_activity_edit_scrap_content"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
