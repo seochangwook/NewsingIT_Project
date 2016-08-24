@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.view.view_fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.NoticeActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.DrawerChild;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
@@ -72,17 +74,22 @@ public class DrawerFragment extends Fragment {
         //그룹을 닫았을 때 이벤트//
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
-            public void onGroupCollapse(int i) {
-                Toast.makeText(getActivity(), "닫혀라 "+i ,Toast.LENGTH_SHORT ).show();
+            public void onGroupCollapse(int groupposition) {
+                //Toast.makeText(getActivity(), "닫혀라 "+groupposition ,Toast.LENGTH_SHORT ).show();
             }
         });
 
         //그룹을 펼쳤을 때 이벤트//
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
-            public void onGroupExpand(int i) {
-                Toast.makeText(getActivity(), "열려라 참깨" ,Toast.LENGTH_SHORT ).show();
+            public void onGroupExpand(int groupposition) {
+                Toast.makeText(getActivity(), "공지사항 화면 이동" + groupposition, Toast.LENGTH_SHORT).show();
 
+                if (groupposition == 4) {
+                    Intent intent = new Intent(getActivity(), NoticeActivity.class);
+
+                    startActivity(intent);
+                }
             }
         });
 

@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.CreateFolderActivity;
 import com.example.apple.newsingit_project.EditMyInfoActivity;
+import com.example.apple.newsingit_project.FollowerListActivity;
+import com.example.apple.newsingit_project.FollowingListActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.UserScrapContentListActivity;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
@@ -36,7 +38,6 @@ public class MyInfoFragment extends Fragment {
     ImageView profile_imageview;
     TextView profile_name_textview;
     TextView profile_my_introduce_textview;
-    Button scrapt_count_button;
     Button follower_count_button;
     Button following_count_button;
     Button my_info_replace_button;
@@ -63,7 +64,6 @@ public class MyInfoFragment extends Fragment {
         profile_imageview = (ImageView) view.findViewById(R.id.profile_imageview);
         profile_name_textview = (TextView) view.findViewById(R.id.profile_name_textview);
         profile_my_introduce_textview = (TextView) view.findViewById(R.id.profile_my_introduce_textview);
-        scrapt_count_button = (Button) view.findViewById(R.id.scrapt_count_button);
         follower_count_button = (Button) view.findViewById(R.id.follower_button);
         following_count_button = (Button) view.findViewById(R.id.following_button);
         my_info_replace_button = (Button) view.findViewById(R.id.myinfo_replace_button);
@@ -150,17 +150,14 @@ public class MyInfoFragment extends Fragment {
         });
 
         /** 일반 버튼 처리 **/
-        scrapt_count_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "스크랩 수 선택", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         follower_count_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "팔로워 리스트 이동", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity(), FollowerListActivity.class);
+
+                startActivity(intent);
             }
         });
 
@@ -168,6 +165,10 @@ public class MyInfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "팔로잉 리스트 이동", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity(), FollowingListActivity.class);
+
+                startActivity(intent);
             }
         });
 

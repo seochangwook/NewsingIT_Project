@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.view.view_fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.SelectNewsDetailActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +37,9 @@ public class MainNewsListFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
+                startActivity(intent);
             }
         });
         return view;

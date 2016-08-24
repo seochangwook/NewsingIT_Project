@@ -12,10 +12,17 @@
     tools:context="com.example.apple.newsingit_project.UserScrapContentListActivity"
     tools:showIn="@layout/activity_user_scrap_content_list_layout">
 
+    <TextView
+        android:id="@+id/name_list_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*" />
+
     <Button
         android:id="@+id/click_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="click" />
 
 </RelativeLayout>

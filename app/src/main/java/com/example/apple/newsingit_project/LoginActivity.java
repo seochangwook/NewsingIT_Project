@@ -11,7 +11,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Facebook 관련 변수
      **/
-    Button facebook_login_button;
+    Button facebook_login_button; //로그인 버튼 커스텀//
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,10 +28,16 @@ public class LoginActivity extends AppCompatActivity {
         facebook_login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                startActivity(intent);
+                is_Login();
             }
         });
+    }
+
+    public void is_Login() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+
+        startActivity(intent);
+
+        finish();
     }
 }

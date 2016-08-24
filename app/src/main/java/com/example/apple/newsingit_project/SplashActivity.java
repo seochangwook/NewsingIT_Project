@@ -1,36 +1,43 @@
 package com.example.apple.newsingit_project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class SplashActivity extends AppCompatActivity {
+    Handler mHandler;
+
+    /**
+     * Facebook 자동 로그인 인증을 위한 관련 변수
+     **/
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splah_activity_layout);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        mHandler = new Handler(Looper.getMainLooper());
 
+        Auto_Login();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_splash, menu);
-        return true;
-    }
+    public void Auto_Login() {
+        /** 자동로그인 처리 매커니즘 **/
+        runOnUiThread(new Runnable() {
+            public void run() {
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-         if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+                        finish();
+                    }
+                }, 2000);
+            }
+        });
     }
 }
