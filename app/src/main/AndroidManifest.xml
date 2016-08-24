@@ -46,6 +46,26 @@
             android:name=".Create_Folder_Activity"
             android:label="@string/title_activity_create__folder_"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".FollowerListActivity"
+            android:exported="true"
+            android:label="@string/title_activity_follower_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FollowingListActivity"
+            android:exported="true"
+            android:label="@string/title_activity_following_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NoticeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_notice"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SelectNewsDetailActivity"
+            android:label="@string/title_activity_select_news_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
