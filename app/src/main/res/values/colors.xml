@@ -4,16 +4,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="black_color">#000000</color>
-    <color name="white_color">#ffffff</color>
 
     <!-- bottome menu color -->
     <color name="bottom_bar_bg">#fefefe</color>
     <color name="bottom_bar_unselected">#bdbdbd</color>
     <color name="bottom_bar_selected">#757575</color>
 
-    <!-- background color -->
-    <color name="bottommenu_click_background">#F0FFF0</color>
-    <color name="button_transparent_background">#00000000</color>
-    <color name="my_info_linearlayout_background">#DCDCDC</color>
+
 </resources>
