@@ -27,5 +27,6 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
     public void setUserScrapContent(UserScrapContentData userScrapContentData) {
         this.userScrapContentData = userScrapContentData;
         contentView.setText(userScrapContentData.getContent());
+
     }
 }

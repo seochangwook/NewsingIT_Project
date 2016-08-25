@@ -8,10 +8,14 @@ import java.util.List;
  */
 public class UserScrapContentData {
     public String content;
-
     public List<UserScrapContentData> userScrapContentDataList = new ArrayList<>();
+    private boolean scrap; //스크랩 설정 버튼 flag//
 
     public String getContent() {
         return this.content;
+    }
+
+    public boolean getScrap() {
+        return this.scrap;
     }
 }
