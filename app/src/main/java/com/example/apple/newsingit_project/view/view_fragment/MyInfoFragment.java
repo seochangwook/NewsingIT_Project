@@ -8,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +23,7 @@ import com.example.apple.newsingit_project.EditMyInfoActivity;
 import com.example.apple.newsingit_project.FollowerListActivity;
 import com.example.apple.newsingit_project.FollowingListActivity;
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.SearchTabActivity;
 import com.example.apple.newsingit_project.UserScrapContentListActivity;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
 import com.example.apple.newsingit_project.view.LoadMoreView;
@@ -198,6 +202,9 @@ public class MyInfoFragment extends Fragment {
         //Dummy Data 설정//
         set_Dummy_Folder_Date();
 
+        //메뉴변경//
+        setHasOptionsMenu(true);
+
         return view;
     }
 
@@ -236,5 +243,27 @@ public class MyInfoFragment extends Fragment {
         folderData.folder_list.add(new_folderdata_3);
 
         folderListAdapter.set_FolderDate(folderData); //설정.//
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.my_info_menu, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int item_id = item.getItemId();
+
+        if (item_id == R.id.search_menu_item) {
+            Toast.makeText(getActivity(), "검색 화면으로 이동", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getActivity(), SearchTabActivity.class);
+
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

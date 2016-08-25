@@ -46,13 +46,24 @@ public class UserInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_layout);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        user_profile_imageview = (ImageView) findViewById(R.id.user_profile_imageview);
+        user_profile_name_textview = (TextView) findViewById(R.id.user_profile_name_textview);
+        user_profile_my_introduce_textview = (TextView) findViewById(R.id.user_profile_my_introduce_textview);
+        user_follower_count_button = (Button) findViewById(R.id.user_follower_button);
+        user_following_count_button = (Button) findViewById(R.id.user_following_button);
+        user_following_button = (Button) findViewById(R.id.user_follow_button);
+
+        user_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.user_folder_rv_list);
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("name");
 
+        /** 타이틀과 이름 값 초기화 **/
         setTitle(title);
+        user_profile_name_textview.setText(title);
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -63,15 +74,6 @@ public class UserInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        user_profile_imageview = (ImageView) findViewById(R.id.user_profile_imageview);
-        user_profile_name_textview = (TextView) findViewById(R.id.user_profile_name_textview);
-        user_profile_my_introduce_textview = (TextView) findViewById(R.id.user_profile_my_introduce_textview);
-        user_follower_count_button = (Button) findViewById(R.id.user_follower_button);
-        user_following_count_button = (Button) findViewById(R.id.user_following_button);
-        user_following_button = (Button) findViewById(R.id.user_follow_button);
-
-        user_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.user_folder_rv_list);
 
         /** 폴더 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
         user_folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(this));

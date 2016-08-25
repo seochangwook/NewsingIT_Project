@@ -5,14 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.SearchTabActivity;
 import com.example.apple.newsingit_project.SelectNewsDetailActivity;
 import com.example.apple.newsingit_project.data.view_data.MainNewsData;
+import com.example.apple.newsingit_project.dialog.KeywordListActivity;
 import com.example.apple.newsingit_project.widget.adapter.MainNewsAdapter;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
@@ -77,5 +82,33 @@ public class MainNewsListFragment extends Fragment {
         }
 
         mAdapter.setMainNewsData(mainNewsData);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int item_id = item.getItemId();
+
+        if (item_id == R.id.keyword_menu_item) {
+            Intent intent = new Intent(getActivity(), KeywordListActivity.class);
+
+            startActivity(intent);
+        }
+
+        if (item_id == R.id.search_menu_item) {
+            Toast.makeText(getActivity(), "검색 화면으로 이동", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getActivity(), SearchTabActivity.class);
+
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

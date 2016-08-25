@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
@@ -63,7 +62,8 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     public void onClick(View view) {
                         //popup window//
                         String userSelect = userScrapContentData.userScrapContentDataList.get(pos).getContent().toString();
-                        Toast.makeText(context, userSelect + " 스크랩 설정", Toast.LENGTH_SHORT).show();
+
+                        //팝업창//
                     }
                 });
 
