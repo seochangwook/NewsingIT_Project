@@ -54,14 +54,6 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             folderViewHolder.set_Folder(folderData.folder_list.get(position), context);
 
-            final boolean folder_private = folderData.get_folder_private();
-
-            if (folder_private == false) {
-                folderViewHolder.folder_private_button.setBackgroundResource(android.R.drawable.ic_partial_secure);
-            } else if (folder_private == true) {
-                folderViewHolder.folder_private_button.setBackgroundResource(android.R.drawable.ic_secure);
-            }
-
             folderViewHolder.folder_private_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
