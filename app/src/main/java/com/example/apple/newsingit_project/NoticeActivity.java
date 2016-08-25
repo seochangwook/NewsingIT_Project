@@ -51,7 +51,7 @@ public class NoticeActivity extends AppCompatActivity {
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int i) {
-                Toast.makeText(NoticeActivity.this, "닫혀라 "+i ,Toast.LENGTH_SHORT ).show();
+                Toast.makeText(NoticeActivity.this, "그룹 닫힘 " + i, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -59,7 +59,7 @@ public class NoticeActivity extends AppCompatActivity {
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int i) {
-                Toast.makeText(NoticeActivity.this, "열려라 참깨" ,Toast.LENGTH_SHORT ).show();
+                Toast.makeText(NoticeActivity.this, "그룹 열림 " + i, Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -2,9 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/scrap_news"
+        android:id="@+id/lock_scrap"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:orderInCategory="100"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/create_scrap"
         android:icon="@android:drawable/checkbox_on_background"
         android:orderInCategory="100"
         android:title=""
         app:showAsAction="always" />
+
 </menu>

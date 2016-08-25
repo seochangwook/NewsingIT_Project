@@ -56,6 +56,8 @@ public class FollowingListActivity extends AppCompatActivity {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String userSelectFollower = followingData.followingDataList.get(position).getName().toString();
                 Toast.makeText(FollowingListActivity.this, "" + userSelectFollower, Toast.LENGTH_SHORT).show();
+
+                //해당 사람의 마이 페이지로 이동//
             }
         });
         initDummyData();

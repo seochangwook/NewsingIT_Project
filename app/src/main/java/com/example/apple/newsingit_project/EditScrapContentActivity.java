@@ -57,6 +57,7 @@ public class EditScrapContentActivity extends AppCompatActivity {
             Toast.makeText(EditScrapContentActivity.this, "스크랩 잠금", Toast.LENGTH_SHORT).show();
         }else if(item_id == R.id.edit_scrap){
             Toast.makeText(EditScrapContentActivity.this, "수정 완료", Toast.LENGTH_SHORT).show();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

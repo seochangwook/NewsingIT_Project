@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -49,6 +50,12 @@ public class AlarmListActivity extends AppCompatActivity {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String userSelectKeyword = alarmData.alarmDataList.get(position).getName().toString();
                 Toast.makeText(AlarmListActivity.this, "" + userSelectKeyword, Toast.LENGTH_SHORT).show();
+                finish();
+                //당신의 게시물을 좋아합니다 -> 나의 해당 스크랩으로 이동//
+                Intent intent = new Intent(AlarmListActivity.this, UserSelectScrapContentActivity.class);
+                startActivity(intent);
+                //당신을 팔로우 하였습니다 -> 나의 마이 페이지로 이동//
+                //xx가 새 스크랩을 하였습니다 -> 그 사람의 마이 페이지로 이동 or 그 사람의 새로운 스크랩으로 바로 이동//
             }
         });
         initDummyData();

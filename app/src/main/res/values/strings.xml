@@ -56,5 +56,6 @@
 
     <!-- Menu string -->
     <string name="cancel_menu_title">취소</string>
+    <string name="title_activity_create_scrap_content">스크랩 생성</string>
 
 </resources>

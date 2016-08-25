@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.LoginActivity;
 import com.example.apple.newsingit_project.NoticeActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.DrawerChild;
@@ -21,7 +22,7 @@ import com.example.apple.newsingit_project.widget.adapter.DrawerAdapter;
  * A simple {@link Fragment} subclass.
  */
 public class DrawerFragment extends Fragment {
-    public static final String MENU_NEWSPID = "뉴스피드";
+
     public static final String MENU_MY_PAGE = "마이페이지";
     public static final String MENU_SET_ALARM = "알림 설정";
     public static final String MENU_LOGOUT = "로그아웃";
@@ -33,7 +34,7 @@ public class DrawerFragment extends Fragment {
     public static final String CHILD_FOLLOW_MY_PAGE = "마이페이지 팔로우";
 
     DrawerGroup[] menuList = {
-            new DrawerGroup(MENU_NEWSPID),
+
             new DrawerGroup(MENU_MY_PAGE),
             new DrawerGroup(MENU_SET_ALARM,
                     new DrawerChild(CHILD_NEW_SCRAP),
@@ -83,11 +84,25 @@ public class DrawerFragment extends Fragment {
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupposition) {
-                Toast.makeText(getActivity(), "공지사항 화면 이동" + groupposition, Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getActivity(), "공지사항 화면 이동" + groupposition, Toast.LENGTH_SHORT).show();
+                if (groupposition == 2) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
 
-                if (groupposition == 4) {
+                if (groupposition == 3) {
                     Intent intent = new Intent(getActivity(), NoticeActivity.class);
 
+                    startActivity(intent);
+                }
+
+                if (groupposition == 4) {
+                    Toast.makeText(getActivity(), "탈퇴" + groupposition, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
             }

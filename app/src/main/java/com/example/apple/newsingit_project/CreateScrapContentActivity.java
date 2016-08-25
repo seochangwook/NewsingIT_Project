@@ -1,6 +1,5 @@
 package com.example.apple.newsingit_project;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,15 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SelectNewsDetailActivity extends AppCompatActivity {
+public class CreateScrapContentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_news_detail_activity_layout);
+        setContentView(R.layout.create_scrap_content_activity_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -30,20 +28,19 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             }
         });
 
-
-        Button btn = (Button)findViewById(R.id.btn_go_detail);
+        Button btn = (Button) findViewById(R.id.btn_tag_create);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SelectNewsDetailActivity.this, "해당 뉴스 링크로 이동", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateScrapContentActivity.this, "해시 태그 등록", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_scrap, menu); //xml로 작성된 메뉴를 팽창//
+        getMenuInflater().inflate(R.menu.menu_create_scrap, menu); //xml로 작성된 메뉴를 팽창//
         return true;
     }
 
@@ -52,17 +49,14 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         //헤더뷰와 푸터뷰의 뷰 레이아웃 삽입.//
         int item_id = item.getItemId();
 
-        if (item_id == R.id.scrap_news) {
-            Toast.makeText(SelectNewsDetailActivity.this, "뉴스 스크랩 하기", Toast.LENGTH_SHORT).show();
-
-            //createNewsScrap이 없어서 임시로 유사한 수정 화면으로 이동//
-            Intent intent = new Intent(SelectNewsDetailActivity.this, CreateScrapContentActivity.class);
-            startActivity(intent);
-
+        if (item_id == R.id.lock_scrap) {
+            Toast.makeText(CreateScrapContentActivity.this, "스크랩 잠금", Toast.LENGTH_SHORT).show();
+        } else if (item_id == R.id.create_scrap) {
+            Toast.makeText(CreateScrapContentActivity.this, "생성 완료", Toast.LENGTH_SHORT).show();
+            finish();
         }
-
         return super.onOptionsItemSelected(item);
+
+
     }
-
-
 }
