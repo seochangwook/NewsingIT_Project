@@ -55,7 +55,9 @@
             android:layout_height="@dimen/profile_replace_button_height"
             android:layout_marginLeft="@dimen/profile_replace_button_layout_left"
             android:layout_marginTop="@dimen/profile_replace_button_layout_top"
-            android:text="@string/user_follow_string" />
+            android:background="@color/button_transparent_background"
+            android:text="@string/user_follow_string"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/user_profile_my_introduce_textview"

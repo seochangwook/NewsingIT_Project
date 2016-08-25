@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project.view.view_list;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,9 +25,18 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
         settingButton = (ImageButton) itemView.findViewById(R.id.img_btn_scrap_setting);
     }
 
-    public void setUserScrapContent(UserScrapContentData userScrapContentData) {
+    public void setUserScrapContent(UserScrapContentData userScrapContentData, Context context, String who_flag) {
         this.userScrapContentData = userScrapContentData;
         contentView.setText(userScrapContentData.getContent());
+
+        //사용자와 다른 사용자에 따른 기능 구분.//
+        if (who_flag.equals("1")) //다른 유저의 스크랩에 들어올 경우//
+        {
+            settingButton.setVisibility(View.GONE);
+        } else if (who_flag.equals("0")) //나의 스크랩에 들어올 경우.//
+        {
+            settingButton.setVisibility(View.VISIBLE);
+        }
 
     }
 }

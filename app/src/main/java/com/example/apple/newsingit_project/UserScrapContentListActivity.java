@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 
 public class UserScrapContentListActivity extends AppCompatActivity {
     String folder_name;
+    String is_user_my;
 //
 //    TextView scrapt_content_text;
 //    Button button;
@@ -37,7 +39,15 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         folder_name = intent.getStringExtra("KEY_FOLDER_NAME");
+        is_user_my = intent.getStringExtra("KEY_USER_IDENTIFY_FLAG");
 
+        if (is_user_my.equals("1")) //다른 사람의 스크랩에 들어올 경우.//
+        {
+            Log.d("who? : ", "other user");
+        } else if (is_user_my.equals("0")) //나의 스크랩에 들어올 경우.//
+        {
+            Log.d("who? : ", "me");
+        }
 
         /** Title명 설정 **/
         setTitle(folder_name + " News");
@@ -72,6 +82,15 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
                 //클릭 시 개별 스크랩 콘텐츠로 이동//
                 Intent intent = new Intent(UserScrapContentListActivity.this, UserSelectScrapContentActivity.class);
+
+                if (is_user_my.equals("1")) //다른 사람의 스크랩에 들어갔을 경우.//
+                {
+                    intent.putExtra("KEY_USER_IDENTIFY_FLAG", "1");
+                } else if (is_user_my.equals("0")) //나의 스크랩일 경우.//
+                {
+                    intent.putExtra("KEY_USER_IDENTIFY_FLAG", "0");
+                }
+
                 startActivity(intent);
             }
         });
@@ -97,7 +116,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             new_userScrapData.content = userScrapList[i];
             userScrapContentData.userScrapContentDataList.add(new_userScrapData);
         }
-        mAdapter.setUserScrapContentData(userScrapContentData);
+        mAdapter.setUserScrapContentData(userScrapContentData, is_user_my); //구분 플래그를 같이 넣어준다.//
     }
 
 }
