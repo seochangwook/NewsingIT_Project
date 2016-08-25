@@ -27,7 +27,6 @@ public class DrawerFragment extends Fragment {
     public static final String MENU_SET_ALARM = "알림 설정";
     public static final String MENU_LOGOUT = "로그아웃";
     public static final String MENU_NOTICE = "공지사항";
-    public static final String MENU_DELETE_ACCOUNT = "계정 삭제";
 
     public static final String CHILD_NEW_SCRAP="새 스크랩";
     public static final String CHILD_LIKE_MY_SCRAP ="내 스크랩 좋아요";
@@ -41,8 +40,7 @@ public class DrawerFragment extends Fragment {
                     new DrawerChild(CHILD_LIKE_MY_SCRAP),
                     new DrawerChild(CHILD_FOLLOW_MY_PAGE)),
             new DrawerGroup(MENU_LOGOUT),
-            new DrawerGroup(MENU_NOTICE),
-            new DrawerGroup(MENU_DELETE_ACCOUNT)
+            new DrawerGroup(MENU_NOTICE)
     };
 
     ExpandableListView expandableListView;
@@ -98,13 +96,6 @@ public class DrawerFragment extends Fragment {
                     startActivity(intent);
                 }
 
-                if (groupposition == 4) {
-                    Toast.makeText(getActivity(), "탈퇴" + groupposition, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                }
             }
         });
 
