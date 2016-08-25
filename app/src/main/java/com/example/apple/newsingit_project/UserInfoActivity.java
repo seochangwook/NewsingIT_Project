@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -59,7 +57,7 @@ public class UserInfoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("name");
+        String title = intent.getStringExtra("USER_NAME");
 
         /** 타이틀과 이름 값 초기화 **/
         setTitle(title);
@@ -216,25 +214,25 @@ public class UserInfoActivity extends AppCompatActivity {
         user_folderListAdapter.set_UserFolderDate(user_folderData); //설정.//
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_userinfo, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int item_id = item.getItemId();
-
-        if (item_id == R.id.search_menu) {
-            Intent intent = new Intent(UserInfoActivity.this, SearchTabActivity.class);
-
-            startActivity(intent);
-
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_userinfo, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int item_id = item.getItemId();
+//
+//        if (item_id == R.id.search_menu) {
+//            Intent intent = new Intent(UserInfoActivity.this, SearchTabActivity.class);
+//
+//            startActivity(intent);
+//
+//         //Zfinish();
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }

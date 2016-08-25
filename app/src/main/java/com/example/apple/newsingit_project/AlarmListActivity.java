@@ -61,7 +61,7 @@ public class AlarmListActivity extends AppCompatActivity {
                 } else if (alarmCase == "3") {  //3 - 새 스크랩
                     //xx가 새 스크랩을 하였습니다 -> 그 사람의 마이 페이지로 이동 or 그 사람의 새로운 스크랩으로 바로 이동//
                     Intent intent = new Intent(AlarmListActivity.this, UserInfoActivity.class);
-                    intent.putExtra("name", userSelect);
+                    intent.putExtra("USER_NAME", userSelect);
                     startActivity(intent);
                 }
 

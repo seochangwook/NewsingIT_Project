@@ -49,8 +49,8 @@ public class KeywordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (keywordData.keywordDataList.size() > 0) {
             if (position < keywordData.keywordDataList.size()) {
-                KeywordViewHolder kvh = (KeywordViewHolder) holder;
-                kvh.setKeywordData(keywordData.keywordDataList.get(position));
+                KeywordViewHolder keywordViewHolder = (KeywordViewHolder) holder;
+                keywordViewHolder.setKeywordData(keywordData.keywordDataList.get(position));
                 return;
             }
             position -= keywordData.keywordDataList.size();

@@ -50,8 +50,8 @@ public class MainNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (mainNewsData.mainNewsDataList.size() > 0) {
             if (position < mainNewsData.mainNewsDataList.size()) {
-                MainNewsViewHolder mvh = (MainNewsViewHolder) holder;
-                mvh.setMainNewsData(mainNewsData.mainNewsDataList.get(position));
+                MainNewsViewHolder mainNewsViewHolder = (MainNewsViewHolder) holder;
+                mainNewsViewHolder.setMainNewsData(mainNewsData.mainNewsDataList.get(position));
                 return;
             }
             position -= mainNewsData.mainNewsDataList.size();

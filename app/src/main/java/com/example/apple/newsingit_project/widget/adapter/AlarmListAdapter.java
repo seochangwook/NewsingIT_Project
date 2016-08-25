@@ -51,8 +51,8 @@ public class AlarmListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (alarmData.alarmDataList.size() > 0) {
             if (position < alarmData.alarmDataList.size()) {
-                AlarmListViewHolder avh = (AlarmListViewHolder) holder;
-                avh.setAlarmData(alarmData.alarmDataList.get(position));
+                AlarmListViewHolder alarmListViewHolder = (AlarmListViewHolder) holder;
+                alarmListViewHolder.setAlarmData(alarmData.alarmDataList.get(position));
                 return;
             }
             position -= alarmData.alarmDataList.size();

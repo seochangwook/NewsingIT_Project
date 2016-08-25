@@ -1,6 +1,5 @@
 package com.example.apple.newsingit_project.view.view_fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

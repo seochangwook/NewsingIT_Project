@@ -62,7 +62,7 @@ public class SearchUserFragment extends Fragment {
 
                 //선택한 유저의 마이 페이지로 이동//
                 Intent intent = new Intent(getActivity(), UserInfoActivity.class);
-                intent.putExtra("name", userSelect);
+                intent.putExtra("USER_NAME", userSelect);
                 startActivity(intent);
 
             }

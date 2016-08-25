@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -54,10 +55,13 @@ public class FollowingListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                String userSelectFollower = followingData.followingDataList.get(position).getName().toString();
-                Toast.makeText(FollowingListActivity.this, "" + userSelectFollower, Toast.LENGTH_SHORT).show();
+                String userSelect = followingData.followingDataList.get(position).getName().toString();
+                Toast.makeText(FollowingListActivity.this, "" + userSelect, Toast.LENGTH_SHORT).show();
 
                 //해당 사람의 마이 페이지로 이동//
+                Intent intent = new Intent(FollowingListActivity.this, UserInfoActivity.class);
+                intent.putExtra("USER_NAME", userSelect);
+                startActivity(intent);
             }
         });
         initDummyData();

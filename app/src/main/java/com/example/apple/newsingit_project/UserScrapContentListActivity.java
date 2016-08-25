@@ -16,9 +16,6 @@ import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 public class UserScrapContentListActivity extends AppCompatActivity {
     String folder_name;
     String is_user_my;
-//
-//    TextView scrapt_content_text;
-//    Button button;
 
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
@@ -30,9 +27,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_scrap_content_list_layout);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // button = (Button) findViewById(R.id.click_button);
-
-        //  scrapt_content_text = (TextView) findViewById(R.id.name_list_str);
 
         setSupportActionBar(toolbar);
 
@@ -51,8 +45,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         /** Title명 설정 **/
         setTitle(folder_name + " News");
-
-        //  scrapt_content_text.setText(folder_name + " 스크랩 리스트(리사이클뷰 생략)");
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -96,16 +88,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         });
 
         initDummyData();
-
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(UserScrapContentListActivity.this, UserSelectScrapContentActivity.class);
-//
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void initDummyData() {
