@@ -18,15 +18,17 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     UserScrapContentData userScrapContentData;
     Context context;
+    String whoflag;
 
     public UserScrapContentAdapter(Context context) {
         this.context = context;
         userScrapContentData = new UserScrapContentData();
     }
 
-    public void setUserScrapContentData(UserScrapContentData userScrapContentData) {
+    public void setUserScrapContentData(UserScrapContentData userScrapContentData, String whoflag) {
         if (this.userScrapContentData != userScrapContentData) {
             this.userScrapContentData = userScrapContentData;
+            this.whoflag = whoflag;
             notifyDataSetChanged();
         }
     }
@@ -53,7 +55,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
             if (position < userScrapContentData.userScrapContentDataList.size()) {
                 final UserScrapContentViewHolder uvh = (UserScrapContentViewHolder) holder;
                 final int pos = position;
-                uvh.setUserScrapContent(userScrapContentData.userScrapContentDataList.get(position));
+                uvh.setUserScrapContent(userScrapContentData.userScrapContentDataList.get(position), context, whoflag);
 
                 uvh.settingButton.setOnClickListener(new View.OnClickListener() {
 
