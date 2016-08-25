@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -19,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -86,6 +88,10 @@
             android:name=".UserScrapContentListActivity"
             android:label="@string/title_activity_user_scrap_content_list"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserInfoActivity"
+            android:label="@string/title_activity_user_info"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".CreateScrapContentActivity"
             android:label="@string/title_activity_create_scrap_content"

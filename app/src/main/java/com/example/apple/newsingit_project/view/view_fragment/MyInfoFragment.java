@@ -34,7 +34,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
  * A simple {@link Fragment} subclass.
  */
 public class MyInfoFragment extends Fragment {
-    //나의 정보 뷰 관련 변수/
+    //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
     TextView profile_name_textview;
     TextView profile_my_introduce_textview;
@@ -133,6 +133,7 @@ public class MyInfoFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), UserScrapContentListActivity.class);
 
                 intent.putExtra("KEY_FOLDER_NAME", select_folder_name);
+                intent.putExtra("KEY_USER_IDENTIFY_FLAG", "0"); //0이면 나의 경우//
 
                 startActivity(intent);
             }

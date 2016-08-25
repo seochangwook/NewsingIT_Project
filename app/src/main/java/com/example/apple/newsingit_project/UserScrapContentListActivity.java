@@ -38,6 +38,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         folder_name = intent.getStringExtra("KEY_FOLDER_NAME");
 
+
         /** Title명 설정 **/
         setTitle(folder_name + " News");
 

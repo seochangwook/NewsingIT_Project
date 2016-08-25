@@ -20,6 +20,7 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
     public ImageView folder_imageview;
     public TextView folder_name_textview;
     public Button folder_private_button;
+    public boolean folder_private;
     //폴더 데이터 클래스//
     FolderData folderData;
 
@@ -33,6 +34,14 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
 
     public void set_Folder(FolderData folderData, Context context) {
         this.folderData = folderData;
+
+        folder_private = folderData.get_folder_private();
+
+        if (folder_private == false) {
+            folder_private_button.setBackgroundResource(android.R.drawable.ic_partial_secure);
+        } else if (folder_private == true) {
+            folder_private_button.setBackgroundResource(android.R.drawable.ic_secure);
+        }
 
         //폴더 정보 불러오기//
         folder_name_textview.setText(folderData.get_folder_name());

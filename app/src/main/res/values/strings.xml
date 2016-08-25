@@ -8,7 +8,7 @@
     <string name="title_activity_search_tab">검색화면</string>
     <string name="title_activity_user_scrap_content_list">스크랩 상세</string>
     <string name="fragment_1">뉴스검색 리스트</string>
-    <string name="fragment_2">사용자 검색 리스트</string>
+    <string name="fragment_2">사용자 검색 리스트(리사이클뷰 생략)</string>
     <string name="fragment_3">태그 검색 리스트</string>
     <string name="section_format">빈 페이지</string>
 
@@ -29,6 +29,7 @@
     <string name="follower_textview">팔로워수</string>
     <string name="following_textview">팔로잉수</string>
     <string name="replace_myinfo_string">내 정보 수정하기</string>
+    <string name="user_follow_string">+팔로우</string>
     <string name="folder_add_string">+폴더 추가하기</string>
 
     <!-- MyInfo replace / alarm -->
@@ -56,6 +57,7 @@
 
     <!-- Menu string -->
     <string name="cancel_menu_title">취소</string>
+    <string name="title_activity_user_info">UserInfoActivity</string>
     <string name="title_activity_create_scrap_content">스크랩 생성</string>
 
 </resources>
