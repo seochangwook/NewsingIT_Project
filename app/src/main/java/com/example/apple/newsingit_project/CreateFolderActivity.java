@@ -14,7 +14,7 @@ import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.Toast;
 
-public class Create_Folder_Activity extends AppCompatActivity {
+public class CreateFolderActivity extends AppCompatActivity {
     Button enroll_button;
     ImageButton image_select_button;
     Switch private_select_switch;
@@ -84,7 +84,7 @@ public class Create_Folder_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //팝업창을 띄운다.//
-                Toast.makeText(Create_Folder_Activity.this, "이미지를 선택합니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateFolderActivity.this, "이미지를 선택합니다.", Toast.LENGTH_SHORT).show();
 
                 image_select_popup.showAtLocation(findViewById(R.id.image_select_button), Gravity.CENTER, 0, 0);
             }
@@ -94,14 +94,14 @@ public class Create_Folder_Activity extends AppCompatActivity {
         select_gallery_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Create_Folder_Activity.this, "갤러리에서 이미지 선택", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateFolderActivity.this, "갤러리에서 이미지 선택", Toast.LENGTH_SHORT).show();
             }
         });
 
         camera_picture_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Create_Folder_Activity.this, "카메라 버튼", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateFolderActivity.this, "카메라 버튼", Toast.LENGTH_SHORT).show();
             }
         });
     }

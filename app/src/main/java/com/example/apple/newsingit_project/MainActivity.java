@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.dialog.KeywordListActivity;
 import com.example.apple.newsingit_project.view.view_fragment.MainNewsListFragment;
-import com.example.apple.newsingit_project.view.view_fragment.MyInfo_Fragment;
+import com.example.apple.newsingit_project.view.view_fragment.MyInfoFragment;
 import com.example.apple.newsingit_project.widget.menuwidget.BottomMenu;
 import com.squareup.picasso.Picasso;
 
@@ -26,18 +27,20 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar; //툴바//
     BottomMenu bottommenu; //하단 네비게이션 메뉴 바//
-
     /**
      * Drawable Menu 관련 위젯
      **/
     DrawerLayout drawerLayout; //드로워블 레이아웃.//
     ImageButton alarm_imagebutton;
     ImageView profile_imageview;
+    private BackPressCloseHandler backPressCloseHandler; //뒤로가기 처리//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_activity);
+
+        setTitle(getResources().getString(R.string.title_activity_main));
 
         if (savedInstanceState == null) {
             //최초 초기화가 되고 생성 될 프래그먼트 정의.//
@@ -78,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // TODO Auto-generated method stub
+        backPressCloseHandler.onBackPressed();
     }
 
     @Override
@@ -114,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "나의 정보 페이지 이동", Toast.LENGTH_SHORT).show();
 
                     //프래그먼트 변경.//
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyInfo_Fragment())
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyInfoFragment())
                             .commit();
 
                     //프래그먼트 변경 시 타이틀 변경.//
@@ -164,6 +175,10 @@ public class MainActivity extends AppCompatActivity {
         if (item_id == R.id.search_menu_item)
         {
             Toast.makeText(MainActivity.this, "검색 화면으로 이동", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(MainActivity.this, SearchTabActivity.class);
+
+            startActivity(intent);
         }
 
         if (item_id == android.R.id.home) {
@@ -176,5 +191,39 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 뒤로가기 처리 클래스(두번 터치 후 종료)
+     **/
+    public class BackPressCloseHandler {
+        private long backKeyPressedTime = 0;
+        private Toast toast;
+
+        private Activity activity;
+
+        public BackPressCloseHandler(Activity context) {
+            this.activity = context;
+        }
+
+        public void onBackPressed() {
+            if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
+                backKeyPressedTime = System.currentTimeMillis();
+                showGuide();
+
+                return;
+            }
+
+            if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
+                activity.finish();
+                toast.cancel();
+            }
+        }
+
+        private void showGuide() {
+            toast = Toast.makeText(activity, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT);
+
+            toast.show();
+        }
     }
 }

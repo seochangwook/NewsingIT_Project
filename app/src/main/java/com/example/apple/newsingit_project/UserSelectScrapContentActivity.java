@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -46,6 +47,10 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 공유", Toast.LENGTH_SHORT).show();
         }else if(item_id == R.id.setting_scrap){
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 설정", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(UserSelectScrapContentActivity.this, EditScrapContentActivity.class);
+
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

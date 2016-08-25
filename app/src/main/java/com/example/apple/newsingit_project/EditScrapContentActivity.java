@@ -18,6 +18,8 @@ public class EditScrapContentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        setTitle(getResources().getString(R.string.title_activity_edit_scrap_news));
+
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -37,7 +39,6 @@ public class EditScrapContentActivity extends AppCompatActivity {
                 Toast.makeText(EditScrapContentActivity.this, "해시 태그 등록", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
 
