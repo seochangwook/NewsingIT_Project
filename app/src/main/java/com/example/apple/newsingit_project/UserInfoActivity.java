@@ -48,7 +48,10 @@ public class UserInfoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setTitle("임지수");
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("name");
+
+        setTitle(title);
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);

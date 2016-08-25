@@ -48,14 +48,24 @@ public class AlarmListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                String userSelectKeyword = alarmData.alarmDataList.get(position).getName().toString();
-                Toast.makeText(AlarmListActivity.this, "" + userSelectKeyword, Toast.LENGTH_SHORT).show();
-                finish();
-                //당신의 게시물을 좋아합니다 -> 나의 해당 스크랩으로 이동//
-                Intent intent = new Intent(AlarmListActivity.this, UserSelectScrapContentActivity.class);
-                startActivity(intent);
-                //당신을 팔로우 하였습니다 -> 나의 마이 페이지로 이동//
-                //xx가 새 스크랩을 하였습니다 -> 그 사람의 마이 페이지로 이동 or 그 사람의 새로운 스크랩으로 바로 이동//
+                String userSelect = alarmData.alarmDataList.get(position).getName().toString();
+                String alarmCase = alarmData.alarmDataList.get(position).getCase().toString();
+
+                if (alarmCase == "1") { //1 - 스크랩 좋아요
+                    //당신의 게시물을 좋아합니다 -> 나의 해당 스크랩으로 이동//
+                    Toast.makeText(AlarmListActivity.this, "나의 마이 페이지로 이동합니다", Toast.LENGTH_SHORT).show();
+                } else if (alarmCase == "2") {   //2 - 나를 팔로우
+                    //당신을 팔로우 하였습니다 -> 나의 마이 페이지로 이동//
+                    Toast.makeText(AlarmListActivity.this, "나의 마이 페이지로 이동합니다", Toast.LENGTH_SHORT).show();
+
+                } else if (alarmCase == "3") {  //3 - 새 스크랩
+                    //xx가 새 스크랩을 하였습니다 -> 그 사람의 마이 페이지로 이동 or 그 사람의 새로운 스크랩으로 바로 이동//
+                    Intent intent = new Intent(AlarmListActivity.this, UserInfoActivity.class);
+                    intent.putExtra("name", userSelect);
+                    startActivity(intent);
+                }
+
+
             }
         });
         initDummyData();
@@ -67,12 +77,14 @@ public class AlarmListActivity extends AppCompatActivity {
                 , "님이 당신의 게시물을 좋아합니다", "님이 당신을 팔로우 하였습니다", "님이 새 스크랩을 하였습니다"
                 , "님이 당신의 게시물을 좋아합니다"};
         String dateList[] = {"1시간 전", "1시간 전", "2시간 전", "2시간 전", "4시간 전", "6시간 전", "9시간 전"};
+        String acaseList[] = {"1", "1", "1", "1", "2", "3", "1"};
 
         for (int i = 0; i < 7; i++) {
             AlarmData new_alarmData = new AlarmData();
             new_alarmData.name = nameList[i];
             new_alarmData.content = contentList[i];
             new_alarmData.date = dateList[i];
+            new_alarmData.acase = acaseList[i];
 
             alarmData.alarmDataList.add(new_alarmData);
         }

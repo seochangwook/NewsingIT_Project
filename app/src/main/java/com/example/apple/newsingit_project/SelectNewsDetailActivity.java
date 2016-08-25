@@ -30,11 +30,17 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("NEWS_TITLE");
+        setTitle(title);
 
         Button btn = (Button)findViewById(R.id.btn_go_detail);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //웹뷰 띄우기//
+
+
                 Toast.makeText(SelectNewsDetailActivity.this, "해당 뉴스 링크로 이동", Toast.LENGTH_SHORT).show();
             }
         });

@@ -11,6 +11,11 @@ public class AlarmData {
     public String content;
     public String date;
 
+    public String acase;
+    //1 - 스크랩 좋아요
+    //2 - 나를 팔로우
+    //3 - 새 스크랩
+
 
     public List<AlarmData> alarmDataList = new ArrayList<>();
 
@@ -24,5 +29,9 @@ public class AlarmData {
 
     public String getDate(){
         return this.date;
+    }
+
+    public String getCase() {
+        return this.acase;
     }
 }
