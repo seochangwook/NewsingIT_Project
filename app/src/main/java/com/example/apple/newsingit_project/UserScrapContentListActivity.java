@@ -76,7 +76,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-
                 String userSelect = userScrapContentData.userScrapContentDataList.get(position).getContent().toString();
                 Toast.makeText(UserScrapContentListActivity.this, "" + userSelect, Toast.LENGTH_SHORT).show();
 
@@ -96,16 +95,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         });
 
         initDummyData();
-
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(UserScrapContentListActivity.this, UserSelectScrapContentActivity.class);
-//
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void initDummyData() {

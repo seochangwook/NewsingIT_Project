@@ -46,7 +46,7 @@
             android:layout_marginTop="@dimen/name_textview_layout_margin_top"
             android:text="임지수"
             android:textColor="#000000"
-            android:textSize="15dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button

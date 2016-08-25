@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.apple.newsingit_project">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -22,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -79,8 +77,7 @@
         <activity
             android:name=".EditScrapContentActivity"
             android:exported="true"
-            android:label="@string/title_activity_edit_scrap_content"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_edit_scrap_content" />
         <activity
             android:name=".SearchTabActivity"
             android:exported="true"
@@ -93,11 +90,14 @@
         <activity
             android:name=".UserInfoActivity"
             android:label="@string/title_activity_user_info"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CreateScrapContentActivity"
             android:label="@string/title_activity_create_scrap_content"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".dialog.ScrapContentEditDialog"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
     </application>
 
 </manifest>

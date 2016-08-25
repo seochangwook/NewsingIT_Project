@@ -1,13 +1,16 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
+import com.example.apple.newsingit_project.dialog.ScrapContentEditDialog;
 import com.example.apple.newsingit_project.view.view_list.UserScrapContentViewHolder;
 
 /**
@@ -18,6 +21,12 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
     UserScrapContentData userScrapContentData;
     Context context;
     String whoflag;
+
+    /**
+     * 팝업 관련 변수
+     **/
+    PopupWindow image_select_popup;
+    View image_select_popup_view;
 
     public UserScrapContentAdapter(Context context) {
         this.context = context;
@@ -54,16 +63,20 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
             if (position < userScrapContentData.userScrapContentDataList.size()) {
                 final UserScrapContentViewHolder uvh = (UserScrapContentViewHolder) holder;
                 final int pos = position;
+
                 uvh.setUserScrapContent(userScrapContentData.userScrapContentDataList.get(position), context, whoflag);
 
                 uvh.settingButton.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View view) {
                         //popup window//
                         String userSelect = userScrapContentData.userScrapContentDataList.get(pos).getContent().toString();
 
                         //팝업창//
+                        Intent intent = new Intent(context, ScrapContentEditDialog.class);
+
+                        //필요한 정보를 전송.//
+                        context.startActivity(intent);
                     }
                 });
 
