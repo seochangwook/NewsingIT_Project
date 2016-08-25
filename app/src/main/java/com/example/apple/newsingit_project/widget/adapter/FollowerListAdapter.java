@@ -52,11 +52,11 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (followerData.followerDataList.size() > 0) {
             if (position < followerData.followerDataList.size()) {
-                final FollowerViewHolder fvh = (FollowerViewHolder)holder;
+                final FollowerViewHolder followerViewHolder = (FollowerViewHolder) holder;
                 final int pos = position;
-                fvh.setFollowerData(followerData.followerDataList.get(position));
+                followerViewHolder.setFollowerData(followerData.followerDataList.get(position));
 
-                fvh.btnFollower.setOnClickListener(new View.OnClickListener(){
+                followerViewHolder.btnFollower.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 

@@ -12,6 +12,8 @@ public class LoginActivity extends AppCompatActivity {
      * Facebook 관련 변수
      **/
     Button facebook_login_button; //로그인 버튼 커스텀//
+    Button btnTwitterLogin;
+    Button btnGoogleLodin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,12 +22,28 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity_layout);
 
         facebook_login_button = (Button) findViewById(R.id.btn_facebook_login);
+        btnGoogleLodin = (Button) findViewById(R.id.btn_google_login);
+        btnTwitterLogin = (Button) findViewById(R.id.btn_twitter_login);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
 
         facebook_login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                is_Login();
+            }
+        });
+
+        btnGoogleLodin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                is_Login();
+            }
+        });
+
+        btnTwitterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 is_Login();
