@@ -9,6 +9,7 @@ import java.util.List;
 public class SearchNewsData {
     public String title;
     public String content;
+    public String date;
 
     public List<SearchNewsData> searchNewsDataArrayList = new ArrayList<>();
 
@@ -18,6 +19,10 @@ public class SearchNewsData {
 
     public String getContent() {
         return this.content;
+    }
+
+    public String getDate(){
+        return this.date;
     }
 
 

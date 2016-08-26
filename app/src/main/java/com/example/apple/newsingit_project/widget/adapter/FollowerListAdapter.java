@@ -54,7 +54,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (position < followerData.followerDataList.size()) {
                 final FollowerViewHolder followerViewHolder = (FollowerViewHolder) holder;
                 final int pos = position;
-                followerViewHolder.setFollowerData(followerData.followerDataList.get(position));
+                followerViewHolder.setFollowerData(followerData.followerDataList.get(position), context);
 
                 followerViewHolder.btnFollower.setOnClickListener(new View.OnClickListener() {
                     @Override

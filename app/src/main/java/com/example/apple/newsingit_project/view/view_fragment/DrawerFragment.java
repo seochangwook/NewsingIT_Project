@@ -32,7 +32,6 @@ public class DrawerFragment extends Fragment {
     public static final String CHILD_FOLLOW_MY_PAGE = "마이페이지 팔로우";
 
     DrawerGroup[] menuList = {
-
             new DrawerGroup(MENU_MY_PAGE),
             new DrawerGroup(MENU_SET_ALARM,
                     new DrawerChild(CHILD_NEW_SCRAP),
@@ -82,6 +81,8 @@ public class DrawerFragment extends Fragment {
             @Override
             public void onGroupExpand(int groupposition) {
                 //  Toast.makeText(getActivity(), "공지사항 화면 이동" + groupposition, Toast.LENGTH_SHORT).show();
+
+                //로그아웃 - 로그인 화면으로 이동//
                 if (groupposition == 2) {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -89,12 +90,13 @@ public class DrawerFragment extends Fragment {
                     startActivity(intent);
                 }
 
+                //공지사항 이동//
                 if (groupposition == 3) {
                     Intent intent = new Intent(getActivity(), NoticeActivity.class);
 
+
                     startActivity(intent);
                 }
-
             }
         });
 

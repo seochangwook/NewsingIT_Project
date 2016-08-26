@@ -68,10 +68,12 @@ public class SearchTagFragment extends Fragment {
     private void initDummyData() {
 
         String[] tagList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
+        String[] countList = {"1,000개", "500개", "1,111개", "4,235,32개", "4,234개"};
 
         for (int i = 0; i < 5; i++) {
             SearchTagData new_searchTagData = new SearchTagData();
-            new_searchTagData.tag = tagList[i];
+            new_searchTagData.tag = "# "+tagList[i];
+            new_searchTagData.count = countList[i];
             searchTagData.searchTagDataList.add(new_searchTagData);
         }
         mAdapter.setSearchTagData(searchTagData);

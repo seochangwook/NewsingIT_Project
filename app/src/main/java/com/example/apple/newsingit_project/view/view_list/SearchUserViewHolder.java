@@ -16,13 +16,15 @@ import com.example.apple.newsingit_project.data.view_data.SearchUserData;
 public class SearchUserViewHolder extends RecyclerView.ViewHolder {
 
     public SearchUserData searchUserData;
-    public TextView nameView;
+    public TextView nameView, introView;
     public Button btnSearchUser;
     public ImageView searchUserImgView;
 
+
     public SearchUserViewHolder(View itemView) {
         super(itemView);
-        nameView = (TextView) itemView.findViewById(R.id.text_search_user);
+        nameView = (TextView) itemView.findViewById(R.id.text_search_user_name);
+        introView = (TextView)itemView.findViewById(R.id.text_search_user_intro);
         btnSearchUser = (Button) itemView.findViewById(R.id.btn_search_user);
         searchUserImgView = (ImageView) itemView.findViewById(R.id.img_search_user);
     }
@@ -30,5 +32,6 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
     public void setSearchUserData(SearchUserData searchUserData, Context context) {
         this.searchUserData = searchUserData;
         nameView.setText(searchUserData.getName());
+        introView.setText(searchUserData.getIntro());
     }
 }

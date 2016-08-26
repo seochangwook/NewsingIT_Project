@@ -14,7 +14,6 @@ public class KeywordViewHolder extends RecyclerView.ViewHolder {
     KeywordData keywordData;
     TextView keywordView;
 
-
     public KeywordViewHolder(View itemView) {
         super(itemView);
         keywordView = (TextView) itemView.findViewById(R.id.text_keyword);

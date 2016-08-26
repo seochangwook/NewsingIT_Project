@@ -8,11 +8,15 @@ import java.util.List;
  */
 public class SearchTagData {
     public String tag;
-
+    public String count;
 
     public List<SearchTagData> searchTagDataList = new ArrayList<>();
 
     public String getTag() {
         return this.tag;
+    }
+
+    public String getCount(){
+        return this.count;
     }
 }

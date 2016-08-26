@@ -14,16 +14,17 @@ import com.example.apple.newsingit_project.data.view_data.SearchTagData;
 public class SearchTagViewHolder extends RecyclerView.ViewHolder {
 
     SearchTagData searchTagData;
-    Context context;
-    TextView tagView;
+    TextView tagView, countView;
 
     public SearchTagViewHolder(View itemView) {
         super(itemView);
         tagView = (TextView) itemView.findViewById(R.id.text_search_tag);
+        countView = (TextView)itemView.findViewById(R.id.text_search_tag_count);
     }
 
     public void setSearchTagData(SearchTagData searchTagData, Context context) {
         this.searchTagData = searchTagData;
         tagView.setText(searchTagData.getTag());
+        countView.setText(searchTagData.getCount());
     }
 }
