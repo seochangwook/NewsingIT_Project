@@ -31,3 +31,4 @@
 * UI시나리오 테스트를 위한 전반적인 구성 - 서창욱 (16/08/25 00:43)
 * CreateScrapContentActivity / MainNews - RecyclerView 추가 / 기타 화면 Navigation 구성 - 임지수 (16/08/25 13:06)
 * 검색 fragment에 recyclerview 추가 - 16/08/25 15:57
+* PopupWindow 화면 구성 / ScrapFolderListDialog 구성 / 전반적인 UI Navigation 정리 - 서창욱 (16/08/26 02:18)
