@@ -97,6 +97,8 @@ public class MyInfoFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         folder_recyclerrefreshview.pullRefreshComplete();
+                        folderListAdapter.set_FolderDate(folderData); //설정.//
+
                     }
                 }, 1000);
             }
@@ -111,6 +113,8 @@ public class MyInfoFragment extends Fragment {
                         Log.i("EVENT :", "새로고침 완료");
 
                         folder_recyclerrefreshview.loadMoreComplete();
+                        folderListAdapter.set_FolderDate(folderData); //설정.//
+
                     }
                 }, 1000);
             }
@@ -148,7 +152,7 @@ public class MyInfoFragment extends Fragment {
             public boolean onItemLongClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String folder_name = folderData.folder_list.get(position).get_folder_name();
 
-                Toast.makeText(getActivity(), folder_name + "폴더 제거", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), folder_name + "폴더 제거" + "" + position, Toast.LENGTH_SHORT).show();
 
                 return true;
             }

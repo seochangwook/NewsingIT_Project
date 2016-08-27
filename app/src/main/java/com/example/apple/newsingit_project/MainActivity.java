@@ -8,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, AlarmListActivity.class);
 
-                startActivity(intent);
+                startActivityForResult(intent, 100);
             }
         });
 
@@ -169,6 +170,38 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        drawerLayout.closeDrawer(GravityCompat.START); //우선적으로 어떠한 아이템이 클릭되었을 시 네비게이션바를 닫아준다.//
+
+        Log.d("life cycle message", "MainActivity onPause()");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100) //응답코드(알람화면 중 '내 게시물 좋아요'가 전달되었을 경우)//
+        {
+            if (resultCode == RESULT_OK) //정상응답//
+            {
+                Log.d("respone message", "result");
+
+                //프래그먼트 변경.(메인 프래그먼트로 이동)//
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MainNewsListFragment())
+                        .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
+
+                //프래그먼트 변경 시 타이틀 변경.//
+                setTitle(getResources().getString(R.string.title_fragment_myinfo));
+
+                //bottommenu.
+            }
+        }
     }
 
     /**

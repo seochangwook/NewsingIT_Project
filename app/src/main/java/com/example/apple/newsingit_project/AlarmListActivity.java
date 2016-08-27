@@ -45,7 +45,6 @@ public class AlarmListActivity extends AppCompatActivity {
         recyclerview.setAdapter(mAdapter);
 
         recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
-
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String userSelect = alarmData.alarmDataList.get(position).getName().toString();
@@ -54,13 +53,30 @@ public class AlarmListActivity extends AppCompatActivity {
                 if (alarmCase == "1") { //1 - 스크랩 좋아요
                     //당신의 게시물을 좋아합니다 -> 나의 해당 스크랩으로 이동//
                     Toast.makeText(AlarmListActivity.this, "나의 마이 페이지로 이동합니다", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(AlarmListActivity.this, MainActivity.class);
+
+                    intent.putExtra("KEY_FRAGMENT_NUMBER", "1");
+
+                    setResult(RESULT_OK, intent);
+
+                    finish();
                 } else if (alarmCase == "2") {   //2 - 나를 팔로우
                     //당신을 팔로우 하였습니다 -> 나의 마이 페이지로 이동//
                     Toast.makeText(AlarmListActivity.this, "나의 마이 페이지로 이동합니다", Toast.LENGTH_SHORT).show();
 
+                    Intent intent = new Intent(AlarmListActivity.this, MainActivity.class);
+
+                    intent.putExtra("KEY_FRAGMENT_NUMBER", "1");
+
+                    setResult(RESULT_OK, intent);
+
+                    finish();
+
                 } else if (alarmCase == "3") {  //3 - 새 스크랩
                     //xx가 새 스크랩을 하였습니다 -> 그 사람의 마이 페이지로 이동 or 그 사람의 새로운 스크랩으로 바로 이동//
                     Intent intent = new Intent(AlarmListActivity.this, UserInfoActivity.class);
+                    //필요한 값을 전달한다.//
                     intent.putExtra("USER_NAME", userSelect);
                     startActivity(intent);
                 }
@@ -90,5 +106,4 @@ public class AlarmListActivity extends AppCompatActivity {
         }
         mAdapter.setAlarmDataLIist(alarmData);
     }
-
 }
