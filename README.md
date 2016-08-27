@@ -32,3 +32,4 @@
 * CreateScrapContentActivity / MainNews - RecyclerView 추가 / 기타 화면 Navigation 구성 - 임지수 (16/08/25 13:06)
 * 검색 fragment에 recyclerview 추가 - 16/08/25 15:57
 * PopupWindow 화면 구성 / ScrapFolderListDialog 구성 / 전반적인 UI Navigation 정리 - 서창욱 (16/08/26 02:18)
+* MainNewsList 화면 구성 - RecyclerView / MultiListAdapter (작업 중 - Recyclerview안에 fragment구성) - 서창욱 (16/08/27 23:20)
