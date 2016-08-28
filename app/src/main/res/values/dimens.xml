@@ -90,7 +90,7 @@
     <!-- Main News dimen -->
     <dimen name="main_news_news_author_layout_margin_top">12dp</dimen>
     <dimen name="main_news_news_author_layout_margin_left">90dp</dimen>
-    <dimen name="main_news_write_time_layout_margin_top">15dp</dimen>
+    <dimen name="main_news_write_time_layout_margin_top">13dp</dimen>
     <dimen name="main_news_write_time_layout_margin_left">145dp</dimen>
     <dimen name="main_news_title_layout_margin_top">31dp</dimen>
     <dimen name="main_news_title_layout_margin_left">90dp</dimen>
@@ -98,4 +98,11 @@
     <dimen name="main_news_content_layout_width">250dp</dimen>
     <dimen name="main_news_content_layout_margin_top">50dp</dimen>
     <dimen name="main_news_content_layout_margin_left">90dp</dimen>
+
+    <!-- Floating button dimen -->
+    <dimen name="floatingbutton_width">40dp</dimen>
+    <dimen name="floatingbutton_height">40dp</dimen>
+    <dimen name="floatingbutton_margin_left">260dp</dimen>
+    <dimen name="floatingbutton_margin_top">400dp</dimen>
+
 </resources>

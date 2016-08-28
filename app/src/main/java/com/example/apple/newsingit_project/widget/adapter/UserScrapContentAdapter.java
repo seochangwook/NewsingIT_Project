@@ -82,6 +82,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                 return;
             }
+
             position -= userScrapContentData.userScrapContentDataList.size();
         }
         throw new IllegalArgumentException("invalid position");

@@ -15,4 +15,16 @@
         app:frv_layoutManager="linear"
         app:frv_layoutManagerOrientation="vertical" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/scroll_topup_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/floatingbutton_margin_left"
+        android:layout_marginTop="@dimen/floatingbutton_margin_top"
+        android:src="@android:drawable/arrow_up_float"
+        app:backgroundTint="@color/blue_color"
+        app:borderWidth="0dp"
+        app:elevation="6dp"
+        app:fabSize="mini" />
+
 </FrameLayout>

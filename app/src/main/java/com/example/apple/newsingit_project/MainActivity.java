@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout; //드로워블 레이아웃.//
     ImageButton alarm_imagebutton;
     ImageView profile_imageview;
+
     private BackPressCloseHandler backPressCloseHandler; //뒤로가기 처리//
 
     @Override
