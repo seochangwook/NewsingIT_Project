@@ -43,3 +43,4 @@
 * MainNewsList에서 RecyclerView 내부에 FrameLayout터치 중복 issue -> Adapter에 onCreateViewHolder에서 view를 inflate하고 해당 자원을 가지고 이벤트 작업 방식으로 issue 해결 - 서창욱 (16/08/29 10:13)
 * ListView에 get Twitter timeline test - 임지수 (16/08/29 15:47)
 * SwipeLayout을 적용해서 트위터 내용 갱신 기능 완료 - 서창욱 (16/08/29 17:55)
+* OkHttp 라이브러리를 적용하여 KeywordList데이터 불러오기 - 서창욱 (16/08/29 23:02)
