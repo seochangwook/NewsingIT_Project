@@ -5,16 +5,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.KeywordSection;
 import com.example.apple.newsingit_project.data.view_data.NewsContent;
+import com.example.apple.newsingit_project.view.view_list.Keyword10NewsContentViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword10SectionViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword1NewsContentViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword1SectionViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword2NewsContentViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword2SectionViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword3NewsContentViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword3SectionViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword4NewsContentViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword4SectionViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword5NewsContentViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword5SectionViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword6NewsContentViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword6SectionViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword7NewsContentViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword7SectionViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword8NewsContentViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword8SectionViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword9NewsContentViewHolder;
+import com.example.apple.newsingit_project.view.view_list.Keyword9SectionViewHolder;
 import com.example.apple.newsingit_project.view.view_list.NewsSectionEndViewHolder;
 import com.example.apple.newsingit_project.view.view_list.TwitterStartViewHolder;
 import com.example.apple.newsingit_project.view.view_list.TwitterViewHolder;
@@ -48,7 +64,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_TYPE_NEWSSECTIONEND = 300;
     private static final int VIEW_TYPE_START_TWITTER = 500;
-    private static final int VIEW_TYPE_NESTED_TWITTERVIEW = 400;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_1 = 400;
 
     //키워드 관련 인덱스//
     private static int keyword_section_position = 0; //초기 인덱스는 0//
@@ -58,8 +74,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     NewsContent newsContent;
     KeywordSection keywordSection;
 
+    /**
+     * Twitter 관련 변수
+     **/
+    ImageButton twitter_link_button;
+
     //액티비티 자원을 초기화 하기 위해서 생성자로 선언//
-    public NewsAdapter(Context context) {
+    public NewsAdapter(Context context)
+    {
         this.context = context;
     }
 
@@ -114,7 +136,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -147,7 +169,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -180,7 +202,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -193,7 +215,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         //네번째 키워드에 대한 리스트//
-        /*if (newsContent.keyword_4_news_content.size() > 0) {
+        if (newsContent.keyword_4_news_content.size() > 0) {
             if (position == 0) {
                 return VIEW_TYPE_KEYWORDSECTION_4_CATEGORY;
             }
@@ -205,6 +227,24 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position -= newsContent.keyword_4_news_content.size();
+
+            if (position == 0) {
+                return VIEW_TYPE_START_TWITTER;
+            }
+
+            position--;
+
+            if (position == 0) {
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+            }
+
+            position--; //다시 0으로 초기화 시켜준다.//
+
+            if (position == 0) {
+                return VIEW_TYPE_NEWSSECTIONEND;
+            }
+
+            position--;
         }
 
         //다섯번째 키워드에 대한 리스트//
@@ -220,6 +260,24 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position -= newsContent.keyword_5_news_content.size();
+
+            if (position == 0) {
+                return VIEW_TYPE_START_TWITTER;
+            }
+
+            position--;
+
+            if (position == 0) {
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+            }
+
+            position--; //다시 0으로 초기화 시켜준다.//
+
+            if (position == 0) {
+                return VIEW_TYPE_NEWSSECTIONEND;
+            }
+
+            position--;
         }
 
         //여섯번째 키워드에 대한 리스트//
@@ -235,6 +293,24 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position -= newsContent.keyword_6_news_content.size();
+
+            if (position == 0) {
+                return VIEW_TYPE_START_TWITTER;
+            }
+
+            position--;
+
+            if (position == 0) {
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+            }
+
+            position--; //다시 0으로 초기화 시켜준다.//
+
+            if (position == 0) {
+                return VIEW_TYPE_NEWSSECTIONEND;
+            }
+
+            position--;
         }
 
         //일곱번쨰 키워드에 대한 리스트//
@@ -250,6 +326,24 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position -= newsContent.keyword_7_news_content.size();
+
+            if (position == 0) {
+                return VIEW_TYPE_START_TWITTER;
+            }
+
+            position--;
+
+            if (position == 0) {
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+            }
+
+            position--; //다시 0으로 초기화 시켜준다.//
+
+            if (position == 0) {
+                return VIEW_TYPE_NEWSSECTIONEND;
+            }
+
+            position--;
         }
 
         //여덟번째 키워드에 대한 리스트//
@@ -265,6 +359,24 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position -= newsContent.keyword_8_news_content.size();
+
+            if (position == 0) {
+                return VIEW_TYPE_START_TWITTER;
+            }
+
+            position--;
+
+            if (position == 0) {
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+            }
+
+            position--; //다시 0으로 초기화 시켜준다.//
+
+            if (position == 0) {
+                return VIEW_TYPE_NEWSSECTIONEND;
+            }
+
+            position--;
         }
 
         //아홉번째 키워드에 대한 리스트//
@@ -280,6 +392,24 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position -= newsContent.keyword_9_news_content.size();
+
+            if (position == 0) {
+                return VIEW_TYPE_START_TWITTER;
+            }
+
+            position--;
+
+            if (position == 0) {
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+            }
+
+            position--; //다시 0으로 초기화 시켜준다.//
+
+            if (position == 0) {
+                return VIEW_TYPE_NEWSSECTIONEND;
+            }
+
+            position--;
         }
 
         //열번째 키워드에 대한 리스트//
@@ -295,7 +425,25 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position -= newsContent.keyword_10_news_content.size();
-        }*/
+
+            if (position == 0) {
+                return VIEW_TYPE_START_TWITTER;
+            }
+
+            position--;
+
+            if (position == 0) {
+                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+            }
+
+            position--; //다시 0으로 초기화 시켜준다.//
+
+            if (position == 0) {
+                return VIEW_TYPE_NEWSSECTIONEND;
+            }
+
+            position--;
+        }
 
         throw new IllegalArgumentException(("Invalid position"));
     }
@@ -314,10 +462,21 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             }
 
-            case VIEW_TYPE_NESTED_TWITTERVIEW: {
+            case VIEW_TYPE_NESTED_TWITTERVIEW_1 : {
                 View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
 
                 viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_1_dummy_data();
+                    }
+                });
 
                 break;
             }
@@ -378,7 +537,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 break;
             }
 
-            /*case VIEW_TYPE_KEYWORDSECTION_4_CATEGORY: {
+            case VIEW_TYPE_KEYWORDSECTION_4_CATEGORY: {
                 View view = inflater.inflate(R.layout.view_keyword_4_section, parent, false);
 
                 viewholder = new Keyword4SectionViewHolder(view);
@@ -488,7 +647,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 viewholder = new Keyword10NewsContentViewHolder(view);
 
                 break;
-            }*/
+            }
         }
 
         return viewholder;
@@ -651,7 +810,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
         }
 
-        /*//네번째 키워드 관련//
+        //네번째 키워드 관련//
         if (newsContent.keyword_4_news_content.size() > 0) {
             if (position == 0) //먼저 섹션부분의 데이터를 초기화.//
             {
@@ -676,6 +835,30 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //다시 0을 위해서 포지션값 초기화.//
             position -= newsContent.keyword_4_news_content.size();
+
+            if (position == 0) {
+                TwitterStartViewHolder twitterStartViewHolder = (TwitterStartViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                TwitterViewHolder twitterViewHolder = (TwitterViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                NewsSectionEndViewHolder newsSectionEndViewHolder = (NewsSectionEndViewHolder) holder;
+
+                return;
+            }
+
+            position--;
         }
 
         //다섯번째 키워드 관련//
@@ -703,6 +886,30 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //다시 0을 위해서 포지션값 초기화.//
             position -= newsContent.keyword_5_news_content.size();
+
+            if (position == 0) {
+                TwitterStartViewHolder twitterStartViewHolder = (TwitterStartViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                TwitterViewHolder twitterViewHolder = (TwitterViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                NewsSectionEndViewHolder newsSectionEndViewHolder = (NewsSectionEndViewHolder) holder;
+
+                return;
+            }
+
+            position--;
         }
 
         //여섯번째 키워드 관련//
@@ -730,6 +937,30 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //다시 0을 위해서 포지션값 초기화.//
             position -= newsContent.keyword_6_news_content.size();
+
+            if (position == 0) {
+                TwitterStartViewHolder twitterStartViewHolder = (TwitterStartViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                TwitterViewHolder twitterViewHolder = (TwitterViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                NewsSectionEndViewHolder newsSectionEndViewHolder = (NewsSectionEndViewHolder) holder;
+
+                return;
+            }
+
+            position--;
         }
 
         //일곱번째 키워드 관련//
@@ -757,6 +988,30 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //다시 0을 위해서 포지션값 초기화.//
             position -= newsContent.keyword_7_news_content.size();
+
+            if (position == 0) {
+                TwitterStartViewHolder twitterStartViewHolder = (TwitterStartViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                TwitterViewHolder twitterViewHolder = (TwitterViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                NewsSectionEndViewHolder newsSectionEndViewHolder = (NewsSectionEndViewHolder) holder;
+
+                return;
+            }
+
+            position--;
         }
 
         //여덟번째 키워드 관련//
@@ -784,6 +1039,30 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //다시 0을 위해서 포지션값 초기화.//
             position -= newsContent.keyword_8_news_content.size();
+
+            if (position == 0) {
+                TwitterStartViewHolder twitterStartViewHolder = (TwitterStartViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                TwitterViewHolder twitterViewHolder = (TwitterViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                NewsSectionEndViewHolder newsSectionEndViewHolder = (NewsSectionEndViewHolder) holder;
+
+                return;
+            }
+
+            position--;
         }
 
         //아홉번째 키워드 관련//
@@ -811,6 +1090,30 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //다시 0을 위해서 포지션값 초기화.//
             position -= newsContent.keyword_9_news_content.size();
+
+            if (position == 0) {
+                TwitterStartViewHolder twitterStartViewHolder = (TwitterStartViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                TwitterViewHolder twitterViewHolder = (TwitterViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                NewsSectionEndViewHolder newsSectionEndViewHolder = (NewsSectionEndViewHolder) holder;
+
+                return;
+            }
+
+            position--;
         }
 
         //열번째 키워드 관련//
@@ -838,7 +1141,31 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //다시 0을 위해서 포지션값 초기화.//
             position -= newsContent.keyword_10_news_content.size();
-        }*/
+
+            if (position == 0) {
+                TwitterStartViewHolder twitterStartViewHolder = (TwitterStartViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                TwitterViewHolder twitterViewHolder = (TwitterViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+
+            if (position == 0) {
+                NewsSectionEndViewHolder newsSectionEndViewHolder = (NewsSectionEndViewHolder) holder;
+
+                return;
+            }
+
+            position--;
+        }
 
         throw new IllegalArgumentException("invalid position");
     }
@@ -864,34 +1191,40 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             count += (4 + newsContent.keyword_3_news_content.size());
         }
 
-        /*if (newsContent.keyword_4_news_content.size() > 0) {
-            count += (1 + newsContent.keyword_4_news_content.size());
+        if (newsContent.keyword_4_news_content.size() > 0) {
+            count += (4 + newsContent.keyword_4_news_content.size());
         }
 
         if (newsContent.keyword_5_news_content.size() > 0) {
-            count += (1 + newsContent.keyword_5_news_content.size());
+            count += (4 + newsContent.keyword_5_news_content.size());
         }
 
         if (newsContent.keyword_6_news_content.size() > 0) {
-            count += (1 + newsContent.keyword_6_news_content.size());
+            count += (4 + newsContent.keyword_6_news_content.size());
         }
 
         if (newsContent.keyword_7_news_content.size() > 0) {
-            count += (1 + newsContent.keyword_7_news_content.size());
+            count += (4 + newsContent.keyword_7_news_content.size());
         }
 
         if (newsContent.keyword_8_news_content.size() > 0) {
-            count += (1 + newsContent.keyword_8_news_content.size());
+            count += (4 + newsContent.keyword_8_news_content.size());
         }
 
         if (newsContent.keyword_9_news_content.size() > 0) {
-            count += (1 + newsContent.keyword_9_news_content.size());
+            count += (4 + newsContent.keyword_9_news_content.size());
         }
 
         if (newsContent.keyword_10_news_content.size() > 0) {
-            count += (1 + newsContent.keyword_10_news_content.size());
-        }*/
+            count += (4 + newsContent.keyword_10_news_content.size());
+        }
 
         return count;
+    }
+
+    //첫번째 트위터에 대한 데이터//
+    public void init_twitter_1_dummy_data()
+    {
+
     }
 }

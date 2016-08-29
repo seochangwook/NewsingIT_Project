@@ -1,13 +1,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.apple.newsingit_project.view.view_fragment.TwitterMessageFragment">
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageButton
+        android:id="@+id/twitter_link_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/dummy_twitter_fragment" />
+        android:layout_height="60dp"
+        android:background="@color/button_transparent_background"
+        android:src="@mipmap/sample_twitter_button" />
 
 </FrameLayout>
