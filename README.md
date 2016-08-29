@@ -39,4 +39,5 @@
 3. 상단으로 이동하기 버튼(FloatingActionButton) 클릭 시 리스트 상단으로 이동 - 서창욱 (16/08/29 00:52)
 4. 리스트 내용 선택 시 해당 뉴스의 id값과 title을 가져오는 기능 구현 - 서창욱 (16/08/29 00:52)
 5. 사용자가 키워드리스트에서 키워드 선택 시 메인뉴스 리스트에서 해당 키워드가 존재하는 위치로 이동하는 기능 구현 - 서창욱 (16/08/29 00:52)
+* MainNewsList에서 RecyclerView 내부에 FrameLayout터치 중복 issue -> Adapter에 onCreateViewHolder에서 view를 inflate하고 해당 자원을 가지고 이벤트 작업 방식으로 해결 - 서창욱 (16/08/29 10:13)
 * 
