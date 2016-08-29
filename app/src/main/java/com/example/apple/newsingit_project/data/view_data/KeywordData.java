@@ -13,4 +13,8 @@ public class KeywordData {
     public String getKeyword() {
         return this.keyword;
     }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 }

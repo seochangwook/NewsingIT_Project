@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SearchTabActivity;
+import com.example.apple.newsingit_project.SelectNewsDetailActivity;
 import com.example.apple.newsingit_project.data.view_data.Keyword10NewsContentData;
 import com.example.apple.newsingit_project.data.view_data.Keyword10SectionData;
 import com.example.apple.newsingit_project.data.view_data.Keyword1NewsContentData;
@@ -64,9 +65,7 @@ public class MainNewsListFragment extends Fragment {
     NewsContent newsContent;
     KeywordSection keywordSection;
     NewsAdapter newsAdapter;
-    /**
-     * RecyclerView Touch이벤트 관련(Scroll 부분)
-     **/
+
     FloatingActionButton topup_button;
     float startYPosition = 0; //기본적으로 스크롤은 Y축을 기준으로 계산.//
     float endYPosition = 0;
@@ -126,7 +125,7 @@ public class MainNewsListFragment extends Fragment {
 
         mainnews_recyclerview.setEmptyView(emptyview, true);
 
-        /** 뉴스 리스트 선택 이벤트 설정 **/
+        /** 뉴스 리스트 선택 이벤트 설정(개수가 고정되어 있기에 직접할당) **/
         mainnews_recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
@@ -149,6 +148,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_1_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 2에 관련된 영역//
@@ -168,6 +171,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_2_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 3에 관련된 영역//
@@ -187,6 +194,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_3_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 4에 관련된 영역//
@@ -206,6 +217,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_4_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 5에 관련된 영역//
@@ -225,6 +240,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_5_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 6에 관련된 영역//
@@ -244,6 +263,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_6_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 7에 관련된 영역//
@@ -263,6 +286,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_7_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 8에 관련된 영역//
@@ -282,6 +309,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_8_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 9에 관련된 영역//
@@ -301,6 +332,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_9_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
 
                 //키워드 10에 관련된 영역//
@@ -320,6 +355,10 @@ public class MainNewsListFragment extends Fragment {
                     String news_title = newsContent.keyword_10_news_content.get(select_position).get_news_title();
 
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    startActivity(intent);
                 }
             }
         });
@@ -377,6 +416,7 @@ public class MainNewsListFragment extends Fragment {
             }
         });
 
+        /** Scroll 처리를 위한 Touch 이벤트 구현 **/
         mainnews_recyclerview.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -435,6 +475,21 @@ public class MainNewsListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == RC_KEYWORD) {
+                String select_keyword = data.getStringExtra(KEY_KEYWORD);
+                Log.d("intent data", select_keyword);
+
+                //스크롤을 이동하는 작업//
+                move_scrollaction(select_keyword);
+            }
+        }
+    }
+
     public void Data_Init() {
         //모든 배열을 초기화.//
         keywordSection.keyword1SectionDatas.clear();
@@ -468,7 +523,7 @@ public class MainNewsListFragment extends Fragment {
 
         //데이터 할당.//
         //해당 부분을 네트워크로 데이터를 가져온다.//
-        String keyword_data[] = {"iot", "라즈베리파이", "안드로이드", "갤럭시 7", "소프트뱅크", "드론", "VR", "테슬라", "핀테크", "아이폰 7"};
+        String keyword_data[] = {"keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6", "keyword7", "keyword8", "keyword9", "keyword10"};
 
         //첫번째 키워드 데이터//
         Keyword1SectionData new_keyword_section_1 = new Keyword1SectionData();
@@ -873,21 +928,6 @@ public class MainNewsListFragment extends Fragment {
         newsAdapter.setNewsData(keywordSection, newsContent);
 
         hidepDialog();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == getActivity().RESULT_OK) {
-            if (requestCode == RC_KEYWORD) {
-                String select_keyword = data.getStringExtra(KEY_KEYWORD);
-                Log.d("intent data", select_keyword);
-
-                //스크롤을 이동하는 작업//
-                move_scrollaction(select_keyword);
-            }
-        }
     }
 
     public void move_scrollaction(String select_keyword) {
