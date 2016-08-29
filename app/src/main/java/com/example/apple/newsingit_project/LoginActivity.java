@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // is_Login();
                 //twitter를 dialog로 띄움
-                Intent intent = new Intent(LoginActivity.this, TwitterTestActivity.class);
+                Intent intent = new Intent(LoginActivity.this, TwitterLinkActivity.class);
 
                 startActivity(intent);
             }

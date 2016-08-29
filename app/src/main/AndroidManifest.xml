@@ -105,7 +105,7 @@
             android:value="afa791efc45e7e899d163ea64b88bf5e41a900f8" />
 
         <activity
-            android:name=".TwitterTestActivity"
+            android:name=".TwitterLinkActivity"
             android:exported="true"
             android:label="@string/title_activity_twitter_test"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"
