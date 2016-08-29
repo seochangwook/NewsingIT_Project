@@ -511,6 +511,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position--;
+          
 
             if (position < newsContent.keyword_1_news_content.size()) {
                 Keyword1NewsContentViewHolder keyword1NewsContentViewHolder = (Keyword1NewsContentViewHolder) holder;
