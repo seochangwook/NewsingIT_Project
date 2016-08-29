@@ -81,16 +81,10 @@ public class MainNewsListFragment extends Fragment {
      **/
     private ProgressDialog pDialog;
 
-    /**
-     * 트위터 관련 화면
-     **/
-
-
     public MainNewsListFragment() //프래그먼트는 반드시 한개 이상의 생성자가 존재해야 한다.//
     {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

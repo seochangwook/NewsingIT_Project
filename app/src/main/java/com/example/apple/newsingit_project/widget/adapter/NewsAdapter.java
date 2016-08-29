@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.TwitterLinkActivity;
 import com.example.apple.newsingit_project.data.view_data.KeywordSection;
 import com.example.apple.newsingit_project.data.view_data.NewsContent;
 import com.example.apple.newsingit_project.view.view_list.Keyword10NewsContentViewHolder;
@@ -65,6 +67,15 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_NEWSSECTIONEND = 300;
     private static final int VIEW_TYPE_START_TWITTER = 500;
     private static final int VIEW_TYPE_NESTED_TWITTERVIEW_1 = 400;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_2 = 401;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_3 = 402;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_4 = 403;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_5 = 404;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_6 = 405;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_7 = 406;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_8 = 407;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_9 = 408;
+    private static final int VIEW_TYPE_NESTED_TWITTERVIEW_10 = 409;
 
     //키워드 관련 인덱스//
     private static int keyword_section_position = 0; //초기 인덱스는 0//
@@ -169,7 +180,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_2;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -202,7 +213,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_3;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -235,7 +246,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_4;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -268,7 +279,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_5;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -301,7 +312,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_6;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -334,7 +345,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_7;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -367,7 +378,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_8;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -400,7 +411,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_9;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -433,7 +444,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position == 0) {
-                return VIEW_TYPE_NESTED_TWITTERVIEW_1;
+                return VIEW_TYPE_NESTED_TWITTERVIEW_10;
             }
 
             position--; //다시 0으로 초기화 시켜준다.//
@@ -474,7 +485,178 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     public void onClick(View view) {
                         Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
 
-                        init_twitter_1_dummy_data();
+                        init_twitter_data(0);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_2: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(1);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_3: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(2);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_4: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(3);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_5: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(4);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_6: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(5);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_7: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(6);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_8: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(7);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_9: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(8);
+                    }
+                });
+
+                break;
+            }
+
+            case VIEW_TYPE_NESTED_TWITTERVIEW_10: {
+                View view = inflater.inflate(R.layout.twitter_fragmentlayout, parent, false);
+
+                viewholder = new TwitterViewHolder(view);
+
+                twitter_link_button = (ImageButton) view.findViewById(R.id.twitter_link_button);
+
+                twitter_link_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
+
+                        init_twitter_data(9);
                     }
                 });
 
@@ -1224,8 +1406,116 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     //첫번째 트위터에 대한 데이터//
-    public void init_twitter_1_dummy_data()
+    public void init_twitter_data(int keyword_position)
     {
+        if (keyword_position == 0) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword1SectionDatas.get(0).get_keyword_text();
 
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 1) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword2SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 2) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword3SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 3) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword4SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 4) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword5SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 5) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword6SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 6) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword7SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 7) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword8SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 8) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keyword9SectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
+
+        if (keyword_position == 9) {
+            //첫번째 키워드를 가지고 Intent를 수행//
+            String keyword = keywordSection.keywor10dSectionDatas.get(0).get_keyword_text();
+
+            Intent intent = new Intent(context, TwitterLinkActivity.class);
+
+            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+
+            context.startActivity(intent);
+        }
     }
 }
