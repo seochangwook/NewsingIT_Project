@@ -50,7 +50,12 @@ public class LoginActivity extends AppCompatActivity {
         btnTwitterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                is_Login();
+
+                // is_Login();
+                //twitter를 dialog로 띄움
+                Intent intent = new Intent(LoginActivity.this, TwitterTestActivity.class);
+
+                startActivity(intent);
             }
         });
 

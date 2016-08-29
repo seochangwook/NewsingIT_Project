@@ -26,12 +26,23 @@
         android:id="@+id/text_search_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/img_search_tag"
-        android:layout_toRightOf="@+id/img_search_tag"
+        android:layout_marginLeft="26dp"
         android:text="#태그"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginStart="26dp"
+        android:layout_alignTop="@+id/img_search_tag"
+        android:layout_toRightOf="@+id/img_search_tag"
+        android:layout_toEndOf="@+id/img_search_tag" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="게시물 수"
+        android:id="@+id/text_search_tag_count"
+        android:layout_below="@+id/text_search_tag"
+        android:layout_alignLeft="@+id/text_search_tag"
+        android:layout_alignStart="@+id/text_search_tag"
+        android:layout_marginTop="10dp" />
 </RelativeLayout>
 </android.support.v7.widget.CardView>

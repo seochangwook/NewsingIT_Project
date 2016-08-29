@@ -8,11 +8,15 @@ import java.util.List;
  */
 public class FollowerData {
     public String name;
+    public String intro;
 
     public List<FollowerData> followerDataList = new ArrayList<>();
 
     public String getName() {
         return this.name;
+    }
+    public String getIntro(){
+        return this.intro;
     }
 
 

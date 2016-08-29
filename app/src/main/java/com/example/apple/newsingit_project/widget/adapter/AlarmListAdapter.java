@@ -52,7 +52,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (alarmData.alarmDataList.size() > 0) {
             if (position < alarmData.alarmDataList.size()) {
                 AlarmListViewHolder alarmListViewHolder = (AlarmListViewHolder) holder;
-                alarmListViewHolder.setAlarmData(alarmData.alarmDataList.get(position));
+                alarmListViewHolder.setAlarmData(alarmData.alarmDataList.get(position), context);
                 return;
             }
             position -= alarmData.alarmDataList.size();

@@ -24,16 +24,14 @@
         android:src="@drawable/ic_face_black_24dp" />
 
     <TextView
-        android:id="@+id/text_search_user"
+        android:id="@+id/text_search_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/img_search_user"
-        android:layout_toRightOf="@+id/img_search_user"
         android:text="유저 이름"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignTop="@+id/img_search_user"
+        android:layout_toRightOf="@+id/img_search_user"
+        android:layout_toEndOf="@+id/img_search_user" />
 
     <Button
         android:id="@+id/btn_search_user"
@@ -45,5 +43,16 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:text="팔로우" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="자기소개"
+        android:id="@+id/text_search_user_intro"
+        android:layout_alignBottom="@+id/btn_search_user"
+        android:layout_toRightOf="@+id/img_search_user"
+        android:layout_toEndOf="@+id/img_search_user"
+        android:layout_marginTop="10dp" />
 </RelativeLayout>
 </android.support.v7.widget.CardView>

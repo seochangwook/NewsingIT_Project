@@ -83,9 +83,12 @@ public class FollowerListActivity extends AppCompatActivity {
 
     private void initDummyData() {
         String nameList[] = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
+        String[] introList = {"저는 코딩이 취미입니다", "반갑습니다", "ㅇvㅇ", "^ㅇ^", "술x"
+                ,"만두만두", "=v="};
         for (int i = 0; i < 7; i++) {
             FollowerData new_followerData = new FollowerData();
             new_followerData.name = nameList[i];
+            new_followerData.intro = introList[i];
             followerData.followerDataList.add(new_followerData);
         }
 

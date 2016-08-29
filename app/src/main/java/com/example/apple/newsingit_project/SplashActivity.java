@@ -7,6 +7,8 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     Handler mHandler;
 
     /**

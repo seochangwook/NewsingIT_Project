@@ -8,11 +8,16 @@ import java.util.List;
  */
 public class SearchUserData {
     public String name;
+    public String intro;
 
     public List<SearchUserData> searchUserDataArrayList = new ArrayList<>();
 
     public String getName() {
         return this.name;
+    }
+
+    public String getIntro(){
+        return this.intro;
     }
 
 }

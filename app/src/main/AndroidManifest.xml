@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.apple.newsingit_project">
+    package="com.example.apple.newsingit_project" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,12 +9,12 @@
         android:icon="@mipmap/logo_image"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,6 +99,18 @@
         <activity
             android:name=".dialog.ScrapContentEditDialog"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="afa791efc45e7e899d163ea64b88bf5e41a900f8" />
+
+        <activity
+            android:name=".TwitterTestActivity"
+            android:exported="true"
+            android:label="@string/title_activity_twitter_test"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"
+            />
+
     </application>
 
 </manifest>
