@@ -108,11 +108,9 @@
             android:name=".TwitterTestActivity"
             android:exported="true"
             android:label="@string/title_activity_twitter_test"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"
+            />
 
-        <activity android:name=".TestActivity"
-            android:exported="true">
-        </activity>
     </application>
 
 </manifest>
