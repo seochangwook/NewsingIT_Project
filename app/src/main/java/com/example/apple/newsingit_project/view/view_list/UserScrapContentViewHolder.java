@@ -16,18 +16,25 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
 
     public UserScrapContentData userScrapContentData;
 
-    public TextView contentView;
-    public ImageButton settingButton;
+    public TextView contentView, titleView, dateView, likeView;
+    public ImageButton settingButton, likeButton;
 
     public UserScrapContentViewHolder(View itemView) {
         super(itemView);
-        contentView = (TextView) itemView.findViewById(R.id.text_scrap_list);
+        titleView = (TextView)itemView.findViewById(R.id.text_scrap_list_title);
+        contentView = (TextView) itemView.findViewById(R.id.text_scrap_list_content);
+        dateView = (TextView)itemView.findViewById(R.id.text_scrap_list_date);
+        likeView = (TextView)itemView.findViewById(R.id.text_scrap_list_like);
         settingButton = (ImageButton) itemView.findViewById(R.id.img_btn_scrap_setting);
+        likeButton = (ImageButton)itemView.findViewById(R.id.img_btn_scrap_list_like);
     }
 
     public void setUserScrapContent(UserScrapContentData userScrapContentData, Context context, String who_flag) {
         this.userScrapContentData = userScrapContentData;
+        titleView.setText(userScrapContentData.getTitle());
         contentView.setText(userScrapContentData.getContent());
+        dateView.setText(userScrapContentData.getDate());
+        likeView.setText(userScrapContentData.getLike());
 
         //사용자와 다른 사용자에 따른 기능 구분.//
         if (who_flag.equals("1")) //다른 유저의 스크랩에 들어올 경우//
