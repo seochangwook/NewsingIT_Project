@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.dialog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -13,6 +14,8 @@ import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 
 public class KeywordListActivity extends Activity {
 
+    //전달할 값의 키//
+    private static final String KEY_KEYWORD = "KEY_KEYWORD";
     KeywordListAdapter mAdapter;
     KeywordData keywordData;
     private FamiliarRecyclerView recyclerview;
@@ -37,6 +40,12 @@ public class KeywordListActivity extends Activity {
 
                 Toast.makeText(KeywordListActivity.this, "[" + userSelectKeyword + "]로 리스트 이동", Toast.LENGTH_SHORT).show();
 
+                Intent intent = getIntent();
+
+                intent.putExtra(KEY_KEYWORD, userSelectKeyword);
+
+                setResult(RESULT_OK, intent);
+
                 finish();
             }
         });
@@ -46,7 +55,7 @@ public class KeywordListActivity extends Activity {
 
     private void initDummyData() {
 
-        String keywordDummyList[] = {"갤럭시 7", "iot", "소프트뱅크", "드론", "VR", "테슬라", "핀테크", "MS 윈도우", "라즈베리파이", "아이폰 7"};
+        String keywordDummyList[] = {"갤럭시 7", "iot", "소프트뱅크", "드론", "VR", "테슬라", "핀테크", "안드로이드", "라즈베리파이", "아이폰 7"};
 
         for (int i = 0; i < 10; i++) {
             KeywordData new_keywordData = new KeywordData();

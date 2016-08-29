@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.view_data.FollowerData;
@@ -17,6 +21,7 @@ public class FollowerListActivity extends AppCompatActivity {
 
     FollowerListAdapter mAdapter;
     FollowerData followerData;
+    EditText search_edit;
     private FamiliarRecyclerView recyclerview;
 
     @Override
@@ -43,6 +48,17 @@ public class FollowerListActivity extends AppCompatActivity {
 
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
+
+        search_edit = (EditText) headerView.findViewById(R.id.editText3);
+
+        search_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                Log.d("input text", textView.getText().toString());
+                return true;
+            }
+        });
+
         recyclerview.addHeaderView(headerView);
         mAdapter = new FollowerListAdapter(this);
 

@@ -115,5 +115,4 @@ public class DrawerFragment extends Fragment {
 
         return view;
     }
-
 }

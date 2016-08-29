@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/news_10_thumbnail_imageview"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/news_10_author_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_news_news_author_layout_margin_left"
+        android:layout_marginTop="@dimen/main_news_news_author_layout_margin_top"
+        android:text="한국경제"
+        android:textColor="@color/black_color"
+        android:textSize="10dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/news_10_write_time_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_news_write_time_layout_margin_left"
+        android:layout_marginTop="@dimen/main_news_write_time_layout_margin_top"
+        android:text="2016.08.11"
+        android:textSize="7dp" />
+
+    <TextView
+        android:id="@+id/news_10_title_textview"
+        android:layout_width="@dimen/main_news_title_layout_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_news_title_layout_margin_left"
+        android:layout_marginTop="@dimen/main_news_title_layout_margin_top"
+        android:singleLine="true"
+        android:text="SKT, 인텔과 폰 없이 통화하는 시대 연다."
+        android:textColor="@color/black_color"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/news_10_content_textview"
+        android:layout_width="@dimen/main_news_content_layout_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_news_content_layout_margin_left"
+        android:layout_marginTop="@dimen/main_news_content_layout_margin_top"
+        android:singleLine="true"
+        android:text="16일(현지시각)미국 샌프란시스코 '인텐개발자' 더미 데이터 넣기 "
+        android:textSize="10dp" />
+</RelativeLayout>
