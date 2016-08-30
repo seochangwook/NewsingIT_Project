@@ -14,6 +14,7 @@
 * compile 'com.android.support:design:24.2.0'
 * compile 'com.android.support:support-v4:24.2.0'
 * compile 'com.android.support:appcompat-v7:22.2.1' //TextInputLayout 관련 라이브러리//
+* 
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 
@@ -46,4 +47,4 @@
 * SwipeLayout을 적용해서 트위터 내용 갱신 기능 완료 - 서창욱 (16/08/29 17:55)
 * OkHttp 라이브러리를 적용하여 KeywordList데이터 불러오기 - 서창욱 (16/08/29 23:02)
 * 상대방 스크랩에서만 좋아요 활성화/ 검색 edittext color값 수정/ scrap 생성,수정 edittext 글자수 표기/ 기타 view들 custom - 임지수 (16/08/30 14:51)
-* MainNewsList Okhttp를 이용한 getData()부분 기능 구현 완료
+* MainNewsList Okhttp를 이용한 getData()부분 기능 구현 완료 - 서창욱 (16/08/30 15:08)
