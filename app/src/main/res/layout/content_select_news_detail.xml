@@ -31,7 +31,7 @@
         android:layout_below="@+id/text_news_headline"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:src="@android:drawable/sym_def_app_icon" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/text_news_part"
@@ -73,6 +73,5 @@
         android:layout_below="@+id/text_news_headline"
         android:text="정현정 기자"
         android:textAppearance="?android:attr/textAppearanceSmall" />
-
 
 </RelativeLayout>

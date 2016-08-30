@@ -100,6 +100,20 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
         if (item_id == R.id.share_scrap) {
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 공유", Toast.LENGTH_SHORT).show();
+
+            Intent msg = new Intent(Intent.ACTION_SEND);
+
+            msg.addCategory(Intent.CATEGORY_DEFAULT);
+
+            msg.putExtra(Intent.EXTRA_SUBJECT, "서창욱");
+
+            msg.putExtra(Intent.EXTRA_TEXT, "코딩이 취미");
+
+            msg.putExtra(Intent.EXTRA_TITLE, "제목");
+
+            msg.setType("text/plain");
+
+            startActivity(Intent.createChooser(msg, "공유"));
         }else if(item_id == R.id.setting_scrap){
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 설정", Toast.LENGTH_SHORT).show();
 

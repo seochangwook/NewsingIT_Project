@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.dialog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.CreateFolderActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.widget.adapter.FolderGroupAdapter;
 
@@ -19,7 +21,6 @@ public class ScrapContentEditDialog extends Activity {
     Button scrap_delete_button;
     Switch scrap_private_switch;
     TextView scrap_info_text;
-    Button scrap_fix_enroll_button;
 
     String group_name[];
     String child_name[];
@@ -33,7 +34,6 @@ public class ScrapContentEditDialog extends Activity {
         scrap_delete_button = (Button) findViewById(R.id.delete_scrap_content);
         scrap_private_switch = (Switch) findViewById(R.id.private_set_switch);
         scrap_info_text = (TextView) findViewById(R.id.info_text_private);
-        scrap_fix_enroll_button = (Button) findViewById(R.id.scrap_fix_enroll_button);
 
         mAdapter = new FolderGroupAdapter(this);
         expandablelistview.setAdapter(mAdapter);
@@ -50,7 +50,6 @@ public class ScrapContentEditDialog extends Activity {
                 scrap_delete_button.setVisibility(View.GONE);
                 scrap_private_switch.setVisibility(View.GONE);
                 scrap_info_text.setVisibility(View.GONE);
-                scrap_fix_enroll_button.setVisibility(View.GONE);
             }
         });
 
@@ -59,6 +58,13 @@ public class ScrapContentEditDialog extends Activity {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
                 Toast.makeText(ScrapContentEditDialog.this, "선택된 카테고리 : " + child_name[childPosition], Toast.LENGTH_SHORT).show();
+
+                if (childPosition == child_name.length - 1) //마지막 자식
+                {
+                    Intent intent = new Intent(ScrapContentEditDialog.this, CreateFolderActivity.class);
+
+                    startActivity(intent);
+                }
 
                 expandableListView.collapseGroup(0);
 
@@ -75,18 +81,9 @@ public class ScrapContentEditDialog extends Activity {
                 scrap_delete_button.setVisibility(View.VISIBLE);
                 scrap_private_switch.setVisibility(View.VISIBLE);
                 scrap_info_text.setVisibility(View.VISIBLE);
-                scrap_fix_enroll_button.setVisibility(View.VISIBLE);
             }
         });
 
-        scrap_fix_enroll_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ScrapContentEditDialog.this, "스크랩 설정 완료", Toast.LENGTH_SHORT).show();
-
-                finish();
-            }
-        });
 
         scrap_delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +99,8 @@ public class ScrapContentEditDialog extends Activity {
 
     public void set_ExpanList_Data() {
         //데이터 초기화.(네트워크로 부터 데이터를 로드한다.)//
-        group_name = new String[]{"Category"};
-        child_name = new String[]{"사회이슈", "인물", "정치"};
+        group_name = new String[]{"스크랩 폴더 이동"};
+        child_name = new String[]{"사회이슈", "인물", "정치", "+ 폴더만들기"};
 
         //이중for문으로 그룹 당 자식을 생성.//
         for (int group_index = 0; group_index < group_name.length; group_index++) {
