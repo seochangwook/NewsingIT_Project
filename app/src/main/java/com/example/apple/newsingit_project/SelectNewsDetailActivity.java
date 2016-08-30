@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.view_data.ScrapFolderListData;
@@ -33,6 +35,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
      * Popup관련 변수
      **/
     Button scrap_folder_create_button;
+    TextView textView;
 
     PopupWindow scrap_folder_popup;
     View scrap_folderlist_view;
@@ -150,6 +153,11 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //textView에 scroll 추가//
+        textView = (TextView) findViewById(R.id.text_news_part);
+        textView.setMovementMethod(new ScrollingMovementMethod());
+
 
         Intent intent = getIntent();
         String title = intent.getStringExtra("NEWS_TITLE");

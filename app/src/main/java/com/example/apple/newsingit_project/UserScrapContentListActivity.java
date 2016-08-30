@@ -101,13 +101,16 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         String[] dateList = {"16.08.29", "16.08.28", "16.08.27"
                 , "16.08.26", "16.08.25", "16.08.24"};
-        String[] likeList = {"10", "10", "3", "4", "125", "23"};
+        int[] likeList = {10, 10, 3, 4, 125, 23};
+        boolean[] likeFlagList = {false, false, false, false, false, false};
+
         for (int i = 0; i < 6; i++) {
             UserScrapContentData new_userScrapData = new UserScrapContentData();
-            new_userScrapData.title = titleList[i];
-            new_userScrapData.content = contentList[i];
-            new_userScrapData.date = dateList[i];
-            new_userScrapData.like = likeList[i];
+            new_userScrapData.setTitle(titleList[i]);
+            new_userScrapData.setContent(contentList[i]);
+            new_userScrapData.setDate(dateList[i]);
+            new_userScrapData.setLike(likeList[i]);
+            new_userScrapData.setLikeFlag(likeFlagList[i]);
 
             userScrapContentData.userScrapContentDataList.add(new_userScrapData);
         }

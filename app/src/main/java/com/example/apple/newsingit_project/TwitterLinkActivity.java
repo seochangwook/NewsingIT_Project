@@ -24,7 +24,7 @@ public class TwitterLinkActivity extends Activity {
     private static final String TWITTER_SECRET = "yR9fxY13cGOJyG0vPMAu6a8HdDNOcU9FPczPncLm6OwyxdsPkM";
 
     //트위터 검색 변수.//
-    public String search_value = null;
+    public String searchValue = null;
 
     SwipeRefreshLayout swipeLayout;
     ListView listview;
@@ -46,10 +46,10 @@ public class TwitterLinkActivity extends Activity {
 
         Intent intent = getIntent();
 
-        search_value = intent.getStringExtra("KEY_KEYWORD");
+        searchValue = intent.getStringExtra("KEY_KEYWORD");
 
         final SearchTimeline timeline = new SearchTimeline.Builder()
-                .query(search_value)
+                .query(searchValue)
                 .languageCode("ko")
                 .build();
 

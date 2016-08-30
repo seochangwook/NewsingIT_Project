@@ -34,7 +34,7 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
         titleView.setText(userScrapContentData.getTitle());
         contentView.setText(userScrapContentData.getContent());
         dateView.setText(userScrapContentData.getDate());
-        likeView.setText(userScrapContentData.getLike());
+        likeView.setText("" + userScrapContentData.getLike());
 
         //사용자와 다른 사용자에 따른 기능 구분.//
         if (who_flag.equals("1")) //다른 유저의 스크랩에 들어올 경우//
@@ -43,7 +43,7 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
         } else if (who_flag.equals("0")) //나의 스크랩에 들어올 경우.//
         {
             settingButton.setVisibility(View.VISIBLE);
+            //좋아요 기능 활성화 하면 안돼//
         }
-
     }
 }

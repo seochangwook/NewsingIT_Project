@@ -14,34 +14,94 @@
 
     <TextView
         android:id="@+id/text_scrap_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="SKT, 인텔과 폰 없이 통화하는 시대 연다"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="카카오, 카셰어링으로 대리운전기사 이동 문제 해결"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/text_scrap_content"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/img_scrap"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:text="스크랩 내용 내용 내용"
+        android:text="카카오가 O2O 비즈니스 파트너들과의 연계를 통해 카카오드라이버 대리운전기사 이동 수단 문제를 해결하고자 하는 의지를 내비쳤다. 카카오는 쏘카, 그린카와 각각 ‘O2O 비즈니스 업무 제휴’협약을 26일 카카오 판교오피스에서 체결했다고 28일 밝혔다. 이를 통해 카카오드라이버 기사회원은 대리운전 운행 전후 이동 시 카셰어링 서비스를 저렴하게 활용할 수 있고, 양사는 심야-새벽 시간대의 유휴 차량을 효율적으로 운영할 수 있게 된다. 그린카와 쏘카는 전국에서 양사 합계 약 1만 2천여대의 차량을 운영하고 있는 국내 최대 규모의 카셰어링 업체다. 카카오와 양사는 각자의 전문 역량과 노하우, 자산을 효율적으로 활용해 카카오드라이버뿐만 아니라 다양한 O2O 비즈니스 영역 전반에 걸쳐 제휴와 협력을 진행할 예정이다. 우선 양사는 이번 업무 제휴 협약을 통해 8월말부터 1개월 간 특정시간대에 카카오드라이버 기사회원에게 기준 이용 금액 100% 할인을 제공한다."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageView
         android:id="@+id/img_scrap"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/text_scrap_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/text_scrap_content"
+        android:layout_alignStart="@+id/text_scrap_content"
+        android:layout_below="@+id/text_scrap_press"
         android:layout_marginTop="10dp"
-        android:src="#ffffff" />
+        android:src="@android:drawable/sym_def_app_icon" />
+
+    <TextView
+        android:id="@+id/text_news_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/imageView4"
+        android:layout_toRightOf="@+id/imageView4"
+        android:scrollbars="vertical"
+        android:text="카카오, 택시, 대리운전"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@android:drawable/sym_action_chat" />
+
+    <TextView
+        android:id="@+id/text_scrap_my_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@+id/text_news_tag"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_scrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:maxLength="100"
+        android:scrollbars="vertical"
+        android:text="나는 이거 좋다고 생각해 카카오가 O2O 비즈니스 파트너들과의 연계를 통해 카카오드라이버 대리운전기사 이동 수단 문제를 해결하고자 하는 의지를 내비쳤다. 카카오는 쏘카, 그린카와 각각 ‘O2O 비즈니스 업무 제휴’협약을 26일 카카오 판교오피스에서 체결했다고 28일 밝혔다. 이를 통해 카카오드라이버 기사회원은 대리운전 운행 전후 이동 시 카셰어링 서비스를 저렴하게 활용할 수 있고, 양사는 심야-새벽 시간대의 유휴 차량을 효율적으로 운영할 수 있게 된다. 그린카와 쏘카는 전국에서 양사 합계 약 1만 2천여대의 차량을 운영하고 있는 국내 최대 규모의 카셰어링 업체다. 카카오와 "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/text_scrap_press"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_scrap_title"
+        android:layout_marginLeft="10dp"
+        android:text="안희정 기자"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/text_scrap_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_scrap_title"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/text_scrap_press"
+        android:layout_toRightOf="@+id/text_scrap_press"
+        android:text="2016-08-22 09:33:25"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 </RelativeLayout>

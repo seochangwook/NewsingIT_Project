@@ -21,43 +21,57 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/img_news"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="41dp"
-        android:text="뉴스 기사 헤드라인"
+        android:text="&apos;갤럭시폴더2&apos; 유출…中 출시 임박"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
         android:id="@+id/img_news"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/text_news_headline"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:src="@color/abc_search_url_text_normal" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@android:drawable/sym_def_app_icon" />
 
     <TextView
         android:id="@+id/text_news_part"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_alignEnd="@+id/img_news"
-        android:layout_alignLeft="@+id/img_news"
-        android:layout_alignRight="@+id/img_news"
-        android:layout_alignStart="@+id/img_news"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/img_news"
-        android:layout_marginTop="10dp"
-        android:text="뉴스 내용 일부 일부 일부 일부"
+        android:scrollbars="vertical"
+        android:text="삼성전자가 중국에서 출시를 준비 중인 폴더형 안드로이드 스마트폰 &apos;갤럭시폴더2&apos;로 추정되는 제품 사진이 유출됐다. 28일(현지시간) 삼성전자 모바일 전문매체 샘모바일에 따르면 최근 중국 소셜네트워크서비스(SNS) 웨이보에 삼성전자 폴더폰 후속 제품 &apos;갤러시폴더2&apos; 홍보용 이미지가 등장했다. 공개된 사진에 따르면 갤럭시폴더2는 골드 색상에 울트라 슬림 디자인으로 전작과 유사한 특징을 하고 있다. 이와 함께 제품 상세 사양을 닮은 홍보용 사진도 함께 유출돼 중국에서 신제품 출시가 임박했음을 보여준다. 갤럭시폴더는 폴더형 디자인에 인터넷 검색과 메신저, SNS 등 스마트폰 기능을 결합한 제품이다. 특히 이 제품은 스마트폰 사용이 익숙치 않고 폴더형 디자인을 선호하는 소비자들에게 적합하다는 평가를 받고 있다. 지난해 출시된 &apos;갤럭시폴더&apos;의 후속 모델인 &apos;갤럭시폴더2&apos;는 전작과 유사한 디자인에 프로세서, 메모리, 배터리 등 일부 성능이 업그레이드 됐다."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/btn_go_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btn_go_detail" />
+
+    <TextView
+        android:id="@+id/text_news_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/text_news_part"
-        android:layout_alignLeft="@+id/text_news_part"
-        android:layout_alignRight="@+id/text_news_part"
-        android:layout_alignStart="@+id/text_news_part"
-        android:layout_below="@+id/text_news_part"
-        android:layout_marginTop="10dp"
-        android:text="@string/btn_go_detail" />
+        android:layout_alignTop="@+id/text_news_press"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/text_news_press"
+        android:layout_toRightOf="@+id/text_news_press"
+        android:text="2016-08-22 09:33:25"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/text_news_press"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_news_headline"
+        android:text="정현정 기자"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
 </RelativeLayout>
