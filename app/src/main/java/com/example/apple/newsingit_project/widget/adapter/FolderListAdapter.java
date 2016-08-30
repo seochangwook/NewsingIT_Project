@@ -48,30 +48,38 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     //리사이클뷰에 들어갈 뷰의 아이템값 초기화.//
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (position < folderData.folder_list.size()) {
             final FolderViewHolder folderViewHolder = (FolderViewHolder) holder;
 
             folderViewHolder.set_Folder(folderData.folder_list.get(position), context);
 
+            final boolean folder_private = folderData.folder_list.get(position).get_folder_private();
+
+            if (folder_private == true) { //잠금 해제//
+                folderViewHolder.folder_private_button.setVisibility(View.GONE);
+            } else { //잠금 설정//
+                folderViewHolder.folder_private_button.setVisibility(View.VISIBLE);
+            }
+
             folderViewHolder.folder_private_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    boolean folder_private = folderData.get_folder_private();
 
-                    if (folder_private == true) {
+                    if (folder_private == true) { //잠금 해제//
                         Toast.makeText(context, "잠금모드 해제", Toast.LENGTH_SHORT).show();
 
-                        folderViewHolder.folder_private_button.setBackgroundResource(android.R.drawable.ic_partial_secure);
-                        folderData.setFolder_private(false);
+                        folderData.folder_list.get(position).setFolder_private(false);
+
                         //인증해제 작업을 해준다.//
-                    } else if (folder_private == false) {
+                    } else if (folder_private == false) { //잠금 설정//
                         Toast.makeText(context, "잠금모드 설정", Toast.LENGTH_SHORT).show();
 
-                        folderViewHolder.folder_private_button.setBackgroundResource(android.R.drawable.ic_secure);
-                        folderData.setFolder_private(true);
+                        folderData.folder_list.get(position).setFolder_private(true);
+
                         //인증작업을 해준다.//
                     }
+                    notifyDataSetChanged();
                 }
             });
         }

@@ -10,9 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CreateFolderActivity"
-    tools:showIn="@layout/create_folder_activity_layout">
-
+    tools:context=".EditFolderActivity"
+    tools:showIn="@layout/activity_edit_folder">
     <!--카드뷰로 감싸기(Metrial Design적용) -->
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
@@ -22,7 +21,7 @@
         card:cardElevation="4dp">
 
         <ImageView
-            android:id="@+id/folder_imageview"
+            android:id="@+id/folder_create_imageview"
             android:layout_width="@dimen/folder_create_image_layout_width"
             android:layout_height="@dimen/folder_create_image_layout_height"
             android:src="@mipmap/ic_launcher" />
@@ -41,7 +40,7 @@
         android:text="폴더 이름" />
 
     <EditText
-        android:id="@+id/folder_name_edittext"
+        android:id="@+id/folder_create_name_edittext"
         android:layout_width="@dimen/folder_create_name_edittext_layout_width"
         android:layout_height="@dimen/folder_create_name_edittext_layout_height"
         android:layout_marginTop="@dimen/folder_create_name_edittext_margin_top"
@@ -60,7 +59,7 @@
         android:text="대표 이미지 선택" />
 
     <ImageButton
-        android:id="@+id/image_select_button"
+        android:id="@+id/img_btn_create_folder_select_img"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="290dp"
@@ -81,16 +80,32 @@
         android:text="비공개 설정" />
 
     <Switch
-        android:id="@+id/private_switch_button"
+        android:id="@+id/create_folder_private_switch_button"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginLeft="220dp"
         android:layout_marginTop="306dp" />
 
     <TextView
+        android:id="@+id/line4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/folder_create_line_4_margin_top"
+        android:background="@drawable/line_draw" />
+
+    <TextView
+        android:id="@+id/delete_folder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line4"
+        android:layout_marginTop="10dp"
+        android:text="폴더 삭제" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/delete_folder"
+        android:layout_marginTop="10dp"
         android:background="@drawable/line_draw" />
 
 </RelativeLayout>
