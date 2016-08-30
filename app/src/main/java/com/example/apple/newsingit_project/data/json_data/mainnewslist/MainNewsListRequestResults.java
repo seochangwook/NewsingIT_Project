@@ -1,7 +1,7 @@
 package com.example.apple.newsingit_project.data.json_data.mainnewslist;
 
 public class MainNewsListRequestResults {
-    private MainNewsListRequestResultsNewscontens[] newscontens;
+    public MainNewsListRequestResultsNewscontens[] newscontens;
     private String keyword;
 
     public MainNewsListRequestResultsNewscontens[] getNewscontens() {

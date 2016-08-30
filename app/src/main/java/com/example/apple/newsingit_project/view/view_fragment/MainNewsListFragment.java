@@ -21,6 +21,9 @@ import android.widget.Toast;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SearchTabActivity;
 import com.example.apple.newsingit_project.SelectNewsDetailActivity;
+import com.example.apple.newsingit_project.data.json_data.mainnewslist.MainNewsListRequest;
+import com.example.apple.newsingit_project.data.json_data.mainnewslist.MainNewsListRequestResults;
+import com.example.apple.newsingit_project.data.json_data.mainnewslist.MainNewsListRequestResultsNewscontens;
 import com.example.apple.newsingit_project.data.view_data.Keyword10NewsContentData;
 import com.example.apple.newsingit_project.data.view_data.Keyword10SectionData;
 import com.example.apple.newsingit_project.data.view_data.Keyword1NewsContentData;
@@ -44,11 +47,24 @@ import com.example.apple.newsingit_project.data.view_data.Keyword9SectionData;
 import com.example.apple.newsingit_project.data.view_data.KeywordSection;
 import com.example.apple.newsingit_project.data.view_data.NewsContent;
 import com.example.apple.newsingit_project.dialog.KeywordListActivity;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.NewsAdapter;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,13 +88,37 @@ public class MainNewsListFragment extends Fragment {
     boolean firstDragFlag = true;
     boolean motionFlag = true;
     boolean dragFlag = false; //현재 터치가 드래그인지 먼저 확인//
+    /**
+     * Network variable
+     **/
+    NetworkManager manager;
     private FamiliarRefreshRecyclerView mainnews_recyclerrefreshview;
     private FamiliarRecyclerView mainnews_recyclerview;
-
     /**
      * 기타 로딩 기능
      **/
     private ProgressDialog pDialog;
+    private Callback requestmainnewslistcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) //접속 실패의 경우.//
+        {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            MainNewsListRequest mainNewsListRequest = gson.fromJson(response_data, MainNewsListRequest.class);
+
+            set_Data(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
+        }
+    };
 
     public MainNewsListFragment() //프래그먼트는 반드시 한개 이상의 생성자가 존재해야 한다.//
     {
@@ -125,7 +165,7 @@ public class MainNewsListFragment extends Fragment {
 
         mainnews_recyclerview.setEmptyView(emptyview, true);
 
-        /** 뉴스 리스트 선택 이벤트 설정(개수가 고정되어 있기에 직접할당) **/
+        /** 뉴스 리스트 선택 이벤트 설정(개수가 고정되어 있기에 직접할당,일반적으로는 동적할당) **/
         mainnews_recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
@@ -378,7 +418,7 @@ public class MainNewsListFragment extends Fragment {
                         Data_Init();
 
                         //데이터를 다시 초기화//
-                        initDummyData();
+                        get_MainNewsData();
 
                     }
                 }, 1000);
@@ -399,7 +439,7 @@ public class MainNewsListFragment extends Fragment {
                         Data_Init();
 
                         //데이터를 다시 초기화//
-                        initDummyData();
+                        get_MainNewsData();
 
                     }
                 }, 1000);
@@ -470,9 +510,793 @@ public class MainNewsListFragment extends Fragment {
         });
 
         /** Data Setting **/
-        initDummyData();
+        //initDummyData();
+
+        get_MainNewsData();
 
         return view;
+    }
+
+    public void get_MainNewsData() {
+        /** 네트워크 작업 설정 **/
+        //네트워크로 부터 데이터를 가져온다.//
+        showpDialog();
+
+        /** Network 자원을 설정 **/
+        manager = NetworkManager.getInstance(); //싱글톤 객체를 가져온다.//
+
+        /** Client 설정 **/
+        OkHttpClient client = manager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.addPathSegment("newscontents");
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(getActivity())
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestmainnewslistcallback);
+
+        hidepDialog();
+    }
+
+    public void set_Data(final MainNewsListRequestResults mainNewsListRequest[], final int mainNewsListRequest_size) {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<MainNewsListRequestResults> mainNewsListRequestResultses = new ArrayList<>();
+
+                    mainNewsListRequestResultses.addAll(Arrays.asList(mainNewsListRequest));
+
+                    //키워드와 뉴스 콘텐츠별로 데이터 셋팅(전체 키워드는 10개이므로 전체 10번돌면 종료)//
+                    for (int i = 0; i < mainNewsListRequest_size; i++) {
+                        //각 키워드 별로 구분(키워드 당 3개의 콘텐츠)//
+                        if (i == 0) {
+                            Keyword1SectionData new_keyword_section_1 = new Keyword1SectionData();
+
+                            new_keyword_section_1.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword1SectionDatas.add(new_keyword_section_1);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword1NewsContentData new_news1content_1 = new Keyword1NewsContentData();
+
+                                    new_news1content_1.set_news_author(author);
+                                    new_news1content_1.set_news_content(contents);
+                                    new_news1content_1.set_news_content_id(news_id);
+                                    new_news1content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news1content_1.set_news_write_date(ntime);
+                                    new_news1content_1.set_news_title(title);
+
+                                    newsContent.keyword_1_news_content.add(new_news1content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword1NewsContentData new_news1content_2 = new Keyword1NewsContentData();
+
+                                    new_news1content_2.set_news_author(author);
+                                    new_news1content_2.set_news_content(contents);
+                                    new_news1content_2.set_news_content_id(news_id);
+                                    new_news1content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news1content_2.set_news_write_date(ntime);
+                                    new_news1content_2.set_news_title(title);
+
+                                    newsContent.keyword_1_news_content.add(new_news1content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword1NewsContentData new_news1content_3 = new Keyword1NewsContentData();
+
+                                    new_news1content_3.set_news_author(author);
+                                    new_news1content_3.set_news_content(contents);
+                                    new_news1content_3.set_news_content_id(news_id);
+                                    new_news1content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news1content_3.set_news_write_date(ntime);
+                                    new_news1content_3.set_news_title(title);
+
+                                    newsContent.keyword_1_news_content.add(new_news1content_3);
+                                }
+                            }
+                        } else if (i == 1) {
+                            Keyword2SectionData new_keyword_section_2 = new Keyword2SectionData();
+
+                            new_keyword_section_2.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword2SectionDatas.add(new_keyword_section_2);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword2NewsContentData new_news2content_1 = new Keyword2NewsContentData();
+
+                                    new_news2content_1.set_news_author(author);
+                                    new_news2content_1.set_news_content(contents);
+                                    new_news2content_1.set_news_content_id(news_id);
+                                    new_news2content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news2content_1.set_news_write_date(ntime);
+                                    new_news2content_1.set_news_title(title);
+
+                                    newsContent.keyword_2_news_content.add(new_news2content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword2NewsContentData new_news2content_2 = new Keyword2NewsContentData();
+
+                                    new_news2content_2.set_news_author(author);
+                                    new_news2content_2.set_news_content(contents);
+                                    new_news2content_2.set_news_content_id(news_id);
+                                    new_news2content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news2content_2.set_news_write_date(ntime);
+                                    new_news2content_2.set_news_title(title);
+
+                                    newsContent.keyword_2_news_content.add(new_news2content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword2NewsContentData new_news2content_3 = new Keyword2NewsContentData();
+
+                                    new_news2content_3.set_news_author(author);
+                                    new_news2content_3.set_news_content(contents);
+                                    new_news2content_3.set_news_content_id(news_id);
+                                    new_news2content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news2content_3.set_news_write_date(ntime);
+                                    new_news2content_3.set_news_title(title);
+
+                                    newsContent.keyword_2_news_content.add(new_news2content_3);
+                                }
+                            }
+                        } else if (i == 2) {
+                            Keyword3SectionData new_keyword_section_3 = new Keyword3SectionData();
+
+                            new_keyword_section_3.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword3SectionDatas.add(new_keyword_section_3);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword3NewsContentData new_news3content_1 = new Keyword3NewsContentData();
+
+                                    new_news3content_1.set_news_author(author);
+                                    new_news3content_1.set_news_content(contents);
+                                    new_news3content_1.set_news_content_id(news_id);
+                                    new_news3content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news3content_1.set_news_write_date(ntime);
+                                    new_news3content_1.set_news_title(title);
+
+                                    newsContent.keyword_3_news_content.add(new_news3content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword3NewsContentData new_news3content_2 = new Keyword3NewsContentData();
+
+                                    new_news3content_2.set_news_author(author);
+                                    new_news3content_2.set_news_content(contents);
+                                    new_news3content_2.set_news_content_id(news_id);
+                                    new_news3content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news3content_2.set_news_write_date(ntime);
+                                    new_news3content_2.set_news_title(title);
+
+                                    newsContent.keyword_3_news_content.add(new_news3content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword3NewsContentData new_news3content_3 = new Keyword3NewsContentData();
+
+                                    new_news3content_3.set_news_author(author);
+                                    new_news3content_3.set_news_content(contents);
+                                    new_news3content_3.set_news_content_id(news_id);
+                                    new_news3content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news3content_3.set_news_write_date(ntime);
+                                    new_news3content_3.set_news_title(title);
+
+                                    newsContent.keyword_3_news_content.add(new_news3content_3);
+                                }
+                            }
+                        } else if (i == 3) {
+                            Keyword4SectionData new_keyword_section_4 = new Keyword4SectionData();
+
+                            new_keyword_section_4.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword4SectionDatas.add(new_keyword_section_4);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword4NewsContentData new_news4content_1 = new Keyword4NewsContentData();
+
+                                    new_news4content_1.set_news_author(author);
+                                    new_news4content_1.set_news_content(contents);
+                                    new_news4content_1.set_news_content_id(news_id);
+                                    new_news4content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news4content_1.set_news_write_date(ntime);
+                                    new_news4content_1.set_news_title(title);
+
+                                    newsContent.keyword_4_news_content.add(new_news4content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword4NewsContentData new_news4content_2 = new Keyword4NewsContentData();
+
+                                    new_news4content_2.set_news_author(author);
+                                    new_news4content_2.set_news_content(contents);
+                                    new_news4content_2.set_news_content_id(news_id);
+                                    new_news4content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news4content_2.set_news_write_date(ntime);
+                                    new_news4content_2.set_news_title(title);
+
+                                    newsContent.keyword_4_news_content.add(new_news4content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword4NewsContentData new_news4content_3 = new Keyword4NewsContentData();
+
+                                    new_news4content_3.set_news_author(author);
+                                    new_news4content_3.set_news_content(contents);
+                                    new_news4content_3.set_news_content_id(news_id);
+                                    new_news4content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news4content_3.set_news_write_date(ntime);
+                                    new_news4content_3.set_news_title(title);
+
+                                    newsContent.keyword_4_news_content.add(new_news4content_3);
+                                }
+                            }
+                        } else if (i == 4) {
+                            Keyword5SectionData new_keyword_section_5 = new Keyword5SectionData();
+
+                            new_keyword_section_5.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword5SectionDatas.add(new_keyword_section_5);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword5NewsContentData new_news5content_1 = new Keyword5NewsContentData();
+
+                                    new_news5content_1.set_news_author(author);
+                                    new_news5content_1.set_news_content(contents);
+                                    new_news5content_1.set_news_content_id(news_id);
+                                    new_news5content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news5content_1.set_news_write_date(ntime);
+                                    new_news5content_1.set_news_title(title);
+
+                                    newsContent.keyword_5_news_content.add(new_news5content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword5NewsContentData new_news5content_2 = new Keyword5NewsContentData();
+
+                                    new_news5content_2.set_news_author(author);
+                                    new_news5content_2.set_news_content(contents);
+                                    new_news5content_2.set_news_content_id(news_id);
+                                    new_news5content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news5content_2.set_news_write_date(ntime);
+                                    new_news5content_2.set_news_title(title);
+
+                                    newsContent.keyword_5_news_content.add(new_news5content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword5NewsContentData new_news5content_3 = new Keyword5NewsContentData();
+
+                                    new_news5content_3.set_news_author(author);
+                                    new_news5content_3.set_news_content(contents);
+                                    new_news5content_3.set_news_content_id(news_id);
+                                    new_news5content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news5content_3.set_news_write_date(ntime);
+                                    new_news5content_3.set_news_title(title);
+
+                                    newsContent.keyword_5_news_content.add(new_news5content_3);
+                                }
+                            }
+                        } else if (i == 5) {
+                            Keyword6SectionData new_keyword_section_6 = new Keyword6SectionData();
+
+                            new_keyword_section_6.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword6SectionDatas.add(new_keyword_section_6);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword6NewsContentData new_news6content_1 = new Keyword6NewsContentData();
+
+                                    new_news6content_1.set_news_author(author);
+                                    new_news6content_1.set_news_content(contents);
+                                    new_news6content_1.set_news_content_id(news_id);
+                                    new_news6content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news6content_1.set_news_write_date(ntime);
+                                    new_news6content_1.set_news_title(title);
+
+                                    newsContent.keyword_6_news_content.add(new_news6content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword6NewsContentData new_news6content_2 = new Keyword6NewsContentData();
+
+                                    new_news6content_2.set_news_author(author);
+                                    new_news6content_2.set_news_content(contents);
+                                    new_news6content_2.set_news_content_id(news_id);
+                                    new_news6content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news6content_2.set_news_write_date(ntime);
+                                    new_news6content_2.set_news_title(title);
+
+                                    newsContent.keyword_6_news_content.add(new_news6content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword6NewsContentData new_news6content_3 = new Keyword6NewsContentData();
+
+                                    new_news6content_3.set_news_author(author);
+                                    new_news6content_3.set_news_content(contents);
+                                    new_news6content_3.set_news_content_id(news_id);
+                                    new_news6content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news6content_3.set_news_write_date(ntime);
+                                    new_news6content_3.set_news_title(title);
+
+                                    newsContent.keyword_6_news_content.add(new_news6content_3);
+                                }
+                            }
+                        } else if (i == 6) {
+                            Keyword7SectionData new_keyword_section_7 = new Keyword7SectionData();
+
+                            new_keyword_section_7.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword7SectionDatas.add(new_keyword_section_7);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword7NewsContentData new_news7content_1 = new Keyword7NewsContentData();
+
+                                    new_news7content_1.set_news_author(author);
+                                    new_news7content_1.set_news_content(contents);
+                                    new_news7content_1.set_news_content_id(news_id);
+                                    new_news7content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news7content_1.set_news_write_date(ntime);
+                                    new_news7content_1.set_news_title(title);
+
+                                    newsContent.keyword_7_news_content.add(new_news7content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword7NewsContentData new_news7content_2 = new Keyword7NewsContentData();
+
+                                    new_news7content_2.set_news_author(author);
+                                    new_news7content_2.set_news_content(contents);
+                                    new_news7content_2.set_news_content_id(news_id);
+                                    new_news7content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news7content_2.set_news_write_date(ntime);
+                                    new_news7content_2.set_news_title(title);
+
+                                    newsContent.keyword_7_news_content.add(new_news7content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword7NewsContentData new_news7content_3 = new Keyword7NewsContentData();
+
+                                    new_news7content_3.set_news_author(author);
+                                    new_news7content_3.set_news_content(contents);
+                                    new_news7content_3.set_news_content_id(news_id);
+                                    new_news7content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news7content_3.set_news_write_date(ntime);
+                                    new_news7content_3.set_news_title(title);
+
+                                    newsContent.keyword_7_news_content.add(new_news7content_3);
+                                }
+                            }
+                        } else if (i == 7) {
+                            Keyword8SectionData new_keyword_section_8 = new Keyword8SectionData();
+
+                            new_keyword_section_8.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword8SectionDatas.add(new_keyword_section_8);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword8NewsContentData new_news8content_1 = new Keyword8NewsContentData();
+
+                                    new_news8content_1.set_news_author(author);
+                                    new_news8content_1.set_news_content(contents);
+                                    new_news8content_1.set_news_content_id(news_id);
+                                    new_news8content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news8content_1.set_news_write_date(ntime);
+                                    new_news8content_1.set_news_title(title);
+
+                                    newsContent.keyword_8_news_content.add(new_news8content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword8NewsContentData new_news8content_2 = new Keyword8NewsContentData();
+
+                                    new_news8content_2.set_news_author(author);
+                                    new_news8content_2.set_news_content(contents);
+                                    new_news8content_2.set_news_content_id(news_id);
+                                    new_news8content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news8content_2.set_news_write_date(ntime);
+                                    new_news8content_2.set_news_title(title);
+
+                                    newsContent.keyword_8_news_content.add(new_news8content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword8NewsContentData new_news8content_3 = new Keyword8NewsContentData();
+
+                                    new_news8content_3.set_news_author(author);
+                                    new_news8content_3.set_news_content(contents);
+                                    new_news8content_3.set_news_content_id(news_id);
+                                    new_news8content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news8content_3.set_news_write_date(ntime);
+                                    new_news8content_3.set_news_title(title);
+
+                                    newsContent.keyword_8_news_content.add(new_news8content_3);
+                                }
+                            }
+                        } else if (i == 8) {
+                            Keyword9SectionData new_keyword_section_9 = new Keyword9SectionData();
+
+                            new_keyword_section_9.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keyword9SectionDatas.add(new_keyword_section_9);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword9NewsContentData new_news9content_1 = new Keyword9NewsContentData();
+
+                                    new_news9content_1.set_news_author(author);
+                                    new_news9content_1.set_news_content(contents);
+                                    new_news9content_1.set_news_content_id(news_id);
+                                    new_news9content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news9content_1.set_news_write_date(ntime);
+                                    new_news9content_1.set_news_title(title);
+
+                                    newsContent.keyword_9_news_content.add(new_news9content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword9NewsContentData new_news9content_2 = new Keyword9NewsContentData();
+
+                                    new_news9content_2.set_news_author(author);
+                                    new_news9content_2.set_news_content(contents);
+                                    new_news9content_2.set_news_content_id(news_id);
+                                    new_news9content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news9content_2.set_news_write_date(ntime);
+                                    new_news9content_2.set_news_title(title);
+
+                                    newsContent.keyword_9_news_content.add(new_news9content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword9NewsContentData new_news9content_3 = new Keyword9NewsContentData();
+
+                                    new_news9content_3.set_news_author(author);
+                                    new_news9content_3.set_news_content(contents);
+                                    new_news9content_3.set_news_content_id(news_id);
+                                    new_news9content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news9content_3.set_news_write_date(ntime);
+                                    new_news9content_3.set_news_title(title);
+
+                                    newsContent.keyword_9_news_content.add(new_news9content_3);
+                                }
+                            }
+                        } else if (i == 9) {
+                            Keyword10SectionData new_keyword_section_10 = new Keyword10SectionData();
+
+                            new_keyword_section_10.set_keyword_text(mainNewsListRequestResultses.get(i).getKeyword());
+
+                            keywordSection.keywor10dSectionDatas.add(new_keyword_section_10);
+
+                            //콘텐츠 설정.//
+                            int news_content_size = mainNewsListRequestResultses.get(i).getNewscontens().length;
+                            MainNewsListRequestResultsNewscontens news_content[] = mainNewsListRequestResultses.get(i).getNewscontens();
+
+                            for (int content_size = 0; content_size < news_content_size; content_size++) {
+                                //첫번째 키워드에 대한 첫번째 컨텐츠.//
+                                if (content_size == 0) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    //배열에 저장//
+                                    Keyword10NewsContentData new_news10content_1 = new Keyword10NewsContentData();
+
+                                    new_news10content_1.set_news_author(author);
+                                    new_news10content_1.set_news_content(contents);
+                                    new_news10content_1.set_news_content_id(news_id);
+                                    new_news10content_1.set_news_thumbnail_Url(img_Url);
+                                    new_news10content_1.set_news_write_date(ntime);
+                                    new_news10content_1.set_news_title(title);
+
+                                    newsContent.keyword_10_news_content.add(new_news10content_1);
+                                } else if (content_size == 1) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword10NewsContentData new_news10content_2 = new Keyword10NewsContentData();
+
+                                    new_news10content_2.set_news_author(author);
+                                    new_news10content_2.set_news_content(contents);
+                                    new_news10content_2.set_news_content_id(news_id);
+                                    new_news10content_2.set_news_thumbnail_Url(img_Url);
+                                    new_news10content_2.set_news_write_date(ntime);
+                                    new_news10content_2.set_news_title(title);
+
+                                    newsContent.keyword_10_news_content.add(new_news10content_2);
+                                } else if (content_size == 2) {
+                                    String title = news_content[content_size].getTitle();
+                                    String author = news_content[content_size].getAuthor();
+                                    //String img_Url = news_content[content_size].getImg_url();
+                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    int news_id = news_content[content_size].getId();
+                                    String contents = news_content[content_size].getContents();
+                                    String ntime = news_content[content_size].getNtime();
+
+                                    Keyword10NewsContentData new_news10content_3 = new Keyword10NewsContentData();
+
+                                    new_news10content_3.set_news_author(author);
+                                    new_news10content_3.set_news_content(contents);
+                                    new_news10content_3.set_news_content_id(news_id);
+                                    new_news10content_3.set_news_thumbnail_Url(img_Url);
+                                    new_news10content_3.set_news_write_date(ntime);
+                                    new_news10content_3.set_news_title(title);
+
+                                    newsContent.keyword_10_news_content.add(new_news10content_3);
+                                }
+                            }
+                        }
+                    }
+
+                    newsAdapter.setNewsData(keywordSection, newsContent);
+                }
+            });
+        }
     }
 
     @Override
