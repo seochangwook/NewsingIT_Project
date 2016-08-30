@@ -44,7 +44,7 @@
 4. 리스트 내용 선택 시 해당 뉴스의 id값과 title을 가져오는 기능 구현 - 서창욱 (16/08/29 00:52)
 5. 사용자가 키워드리스트에서 키워드 선택 시 메인뉴스 리스트에서 해당 키워드가 존재하는 위치로 이동하는 기능 구현 - 서창욱 (16/08/29 00:52)
 * MainNewsList에서 RecyclerView 내부에 FrameLayout터치 중복 issue -> Adapter에 onCreateViewHolder에서 view를 inflate하고 해당 자원을 가지고 이벤트 작업 방식으로 issue 해결 - 서창욱 (16/08/29 10:13)
-* ListView에 get Twitter timeline test - 임지수 (16/08/29 15:47)
+* ListView에 트위터 가져오기 테스트 완료- 임지수 (16/08/29 15:47)
 * SwipeLayout을 적용해서 트위터 내용 갱신 기능 완료 - 서창욱 (16/08/29 17:55)
 * OkHttp 라이브러리를 적용하여 KeywordList데이터 불러오기 - 서창욱 (16/08/29 23:02)
 * 상대방 스크랩에서만 좋아요 활성화/ 검색 edittext color값 수정/ scrap 생성,수정 edittext 글자수 표기/ 기타 view들 custom - 임지수 (16/08/30 14:51)
