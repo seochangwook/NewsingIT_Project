@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.CreateFolderActivity;
+import com.example.apple.newsingit_project.EditFolderActivity;
 import com.example.apple.newsingit_project.EditMyInfoActivity;
 import com.example.apple.newsingit_project.FollowerListActivity;
 import com.example.apple.newsingit_project.FollowingListActivity;
@@ -151,8 +152,10 @@ public class MyInfoFragment extends Fragment {
             @Override
             public boolean onItemLongClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String folder_name = folderData.folder_list.get(position).get_folder_name();
+                Intent intent = new Intent(getActivity(), EditFolderActivity.class);
+                startActivity(intent);
 
-                Toast.makeText(getActivity(), folder_name + "폴더 제거" + "" + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), folder_name + "폴더 제거" + "" + position, Toast.LENGTH_SHORT).show();
 
                 return true;
             }

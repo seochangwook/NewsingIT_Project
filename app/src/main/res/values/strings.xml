@@ -18,6 +18,7 @@
     <string name="title_activity_keyword_list">KeywordListActivity</string>
     <string name="title_fragment_myinfo">마이페이지</string>
     <string name="title_activity_folder_add">폴더 만들기</string>
+    <string name="title_activity_folder_create">폴더 수정</string>
     <string name="title_activity_edit_scrap_news">스크랩 수정</string>
 
     <string name="fragment_dummy_data_1">fragment 1</string>
@@ -65,5 +66,9 @@
     <string name="dummy_twitter_fragment">blank fragment(각 키워드의 트위터 메시지 정보)</string>
     <string name="title_activity_screap_edit_dialog">ScreapEditDialog</string>
     <string name="title_activity_twitter_test">TwitterTestActivity</string>
+
+    <!-- facebook -->
+    <string name="facebook_app_id">294467057584893</string>
+    <string name="title_activity_edit">EditActivity</string>
 
 </resources>

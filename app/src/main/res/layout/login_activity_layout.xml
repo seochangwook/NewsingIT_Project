@@ -76,6 +76,16 @@
             android:text="IT, 키워드로 읽다"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
+        <Button
+            android:id="@+id/btn_test"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btn_facebook_login"
+            android:layout_alignStart="@+id/btn_facebook_login"
+            android:layout_below="@+id/btn_facebook_login"
+            android:text="New Button" />
+
     </RelativeLayout>
 
 
