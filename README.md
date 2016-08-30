@@ -13,6 +13,7 @@
 * compile 'com.android.support:cardview-v7:24.2.0'
 * compile 'com.android.support:design:24.2.0'
 * compile 'com.android.support:support-v4:24.2.0'
+* compile 'com.android.support:appcompat-v7:22.2.1' //TextInputLayout 관련 라이브러리//
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 
