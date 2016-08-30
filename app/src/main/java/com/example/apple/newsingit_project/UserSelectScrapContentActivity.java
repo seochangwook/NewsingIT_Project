@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class UserSelectScrapContentActivity extends AppCompatActivity {
+    TextView newsContentView, myContentView;
+
     String is_me; //나에 대한 스크랩인지, 다르 사람의 스크랩인지 구분 플래그//
 
     @Override
@@ -30,6 +34,12 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //textview에 scroll 추가//
+        newsContentView = (TextView) findViewById(R.id.text_scrap_content);
+        myContentView = (TextView) findViewById(R.id.text_scrap_my_content);
+        newsContentView.setMovementMethod(new ScrollingMovementMethod());
+        myContentView.setMovementMethod(new ScrollingMovementMethod());
 
         Intent intent = getIntent();
 

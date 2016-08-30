@@ -63,8 +63,17 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
             if (position < userScrapContentData.userScrapContentDataList.size()) {
                 final UserScrapContentViewHolder uvh = (UserScrapContentViewHolder) holder;
                 final int pos = position;
+                final boolean flag = userScrapContentData.userScrapContentDataList.get(pos).getLikeFlag();
 
                 uvh.setUserScrapContent(userScrapContentData.userScrapContentDataList.get(position), context, whoflag);
+
+                //좋아요를 눌렀을 때와 누르지 않았을 때//
+                //이미지 빈 하트 -> 채워진 하트//
+                if (flag) {  //좋아요//
+                    uvh.likeButton.setImageResource(android.R.drawable.star_big_on);
+                } else { //좋아요 취소//
+                    uvh.likeButton.setImageResource(android.R.drawable.star_big_off);
+                }
 
                 uvh.settingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -80,6 +89,33 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     }
                 });
 
+                if (whoflag.equals("1")) { //다른 사람//
+                    uvh.likeButton.setEnabled(true);
+                } else { //내 스크랩//
+                    uvh.likeButton.setEnabled(false);
+                }
+
+
+                uvh.likeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int count = userScrapContentData.userScrapContentDataList.get(pos).getLike();
+
+                        if (flag) { //좋아요 한 상태 -> 좋아요 취소 작업//
+                            count--;
+                            setFavoriteCancel();
+                        } else { //좋아요 안 한 상태 -> 좋아요 할거야//
+                            count++;
+                            setFavoriteDo();
+                        }
+
+                        userScrapContentData.userScrapContentDataList.get(pos).setLike(count); //좋아요 갯수 setting//
+                        userScrapContentData.userScrapContentDataList.get(pos).setLikeFlag(!flag); //좋아요 flag setting//
+
+                        notifyDataSetChanged();
+                    }
+                });
+
                 return;
             }
 
@@ -87,5 +123,14 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
         throw new IllegalArgumentException("invalid position");
     }
+
+    private void setFavoriteCancel() {
+
+    }
+
+    private void setFavoriteDo() {
+
+    }
+
 
 }

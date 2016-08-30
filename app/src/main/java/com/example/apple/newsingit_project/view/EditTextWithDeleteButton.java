@@ -20,25 +20,22 @@ import com.example.apple.newsingit_project.R;
 public class EditTextWithDeleteButton extends LinearLayout {
 	protected EditText editText;
 	protected ImageButton clearTextButton;
-	public interface TextChangedListener extends TextWatcher {
-	}
 	TextChangedListener editTextListener = null;
-	public void addTextChangedListener(TextChangedListener listener) {
-        this.editTextListener = listener;
-    }
 	public EditTextWithDeleteButton(Context context) {
 		super(context);
 		LayoutInflater.from(context).inflate(R.layout.activity_search_tab, this);
 	}
-
 	public EditTextWithDeleteButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initViews(context, attrs);
 	}
-
 	public EditTextWithDeleteButton(Context context, AttributeSet attrs, int defStyle) {
 		this(context, attrs);
 		initViews(context, attrs);
+	}
+
+	public void addTextChangedListener(TextChangedListener listener) {
+		this.editTextListener = listener;
 	}
 
 	private void initViews(Context context, AttributeSet attrs) {
@@ -63,7 +60,7 @@ public class EditTextWithDeleteButton extends LinearLayout {
 		this.addView(editText);
 		this.addView(clearTextButton);
 		editText.addTextChangedListener(txtEntered());
-	
+
 
 		editText.setOnFocusChangeListener(new OnFocusChangeListener() {
 
@@ -110,9 +107,7 @@ public class EditTextWithDeleteButton extends LinearLayout {
 										  int after) {
 				if (editTextListener != null)
 		            editTextListener.beforeTextChanged(s, start, count, after);
-
 			}
-
 		};
 	}
 
@@ -126,7 +121,7 @@ public class EditTextWithDeleteButton extends LinearLayout {
 		editText.setHorizontallyScrolling(false);
 		editText.setVerticalScrollBarEnabled(true);
 		editText.setGravity(Gravity.LEFT);
-	//	editText.setGravity(Gravity.CENTER);
+		editText.setTextColor(getResources().getColor(R.color.colorAccent));
 		editText.setBackground(null);
 		editText.setHint(hintText);
 
@@ -143,6 +138,9 @@ public class EditTextWithDeleteButton extends LinearLayout {
 		clearTextButton.setBackgroundResource(deleteButtonRes);
 		clearTextButton.setVisibility(View.GONE);
 		return clearTextButton;
+	}
+
+	public interface TextChangedListener extends TextWatcher {
 	}
 
 }

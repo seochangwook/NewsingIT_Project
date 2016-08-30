@@ -51,11 +51,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // is_Login();
-                //twitter를 dialog로 띄움
-                Intent intent = new Intent(LoginActivity.this, TwitterLinkActivity.class);
-
-                startActivity(intent);
+                is_Login();
+//                //twitter를 dialog로 띄움
+//                Intent intent = new Intent(LoginActivity.this, TwitterLinkActivity.class);
+//
+//                startActivity(intent);
             }
         });
 
