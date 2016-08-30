@@ -54,7 +54,6 @@ dependencies {
     compile 'com.github.mabbas007:TagsEditText:v1.0'
     compile 'me.gujun.android.taggroup:library:1.4@aar'
     compile 'com.google.code.gson:gson:2.7'
-
     compile 'com.android.support:design:22.2.1' //TextInputLayout 관련 라이브러리//
     compile 'com.android.support:appcompat-v7:22.2.1' //TextInputLayout 관련 라이브러리//
 }

@@ -23,5 +23,8 @@
     <color name="drawer_child">#FFFEFEFE</color>
     <color name="drawer_text">#FFFEFEFE</color>
 
-
+    <!-- tag color -->
+    <color name="blackOlive">#39393F</color>
+    <color name="orange">#FEC500</color>
+    <color name="bg_tag_default">#7cd167</color>
 </resources>

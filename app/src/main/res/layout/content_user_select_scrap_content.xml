@@ -46,32 +46,21 @@
         android:layout_marginTop="10dp"
         android:src="@android:drawable/sym_def_app_icon" />
 
-    <TextView
-        android:id="@+id/text_news_tag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:layout_toEndOf="@+id/imageView4"
-        android:layout_toRightOf="@+id/imageView4"
-        android:scrollbars="vertical"
-        android:text="카카오, 택시, 대리운전"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:src="@android:drawable/sym_action_chat" />
+    <me.gujun.android.taggroup.TagGroup
+        android:id="@+id/tag_group_scrap_beauty"
+        style="@style/TagGroup.Beauty_Red"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="450dp"
+        app:atg_inputHint="태그를 등록해주세요" />
+
 
     <TextView
         android:id="@+id/text_scrap_my_content"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_above="@+id/text_news_tag"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/text_scrap_content"

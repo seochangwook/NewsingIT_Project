@@ -12,15 +12,29 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import me.gujun.android.taggroup.TagGroup;
+
 public class UserSelectScrapContentActivity extends AppCompatActivity {
     TextView newsContentView, myContentView;
 
     String is_me; //나에 대한 스크랩인지, 다르 사람의 스크랩인지 구분 플래그//
 
+    /**
+     * 해시태그 관련 변수
+     **/
+    List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
+    List<String> tags = new ArrayList<>();
+    private TagGroup mBeautyTagGroup; //태그를 나타낼 스타일 뷰//
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_select_scrap_content_activity_layout);
+
+        mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_scrap_beauty);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,6 +65,22 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         } else if (is_me.equals("0")) {
             Log.d("whowho : ", "me");
         }
+
+        set_Tag(); //태그 설정.//
+    }
+
+    public void set_Tag() {
+        /** 해시태그 설정 **/
+        tags.add("서창욱");
+        tags.add("임지수");
+        tags.add("뉴스잉");
+
+        //해시태그 레이아웃에 추가//
+        tag_layout_array.add("#" + tags.get(0).toString());
+        tag_layout_array.add("#" + tags.get(1).toString());
+        tag_layout_array.add("#" + tags.get(2).toString());
+
+        mBeautyTagGroup.setTags(tag_layout_array);
     }
 
     @Override
