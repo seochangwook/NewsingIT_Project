@@ -16,6 +16,7 @@
 * compile 'com.android.support:appcompat-v7:22.2.1' //TextInputLayout 관련 라이브러리//
 * compile 'com.squareup.okhttp3:okhttp:3.4.1'
 * compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
+* compile 'com.facebook.android:facebook-android-sdk:4.8.2'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 
