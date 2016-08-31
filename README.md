@@ -57,4 +57,5 @@
 * SearchTab/scrap목록 네트워크 DummyData test - 임지수 (16/08/31 15:33)
 * ScrapFolderList ExpandableList DummyData test 완료 - 서창욱 (16/08/31 18:25)
 * Follower/Following 목록, scrap 상세 화면 DummyData test - 임지수 (16/08/31 18:30)
+* MyInfoFragment / AlarmListActivity 등 DummyData test 완료 및 현 프로젝트 GET방식 점검 - 서창욱 (16/09/01 00:25)
 
