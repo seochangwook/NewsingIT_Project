@@ -1,4 +1,4 @@
-package com.example.apple.newsingit_project.data.json_data.UserInfo;
+package com.example.apple.newsingit_project.data.json_data.userinfo;
 
 public class UserInfoRequestResult {
     private int followers;

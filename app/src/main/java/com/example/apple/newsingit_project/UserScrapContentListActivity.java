@@ -178,6 +178,9 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                     intent.putExtra("KEY_USER_IDENTIFY_FLAG", "0");
                 }
 
+                intent.putExtra("SCRAP_ID", userScrapContentData.userScrapContentDataList.get(position).getId());
+                // intent.putExtra("SCRAP_AUTHOR", userScrapContentData.userScrapContentDataList.get(position).getNcAuthor());
+
                 startActivity(intent);
             }
         });

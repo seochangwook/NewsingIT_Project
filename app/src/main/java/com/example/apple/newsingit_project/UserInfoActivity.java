@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.apple.newsingit_project.data.json_data.UserInfo.UserInfoRequest;
-import com.example.apple.newsingit_project.data.json_data.UserInfo.UserInfoRequestResult;
+import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequest;
+import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
@@ -287,7 +287,7 @@ public class UserInfoActivity extends AppCompatActivity {
                     //user_imgUrl = userInfoRequestResult.getPf_url();
                     user_imgUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
 
-                    /*Log.d("user intro", user_intro);
+                    /*Log.d("user aboutMe", user_intro);
                     Log.d("user scrap count", scrap_count);
                     Log.d("user following", following_count);
                     Log.d("user follower", follower_count);

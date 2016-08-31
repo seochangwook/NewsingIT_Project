@@ -1,4 +1,4 @@
-package com.example.apple.newsingit_project.data.json_data.SearchUserlist;
+package com.example.apple.newsingit_project.data.json_data.searchuserlist;
 
 public class SearchUserRequest {
     private SearchUserRequestResults[] results;

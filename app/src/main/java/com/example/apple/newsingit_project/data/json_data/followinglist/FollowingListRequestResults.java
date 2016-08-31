@@ -1,6 +1,6 @@
-package com.example.apple.newsingit_project.data.json_data.searchuserlist;
+package com.example.apple.newsingit_project.data.json_data.followinglist;
 
-public class SearchUserRequestResults {
+public class FollowingListRequestResults {
     private String name;
     private int id;
     private String pf_url;

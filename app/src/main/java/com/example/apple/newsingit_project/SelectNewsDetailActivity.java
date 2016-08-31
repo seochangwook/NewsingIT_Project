@@ -21,8 +21,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.apple.newsingit_project.data.json_data.NewsContentDetail.NewsContentDetailRequest;
-import com.example.apple.newsingit_project.data.json_data.NewsContentDetail.NewsContentDetailRequestResult;
+import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequest;
+import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequestResult;
 import com.example.apple.newsingit_project.data.view_data.ScrapFolderListData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
