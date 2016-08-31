@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,16 +14,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.data.json_data.UserInfo.UserInfoRequest;
+import com.example.apple.newsingit_project.data.json_data.UserInfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.UserFolderListAdapter;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class UserInfoActivity extends AppCompatActivity {
+    private static final String USER_ID = "USER_ID";
+    private static final String USER_NAME = "USER_NAME";
+
     boolean dummy_follow_state = false; //팔로우 하지 않음이 기본 설정.//
     //사용자 정보 뷰 관련 변수//
     ImageView user_profile_imageview;
@@ -31,14 +47,53 @@ public class UserInfoActivity extends AppCompatActivity {
     Button user_follower_count_button;
     Button user_following_count_button;
     Button user_following_button;
+    Button user_scrap_button;
 
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
 
+    String get_user_id = null;
+    String get_user_name = null;
+
+    /**
+     * 네트워크 데이터
+     **/
+    String following_count;
+    String follower_count;
+    String scrap_count;
+    String user_imgUrl;
+    String user_name;
+    String user_intro;
+    /**
+     * 네트워크 관련 변수
+     **/
+    NetworkManager networkManager;
     //리사이클뷰 관련 변수.//
     private FamiliarRefreshRecyclerView user_folder_recyclerrefreshview;
     private FamiliarRecyclerView user_folder_recyclerview;
+    private ProgressDialog pDialog;
+    private Callback requestuserinfocallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) //접속 실패의 경우.//
+        {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            UserInfoRequest userInfoRequest = gson.fromJson(response_data, UserInfoRequest.class);
+
+            set_UserInfo_Data(userInfoRequest.getResult());
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +107,23 @@ public class UserInfoActivity extends AppCompatActivity {
         user_follower_count_button = (Button) findViewById(R.id.user_follower_button);
         user_following_count_button = (Button) findViewById(R.id.user_following_button);
         user_following_button = (Button) findViewById(R.id.user_follow_button);
+        user_scrap_button = (Button) findViewById(R.id.scrapt_count_button);
 
         user_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.user_folder_rv_list);
         setSupportActionBar(toolbar);
 
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+
         Intent intent = getIntent();
-        String title = intent.getStringExtra("USER_NAME");
+
+        get_user_id = intent.getStringExtra("USER_ID");
+        get_user_name = intent.getStringExtra("USER_NAME");
 
         /** 타이틀과 이름 값 초기화 **/
-        setTitle(title);
-        user_profile_name_textview.setText(title);
+        setTitle(get_user_name);
+        user_profile_name_textview.setText(get_user_name);
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -177,15 +239,73 @@ public class UserInfoActivity extends AppCompatActivity {
             }
         });
 
-        //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
-        //파카소 라이브러리를 이용하여 이미지 로딩//
-        Picasso.with(this)
-                .load(R.drawable.facebook_people_image)
-                .transform(new CropCircleTransformation())
-                .into(user_profile_imageview);
-
         //Dummy Data 설정//
         set_Dummy_Folder_Date();
+
+        //유저 프로필 정보를 불러온다.//
+        get_UserInfo_Data(get_user_id); //id값이 조건으로 필요하다.//
+    }
+
+    public void get_UserInfo_Data(String user_id) {
+        /** 네트워크 설정을 한다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.addPathSegment("users");
+        builder.addPathSegment(user_id);
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestuserinfocallback);
+    }
+
+    public void set_UserInfo_Data(final UserInfoRequestResult userInfoRequestResult) {
+        //데이터 값을 할당.//
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    user_intro = userInfoRequestResult.getAboutme();
+                    scrap_count = "" + userInfoRequestResult.getScrapings();
+                    following_count = "" + userInfoRequestResult.getFollowings();
+                    follower_count = "" + userInfoRequestResult.getFollowers();
+                    //user_imgUrl = userInfoRequestResult.getPf_url();
+                    user_imgUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+
+                    /*Log.d("user intro", user_intro);
+                    Log.d("user scrap count", scrap_count);
+                    Log.d("user following", following_count);
+                    Log.d("user follower", follower_count);
+                    Log.d("user imgUrl", user_imgUrl);*/
+
+                    //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
+                    //파카소 라이브러리를 이용하여 이미지 로딩//
+                    Picasso.with(UserInfoActivity.this)
+                            .load(user_imgUrl)
+                            .transform(new CropCircleTransformation())
+                            .into(user_profile_imageview);
+
+                    user_profile_my_introduce_textview.setText(user_intro);
+                    user_follower_count_button.setText(follower_count);
+                    user_following_count_button.setText(following_count);
+                    user_scrap_button.setText(scrap_count);
+                }
+            });
+        }
     }
 
     public void set_Dummy_Folder_Date() {
@@ -214,25 +334,13 @@ public class UserInfoActivity extends AppCompatActivity {
         user_folderListAdapter.set_UserFolderDate(user_folderData); //설정.//
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_userinfo, menu);
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int item_id = item.getItemId();
-//
-//        if (item_id == R.id.search_menu) {
-//            Intent intent = new Intent(UserInfoActivity.this, SearchTabActivity.class);
-//
-//            startActivity(intent);
-//
-//         //Zfinish();
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
 }

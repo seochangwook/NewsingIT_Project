@@ -6,10 +6,10 @@
     card:cardBackgroundColor="#FFFFFF"
     card:cardCornerRadius="8dp"
     card:cardElevation="4dp">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/img_search_user"
@@ -21,17 +21,17 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/ic_face_black_24dp" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/text_search_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유저 이름"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignTop="@+id/img_search_user"
+        android:layout_toEndOf="@+id/img_search_user"
         android:layout_toRightOf="@+id/img_search_user"
-        android:layout_toEndOf="@+id/img_search_user" />
+        android:text="유저 이름"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/btn_search_user"
@@ -45,14 +45,14 @@
         android:text="팔로우" />
 
     <TextView
+        android:id="@+id/text_search_user_intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="자기소개"
-        android:id="@+id/text_search_user_intro"
         android:layout_alignBottom="@+id/btn_search_user"
-        android:layout_toRightOf="@+id/img_search_user"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/img_search_user"
-        android:layout_marginTop="10dp" />
+        android:layout_toRightOf="@+id/img_search_user"
+        android:text="자기소개"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 </RelativeLayout>
 </android.support.v7.widget.CardView>
