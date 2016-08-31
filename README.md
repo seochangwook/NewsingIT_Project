@@ -54,3 +54,4 @@
 * ScrapCreate / ScrapActivity UI fix - 서창욱 (16/08/30 20:28)
 * ScrapContentEditDialog의 ExpandableListView 수정, 기타 전반적인 UI구조 수정 - 서창욱 (16/08/31 01:26)
 * NewsDetailActivity / UserInfoActivity / SearchUser 부분 DummyData test 완료 - 서창욱 (16/08/31 15:30)
+* ScrapFolderList ExpandableList DummyData test 완료 - 서창욱 (16/08/31 18:25)

@@ -3,6 +3,7 @@ package com.example.apple.newsingit_project.dialog;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -12,7 +13,23 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.CreateFolderActivity;
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.data.json_data.ScrapFolderList.ScrapFolderListRequest;
+import com.example.apple.newsingit_project.data.json_data.ScrapFolderList.ScrapFolderListRequestResults;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.FolderGroupAdapter;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ScrapContentEditDialog extends Activity {
     ExpandableListView expandablelistview;
@@ -24,6 +41,34 @@ public class ScrapContentEditDialog extends Activity {
 
     String group_name[];
     String child_name[];
+
+    /**
+     * Network 관련 변수
+     **/
+    NetworkManager manager;
+    private Callback requestscrapcontentlistcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) //접속 실패의 경우.//
+        {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+
+            //메인 UI에서 작업하기 위해서 runOnUiThread설정//
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            ScrapFolderListRequest scrapFolderListRequest = gson.fromJson(response_data, ScrapFolderListRequest.class);
+
+            set_scrap_folder_data(scrapFolderListRequest.getResults(), scrapFolderListRequest.getResults().length);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +139,81 @@ public class ScrapContentEditDialog extends Activity {
             }
         });
 
-        set_ExpanList_Data();
+        //set_ExpanList_Data();
+
+        /** 네트워크로 부터 데이터를 불러온다. **/
+        get_Category_Data();
+    }
+
+    public void get_Category_Data() {
+        /** Network 자원을 설정 **/
+        manager = NetworkManager.getInstance(); //싱글톤 객체를 가져온다.//
+
+        /** Client 설정 **/
+        OkHttpClient client = manager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http"); //스킴정의//
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com"); //호스트를 설정.//
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //나의 정보이기에 "me"로 설정//
+        builder.addPathSegment("categories");
+
+        //값을 설정.//
+        builder.addQueryParameter("usage", "scrap");
+        builder.addQueryParameter("page", "1");
+        builder.addQueryParameter("count", "20");
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(ScrapContentEditDialog.this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestscrapcontentlistcallback);
+    }
+
+    public void set_scrap_folder_data(final ScrapFolderListRequestResults scrapFolderListRequestResults[], final int scrap_folder_list_size) {
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<ScrapFolderListRequestResults> scrapFolderListRequestResultsList = new ArrayList<>();
+
+                    scrapFolderListRequestResultsList.addAll(Arrays.asList(scrapFolderListRequestResults));
+
+                    //마지막 부분에 추가.//
+                    int array_last_size = scrap_folder_list_size + 1;
+
+                    group_name = new String[]{"스크랩 폴더 이동"};
+                    child_name = new String[array_last_size]; //스크랩 사이즈의 개수로 배열을 할당.//
+
+                    for (int i = 0; i < array_last_size; i++) {
+                        if (i == array_last_size - 1) {
+                            child_name[i] = "+ 폴더만들기";
+                        } else {
+                            child_name[i] = scrapFolderListRequestResultsList.get(i).getName();
+                        }
+
+                        Log.d("data", child_name[i]);
+                    }
+
+                    //Child를 설정//
+                    for (int group_index = 0; group_index < group_name.length; group_index++) {
+                        for (int child_index = 0; child_index < child_name.length; child_index++) {
+                            String groupname = group_name[group_index];
+                            String childname = child_name[child_index];
+
+                            mAdapter.set_List_Data(groupname, childname);
+                        }
+                    }
+                }
+            });
+        }
     }
 
     public void set_ExpanList_Data() {
