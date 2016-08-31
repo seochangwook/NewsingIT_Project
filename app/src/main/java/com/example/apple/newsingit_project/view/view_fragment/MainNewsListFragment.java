@@ -75,6 +75,8 @@ public class MainNewsListFragment extends Fragment {
      **/
     private static final int RC_KEYWORD = 1000;
     private static final String KEY_KEYWORD = "KEY_KEYWORD";
+    private static final String NEWS_ID = "NEWS_ID";
+    private static final String NEWS_TITLE = "NEWS_TITLE";
     /**
      * RecyclerView의 데이터와 어댑터 관련 변수
      **/
@@ -191,6 +193,10 @@ public class MainNewsListFragment extends Fragment {
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
+
                     startActivity(intent);
                 }
 
@@ -213,6 +219,10 @@ public class MainNewsListFragment extends Fragment {
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
 
                     startActivity(intent);
                 }
@@ -237,6 +247,10 @@ public class MainNewsListFragment extends Fragment {
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
+
                     startActivity(intent);
                 }
 
@@ -259,6 +273,10 @@ public class MainNewsListFragment extends Fragment {
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
 
                     startActivity(intent);
                 }
@@ -283,6 +301,10 @@ public class MainNewsListFragment extends Fragment {
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
+
                     startActivity(intent);
                 }
 
@@ -305,6 +327,10 @@ public class MainNewsListFragment extends Fragment {
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
 
                     startActivity(intent);
                 }
@@ -329,6 +355,10 @@ public class MainNewsListFragment extends Fragment {
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
+
                     startActivity(intent);
                 }
 
@@ -351,6 +381,10 @@ public class MainNewsListFragment extends Fragment {
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
 
                     startActivity(intent);
                 }
@@ -375,6 +409,10 @@ public class MainNewsListFragment extends Fragment {
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
+
                     startActivity(intent);
                 }
 
@@ -397,6 +435,10 @@ public class MainNewsListFragment extends Fragment {
                     Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
+
+                    //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
+                    intent.putExtra(NEWS_TITLE, news_title);
+                    intent.putExtra(NEWS_ID, "" + news_id);
 
                     startActivity(intent);
                 }
