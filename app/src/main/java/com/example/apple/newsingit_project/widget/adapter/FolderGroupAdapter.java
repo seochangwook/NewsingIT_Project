@@ -24,6 +24,8 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
     //그룹에 대한 리스트 정의.//
     List<FolderGroupItem> items = new ArrayList<>();
 
+    int last_childposition;
+
     public FolderGroupAdapter(Context context) {
         this.context = context;
     }
@@ -139,6 +141,7 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
             child_item_view = LayoutInflater.from(parent.getContext()).inflate(R.layout.folder_item, parent, false);
 
             child_item_name = (TextView) child_item_view.findViewById(R.id.child_name_text);
+
         } else {
             child_item_view = convertView;
 

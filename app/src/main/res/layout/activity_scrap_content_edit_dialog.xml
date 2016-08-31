@@ -28,10 +28,10 @@
         android:id="@+id/info_text_private"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="83dp"
         android:gravity="center|left"
         android:text="비공개 설정"
-        android:textSize="20dp"
+        android:textSize="17dp"
         android:textStyle="bold" />
 
     <Switch
@@ -40,13 +40,4 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="170dp"
         android:layout_marginTop="90dp" />
-
-    <Button
-        android:id="@+id/scrap_fix_enroll_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="131dp"
-        android:background="@color/bottom_bar_unselected"
-        android:text="완료"
-        android:textStyle="bold" />
 </RelativeLayout>

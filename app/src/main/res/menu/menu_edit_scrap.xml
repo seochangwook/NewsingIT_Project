@@ -3,15 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/lock_scrap"
-        android:icon="@mipmap/sample_unlock_image"
-        android:orderInCategory="100"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:orderInCategory="101"
         android:title=""
         app:showAsAction="always" />
     <item
-        android:id="@+id/edit_scrap"
-        android:icon="@mipmap/sample_fix_scrap"
-        android:orderInCategory="100"
+        android:id="@+id/create_scrap"
+        android:icon="@android:drawable/checkbox_on_background"
+        android:orderInCategory="102"
         android:title=""
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/getimage"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:orderInCategory="100"
+        android:title=""
+        app:showAsAction="always" />
 </menu>

@@ -1,92 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.apple.newsingit_project.EditScrapContentActivity"
+    tools:context="com.example.apple.newsingit_project.UserSelectScrapContentActivity"
     tools:showIn="@layout/edit_scrap_content_activity_layout">
 
-    <EditText
-        android:id="@+id/editText4"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="스크랩 제목" />
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_layout_edit_scrap"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_above="@+id/editText6"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText4"
-        android:layout_marginBottom="50dp">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_layout_edittext_edit_scrap"
+        <EditText
+            android:id="@+id/editText4"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_above="@+id/editText6"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="스크랩 제목을 수정하세요." />
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            card:cardBackgroundColor="#bdbdbd"
+            card:cardCornerRadius="8dp"
+            card:cardElevation="4dp">
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/news_preview_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/news_preview_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/main_news_news_author_layout_margin_left"
+                    android:layout_marginTop="@dimen/main_news_news_author_layout_margin_top"
+                    android:text="한국경제"
+                    android:textColor="@color/black_color"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/news_preview_write_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/main_news_write_time_layout_margin_left"
+                    android:layout_marginTop="@dimen/main_news_write_time_layout_margin_top"
+                    android:text="2016.08.11"
+                    android:textSize="7dp" />
+
+                <TextView
+                    android:id="@+id/news_preview_title"
+                    android:layout_width="@dimen/main_news_title_layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/main_news_title_layout_margin_left"
+                    android:layout_marginTop="@dimen/main_news_title_layout_margin_top"
+                    android:singleLine="true"
+                    android:text="SKT, 인텔과 폰 없이 통화하는 시대 연다."
+                    android:textColor="@color/black_color"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/news_preview_content"
+                    android:layout_width="@dimen/main_news_content_layout_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/main_news_content_layout_margin_left"
+                    android:layout_marginTop="@dimen/main_news_content_layout_margin_top"
+                    android:singleLine="true"
+                    android:text="16일(현지시각)미국 샌프란시스코 '인텐개발자' 더미 데이터 넣기 "
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_layout_edit_scrap"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/editText4"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:gravity="top"
-            android:hint="내 생각을 적어보세요"
-            android:maxLength="100" />
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="87dp">
 
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/text_layout_edittext_edit_scrap"
+                android:layout_width="match_parent"
+                android:layout_height="245dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="top"
+                android:hint="내 생각을 추가/수정하세요."
+                android:maxLength="100" />
+        </android.support.design.widget.TextInputLayout>
 
-    <!--<EditText-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/editText5"-->
-    <!--android:layout_below="@+id/editText4"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentStart="true"-->
-    <!--android:layout_marginLeft="20dp"-->
-    <!--android:layout_marginRight="20dp"-->
-    <!--android:layout_above="@+id/editText6"-->
-    <!--android:hint="내 생각을 적어보세요"-->
-    <!--android:gravity="top"-->
-    <!--android:layout_marginTop="20dp"-->
-    <!--android:layout_marginBottom="10dp" />-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            android:background="@drawable/line_draw" />
 
+        <ImageView
+            android:id="@+id/scrap_my_imageview"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="410dp"
+            android:src="@mipmap/ic_launcher" />
 
-    <EditText
-        android:id="@+id/editText6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="60dp"
-        android:hint="태그, 태그, 태그, 하고 등록누르기" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="490dp"
+            android:background="@drawable/line_draw" />
 
-    <Button
-        android:id="@+id/btn_tag"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/editText6"
-        android:layout_marginRight="10dp"
-        android:text="등록" />
-</RelativeLayout>
+        <mabbas007.tagsedittext.TagsEditText
+            android:id="@+id/tagsEditText"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="505dp"
+            android:hint="태그를 추가해보세요."
+            TagsEditText:allowSpaceInTag="true"
+            TagsEditText:tagsBackground="@drawable/square_default"
+            TagsEditText:tagsCloseImageRight="@drawable/tag_close" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="510dp"
+            android:src="@mipmap/tag_sample_image" />
+
+        <Button
+            android:id="@+id/btn_tag_create"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="310dp"
+            android:layout_marginTop="500dp"
+            android:text="등록" />
+
+        <me.gujun.android.taggroup.TagGroup
+            android:id="@+id/tag_group_beauty"
+            style="@style/TagGroup.Beauty_Red"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="560dp"
+            app:atg_inputHint="태그를 등록해주세요" />
+    </RelativeLayout>
+</ScrollView>

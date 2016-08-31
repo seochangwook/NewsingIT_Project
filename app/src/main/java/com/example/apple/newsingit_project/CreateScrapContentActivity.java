@@ -51,7 +51,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         setSupportActionBar(toolbar);
 
         /** 해시테그 설정 **/
-        mTagsEditText.setHint("Enter tags");
+        mTagsEditText.setHint("태그를 등록해보세요.");
         mTagsEditText.setTagsWithSpacesEnabled(true);
         mTagsEditText.setTagsListener(CreateScrapContentActivity.this);
         mTagsEditText.setThreshold(1);

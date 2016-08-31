@@ -52,3 +52,4 @@
 * MainNewsList Okhttp를 이용한 getData()부분 기능 구현 완료 - 서창욱 (16/08/30 15:08)
 * facebook login/ EditFolderActivity 추가/ 폴더 long click시 폴더 수정 화면으로 이동/ 자물쇠 이미지(버튼) 클릭 시 사라짐 - 임지수 (16/08/30 19:51)
 * ScrapCreate / ScrapActivity UI fix - 서창욱 (16/08/30 20:28)
+* ScrapContentEditDialog의 ExpandableListView 수정, 기타 전반적인 UI구조 수정 - 서창욱 (16/08/31 01:26)
