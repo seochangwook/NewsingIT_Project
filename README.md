@@ -17,6 +17,7 @@
 * compile 'com.squareup.okhttp3:okhttp:3.4.1'
 * compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
 * compile 'com.facebook.android:facebook-android-sdk:4.8.2'
+* compile 'com.android.support:multidex:1.0.1'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 
@@ -58,4 +59,5 @@
 * ScrapFolderList ExpandableList DummyData test 완료 - 서창욱 (16/08/31 18:25)
 * Follower/Following 목록, scrap 상세 화면 DummyData test - 임지수 (16/08/31 18:30)
 * MyInfoFragment / AlarmListActivity 등 DummyData test 완료 및 현 프로젝트 GET방식 점검 - 서창욱 (16/09/01 00:25)
+* dexOutOfMemory방지 라이브러리 추가로 컴파일 issue 해결 - 서창욱 (16/09/01 00:25)
 
