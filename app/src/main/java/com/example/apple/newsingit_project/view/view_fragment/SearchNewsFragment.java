@@ -37,6 +37,8 @@ import okhttp3.Response;
  * A simple {@link Fragment} subclass.
  */
 public class SearchNewsFragment extends Fragment {
+    private static final String NEWS_ID = "NEWS_ID";
+    private static final String NEWS_TITLE = "NEWS_TITLE";
     FamiliarRecyclerView recyclerView;
     SearchNewsAdapter mAdapter;
     SearchNewsData searchNewsData;
@@ -140,11 +142,15 @@ public class SearchNewsFragment extends Fragment {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
 
                 String userSelect = searchNewsData.searchNewsDataArrayList.get(position).getTitle().toString();
+                int news_id = searchNewsData.searchNewsDataArrayList.get(position).getId();
                 Toast.makeText(getActivity(), "제목 " + userSelect, Toast.LENGTH_SHORT).show();
 
                 //선택한 뉴스 콘텐츠 페이지로 이동//
                 Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
-                intent.putExtra("NEWS_TITLE", userSelect);
+
+                intent.putExtra(NEWS_TITLE, userSelect);
+                intent.putExtra(NEWS_ID, "" + news_id);
+
                 startActivity(intent);
 
             }

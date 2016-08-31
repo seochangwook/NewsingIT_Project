@@ -18,14 +18,6 @@ public class SearchUserData {
     public String profileUrl;
     public List<SearchUserData> searchUserDataArrayList = new ArrayList<>();
 
-    public String getProfileUrl() {
-        return profileUrl;
-    }
-
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
-    }
-
     public int getId() {
         return id;
     }
@@ -46,12 +38,6 @@ public class SearchUserData {
         return this.name;
     }
 
-    public void setName(String user_name) {
-        this.name = user_name;
-    }
-
-    public String getIntro(){
-        return this.intro;
     public void setName(String name) {
         this.name = name;
     }
@@ -62,10 +48,6 @@ public class SearchUserData {
 
     public void setAboutMe(String aboutMe) {
         this.aboutMe = aboutMe;
-    }
-
-    public void set_Intro(String user_intro) {
-        this.intro = user_intro;
     }
 
     public String get_User_imgUrl() {

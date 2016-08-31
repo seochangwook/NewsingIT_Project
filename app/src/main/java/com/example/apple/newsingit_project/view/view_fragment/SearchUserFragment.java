@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.UserInfoActivity;
-import com.example.apple.newsingit_project.data.json_data.searchuserlist.SearchUserListRequest;
-import com.example.apple.newsingit_project.data.json_data.searchuserlist.SearchUserListRequestResults;
 import com.example.apple.newsingit_project.data.json_data.SearchUserlist.SearchUserRequest;
 import com.example.apple.newsingit_project.data.json_data.SearchUserlist.SearchUserRequestResults;
 import com.example.apple.newsingit_project.data.view_data.SearchUserData;
@@ -49,7 +47,8 @@ public class SearchUserFragment extends Fragment {
     SearchUserData searchUserData;
     NetworkManager networkManager;
     private ProgressDialog pDialog;
-    private Callback requestSearchUserListCallback = new Callback() {
+
+    private Callback requestsearchusercallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
@@ -64,7 +63,7 @@ public class SearchUserFragment extends Fragment {
 
             Gson gson = new Gson();
 
-            SearchUserListRequest searchUserListRequest = gson.fromJson(responseData, SearchUserListRequest.class);
+            SearchUserRequest searchUserListRequest = gson.fromJson(responseData, SearchUserRequest.class);
 
             setData(searchUserListRequest.getResults(), searchUserListRequest.getResults().length);
         }
@@ -161,7 +160,7 @@ public class SearchUserFragment extends Fragment {
         client.newCall(request).enqueue(requestsearchusercallback);
     }
 
-    public void set_UserList_Data(final SearchUserRequestResults user_list_data[], final int user_list_data_length) {
+    public void setData(final SearchUserRequestResults user_list_data[], final int user_list_data_length) {
         //실제 데이터에 네트워크로 받아온 값을 할당.//
         if (getActivity() != null) {
             getActivity().runOnUiThread(new Runnable() {
@@ -185,9 +184,9 @@ public class SearchUserFragment extends Fragment {
                     for (int i = 0; i < user_list_data_length; i++) {
                         SearchUserData new_searchUserData = new SearchUserData();
 
-                        new_searchUserData.set_Intro(searchUserRequestResultsList.get(i).getAboutme());
                         new_searchUserData.set_user_id(searchUserRequestResultsList.get(i).getId());
                         new_searchUserData.setName(searchUserRequestResultsList.get(i).getName());
+                        new_searchUserData.setAboutMe(searchUserRequestResultsList.get(i).getAboutme());
                         //new_searchUserData.set_User_imgUrl(searchUserRequestResultsList.get(i).getPf_url());
                         new_searchUserData.set_User_imgUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
 
