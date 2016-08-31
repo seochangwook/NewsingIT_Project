@@ -43,7 +43,7 @@
         android:src="@mipmap/sample_drawable_image" />
 
     <TextView
-        android:id="@+id/text_scrap_list_content"
+        android:id="@+id/text_scrap_list_nctitle"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@+id/text_scrap_list_date"
@@ -53,7 +53,7 @@
         android:layout_toRightOf="@+id/img_scrap_list"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="content"
+        android:text="nctitle"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -64,7 +64,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/img_btn_scrap_list_like"
         android:layout_marginTop="10dp"
-        android:text="date"
+        android:text="ncTime"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView

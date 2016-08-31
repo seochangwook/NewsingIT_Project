@@ -16,13 +16,13 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
 
     public UserScrapContentData userScrapContentData;
 
-    public TextView contentView, titleView, dateView, likeView;
+    public TextView ncTitleView, titleView, dateView, likeView;
     public ImageButton settingButton, likeButton;
 
     public UserScrapContentViewHolder(View itemView) {
         super(itemView);
         titleView = (TextView)itemView.findViewById(R.id.text_scrap_list_title);
-        contentView = (TextView) itemView.findViewById(R.id.text_scrap_list_content);
+        ncTitleView = (TextView) itemView.findViewById(R.id.text_scrap_list_nctitle);
         dateView = (TextView)itemView.findViewById(R.id.text_scrap_list_date);
         likeView = (TextView)itemView.findViewById(R.id.text_scrap_list_like);
         settingButton = (ImageButton) itemView.findViewById(R.id.img_btn_scrap_setting);
@@ -32,8 +32,8 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
     public void setUserScrapContent(UserScrapContentData userScrapContentData, Context context, String who_flag) {
         this.userScrapContentData = userScrapContentData;
         titleView.setText(userScrapContentData.getTitle());
-        contentView.setText(userScrapContentData.getContent());
-        dateView.setText(userScrapContentData.getDate());
+        ncTitleView.setText(userScrapContentData.getNcTitle());
+        dateView.setText(userScrapContentData.getNcTime());
         likeView.setText("" + userScrapContentData.getLike());
 
         //사용자와 다른 사용자에 따른 기능 구분.//

@@ -14,13 +14,13 @@ import com.example.apple.newsingit_project.data.view_data.SearchNewsData;
 public class SearchNewsViewHolder extends RecyclerView.ViewHolder {
 
     SearchNewsData searchNewsData;
-    TextView titleView, contentView, dateView;
+    TextView titleView, authorView, dateView;
 
 
     public SearchNewsViewHolder(View itemView) {
         super(itemView);
         titleView = (TextView) itemView.findViewById(R.id.text_search_news_title);
-        contentView = (TextView) itemView.findViewById(R.id.text_search_news_content);
+        authorView = (TextView) itemView.findViewById(R.id.text_search_news_author);
         dateView = (TextView)itemView.findViewById(R.id.text_search_news_date);
 
     }
@@ -28,7 +28,7 @@ public class SearchNewsViewHolder extends RecyclerView.ViewHolder {
     public void setSearchNewsData(SearchNewsData searchNewsData, Context context) {
         this.searchNewsData = searchNewsData;
         titleView.setText(searchNewsData.getTitle());
-        contentView.setText(searchNewsData.getContent());
+        authorView.setText(searchNewsData.getAuthor());
         dateView.setText(searchNewsData.getDate());
     }
 }

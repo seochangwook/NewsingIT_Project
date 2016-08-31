@@ -116,7 +116,7 @@ public class MainNewsListFragment extends Fragment {
 
             MainNewsListRequest mainNewsListRequest = gson.fromJson(response_data, MainNewsListRequest.class);
 
-            set_Data(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
+            setData(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
         }
     };
 
@@ -548,7 +548,7 @@ public class MainNewsListFragment extends Fragment {
         hidepDialog();
     }
 
-    public void set_Data(final MainNewsListRequestResults mainNewsListRequest[], final int mainNewsListRequest_size) {
+    public void setData(final MainNewsListRequestResults mainNewsListRequest[], final int mainNewsListRequest_size) {
         if (getActivity() != null) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override

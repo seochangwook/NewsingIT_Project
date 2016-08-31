@@ -8,19 +8,64 @@ import java.util.List;
  */
 public class UserScrapContentData {
     public List<UserScrapContentData> userScrapContentDataList = new ArrayList<>();
-    private String content;
+    private int id;
     private String title;
-    private String date;
+    private String ncTitle;
+    private String ncAuthor;
+    private String ncTime;
     private int like;
     private boolean likeFlag;
-    private boolean scrap; //스크랩 설정 버튼 flag//
+    private boolean lock;
+    private String ncImgUrl;
 
-    public String getContent() {
-        return this.content;
+
+    public String getNcImgUrl() {
+        return ncImgUrl;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setNcImgUrl(String ncImgUrl) {
+        this.ncImgUrl = ncImgUrl;
+    }
+
+
+    public List<UserScrapContentData> getUserScrapContentDataList() {
+        return userScrapContentDataList;
+    }
+
+    public void setUserScrapContentDataList(List<UserScrapContentData> userScrapContentDataList) {
+        this.userScrapContentDataList = userScrapContentDataList;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNcAuthor() {
+        return ncAuthor;
+    }
+
+    public void setNcAuthor(String ncAuthor) {
+        this.ncAuthor = ncAuthor;
+    }
+
+    public boolean isLikeFlag() {
+        return likeFlag;
+    }
+
+    public boolean isLock() {
+        return lock;
+    }
+
+    public String getNcTitle() {
+        return this.ncTitle;
+    }
+
+    public void setNcTitle(String ncTitle) {
+        this.ncTitle = ncTitle;
     }
 
     public String getTitle() {
@@ -31,12 +76,12 @@ public class UserScrapContentData {
         this.title = title;
     }
 
-    public String getDate() {
-        return this.date;
+    public String getNcTime() {
+        return this.ncTime;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setNcTime(String ncTime) {
+        this.ncTime = ncTime;
     }
 
     public int getLike() {
@@ -55,8 +100,11 @@ public class UserScrapContentData {
         this.likeFlag = likeFlag;
     }
 
+    public boolean getLock() {
+        return this.lock;
+    }
 
-    public boolean getScrap() {
-        return this.scrap;
+    public void setLock(boolean lock) {
+        this.lock = lock;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.view.view_fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,14 +27,27 @@ import com.example.apple.newsingit_project.FollowingListActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SearchTabActivity;
 import com.example.apple.newsingit_project.UserScrapContentListActivity;
+import com.example.apple.newsingit_project.data.json_data.myinfo.UserInfoRequest;
+import com.example.apple.newsingit_project.data.json_data.myinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
+import com.example.apple.newsingit_project.data.view_data.UserInfoData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FolderListAdapter;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,14 +60,37 @@ public class MyInfoFragment extends Fragment {
     Button follower_count_button;
     Button following_count_button;
     Button my_info_replace_button;
+    Button btnScrapCount;
 
     //폴더 관련 변수.//
     Button folder_add_button;
     FolderData folderData; //폴더 데이터 클래스//
     FolderListAdapter folderListAdapter; //폴더 어댑태 클래스//
-
+    String profileUrl;
+    NetworkManager networkManager;
     private FamiliarRefreshRecyclerView folder_recyclerrefreshview;
     private FamiliarRecyclerView folder_recyclerview;
+    private ProgressDialog pDialog;
+    private Callback requestMyInfoListCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            UserInfoRequest userInfoRequest = gson.fromJson(response_data, UserInfoRequest.class);
+
+            setData(userInfoRequest.getResult());
+        }
+    };
 
     public MyInfoFragment() {
         // Required empty public constructor
@@ -73,7 +110,13 @@ public class MyInfoFragment extends Fragment {
         following_count_button = (Button) view.findViewById(R.id.following_button);
         my_info_replace_button = (Button) view.findViewById(R.id.myinfo_replace_button);
         folder_add_button = (Button) view.findViewById(R.id.category_add_button);
+        btnScrapCount = (Button) view.findViewById(R.id.scrapt_count_button);
         folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) view.findViewById(R.id.folder_rv_list);
+
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
+
 
         /** 폴더 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
         folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(getActivity()));
@@ -124,10 +167,11 @@ public class MyInfoFragment extends Fragment {
         /** Folder RecyclerView Adapter 등록 **/
         folder_recyclerview.setAdapter(folderListAdapter);
 
+
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //파카소 라이브러리를 이용하여 이미지 로딩//
-        Picasso.with(getActivity())
-                .load(R.mipmap.seochangwook)
+        Picasso.with(getActivity()) //profileUrl//
+                .load("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4") //url//
                 .transform(new CropCircleTransformation())
                 .into(profile_imageview);
 
@@ -206,8 +250,11 @@ public class MyInfoFragment extends Fragment {
             }
         });
 
+        getUserInfoNetworkData();
+
         //Dummy Data 설정//
-        set_Dummy_Folder_Date();
+        setDummyFolderData();
+
 
         //메뉴변경//
         setHasOptionsMenu(true);
@@ -215,7 +262,7 @@ public class MyInfoFragment extends Fragment {
         return view;
     }
 
-    public void set_Dummy_Folder_Date() {
+    public void setDummyFolderData() {
         //첫번째 폴더//
         FolderData new_folderdata_1 = new FolderData();
 
@@ -272,5 +319,75 @@ public class MyInfoFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getUserInfoNetworkData() {
+        showpDialog();
+
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("users")
+                .addPathSegment("me");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(getActivity())
+                .build();
+
+        client.newCall(request).enqueue(requestMyInfoListCallback);
+
+        hidepDialog();
+
+    }
+
+    public void setData(final UserInfoRequestResult userInfoRequestResult) {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    UserInfoData userInfoData = new UserInfoData();
+                    String name, aboutMe;
+                    int followerCount, followingCount, scrapCount;
+
+                    userInfoData.setName(userInfoRequestResult.getName());
+                    userInfoData.setProfileUrl(userInfoRequestResult.getPf_url());
+                    userInfoData.setAboutMe(userInfoRequestResult.getAboutme());
+                    userInfoData.setFollowerCount(userInfoRequestResult.getFollowers());
+                    userInfoData.setFollwingCount(userInfoRequestResult.getFollowings());
+                    userInfoData.setScrapCount(userInfoRequestResult.getScrapings());
+
+                    name = userInfoData.getName();
+                    profileUrl = userInfoData.getProfileUrl();
+                    aboutMe = userInfoData.getAboutMe();
+                    followerCount = userInfoData.getFollowerCount();
+                    followingCount = userInfoData.getFollwingCount();
+                    scrapCount = userInfoData.getScrapCount();
+
+                    profile_name_textview.setText(name);
+                    profile_my_introduce_textview.setText(aboutMe);
+                    follower_count_button.setText("" + followerCount);
+                    following_count_button.setText("" + followingCount);
+                    btnScrapCount.setText("" + scrapCount);
+
+
+                }
+            });
+        }
+    }
+
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 }

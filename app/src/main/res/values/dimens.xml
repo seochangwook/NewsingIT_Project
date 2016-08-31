@@ -23,7 +23,7 @@
     <dimen name="profile_replace_button_layout_top">60dp</dimen>
     <dimen name="profile_replace_button_layout_left">130dp</dimen>
 
-    <!-- profile introduce textview -->
+    <!-- profile aboutMe textview -->
     <dimen name="introduce_my_textview_width">200dp</dimen>
     <dimen name="introduce_my_textview_layout_margin_top">106dp</dimen>
     <dimen name="introduce_my_textview_layout_margin_left">130dp</dimen>

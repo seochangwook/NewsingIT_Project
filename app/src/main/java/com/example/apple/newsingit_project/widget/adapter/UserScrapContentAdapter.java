@@ -67,19 +67,13 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                 uvh.setUserScrapContent(userScrapContentData.userScrapContentDataList.get(position), context, whoflag);
 
-                //좋아요를 눌렀을 때와 누르지 않았을 때//
-                //이미지 빈 하트 -> 채워진 하트//
-                if (flag) {  //좋아요//
-                    uvh.likeButton.setImageResource(android.R.drawable.star_big_on);
-                } else { //좋아요 취소//
-                    uvh.likeButton.setImageResource(android.R.drawable.star_big_off);
-                }
+
 
                 uvh.settingButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         //popup window//
-                        String userSelect = userScrapContentData.userScrapContentDataList.get(pos).getContent().toString();
+                        String userSelect = userScrapContentData.userScrapContentDataList.get(pos).getNcTitle().toString();
 
                         //팝업창//
                         Intent intent = new Intent(context, ScrapContentEditDialog.class);
@@ -91,8 +85,15 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                 if (whoflag.equals("1")) { //다른 사람//
                     uvh.likeButton.setEnabled(true);
+                    //좋아요를 눌렀을 때와 누르지 않았을 때//
+                    if (flag) {  //좋아요//
+                        uvh.likeButton.setImageResource(android.R.drawable.star_big_on);
+                    } else { //좋아요 취소//
+                        uvh.likeButton.setImageResource(android.R.drawable.star_big_off);
+                    }
                 } else { //내 스크랩//
                     uvh.likeButton.setEnabled(false);
+                    uvh.likeButton.setImageResource(android.R.drawable.star_big_on); //내 스크랩 좋아요는 항상 같은 이미지 사용//
                 }
 
 

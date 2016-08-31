@@ -32,6 +32,6 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
     public void setSearchUserData(SearchUserData searchUserData, Context context) {
         this.searchUserData = searchUserData;
         nameView.setText(searchUserData.getName());
-        introView.setText(searchUserData.getIntro());
+        introView.setText(searchUserData.getAboutMe());
     }
 }

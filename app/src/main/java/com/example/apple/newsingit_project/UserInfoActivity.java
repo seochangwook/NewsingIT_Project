@@ -40,6 +40,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private FamiliarRefreshRecyclerView user_folder_recyclerrefreshview;
     private FamiliarRecyclerView user_folder_recyclerview;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
