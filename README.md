@@ -16,6 +16,7 @@
 * compile 'com.android.support:appcompat-v7:22.2.1' //TextInputLayout 관련 라이브러리//
 * compile 'com.squareup.okhttp3:okhttp:3.4.1'
 * compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
+* compile 'com.facebook.android:facebook-android-sdk:4.8.2'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 
@@ -50,3 +51,4 @@
 * 상대방 스크랩에서만 좋아요 활성화/ 검색 edittext color값 수정/ scrap 생성,수정 edittext 글자수 표기/ 기타 view들 custom - 임지수 (16/08/30 14:51)
 * MainNewsList Okhttp를 이용한 getData()부분 기능 구현 완료 - 서창욱 (16/08/30 15:08)
 * facebook login/ EditFolderActivity 추가/ 폴더 long click시 폴더 수정 화면으로 이동/ 자물쇠 이미지(버튼) 클릭 시 사라짐 - 임지수 (16/08/30 19:51)
+* ScrapCreate / ScrapActivity UI fix - 서창욱 (16/08/30 20:28)
