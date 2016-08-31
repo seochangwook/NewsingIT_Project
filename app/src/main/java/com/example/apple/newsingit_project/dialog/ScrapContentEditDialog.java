@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.CreateFolderActivity;
 import com.example.apple.newsingit_project.R;
-import com.example.apple.newsingit_project.data.json_data.ScrapFolderList.ScrapFolderListRequest;
-import com.example.apple.newsingit_project.data.json_data.ScrapFolderList.ScrapFolderListRequestResults;
+import com.example.apple.newsingit_project.data.json_data.scrapfolderList.ScrapFolderListRequest;
+import com.example.apple.newsingit_project.data.json_data.scrapfolderList.ScrapFolderListRequestResults;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.FolderGroupAdapter;
 import com.google.gson.Gson;

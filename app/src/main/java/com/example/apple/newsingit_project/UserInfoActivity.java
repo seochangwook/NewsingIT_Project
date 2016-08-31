@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.apple.newsingit_project.data.json_data.UserInfo.UserInfoRequest;
-import com.example.apple.newsingit_project.data.json_data.UserInfo.UserInfoRequestResult;
+import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequest;
+import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;

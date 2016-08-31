@@ -4,20 +4,48 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.view_data.AlarmData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.AlarmListAdapter;
 
+import java.io.IOException;
+
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class AlarmListActivity extends AppCompatActivity {
 
     AlarmListAdapter mAdapter;
     AlarmData alarmData;
+    /**
+     * Network 자원
+     **/
+    NetworkManager networkManager;
     private FamiliarRecyclerView recyclerview;
+    private Callback requestalarmlistcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) //접속 실패의 경우.//
+        {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
 
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+        }
+    };
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +112,40 @@ public class AlarmListActivity extends AppCompatActivity {
 
             }
         });
-        initDummyData();
+
+        //initDummyData();
+
+        //네트워크로 부터 데이터를 얻어온다.//
+        get_Alarm_Data();
+    }
+
+    public void get_Alarm_Data() {
+        /** 네트워크 설정을 한다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.addPathSegment("notifications");
+
+        builder.addQueryParameter("page", "1");
+        builder.addQueryParameter("count", "20");
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestalarmlistcallback);
     }
 
     private void initDummyData() {

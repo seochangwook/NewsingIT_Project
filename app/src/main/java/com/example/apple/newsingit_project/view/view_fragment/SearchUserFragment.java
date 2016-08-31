@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.UserInfoActivity;
-import com.example.apple.newsingit_project.data.json_data.SearchUserlist.SearchUserRequest;
-import com.example.apple.newsingit_project.data.json_data.SearchUserlist.SearchUserRequestResults;
+import com.example.apple.newsingit_project.data.json_data.searchuserlist.SearchUserRequest;
+import com.example.apple.newsingit_project.data.json_data.searchuserlist.SearchUserRequestResults;
 import com.example.apple.newsingit_project.data.view_data.SearchUserData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.SearchUserAdapter;

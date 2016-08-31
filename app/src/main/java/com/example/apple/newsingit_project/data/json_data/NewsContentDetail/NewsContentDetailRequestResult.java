@@ -1,4 +1,4 @@
-package com.example.apple.newsingit_project.data.json_data.NewsContentDetail;
+package com.example.apple.newsingit_project.data.json_data.newscontentdetail;
 
 public class NewsContentDetailRequestResult {
     private String img_url;
