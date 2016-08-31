@@ -27,6 +27,8 @@ import com.example.apple.newsingit_project.FollowingListActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SearchTabActivity;
 import com.example.apple.newsingit_project.UserScrapContentListActivity;
+import com.example.apple.newsingit_project.data.json_data.myfolderlist.MyFolderListRequest;
+import com.example.apple.newsingit_project.data.json_data.myfolderlist.MyFolderListRequestResults;
 import com.example.apple.newsingit_project.data.json_data.myinfo.UserInfoRequest;
 import com.example.apple.newsingit_project.data.json_data.myinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
@@ -38,6 +40,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
@@ -91,11 +96,32 @@ public class MyInfoFragment extends Fragment {
             setData(userInfoRequest.getResult());
         }
     };
+    private Callback requestmyfolderlistcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) //접속 실패의 경우.//
+        {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            MyFolderListRequest myFolderListRequest = gson.fromJson(response_data, MyFolderListRequest.class);
+
+            set_Folder_Data(myFolderListRequest.getResults(), myFolderListRequest.getResults().length);
+        }
+    };
+
 
     public MyInfoFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -253,8 +279,8 @@ public class MyInfoFragment extends Fragment {
         getUserInfoNetworkData();
 
         //Dummy Data 설정//
-        setDummyFolderData();
-
+        //setDummyFolderData();
+        getMyFolderData();
 
         //메뉴변경//
         setHasOptionsMenu(true);
@@ -262,7 +288,66 @@ public class MyInfoFragment extends Fragment {
         return view;
     }
 
-    public void setDummyFolderData() {
+    public void getMyFolderData() {
+        /** 네트워크 설정을 한다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.addPathSegment("users");
+        builder.addPathSegment("me");
+        builder.addPathSegment("categories");
+
+        builder.addQueryParameter("usage", "profile");
+        builder.addQueryParameter("page", "1");
+        builder.addQueryParameter("count", "20");
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestmyfolderlistcallback);
+    }
+
+    public void set_Folder_Data(final MyFolderListRequestResults myFolderListRequestResults[], final int my_folder_list_size) {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<MyFolderListRequestResults> myFolderListRequestResultsList = new ArrayList<>();
+
+                    myFolderListRequestResultsList.addAll(Arrays.asList(myFolderListRequestResults));
+
+                    for (int i = 0; i < my_folder_list_size; i++) {
+                        FolderData new_folderdata = new FolderData();
+
+                        new_folderdata.setFolder_private(myFolderListRequestResultsList.get(i).getLocked());
+                        //new_folderdata.set_folder_imageUrl(myFolderListRequestResultsList.get(i).getImg_url());
+                        new_folderdata.set_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                        new_folderdata.set_get_folder_name(myFolderListRequestResultsList.get(i).getName());
+                        new_folderdata.set_folderid(myFolderListRequestResultsList.get(i).getId());
+
+                        folderData.folder_list.add(new_folderdata);
+
+                        folderListAdapter.set_FolderDate(folderData);
+                    }
+                }
+            });
+        }
+    }
+
+    /*public void setDummyFolderData() {
         //첫번째 폴더//
         FolderData new_folderdata_1 = new FolderData();
 
@@ -297,7 +382,7 @@ public class MyInfoFragment extends Fragment {
         folderData.folder_list.add(new_folderdata_3);
 
         folderListAdapter.set_FolderDate(folderData); //설정.//
-    }
+    }*/
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

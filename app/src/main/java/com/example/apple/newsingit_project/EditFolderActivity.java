@@ -95,7 +95,7 @@ public class EditFolderActivity extends AppCompatActivity {
                 //팝업창을 띄운다.//
                 Toast.makeText(EditFolderActivity.this, "이미지를 선택합니다.", Toast.LENGTH_SHORT).show();
 
-                image_select_popup.showAtLocation(findViewById(R.id.image_select_button), Gravity.CENTER, 0, 0);
+                image_select_popup.showAtLocation(findViewById(R.id.img_btn_create_folder_select_img), Gravity.CENTER, 0, 0);
             }
         });
 

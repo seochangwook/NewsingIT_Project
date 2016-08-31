@@ -8,11 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequest;
+import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.AlarmData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.AlarmListAdapter;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import okhttp3.Call;
@@ -44,6 +50,12 @@ public class AlarmListActivity extends AppCompatActivity {
             String response_data = response.body().string();
 
             Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            AlarmListRequest alarmListRequest = gson.fromJson(response_data, AlarmListRequest.class);
+
+            set_Alarm_Data(alarmListRequest.getResults(), alarmListRequest.getResults().length);
         }
     };
 
@@ -146,6 +158,32 @@ public class AlarmListActivity extends AppCompatActivity {
 
         /** 비동기 방식(enqueue)으로 Callback 구현 **/
         client.newCall(request).enqueue(requestalarmlistcallback);
+    }
+
+
+    public void set_Alarm_Data(final AlarmListRequestResults alarmListRequestResults[], final int alarm_request_result_size) {
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<AlarmListRequestResults> alarmListRequestResultsList = new ArrayList<>();
+
+                    alarmListRequestResultsList.addAll(Arrays.asList(alarmListRequestResults));
+
+                    for (int i = 0; i < alarm_request_result_size; i++) {
+                        AlarmData new_alarmData = new AlarmData();
+
+                        new_alarmData.setContent(alarmListRequestResultsList.get(i).getMessage());
+                        new_alarmData.setDate(alarmListRequestResultsList.get(i).getDtime());
+                        new_alarmData.setData_pk(alarmListRequestResultsList.get(i).getData_pk());
+
+                        alarmData.alarmDataList.add(new_alarmData);
+
+                        mAdapter.setAlarmDataLIist(alarmData);
+                    }
+                }
+            });
+        }
     }
 
     private void initDummyData() {

@@ -47,11 +47,11 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
         folder_name_textview.setText(folderData.get_folder_name());
 
 
-        int dummy_imageUrl = folderData.get_dummy_folder_image();
+        String folder_imageUrl = folderData.get_folder_imageUrl();
 
         //이미지를 로드.//
         Picasso.with(context)
-                .load(dummy_imageUrl)
+                .load(folder_imageUrl)
                 .transform(new CropCircleTransformation())
                 .into(folder_imageview);
     }
