@@ -16,21 +16,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.data.json_data.NewsContentDetail.NewsContentDetailRequest;
+import com.example.apple.newsingit_project.data.json_data.NewsContentDetail.NewsContentDetailRequestResult;
 import com.example.apple.newsingit_project.data.view_data.ScrapFolderListData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.view.view_fragment.WebViewFragment;
 import com.example.apple.newsingit_project.widget.adapter.ScrapFolderListAdapter;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class SelectNewsDetailActivity extends AppCompatActivity {
+    private static final String NEWS_ID = "NEWS_ID";
+    private static final String NEWS_TITLE = "NEWS_TITLE";
     Button btn;
-
     /**
      * Popup관련 변수
      **/
@@ -41,11 +56,52 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
     View scrap_folderlist_view;
     ScrapFolderListData scrapfolderData; //폴더 데이터 클래스//
     ScrapFolderListAdapter scrapfolderListAdapter; //폴더 어댑태 클래스//
+
+    /**
+     * UI관련 변수
+     **/
+    TextView news_headline_title_textview;
+    TextView news_author_textview;
+    TextView news_ntime_textview;
+    TextView news_content_textview;
+    ImageView news_content_imageview;
+    String news_imageUrl;
+    String news_link;
+    String title;
+    String news_id;
+    String news_author;
+    String news_ntime;
+    String news_content;
+    /**
+     * 네트워크 관련 변수
+     **/
+    NetworkManager manager;
     /**
      * 폴더 리스트 관련 변수
      **/
     private FamiliarRefreshRecyclerView scrap_folder_recyclerrefreshview;
     private FamiliarRecyclerView scrap_folder_recyclerview;
+    private Callback requestnewsdetailinfocallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) //접속 실패의 경우.//
+        {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            NewsContentDetailRequest newsContentDetailRequest = gson.fromJson(response_data, NewsContentDetailRequest.class);
+
+            set_NewsDetail_Data(newsContentDetailRequest.getResult());
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +116,12 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
         scrap_folder_create_button = (Button) scrap_folderlist_view.findViewById(R.id.create_scrap_folder_button);
         scrap_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) scrap_folderlist_view.findViewById(R.id.scrap_folder_rv_list);
+
+        news_headline_title_textview = (TextView) findViewById(R.id.text_news_headline);
+        news_author_textview = (TextView) findViewById(R.id.text_news_press);
+        news_content_textview = (TextView) findViewById(R.id.text_news_part);
+        news_ntime_textview = (TextView) findViewById(R.id.text_news_date);
+        news_content_imageview = (ImageView) findViewById(R.id.img_news);
 
         //팝업창 설정.//
         scrap_folder_popup = new PopupWindow(scrap_folderlist_view, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
@@ -160,8 +222,12 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("NEWS_TITLE");
-        setTitle(title);
+
+        title = intent.getStringExtra(NEWS_TITLE);
+        news_id = intent.getStringExtra(NEWS_ID);
+
+        news_headline_title_textview.setText(title);
+
         btn = (Button) findViewById(R.id.btn_go_detail);
         //  btn.setVisibility(View.VISIBLE);
 
@@ -172,7 +238,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 WebViewFragment fragment = new WebViewFragment();
 
                 Bundle bundle = new Bundle();
-                bundle.putString("URL", "https://github.com/seochangwook/NewsingIT_Project");
+                bundle.putString("URL", news_link);
                 fragment.setArguments(bundle);
 
                 //TO DO//
@@ -192,6 +258,61 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
         //Dummy Data 설정//
         set_Dummy_ScrapFolder_Date();
+
+        get_NewsDetail_info(news_id);
+    }
+
+    public void get_NewsDetail_info(String news_id) {
+        /** 네트워크 설정을 한다. **/
+        /** OkHttp 자원 설정 **/
+        manager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = manager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.addPathSegment("newscontents");
+        builder.addPathSegment(news_id);
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestnewsdetailinfocallback);
+    }
+
+    public void set_NewsDetail_Data(final NewsContentDetailRequestResult newsContentDetailRequestResult) {
+        //실제 데이터에 네트워크로 받아온 값을 할당.//
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    //news_imageUrl = newsContentDetailRequestResult.getImg_url();
+                    news_imageUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                    news_author = newsContentDetailRequestResult.getAuthor();
+                    news_link = newsContentDetailRequestResult.getLink();
+                    news_ntime = newsContentDetailRequestResult.getNtime();
+                    news_content = newsContentDetailRequestResult.getContent();
+
+                    //이미지 설정.//
+                    Picasso.with(SelectNewsDetailActivity.this)
+                            .load(news_imageUrl)
+                            .into(news_content_imageview);
+
+                    news_author_textview.setText(news_author);
+                    news_content_textview.setText(news_content);
+                    news_ntime_textview.setText(news_ntime);
+                }
+            });
+        }
     }
 
     public void set_Dummy_ScrapFolder_Date() {
