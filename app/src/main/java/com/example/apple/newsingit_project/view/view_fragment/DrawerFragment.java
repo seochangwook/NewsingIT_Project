@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,21 @@ import android.widget.Toast;
 import com.example.apple.newsingit_project.LoginActivity;
 import com.example.apple.newsingit_project.NoticeActivity;
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.data.json_data.logout.LogoutRequest;
 import com.example.apple.newsingit_project.data.view_data.DrawerChild;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.DrawerAdapter;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,9 +56,48 @@ public class DrawerFragment extends Fragment {
 
     ExpandableListView expandableListView;
     DrawerAdapter mAdapter;
+    NetworkManager networkManager;
 
+    private Callback requestLogoutCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
+            Gson gson = new Gson();
+
+            LogoutRequest logoutRequest = gson.fromJson(responseData, LogoutRequest.class);
+
+
+        }
+    };
     public DrawerFragment() {
         // Required empty public constructor
+    }
+
+    private void getLogoutNetworkData() {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("logout");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(getActivity())
+                .build();
+
+        client.newCall(request).enqueue(requestLogoutCallback);
     }
 
     @Override
@@ -59,6 +111,7 @@ public class DrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drawer, container, false);
         View drawerHeader = inflater.inflate(R.layout.view_drawer_header, container, false);
+
 
         expandableListView = (ExpandableListView)view.findViewById(R.id.expandableListView);
         expandableListView.addHeaderView(drawerHeader);
@@ -84,6 +137,8 @@ public class DrawerFragment extends Fragment {
 
                 //로그아웃 - 로그인 화면으로 이동//
                 if (groupposition == 2) {
+                    getLogoutNetworkData();
+
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -93,8 +148,6 @@ public class DrawerFragment extends Fragment {
                 //공지사항 이동//
                 if (groupposition == 3) {
                     Intent intent = new Intent(getActivity(), NoticeActivity.class);
-
-
                     startActivity(intent);
                 }
             }

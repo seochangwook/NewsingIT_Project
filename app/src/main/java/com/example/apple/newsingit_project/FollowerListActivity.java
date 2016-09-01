@@ -164,12 +164,15 @@ public class FollowerListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                String userSelectFollower = followerData.followerDataList.get(position).getName().toString();
-                Toast.makeText(FollowerListActivity.this, "" + userSelectFollower, Toast.LENGTH_SHORT).show();
+                String selectName = followerData.followerDataList.get(position).getName().toString();
+                int selectId = followerData.followerDataList.get(position).getId();
+
+                Toast.makeText(FollowerListActivity.this, "" + selectName, Toast.LENGTH_SHORT).show();
 
                 //해당 사람의 마이 페이지로 이동//
                 Intent intent = new Intent(FollowerListActivity.this, UserInfoActivity.class);
-                intent.putExtra("USER_NAME", userSelectFollower);
+                intent.putExtra("USER_NAME", selectName);
+                intent.putExtra("USER_ID", "" + selectId);
                 startActivity(intent);
             }
         });

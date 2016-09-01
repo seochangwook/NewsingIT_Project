@@ -53,7 +53,7 @@ public class UserInfoActivity extends AppCompatActivity {
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
 
-    String get_user_id = null;
+    String getUserId;
     String get_user_name = null;
 
     /**
@@ -119,7 +119,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        get_user_id = intent.getStringExtra("USER_ID");
+        getUserId = intent.getStringExtra("USER_ID");
         get_user_name = intent.getStringExtra("USER_NAME");
 
         /** 타이틀과 이름 값 초기화 **/
@@ -244,7 +244,7 @@ public class UserInfoActivity extends AppCompatActivity {
         set_Dummy_Folder_Date();
 
         //유저 프로필 정보를 불러온다.//
-        get_UserInfo_Data(get_user_id); //id값이 조건으로 필요하다.//
+        get_UserInfo_Data(getUserId); //id값이 조건으로 필요하다.//
     }
 
     public void get_UserInfo_Data(String user_id) {
@@ -262,7 +262,7 @@ public class UserInfoActivity extends AppCompatActivity {
         builder.scheme("http");
         builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
         builder.addPathSegment("users");
-        builder.addPathSegment(user_id);
+        builder.addPathSegment("" + user_id);
 
         /** Request 설정 **/
         Request request = new Request.Builder()

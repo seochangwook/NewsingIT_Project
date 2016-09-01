@@ -1,4 +1,4 @@
-package com.example.apple.newsingit_project.data.json_data.scrapfolderList;
+package com.example.apple.newsingit_project.data.json_data.scrapfolderlist;
 
 public class ScrapFolderListRequest {
     private ScrapFolderListRequestResults[] results;

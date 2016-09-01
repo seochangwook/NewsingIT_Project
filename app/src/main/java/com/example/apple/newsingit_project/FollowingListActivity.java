@@ -150,12 +150,14 @@ public class FollowingListActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                String userSelect = followingData.followingDataList.get(position).getName().toString();
-                Toast.makeText(FollowingListActivity.this, "" + userSelect, Toast.LENGTH_SHORT).show();
+                String selectName = followingData.followingDataList.get(position).getName().toString();
+                int selectId = followingData.followingDataList.get(position).getId();
+                Toast.makeText(FollowingListActivity.this, "" + selectName, Toast.LENGTH_SHORT).show();
 
                 //해당 사람의 마이 페이지로 이동//
                 Intent intent = new Intent(FollowingListActivity.this, UserInfoActivity.class);
-                intent.putExtra("USER_NAME", userSelect);
+                intent.putExtra("USER_NAME", selectName);
+                intent.putExtra("USER_ID", "" + selectId);
                 startActivity(intent);
             }
         });
