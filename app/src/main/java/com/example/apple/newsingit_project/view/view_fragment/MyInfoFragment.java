@@ -439,7 +439,8 @@ public class MyInfoFragment extends Fragment {
                     int followerCount, followingCount, scrapCount;
 
                     userInfoData.setName(userInfoRequestResult.getName());
-                    userInfoData.setProfileUrl(userInfoRequestResult.getPf_url());
+                    //userInfoData.setProfileUrl(userInfoRequestResult.getPf_url());
+                    userInfoData.setProfileUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
                     userInfoData.setAboutMe(userInfoRequestResult.getAboutme());
                     userInfoData.setFollowerCount(userInfoRequestResult.getFollowers());
                     userInfoData.setFollwingCount(userInfoRequestResult.getFollowings());

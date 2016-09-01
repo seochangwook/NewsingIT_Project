@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.data.json_data.userfolderlist.UserFolderListRequest;
+import com.example.apple.newsingit_project.data.json_data.userfolderlist.UserFolderListRequestResults;
 import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequest;
 import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
@@ -24,6 +26,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
@@ -106,8 +111,41 @@ public class UserInfoActivity extends AppCompatActivity {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+
+            Gson gson = new Gson();
+
+            UserFolderListRequest userFolderListRequest = gson.fromJson(responseData, UserFolderListRequest.class);
+
+            set_User_Folder_Data(userFolderListRequest.getResults(), userFolderListRequest.getResults().length);
         }
     };
+
+    public void set_User_Folder_Data(final UserFolderListRequestResults userFolderListRequestResults[], final int user_folder_size) {
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<UserFolderListRequestResults> userFolderListRequestResultsList = new ArrayList<>();
+
+                    userFolderListRequestResultsList.addAll(Arrays.asList(userFolderListRequestResults));
+
+                    for (int i = 0; i < user_folder_size; i++) {
+                        UserFolderData new_user_folderdata = new UserFolderData();
+
+                        new_user_folderdata.setFolder_id(userFolderListRequestResultsList.get(i).getId());
+                        new_user_folderdata.set_get_folder_name(userFolderListRequestResultsList.get(i).getName());
+                        //new_user_folderdata.set_get_folder_imageUrl(userFolderListRequestResultsList.get(i).getImg_url());
+                        new_user_folderdata.set_get_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                        new_user_folderdata.setFolder_private(userFolderListRequestResultsList.get(i).getLocked());
+
+                        user_folderData.user_folder_list.add(new_user_folderdata);
+                    }
+
+                    user_folderListAdapter.set_UserFolderDate(user_folderData);
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +168,7 @@ public class UserInfoActivity extends AppCompatActivity {
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
+        //전달되는 값을 받아온다.//
         Intent intent = getIntent();
 
         get_user_id = intent.getStringExtra(USER_ID);
@@ -273,7 +312,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 .addPathSegment(user_id)
                 .addPathSegment("categories");
 
-        builder.addQueryParameter("usage", "scrap");
+        builder.addQueryParameter("usage", "profile");
         builder.addQueryParameter("page", "1");
         builder.addQueryParameter("count", "20");
 
@@ -284,6 +323,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         client.newCall(request).enqueue(requestUserFolderListCallback);
     }
+
 
     public void get_UserInfo_Data(String user_id) {
         /** 네트워크 설정을 한다. **/
