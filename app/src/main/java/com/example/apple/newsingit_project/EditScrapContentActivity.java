@@ -1,7 +1,9 @@
 package com.example.apple.newsingit_project;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
@@ -193,7 +195,26 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
             //네트워크로 데이터를 보낸다.//
 
-            finish();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditScrapContentActivity.this);
+            alertDialog.setMessage("저장하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //yes
+                            finish();
+                        }
+                    }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //no
+
+                }
+            });
+
+            AlertDialog alert = alertDialog.create();
+            alert.show();
+
+            //  finish();
         }
 
         return super.onOptionsItemSelected(item);

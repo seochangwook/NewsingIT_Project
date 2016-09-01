@@ -57,9 +57,9 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             final boolean folder_private = folderData.folder_list.get(position).get_folder_private();
 
             if (folder_private == true) { //잠금 해제//
-                folderViewHolder.folder_private_button.setVisibility(View.GONE);
-            } else { //잠금 설정//
                 folderViewHolder.folder_private_button.setVisibility(View.VISIBLE);
+            } else { //잠금 설정//
+                folderViewHolder.folder_private_button.setVisibility(View.GONE);
             }
 
             folderViewHolder.folder_private_button.setOnClickListener(new View.OnClickListener() {
