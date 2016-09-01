@@ -189,6 +189,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
             //네트워크로 데이터를 보낸다.//
 
+
             finish();
         }
 

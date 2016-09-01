@@ -128,7 +128,7 @@ public class MyInfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_info, container, false);
@@ -224,8 +224,13 @@ public class MyInfoFragment extends Fragment {
         folder_recyclerrefreshview.setOnItemLongClickListener(new FamiliarRecyclerView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                String folder_name = folderData.folder_list.get(position).get_folder_name();
+                //폴더를 삭제하기 위해서 폴더의 id값이 필요.//
+                int folder_id = folderData.folder_list.get(position).get_folderid();
+
                 Intent intent = new Intent(getActivity(), EditFolderActivity.class);
+
+                intent.putExtra(KEY_FOLDER_ID, "" + folder_id);
+
                 startActivity(intent);
 
                 //Toast.makeText(getActivity(), folder_name + "폴더 제거" + "" + position, Toast.LENGTH_SHORT).show();

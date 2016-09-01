@@ -1,11 +1,13 @@
 package com.example.apple.newsingit_project;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +19,21 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class EditFolderActivity extends AppCompatActivity {
+    private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
 
     ImageButton image_select_button;
     Switch private_select_switch;
@@ -33,6 +49,25 @@ public class EditFolderActivity extends AppCompatActivity {
 
     TextView deleteView;
 
+    /**
+     * Network관련 변수
+     **/
+    NetworkManager networkManager;
+    private Callback requestdeletefolderCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +81,9 @@ public class EditFolderActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
+        Intent intent = getIntent();
+
+        final String folder_id = intent.getStringExtra(KEY_FOLDER_ID);
 
         /** Popup 화면 설정 **/
         image_select_popup_view = getLayoutInflater().inflate(R.layout.image_select_popup, null);
@@ -85,6 +123,12 @@ public class EditFolderActivity extends AppCompatActivity {
 
                 Toast.makeText(EditFolderActivity.this, "폴더를 삭제합니다.", Toast.LENGTH_SHORT).show();
 
+                String delete_folder_id = folder_id; //폴더를 삭제할려면 폴더의 id가 필요하다.//
+
+                //삭제요청//
+                delete_folder(delete_folder_id);
+
+                finish();
             }
         });
 
@@ -114,6 +158,39 @@ public class EditFolderActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void delete_folder(String folder_id) {
+        /** 네트워크 설정을 한다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.addPathSegment("users");
+        builder.addPathSegment("me");
+        builder.addPathSegment("categories");
+        builder.addPathSegment(folder_id);
+
+        /** Delete이기에 RequestBody를 만든다 **/
+        RequestBody body = new FormBody.Builder()
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .delete(body)
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestdeletefolderCallback);
     }
 
     @Override
