@@ -70,6 +70,22 @@ public class ScrapContentEditDialog extends Activity {
         }
     };
 
+    private Callback requestDeleteScrapContentCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +149,12 @@ public class ScrapContentEditDialog extends Activity {
         scrap_delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Intent intent = getIntent();
+                String scrapId = intent.getStringExtra("SCRAP_ID");
+                //  Log.d("scrap_id", scrapId);
+                deleteScrapData(scrapId);
+
                 Toast.makeText(ScrapContentEditDialog.this, "스크랩 삭제 완료", Toast.LENGTH_SHORT).show();
 
                 finish();
@@ -231,4 +253,26 @@ public class ScrapContentEditDialog extends Activity {
             }
         }
     }
+
+    private void deleteScrapData(String scrapId) {
+        manager = NetworkManager.getInstance();
+
+        OkHttpClient client = manager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("scraps")
+                .addPathSegment(scrapId);
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(ScrapContentEditDialog.this)
+                .delete()
+                .build();
+
+        client.newCall(request).enqueue(requestDeleteScrapContentCallback);
+
+    }
+
 }

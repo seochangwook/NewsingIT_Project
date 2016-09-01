@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
@@ -103,12 +104,17 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     public void onClick(View view) {
                         //popup window//
                         String userSelect = userScrapContentData.userScrapContentDataList.get(pos).getNcTitle().toString();
+                        int scrapId = userScrapContentData.userScrapContentDataList.get(pos).getId();
 
                         //팝업창//
                         Intent intent = new Intent(context, ScrapContentEditDialog.class);
+                        intent.putExtra("SCRAP_ID", "" + scrapId);
+
+                        Toast.makeText(context, "" + scrapId, Toast.LENGTH_SHORT).show();
 
                         //필요한 정보를 전송.//
                         context.startActivity(intent);
+
                     }
                 });
 
@@ -146,6 +152,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                             setFavoriteDo(select_scrap_id);
                         }
 
+                        //실제 네트워크 통신 전까지 안드로이드에서 값을 임시로 바꿔줌//
                         userScrapContentData.userScrapContentDataList.get(pos).setLike(count); //좋아요 갯수 setting//
                         userScrapContentData.userScrapContentDataList.get(pos).setLikeFlag(!flag); //좋아요 flag setting//
 
@@ -174,6 +181,29 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
                 .addPathSegment("scraps")
                 .addPathSegment(select_scrap_id)
+                .addPathSegment("favorites")
+                .addPathSegment("me");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(context)
+                .delete()
+                .build();
+
+        client.newCall(request).enqueue(requestFavoriteCallback);
+
+    }
+
+    private void setFavoriteDo(String select_scrap_id) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("scraps")
+                .addPathSegment(select_scrap_id)
                 .addPathSegment("favorites");
 
         //POST방식으로 구성하게 되면 RequestBody가 필요(데이터 전달 시)//
@@ -189,11 +219,5 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         client.newCall(request).enqueue(requestFavoriteCallback);
     }
-
-    private void setFavoriteDo(String select_scrap_id)
-    {
-
-    }
-
 
 }

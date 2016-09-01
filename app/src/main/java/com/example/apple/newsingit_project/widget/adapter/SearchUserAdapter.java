@@ -155,6 +155,10 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                             //팔로잉 안 한 상태에서 팔로우 생성//
                             setFollowing(userSelectId);
                         }
+
+                        //실제 네트워크 통신 전까지 안드로이드에서 값을 임시로 바꿔줌//
+                        searchUserData.searchUserDataArrayList.get(pos).setFlag(!flag);
+
                         notifyDataSetChanged();
                     }
                 });

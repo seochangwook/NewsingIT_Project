@@ -108,6 +108,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setLike(scrapContentList.get(i).getFavorite_cnt());
                         newUserScrapCotentData.setLikeFlag(scrapContentList.get(i).getFavorite());
                         newUserScrapCotentData.setLock(scrapContentList.get(i).getLock());
+                        newUserScrapCotentData.setId(scrapContentList.get(i).getId());
 
                         userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
                     }
@@ -239,4 +240,10 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 //        mAdapter.setUserScrapContentData(userScrapContentData, is_user_my); //구분 플래그를 같이 넣어준다.//
 //    }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
 }
