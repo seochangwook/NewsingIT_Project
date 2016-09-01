@@ -66,5 +66,6 @@
 * 팔로워,팔로잉,유저 검색 목록에서의 팔로우 생성/해제 test - 임지수 (16/09/01 15:35)
 * CreateFolder 부분 MultipartBody적용하여 File전송 POST test 완료 - 서창욱 (16/09/01 15:54)
 * 스크랩 삭제 dummyData test - 임지수 (16/09/01 17:23)
+* 스크랩 수정 dummy test / 메인 화면, 마이페이지 ui 수정 - 임지수 (16/09/01 20:23)
 * CreateScrap부분 MultipartBody를 적용하여 POST test 완료 - 서창욱 (16/09/01 20:50)
 
