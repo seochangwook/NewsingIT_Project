@@ -110,23 +110,15 @@
         android:layout_marginTop="@dimen/my_info_linearlayout_layout_margintop"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/user_folder_rv_list_empty"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="#EEAADD"
-            android:gravity="center"
-            android:text="폴더가 없습니다"
-            android:visibility="gone" />
 
         <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
             android:id="@+id/user_folder_rv_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            app:frv_dividerHeight="0.5dp"
-            app:frv_emptyView="@id/user_folder_rv_list_empty"
-            app:frv_isEmptyViewKeepShowHeadOrFooter="true"
+            app:frv_dividerHorizontalHeight="5dp"
+            app:frv_dividerVerticalHeight="5dp"
+            app:frv_itemViewBothSidesMargin="5dp"
             app:frv_layoutManager="grid"
             app:frv_layoutManagerOrientation="vertical" />
     </LinearLayout>

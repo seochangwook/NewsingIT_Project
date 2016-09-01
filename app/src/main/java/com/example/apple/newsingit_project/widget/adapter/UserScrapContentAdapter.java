@@ -184,10 +184,13 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 .addPathSegment("favorites")
                 .addPathSegment("me");
 
+        RequestBody body = new FormBody.Builder()
+                .build();
+
         Request request = new Request.Builder()
                 .url(builder.build())
                 .tag(context)
-                .delete()
+                .delete(body)
                 .build();
 
         client.newCall(request).enqueue(requestFavoriteCallback);

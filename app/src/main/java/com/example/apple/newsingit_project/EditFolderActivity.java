@@ -1,9 +1,12 @@
 package com.example.apple.newsingit_project;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,19 +17,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -34,9 +42,12 @@ import okhttp3.Response;
 
 public class EditFolderActivity extends AppCompatActivity {
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
+    private static final int RC_SINGLE_IMAGE = 2;
+
 
     ImageButton image_select_button;
     Switch private_select_switch;
+    TextView nameView;
 
     /**
      * PopupWindow 화면관련
@@ -49,11 +60,36 @@ public class EditFolderActivity extends AppCompatActivity {
 
     TextView deleteView;
 
+    String folder_id;
+    String name;
+    boolean is_private;
+
+
+    File uploadFile = null; //이미지도 하나의 파일이기에 파일로 만든다.//
+    String path = null;
+    ImageView select_image_thumbnail;
+
     /**
      * Network관련 변수
      **/
+
     NetworkManager networkManager;
     private Callback requestdeletefolderCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
+
+    private Callback requestEditFolderCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
@@ -78,12 +114,14 @@ public class EditFolderActivity extends AppCompatActivity {
         image_select_button = (ImageButton) findViewById(R.id.img_btn_create_folder_select_img);
         private_select_switch = (Switch) findViewById(R.id.create_folder_private_switch_button);
         deleteView = (TextView) findViewById(R.id.delete_folder);
+        nameView = (TextView) findViewById(R.id.folder_create_name_edittext);
 
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
 
-        final String folder_id = intent.getStringExtra(KEY_FOLDER_ID);
+        folder_id = intent.getStringExtra(KEY_FOLDER_ID);
+        //name = nameView.getText().toString();
 
         /** Popup 화면 설정 **/
         image_select_popup_view = getLayoutInflater().inflate(R.layout.image_select_popup, null);
@@ -148,6 +186,10 @@ public class EditFolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(EditFolderActivity.this, "갤러리에서 이미지 선택", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(intent, RC_SINGLE_IMAGE);
             }
         });
 
@@ -158,6 +200,65 @@ public class EditFolderActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void editFolderRequest(String folderId) {
+        String name = nameView.getText().toString();
+        boolean lock = is_private;
+
+        //파일 전송을 위한 설정.//
+        MediaType mediaType = MediaType.parse("image/jpeg");
+
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("users")
+                .addPathSegment("me")
+                .addPathSegment("categories")
+                .addPathSegment(folderId);
+
+//
+//
+//        RequestBody body = new FormBody.Builder()
+//                .add("name", name)
+//                .add("img", img)
+//                .add("locked", locked)
+//                .build();
+//
+
+        /** 파일 전송이므로 MultipartBody 설정 **/
+        MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("name", name);
+
+        //비공개, 공개여부에 의해서 1/0으로 판단.//
+        if (lock == true) //잠금모드 활성화//
+        {
+            multipart_builder.addFormDataPart("locked", "1"); //true//
+        } else if (lock == false) //잠금모드 비활성화//
+        {
+            multipart_builder.addFormDataPart("locked", "0"); //false//
+        }
+
+        if (uploadFile != null) {
+            //이미지 처리//
+            multipart_builder.addFormDataPart("img", uploadFile.getName(),
+                    RequestBody.create(mediaType, uploadFile));
+        }
+
+        RequestBody body = multipart_builder.build();
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .put(body)
+                .build();
+
+        client.newCall(request).enqueue(requestEditFolderCallback);
     }
 
     public void delete_folder(String folder_id) {
@@ -204,9 +305,30 @@ public class EditFolderActivity extends AppCompatActivity {
         int item_id = item.getItemId();
 
         if (item_id == R.id.folder_menu_edit) {
+            editFolderRequest(folder_id);
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SINGLE_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                Uri fileUri = data.getData();
+                Cursor c = getContentResolver().query(fileUri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+                if (c.moveToNext()) {
+                    path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
+                    Log.i("Single", "path : " + path);
+
+                    uploadFile = new File(path);
+
+                    Glide.with(this)
+                            .load(uploadFile)
+                            .into(select_image_thumbnail); //into로 보낼 위젯 선택.//
+                }
+            }
+        }
+    }
 }
