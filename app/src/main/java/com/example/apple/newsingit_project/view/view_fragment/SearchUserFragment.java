@@ -91,18 +91,6 @@ public class SearchUserFragment extends Fragment {
         mAdapter = new SearchUserAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
 
-
-//        click_button = (Button) view.findViewById(R.id.user_mypage_click);
-//
-//        click_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), UserInfoActivity.class);
-//
-//                startActivity(intent);
-//            }
-//        });
-
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
@@ -113,7 +101,7 @@ public class SearchUserFragment extends Fragment {
                 //선택한 유저의 마이 페이지로 이동//
                 Intent intent = new Intent(getActivity(), UserInfoActivity.class);
 
-                intent.putExtra(USER_ID, "" + searchUserData.searchUserDataArrayList.get(position).get_user_id());
+                intent.putExtra(USER_ID, "" + searchUserData.searchUserDataArrayList.get(position).getId());
                 intent.putExtra(USER_NAME, searchUserData.searchUserDataArrayList.get(position).getName());
 
                 startActivity(intent);
@@ -184,9 +172,10 @@ public class SearchUserFragment extends Fragment {
                     for (int i = 0; i < user_list_data_length; i++) {
                         SearchUserData new_searchUserData = new SearchUserData();
 
-                        new_searchUserData.set_user_id(searchUserRequestResultsList.get(i).getId());
+                        new_searchUserData.setId(searchUserRequestResultsList.get(i).getId());
                         new_searchUserData.setName(searchUserRequestResultsList.get(i).getName());
                         new_searchUserData.setAboutMe(searchUserRequestResultsList.get(i).getAboutme());
+                        new_searchUserData.setFlag(searchUserRequestResultsList.get(i).getFlag());
                         //new_searchUserData.set_User_imgUrl(searchUserRequestResultsList.get(i).getPf_url());
                         new_searchUserData.set_User_imgUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
 
@@ -201,19 +190,19 @@ public class SearchUserFragment extends Fragment {
         }
     }
 
-    private void initDummyData() {
-        String[] nameList = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
-        String[] introList = {"저는 코딩이 취미입니다", "반갑습니다", "ㅇvㅇ", "^ㅇ^", "술x"
-                                ,"만두만두", "=v="};
-
-        for (int i = 0; i < 7; i++) {
-            SearchUserData new_searchUserData = new SearchUserData();
-            new_searchUserData.name = nameList[i];
-            new_searchUserData.intro = introList[i];
-            searchUserData.searchUserDataArrayList.add(new_searchUserData);
-        }
-        mAdapter.setSearchUserData(searchUserData);
-    }
+//    private void initDummyData() {
+//        String[] nameList = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
+//        String[] introList = {"저는 코딩이 취미입니다", "반갑습니다", "ㅇvㅇ", "^ㅇ^", "술x"
+//                                ,"만두만두", "=v="};
+//
+//        for (int i = 0; i < 7; i++) {
+//            SearchUserData new_searchUserData = new SearchUserData();
+//            new_searchUserData.name = nameList[i];
+//            new_searchUserData.intro = introList[i];
+//            searchUserData.searchUserDataArrayList.add(new_searchUserData);
+//        }
+//        mAdapter.setSearchUserData(searchUserData);
+//    }
 
     private void showpDialog() {
         if (!pDialog.isShowing())

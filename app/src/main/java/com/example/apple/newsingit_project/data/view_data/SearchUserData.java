@@ -9,14 +9,21 @@ import java.util.List;
 public class SearchUserData {
     public int id;
     public String name;
-    public String intro;
     public String user_img_url;
-    public int user_id;
+    public boolean flag;
 
     //현재 객체를 가지고 있는 것이 여러개이므로 배열로 선언//
     public String aboutMe;
     public String profileUrl;
     public List<SearchUserData> searchUserDataArrayList = new ArrayList<>();
+
+    public boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 
     public int getId() {
         return id;
@@ -58,11 +65,11 @@ public class SearchUserData {
         this.user_img_url = user_imageUrl;
     }
 
-    public int get_user_id() {
-        return this.user_id;
-    }
-
-    public void set_user_id(int user_id) {
-        this.user_id = user_id;
-    }
+    // public int get_user_id() {
+    //   return this.user_id;
+    // }
+//
+//    public void set_user_id(int user_id) {
+//        this.user_id = user_id;
+//    }
 }

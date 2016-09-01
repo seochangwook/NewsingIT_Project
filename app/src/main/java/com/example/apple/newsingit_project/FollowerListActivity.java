@@ -103,6 +103,7 @@ public class FollowerListActivity extends AppCompatActivity {
                         newFollowerData.setProfileUrl(followerList.get(i).getPf_url());
                         newFollowerData.setAboutMe(followerList.get(i).getAboutme());
                         newFollowerData.setName(followerList.get(i).getName());
+                        newFollowerData.setFlag(followerList.get(i).getFlag());
 
                         followerData.followerDataList.add(newFollowerData);
                     }
