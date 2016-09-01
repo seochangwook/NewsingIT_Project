@@ -50,6 +50,9 @@ import okhttp3.Response;
 public class SelectNewsDetailActivity extends AppCompatActivity {
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
+    private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
+
+
     Button btn;
     /**
      * Popup관련 변수
@@ -215,6 +218,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectNewsDetailActivity.this, CreateScrapContentActivity.class);
 
                 //필요한 정보를 넘겨준다.//
+                //기존 프리뷰로 사용할 정보들을 넘겨주기.(뉴스 이미지, author, date, title, content)//
+
                 startActivity(intent);
 
                 scrap_folder_popup.dismiss();
@@ -227,8 +232,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectNewsDetailActivity.this, CreateFolderActivity.class);
 
                 startActivity(intent);
-
-                scrap_folder_popup.dismiss();
             }
         });
 

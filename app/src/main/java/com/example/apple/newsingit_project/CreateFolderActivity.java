@@ -197,7 +197,7 @@ public class CreateFolderActivity extends AppCompatActivity {
         String folder_name = folder_name_edittext.getText().toString();
         boolean folder_locked = is_private;
 
-        Log.d("enroll data", "" + folder_name + "/" + folder_locked + "/" + uploadFile.getName());
+        //Log.d("enroll data", "" + folder_name + "/" + folder_locked + "/" + uploadFile.getName());
 
         //파일 전송을 위한 설정.//
         MediaType mediaType = MediaType.parse("image/jpeg");
@@ -222,17 +222,19 @@ public class CreateFolderActivity extends AppCompatActivity {
                 .addFormDataPart("name", folder_name);
 
         //비공개, 공개여부에 의해서 1/0으로 판단.//
-        if (is_private == true) //잠금모드 활성화//
+        if (folder_locked == true) //잠금모드 활성화//
         {
             multipart_builder.addFormDataPart("locked", "1"); //true//
-        } else if (is_private == false) //잠금모드 비활성화//
+        } else if (folder_locked == false) //잠금모드 비활성화//
         {
             multipart_builder.addFormDataPart("locked", "0"); //false//
         }
 
-        //이미지 처리//
-        multipart_builder.addFormDataPart("img", uploadFile.getName(),
-                RequestBody.create(mediaType, uploadFile));
+        if (uploadFile != null) {
+            //이미지 처리//
+            multipart_builder.addFormDataPart("img", uploadFile.getName(),
+                    RequestBody.create(mediaType, uploadFile));
+        }
 
         /** RequestBody 설정(Multipart로 설정) **/
         RequestBody body = multipart_builder.build();
