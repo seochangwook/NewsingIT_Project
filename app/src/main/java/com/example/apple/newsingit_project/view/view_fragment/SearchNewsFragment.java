@@ -134,6 +134,11 @@ public class SearchNewsFragment extends Fragment {
         searchNewsData = new SearchNewsData();
         recyclerView = (FamiliarRecyclerView) view.findViewById(R.id.search_news_rv_list);
 
+        /** EmptyView 설정 **/
+        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_search_news_emptyview, null);
+
+        recyclerView.setEmptyView(emptyview, true);
+
         mAdapter = new SearchNewsAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
 

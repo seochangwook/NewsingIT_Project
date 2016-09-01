@@ -375,26 +375,28 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         //태그처리//
         int array_size = tag_array.size();
 
-        tag_data_str = new String[array_size];
-        str_data_sample_tag_array = new String[array_size];
+        if (array_size > 0) {
+            tag_data_str = new String[array_size];
+            str_data_sample_tag_array = new String[array_size];
 
-        int last_index = tag_array.size();
+            int last_index = tag_array.size();
 
-        if (last_index > 0) {
-            String original_tag_str = tag_array.get(last_index - 1).toString().replace("[", ""); //양쪽 공백제거.//
-            original_tag_str = original_tag_str.replace("]", "");
+            if (last_index > 0) {
+                String original_tag_str = tag_array.get(last_index - 1).toString().replace("[", ""); //양쪽 공백제거.//
+                original_tag_str = original_tag_str.replace("]", "");
 
-            Log.d("original str : ", original_tag_str);
+                Log.d("original str : ", original_tag_str);
 
-            str_data_sample_tag_array = original_tag_str.split(",");
-        }
+                str_data_sample_tag_array = original_tag_str.split(",");
+            }
 
-        for (int i = 0; i < str_data_sample_tag_array.length; i++) {
-            tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
-        }
+            for (int i = 0; i < str_data_sample_tag_array.length; i++) {
+                tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
+            }
 
-        for (int i = 0; i < tag_data_str.length; i++) {
-            multipart_builder.addFormDataPart("tags", tag_data_str[i]); //true//
+            for (int i = 0; i < tag_data_str.length; i++) {
+                multipart_builder.addFormDataPart("tags", tag_data_str[i]); //true//
+            }
         }
 
         /** RequestBody 설정(Multipart로 설정) **/

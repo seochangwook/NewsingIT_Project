@@ -91,6 +91,11 @@ public class SearchUserFragment extends Fragment {
         mAdapter = new SearchUserAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
 
+        /** EmptyView 설정 **/
+        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_search_emptyuser, null);
+
+        recyclerView.setEmptyView(emptyview, true);
+
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {

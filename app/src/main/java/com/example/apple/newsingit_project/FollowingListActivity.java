@@ -127,24 +127,22 @@ public class FollowingListActivity extends AppCompatActivity {
             }
         });
 
-
         followingData = new FollowingData();
-
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
-
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.following_rv_list);
-
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
         recyclerview.addHeaderView(headerView);
         mAdapter = new FollowingListAdapter(this);
 
-        recyclerview.setAdapter(mAdapter);
+        /** EmptyView 설정 **/
+        View emptyview = getLayoutInflater().inflate(R.layout.view_following_emptyview, null);
 
+        recyclerview.setAdapter(mAdapter);
 
         //리사이클러 뷰 각 항목 클릭//
         recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {

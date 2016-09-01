@@ -134,16 +134,19 @@ public class FollowerListActivity extends AppCompatActivity {
 
         followerData = new FollowerData();
 
-
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
-
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.follower_rv_list);
 
-
+        /** HeaderView 설정 **/
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
+
+        /** EmptyView 설정 **/
+        View emptyview = getLayoutInflater().inflate(R.layout.view_follower_emptyview, null);
+
+        recyclerview.setEmptyView(emptyview, true);
 
         search_edit = (EditText) headerView.findViewById(R.id.editText3);
 

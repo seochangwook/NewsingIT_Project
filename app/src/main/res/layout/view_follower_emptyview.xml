@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="133dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginLeft="136dp"
+        android:layout_marginTop="140dp"
         android:src="@mipmap/sample_warring_image" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="83dp"
-        android:layout_marginTop="240dp"
-        android:text="뉴스정보를 불러올 수 없습니다."
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="280dp"
+        android:text="팔로워 정보를 불러올 수 없습니다"
         android:textColor="#000000"
         android:textSize="16dp"
         android:textStyle="bold" />
@@ -26,8 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="105dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginLeft="108dp"
+        android:layout_marginTop="320dp"
         android:text="네트워크 연결을 다시 확인해주세요"
         android:textColor="#ff0000"
         android:textSize="11dp"

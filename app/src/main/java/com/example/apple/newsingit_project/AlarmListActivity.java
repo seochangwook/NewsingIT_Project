@@ -81,6 +81,11 @@ public class AlarmListActivity extends AppCompatActivity {
 
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.alarm_rv_list);
 
+        /** EmptyView 설정 **/
+        View emptyview = getLayoutInflater().inflate(R.layout.view_alarmlist_emptyview, null);
+
+        recyclerview.setEmptyView(emptyview, true);
+
         mAdapter = new AlarmListAdapter(this);
         recyclerview.setAdapter(mAdapter);
 

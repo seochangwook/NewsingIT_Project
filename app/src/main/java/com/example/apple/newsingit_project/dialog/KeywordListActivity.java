@@ -79,6 +79,11 @@ public class KeywordListActivity extends Activity {
 
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.rv_list);
 
+        /** EmptyView 설정 **/
+        View emptyview = getLayoutInflater().inflate(R.layout.view_keywordlist_emptyview, null);
+
+        recyclerview.setEmptyView(emptyview, true);
+
         mAdapter = new KeywordListAdapter(this);
         recyclerview.setAdapter(mAdapter);
 

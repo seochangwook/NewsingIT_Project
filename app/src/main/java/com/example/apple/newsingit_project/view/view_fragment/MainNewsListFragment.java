@@ -100,6 +100,7 @@ public class MainNewsListFragment extends Fragment {
      * 기타 로딩 기능
      **/
     private ProgressDialog pDialog;
+
     private Callback requestmainnewslistcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) //접속 실패의 경우.//

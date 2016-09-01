@@ -5,20 +5,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.apple.newsingit_project.view.view_fragment.SearchTagFragment">
 
-    <!--&lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
-    <!--<TextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:text="@string/fragment_3" />-->
-
-    <TextView
-        android:id="@+id/emptyView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EEAADD"
-        android:gravity="center"
-        android:text="no data"
-        android:visibility="gone" />
 
     <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
         android:id="@+id/search_tag_rv_list"
@@ -26,8 +12,6 @@
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         app:frv_dividerHeight="0.5dp"
-        app:frv_emptyView="@id/emptyView"
-        app:frv_isEmptyViewKeepShowHeadOrFooter="false"
         app:frv_layoutManager="linear"
         app:frv_layoutManagerOrientation="vertical" />
 

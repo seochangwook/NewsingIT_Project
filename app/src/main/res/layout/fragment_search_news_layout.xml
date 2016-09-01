@@ -11,23 +11,12 @@
     <!--android:layout_height="match_parent"-->
     <!--android:text="@string/fragment_1" />-->
 
-    <TextView
-        android:id="@+id/emptyView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EEAADD"
-        android:gravity="center"
-        android:text="no data"
-        android:visibility="gone" />
-
     <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
         android:id="@+id/search_news_rv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
         app:frv_dividerHeight="0.5dp"
-        app:frv_emptyView="@id/emptyView"
-        app:frv_isEmptyViewKeepShowHeadOrFooter="false"
         app:frv_layoutManager="linear"
         app:frv_layoutManagerOrientation="vertical" />
 

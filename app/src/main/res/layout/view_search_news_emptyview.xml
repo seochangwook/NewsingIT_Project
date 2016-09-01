@@ -15,9 +15,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="83dp"
+        android:layout_marginLeft="70dp"
         android:layout_marginTop="240dp"
-        android:text="뉴스정보를 불러올 수 없습니다."
+        android:text="뉴스검색 정보를 불러올 수 없습니다."
         android:textColor="#000000"
         android:textSize="16dp"
         android:textStyle="bold" />

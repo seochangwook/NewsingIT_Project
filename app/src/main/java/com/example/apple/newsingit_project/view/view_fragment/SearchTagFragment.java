@@ -111,6 +111,7 @@ public class SearchTagFragment extends Fragment {
 
                         searchTagData.searchTagDataList.add(newSearchTagData);
                     }
+
                     mAdapter.setSearchTagData(searchTagData);
                 }
             });
@@ -134,6 +135,10 @@ public class SearchTagFragment extends Fragment {
         mAdapter = new SearchTagAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
 
+        /** EmptyView 설정 **/
+        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_searchtag_emptyview, null);
+
+        recyclerView.setEmptyView(emptyview, true);
 
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
