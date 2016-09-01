@@ -1,25 +1,55 @@
 package com.example.apple.newsingit_project;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+
+import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class CreateFolderActivity extends AppCompatActivity {
+    private static final int RC_SINGLE_IMAGE = 2;
+
     ImageButton image_select_button;
     Switch private_select_switch;
 
+    //설정관련 변수//
+    ImageView select_image_thumbnail;
+    EditText folder_name_edittext;
+    boolean is_private;
     /**
      * PopupWindow 화면관련
      **/
@@ -29,6 +59,31 @@ public class CreateFolderActivity extends AppCompatActivity {
     Button select_gallery_button;
     Button camera_picture_button;
 
+    /**
+     * Network관련 변수
+     **/
+    NetworkManager networkManager;
+
+    File uploadFile = null; //이미지도 하나의 파일이기에 파일로 만든다.//
+
+    String path = null;
+    private Callback requestfoldercreatecallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
+
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +92,8 @@ public class CreateFolderActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         image_select_button = (ImageButton) findViewById(R.id.image_select_button);
         private_select_switch = (Switch) findViewById(R.id.private_switch_button);
+        select_image_thumbnail = (ImageView) findViewById(R.id.folder_imageview);
+        folder_name_edittext = (EditText) findViewById(R.id.folder_name_edittext);
 
         setSupportActionBar(toolbar);
 
@@ -71,6 +128,16 @@ public class CreateFolderActivity extends AppCompatActivity {
             }
         });
 
+        private_select_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean is_check) {
+                if (is_check == true) {
+                    is_private = true;
+                } else if (is_check == false) {
+                    is_private = false;
+                }
+            }
+        });
 
         image_select_button.setOnClickListener(new View.OnClickListener() //폴더 이미지 선택 버튼//
         {
@@ -88,6 +155,10 @@ public class CreateFolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(CreateFolderActivity.this, "갤러리에서 이미지 선택", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                startActivityForResult(intent, RC_SINGLE_IMAGE);
             }
         });
 
@@ -97,6 +168,84 @@ public class CreateFolderActivity extends AppCompatActivity {
                 Toast.makeText(CreateFolderActivity.this, "카메라 버튼", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SINGLE_IMAGE) {
+            if (resultCode == RESULT_OK) {
+                Uri fileUri = data.getData();
+                Cursor c = getContentResolver().query(fileUri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+                if (c.moveToNext()) {
+                    path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
+                    Log.i("Single", "path : " + path);
+
+                    uploadFile = new File(path);
+
+                    Glide.with(this)
+                            .load(uploadFile)
+                            .into(select_image_thumbnail); //into로 보낼 위젯 선택.//
+                }
+            }
+        }
+    }
+
+    public void CreateFolder() {
+        //우선 이동할 데이터를 뽑아온다//
+        String folder_name = folder_name_edittext.getText().toString();
+        boolean folder_locked = is_private;
+
+        Log.d("enroll data", "" + folder_name + "/" + folder_locked + "/" + uploadFile.getName());
+
+        //파일 전송을 위한 설정.//
+        MediaType mediaType = MediaType.parse("image/jpeg");
+
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        /** POST방식의 프로토콜 요청 설정 **/
+        /** URL 설정 **/
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http"); //스킴정의(Http / Https)
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com"); //host정의.//
+        builder.addPathSegment("users");
+        builder.addPathSegment("me");
+        builder.addPathSegment("categories");
+
+        /** 파일 전송이므로 MultipartBody 설정 **/
+        MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("name", folder_name);
+
+        //비공개, 공개여부에 의해서 1/0으로 판단.//
+        if (is_private == true) //잠금모드 활성화//
+        {
+            multipart_builder.addFormDataPart("locked", "1"); //true//
+        } else if (is_private == false) //잠금모드 비활성화//
+        {
+            multipart_builder.addFormDataPart("locked", "0"); //false//
+        }
+
+        //이미지 처리//
+        multipart_builder.addFormDataPart("img", uploadFile.getName(),
+                RequestBody.create(mediaType, uploadFile));
+
+        /** RequestBody 설정(Multipart로 설정) **/
+        RequestBody body = multipart_builder.build();
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .post(body) //POST방식 적용.//
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestfoldercreatecallback);
     }
 
     @Override
@@ -110,6 +259,9 @@ public class CreateFolderActivity extends AppCompatActivity {
         int item_id = item.getItemId();
 
         if (item_id == R.id.folder_menu_create) {
+            //폴더를 생성한다.//
+            CreateFolder();
+
             finish();
         }
         return super.onOptionsItemSelected(item);
