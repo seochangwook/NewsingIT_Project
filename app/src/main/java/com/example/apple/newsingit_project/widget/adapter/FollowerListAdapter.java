@@ -146,15 +146,15 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 followerViewHolder.btnFollower.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int userSelect = followerData.followerDataList.get(pos).getId();
-                        Toast.makeText(context, "팔로워 " + userSelect, Toast.LENGTH_SHORT).show();
+                        int userSelectId = followerData.followerDataList.get(pos).getId();
+                        Toast.makeText(context, "팔로워 " + userSelectId, Toast.LENGTH_SHORT).show();
 
                         if (flag) {
                             //팔로잉 한 상태에서는 팔로우 해제//
-                            deleteFollowing(userSelect);
+                            deleteFollowing(userSelectId);
                         } else {
                             //팔로잉 안 한 상태에서 팔로우 생성//
-                            setFollowing(userSelect);
+                            setFollowing(userSelectId);
                         }
                         notifyDataSetChanged();
                     }

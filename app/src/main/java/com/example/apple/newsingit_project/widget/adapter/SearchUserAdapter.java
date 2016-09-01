@@ -145,15 +145,15 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 searchUserViewHolder.btnSearchUser.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int userSelect = searchUserData.searchUserDataArrayList.get(pos).getId();
-                        Toast.makeText(context, userSelect + " 선택", Toast.LENGTH_SHORT).show();
+                        int userSelectId = searchUserData.searchUserDataArrayList.get(pos).getId();
+                        Toast.makeText(context, userSelectId + " 선택", Toast.LENGTH_SHORT).show();
 
                         if (flag) {
                             //팔로잉 한 상태에서는 팔로우 해제//
-                            deleteFollowing(userSelect);
+                            deleteFollowing(userSelectId);
                         } else {
                             //팔로잉 안 한 상태에서 팔로우 생성//
-                            setFollowing(userSelect);
+                            setFollowing(userSelectId);
                         }
                         notifyDataSetChanged();
                     }
