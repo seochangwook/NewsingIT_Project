@@ -12,6 +12,15 @@ public class FollowerData {
     public String name;
     public String aboutMe;
     public List<FollowerData> followerDataList = new ArrayList<>();
+    private boolean flag;
+
+    public boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 
     public int getId() {
         return id;

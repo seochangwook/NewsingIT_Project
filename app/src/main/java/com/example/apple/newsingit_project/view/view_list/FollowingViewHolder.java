@@ -32,5 +32,6 @@ public class FollowingViewHolder  extends RecyclerView.ViewHolder {
         this.followingData = followingData;
         nameView.setText(followingData.getName());
         introView.setText(followingData.getAboutMe());
+
     }
 }

@@ -5,6 +5,15 @@ public class SearchUserRequestResults {
     private int id;
     private String pf_url;
     private String aboutme;
+    private boolean flag;
+
+    public boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
 
     public String getName() {
         return this.name;

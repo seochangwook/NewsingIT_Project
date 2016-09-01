@@ -27,4 +27,9 @@
     <color name="blackOlive">#39393F</color>
     <color name="orange">#FEC500</color>
     <color name="bg_tag_default">#7cd167</color>
+
+
+    <!-- follow button color-->
+    <color name="follow_true">#b1b1ef</color>
+    <color name="follow_false">#FFFFFFFF</color>
 </resources>
