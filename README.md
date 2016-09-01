@@ -62,4 +62,5 @@
 * dexOutOfMemory방지 라이브러리 추가로 컴파일 issue 해결 - 서창욱 (16/09/01 00:25)
 * 로그아웃 dummy test, 스크랩 수정 dialog, follower/following id값 intent로 넘김 - 임지수 (16/09/01 10:46)
 * folder 잠금일 때 자물쇠 이미지 보이기 - 임지수 (16/09/01 11:17)
+* Favorite count 증가 관련 POST test 완료 - 서창욱 (16/09/01 13:16)
 
