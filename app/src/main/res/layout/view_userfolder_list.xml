@@ -9,21 +9,23 @@
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         card:cardBackgroundColor="@color/white_color"
         card:cardCornerRadius="8dp"
         card:cardElevation="4dp">
 
         <ImageView
             android:id="@+id/user_folder_imageview"
-            android:layout_width="@dimen/folder_imageview_width"
-            android:layout_height="@dimen/folder_imageview_height"
+            android:layout_width="@dimen/folder_user_img_width"
+            android:layout_height="@dimen/folder_user_img_height"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/user_folder_name_textview"
-            android:layout_width="@dimen/folder_imageview_width"
-            android:layout_height="@dimen/folder_name_textview_height"
-            android:layout_marginTop="@dimen/folder_name_textview_layout_margin_top"
+            android:layout_width="@dimen/folder_user_textview_width"
+            android:layout_height="@dimen/folder_user_textview_height"
+            android:layout_marginTop="@dimen/folder_user_textview_layout_margin_top"
             android:background="@color/white_color"
             android:gravity="center"
             android:text="@string/folder_temp_name"

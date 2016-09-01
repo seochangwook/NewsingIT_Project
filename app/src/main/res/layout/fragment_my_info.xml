@@ -124,7 +124,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            app:frv_dividerHeight="0.5dp"
+            app:frv_dividerHorizontalHeight="5dp"
+            app:frv_dividerVerticalHeight="5dp"
+            app:frv_itemViewBothSidesMargin="5dp"
             app:frv_layoutManager="grid"
             app:frv_layoutManagerOrientation="vertical" />
     </LinearLayout>

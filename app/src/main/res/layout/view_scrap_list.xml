@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/text_scrap_list_date"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="40dp"
         android:layout_toLeftOf="@+id/text_scrap_list_date"
         android:layout_toStartOf="@+id/text_scrap_list_date"
         android:paddingRight="10dp"

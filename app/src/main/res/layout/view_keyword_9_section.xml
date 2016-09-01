@@ -8,6 +8,7 @@
         android:id="@+id/keyword_9_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_news_keyword_layout_margin_left"
         android:text="Sample Category"
         android:textColor="@color/blue_color"
         android:textSize="20dp"

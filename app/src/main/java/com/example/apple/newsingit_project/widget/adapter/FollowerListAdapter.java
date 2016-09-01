@@ -91,10 +91,13 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .addPathSegment("follows")
                 .addPathSegment("" + userId);
 
+        RequestBody body = new FormBody.Builder()
+                .build();
+
         Request request = new Request.Builder()
                 .url(builder.build())
                 .tag(context)
-                .delete()
+                .delete(body)
                 .build();
 
         client.newCall(request).enqueue(requestSetFollowingCallback);
