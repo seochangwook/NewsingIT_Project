@@ -37,6 +37,7 @@ import okhttp3.Response;
  * A simple {@link Fragment} subclass.
  */
 public class SearchTagFragment extends Fragment {
+    private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
 
     FamiliarRecyclerView recyclerView;
     SearchTagAdapter mAdapter;
@@ -143,7 +144,7 @@ public class SearchTagFragment extends Fragment {
 
                 //선택한 태그를 가진 스크랩 목록 페이지로 이동//
                 Intent intent = new Intent(getActivity(), UserScrapContentListActivity.class);
-                intent.putExtra("KEY_FOLDER_NAME", userSelect);
+                intent.putExtra(KEY_FOLDER_NAME, userSelect);
                 intent.putExtra("KEY_USER_IDENTIFY_FLAG", "1"); //검색은 다른 사용자의 내용들을 보는것이니 외부사용자로 간다.//
 
                 startActivity(intent);

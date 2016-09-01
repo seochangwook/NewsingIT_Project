@@ -129,9 +129,14 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        folder_id = intent.getStringExtra(KEY_FOLDER_ID);
+        folder_id = intent.getStringExtra(KEY_FOLDER_ID); //태그검색으로 들어올 경우 null이 된다.//
+        //사용자 검색으로 들어올 경우 해당 사용자의 스크랩 목록을 봐야 하기에 사용자 폴더의 id값이 넘어온다.//
         folder_name = intent.getStringExtra(KEY_FOLDER_NAME);
         is_user_my = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
+
+        if (folder_id != null) {
+            Log.d("intent data", folder_id);
+        }
 
         if (is_user_my.equals("1")) //다른 사람의 스크랩에 들어올 경우.//
         {
@@ -154,7 +159,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");

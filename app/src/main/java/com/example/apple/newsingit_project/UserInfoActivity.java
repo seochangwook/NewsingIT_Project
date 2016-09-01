@@ -43,6 +43,8 @@ import okhttp3.Response;
 public class UserInfoActivity extends AppCompatActivity {
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
+    private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
+    private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
 
     boolean dummy_follow_state = false; //팔로우 하지 않음이 기본 설정.//
     //사용자 정보 뷰 관련 변수//
@@ -99,6 +101,7 @@ public class UserInfoActivity extends AppCompatActivity {
             set_UserInfo_Data(userInfoRequest.getResult());
         }
     };
+
     private Callback requestUserFolderListCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -130,15 +133,22 @@ public class UserInfoActivity extends AppCompatActivity {
                     userFolderListRequestResultsList.addAll(Arrays.asList(userFolderListRequestResults));
 
                     for (int i = 0; i < user_folder_size; i++) {
-                        UserFolderData new_user_folderdata = new UserFolderData();
+                        //폴더의 경우 private가 있을경우 상대방에서는 보이지 않아야 한다.//
+                        if (userFolderListRequestResultsList.get(i).getLocked() == true) //잠금 활성화 상태//
+                        {
+                            //비공개 폴더는 배열에 넣지 않아샤 다른 사용자에게 보이지 않는다.//
+                        } else if (userFolderListRequestResultsList.get(i).getLocked() == false) //잠금 비활성화 상태//
+                        {
+                            UserFolderData new_user_folderdata = new UserFolderData();
 
-                        new_user_folderdata.setFolder_id(userFolderListRequestResultsList.get(i).getId());
-                        new_user_folderdata.set_get_folder_name(userFolderListRequestResultsList.get(i).getName());
-                        //new_user_folderdata.set_get_folder_imageUrl(userFolderListRequestResultsList.get(i).getImg_url());
-                        new_user_folderdata.set_get_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-                        new_user_folderdata.setFolder_private(userFolderListRequestResultsList.get(i).getLocked());
+                            new_user_folderdata.setFolder_id(userFolderListRequestResultsList.get(i).getId());
+                            new_user_folderdata.set_get_folder_name(userFolderListRequestResultsList.get(i).getName());
+                            //new_user_folderdata.set_get_folder_imageUrl(userFolderListRequestResultsList.get(i).getImg_url());
+                            new_user_folderdata.set_get_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                            new_user_folderdata.setFolder_private(userFolderListRequestResultsList.get(i).getLocked());
 
-                        user_folderData.user_folder_list.add(new_user_folderdata);
+                            user_folderData.user_folder_list.add(new_user_folderdata);
+                        }
                     }
 
                     user_folderListAdapter.set_UserFolderDate(user_folderData);
@@ -243,12 +253,14 @@ public class UserInfoActivity extends AppCompatActivity {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String select_user_folder_name = user_folderData.user_folder_list.get(position).get_folder_name();
+                String select_user_folder_id = "" + user_folderData.user_folder_list.get(position).getFolder_id();
 
                 Toast.makeText(UserInfoActivity.this, select_user_folder_name + "폴더로 이동", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(UserInfoActivity.this, UserScrapContentListActivity.class);
 
-                intent.putExtra("KEY_FOLDER_NAME", select_user_folder_name);
+                intent.putExtra(KEY_FOLDER_NAME, select_user_folder_name);
+                intent.putExtra(KEY_FOLDER_ID, select_user_folder_id);
                 intent.putExtra("KEY_USER_IDENTIFY_FLAG", "1"); //다른 사용자일 경우 1 / 나일 경우 0//
 
                 startActivity(intent);
