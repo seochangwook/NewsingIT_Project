@@ -30,8 +30,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class UserScrapContentListActivity extends AppCompatActivity {
+    private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
+    private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
+    private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+
     String folder_name;
     String is_user_my;
+    String folder_id;
 
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
@@ -124,8 +129,9 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        folder_name = intent.getStringExtra("KEY_FOLDER_NAME");
-        is_user_my = intent.getStringExtra("KEY_USER_IDENTIFY_FLAG");
+        folder_id = intent.getStringExtra(KEY_FOLDER_ID);
+        folder_name = intent.getStringExtra(KEY_FOLDER_NAME);
+        is_user_my = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
 
         if (is_user_my.equals("1")) //다른 사람의 스크랩에 들어올 경우.//
         {

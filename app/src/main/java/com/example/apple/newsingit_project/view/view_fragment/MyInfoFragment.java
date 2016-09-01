@@ -58,6 +58,10 @@ import okhttp3.Response;
  * A simple {@link Fragment} subclass.
  */
 public class MyInfoFragment extends Fragment {
+    private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
+    private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
+    private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
     TextView profile_name_textview;
@@ -206,13 +210,15 @@ public class MyInfoFragment extends Fragment {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String select_folder_name = folderData.folder_list.get(position).get_folder_name();
+                String select_folder_id = "" + folderData.folder_list.get(position).get_folderid();
 
                 Toast.makeText(getActivity(), select_folder_name + "폴더로 이동", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), UserScrapContentListActivity.class);
 
-                intent.putExtra("KEY_FOLDER_NAME", select_folder_name);
-                intent.putExtra("KEY_USER_IDENTIFY_FLAG", "0"); //0이면 나의 경우//
+                intent.putExtra(KEY_FOLDER_NAME, select_folder_name);
+                intent.putExtra(KEY_FOLDER_ID, select_folder_id);
+                intent.putExtra(KEY_USER_IDENTIFY_FLAG, "0"); //0이면 나의 경우//
 
                 startActivity(intent);
             }
