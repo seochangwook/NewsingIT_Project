@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.data.json_data.userfolderlist.UserFolderListRequest;
+import com.example.apple.newsingit_project.data.json_data.userfolderlist.UserFolderListRequestResults;
 import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequest;
 import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
@@ -24,6 +26,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
@@ -53,7 +58,7 @@ public class UserInfoActivity extends AppCompatActivity {
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
 
-    String getUserId;
+    String get_user_id = null;
     String get_user_name = null;
 
     /**
@@ -94,7 +99,53 @@ public class UserInfoActivity extends AppCompatActivity {
             set_UserInfo_Data(userInfoRequest.getResult());
         }
     };
+    private Callback requestUserFolderListCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
 
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
+            Gson gson = new Gson();
+
+            UserFolderListRequest userFolderListRequest = gson.fromJson(responseData, UserFolderListRequest.class);
+
+            set_User_Folder_Data(userFolderListRequest.getResults(), userFolderListRequest.getResults().length);
+        }
+    };
+
+    public void set_User_Folder_Data(final UserFolderListRequestResults userFolderListRequestResults[], final int user_folder_size) {
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<UserFolderListRequestResults> userFolderListRequestResultsList = new ArrayList<>();
+
+                    userFolderListRequestResultsList.addAll(Arrays.asList(userFolderListRequestResults));
+
+                    for (int i = 0; i < user_folder_size; i++) {
+                        UserFolderData new_user_folderdata = new UserFolderData();
+
+                        new_user_folderdata.setFolder_id(userFolderListRequestResultsList.get(i).getId());
+                        new_user_folderdata.set_get_folder_name(userFolderListRequestResultsList.get(i).getName());
+                        //new_user_folderdata.set_get_folder_imageUrl(userFolderListRequestResultsList.get(i).getImg_url());
+                        new_user_folderdata.set_get_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                        new_user_folderdata.setFolder_private(userFolderListRequestResultsList.get(i).getLocked());
+
+                        user_folderData.user_folder_list.add(new_user_folderdata);
+                    }
+
+                    user_folderListAdapter.set_UserFolderDate(user_folderData);
+                }
+            });
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,10 +168,11 @@ public class UserInfoActivity extends AppCompatActivity {
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
+        //전달되는 값을 받아온다.//
         Intent intent = getIntent();
 
-        getUserId = intent.getStringExtra("USER_ID");
-        get_user_name = intent.getStringExtra("USER_NAME");
+        get_user_id = intent.getStringExtra(USER_ID);
+        get_user_name = intent.getStringExtra(USER_NAME);
 
         /** 타이틀과 이름 값 초기화 **/
         setTitle(get_user_name);
@@ -241,11 +293,37 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         //Dummy Data 설정//
-        set_Dummy_Folder_Date();
+        //set_Dummy_Folder_Date();
 
         //유저 프로필 정보를 불러온다.//
-        get_UserInfo_Data(getUserId); //id값이 조건으로 필요하다.//
+        get_UserInfo_Data(get_user_id); //id값이 조건으로 필요하다.//
+        get_User_Folder_Data(get_user_id); //id값이 조건으로 필요하다.//
     }
+
+    public void get_User_Folder_Data(String user_id) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("users")
+                .addPathSegment(user_id)
+                .addPathSegment("categories");
+
+        builder.addQueryParameter("usage", "profile");
+        builder.addQueryParameter("page", "1");
+        builder.addQueryParameter("count", "20");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestUserFolderListCallback);
+    }
+
 
     public void get_UserInfo_Data(String user_id) {
         /** 네트워크 설정을 한다. **/
@@ -262,7 +340,7 @@ public class UserInfoActivity extends AppCompatActivity {
         builder.scheme("http");
         builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
         builder.addPathSegment("users");
-        builder.addPathSegment("" + user_id);
+        builder.addPathSegment(user_id);
 
         /** Request 설정 **/
         Request request = new Request.Builder()
@@ -309,7 +387,7 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     }
 
-    public void set_Dummy_Folder_Date() {
+    /*public void set_Dummy_Folder_Date() {
         //첫번째 폴더//
         UserFolderData new_user_folderdata_1 = new UserFolderData();
 
@@ -333,7 +411,7 @@ public class UserInfoActivity extends AppCompatActivity {
         user_folderData.user_folder_list.add(new_user_folderdata_2);
 
         user_folderListAdapter.set_UserFolderDate(user_folderData); //설정.//
-    }
+    }*/
 
     private void showpDialog() {
         if (!pDialog.isShowing())

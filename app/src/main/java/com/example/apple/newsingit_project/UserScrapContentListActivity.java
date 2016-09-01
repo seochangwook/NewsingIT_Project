@@ -75,7 +75,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         builder.scheme("http")
                 .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
                 .addPathSegment("scraps")
-                .addQueryParameter("category", "1")
+                .addQueryParameter("category", folder_id)
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "20");
 
