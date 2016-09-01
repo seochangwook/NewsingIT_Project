@@ -63,5 +63,7 @@
 * 로그아웃 dummy test, 스크랩 수정 dialog, follower/following id값 intent로 넘김 - 임지수 (16/09/01 10:46)
 * folder 잠금일 때 자물쇠 이미지 보이기 - 임지수 (16/09/01 11:17)
 * Favorite count 증가 관련 POST test 완료 - 서창욱 (16/09/01 13:16)
+* 팔로워,팔로잉,유저 검색 목록에서의 팔로우 생성/해제 test - 임지수 (16/09/01 15:35)
 * CreateFolder 부분 MultipartBody적용하여 File전송 POST test 완료 - 서창욱 (16/09/01 15:54)
+* 스크랩 삭제 dummyData test - 임지수 (16/09/01 17:23)
 
