@@ -21,6 +21,7 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
     public TextView user_folder_name_textview;
     public Button user_folder_private_button;
     public boolean user_folder_private;
+    public String folder_imgUrl;
     //폴더 데이터 클래스//
     UserFolderData userfolderData;
 
@@ -41,11 +42,11 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
         {
             user_folder_private_button.setBackgroundResource(android.R.drawable.ic_partial_secure);
 
-            int dummy_imageUrl = userfolderData.get_dummy_folder_image();
+            folder_imgUrl = userfolderData.get_folder_imageUrl();
 
             //이미지를 로드.//
             Picasso.with(context)
-                    .load(dummy_imageUrl)
+                    .load(folder_imgUrl)
                     .transform(new CropCircleTransformation())
                     .into(user_folder_imageview);
 
@@ -53,11 +54,11 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
         {
             user_folder_private_button.setVisibility(View.GONE);
 
-            int dummy_imageUrl = userfolderData.get_dummy_folder_image();
+            folder_imgUrl = userfolderData.get_folder_imageUrl();
 
             //이미지를 로드.//
             Picasso.with(context)
-                    .load(dummy_imageUrl)
+                    .load(folder_imgUrl)
                     .transform(new CropCircleTransformation())
                     .into(user_folder_imageview);
         }

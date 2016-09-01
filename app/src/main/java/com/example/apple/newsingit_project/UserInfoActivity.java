@@ -94,7 +94,20 @@ public class UserInfoActivity extends AppCompatActivity {
             set_UserInfo_Data(userInfoRequest.getResult());
         }
     };
+    private Callback requestUserFolderListCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
 
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +132,8 @@ public class UserInfoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        get_user_id = intent.getStringExtra("USER_ID");
-        get_user_name = intent.getStringExtra("USER_NAME");
+        get_user_id = intent.getStringExtra(USER_ID);
+        get_user_name = intent.getStringExtra(USER_NAME);
 
         /** 타이틀과 이름 값 초기화 **/
         setTitle(get_user_name);
@@ -241,10 +254,35 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         //Dummy Data 설정//
-        set_Dummy_Folder_Date();
+        //set_Dummy_Folder_Date();
 
         //유저 프로필 정보를 불러온다.//
         get_UserInfo_Data(get_user_id); //id값이 조건으로 필요하다.//
+        get_User_Folder_Data(get_user_id); //id값이 조건으로 필요하다.//
+    }
+
+    public void get_User_Folder_Data(String user_id) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("users")
+                .addPathSegment(user_id)
+                .addPathSegment("categories");
+
+        builder.addQueryParameter("usage", "scrap");
+        builder.addQueryParameter("page", "1");
+        builder.addQueryParameter("count", "20");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestUserFolderListCallback);
     }
 
     public void get_UserInfo_Data(String user_id) {
@@ -309,7 +347,7 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     }
 
-    public void set_Dummy_Folder_Date() {
+    /*public void set_Dummy_Folder_Date() {
         //첫번째 폴더//
         UserFolderData new_user_folderdata_1 = new UserFolderData();
 
@@ -333,7 +371,7 @@ public class UserInfoActivity extends AppCompatActivity {
         user_folderData.user_folder_list.add(new_user_folderdata_2);
 
         user_folderListAdapter.set_UserFolderDate(user_folderData); //설정.//
-    }
+    }*/
 
     private void showpDialog() {
         if (!pDialog.isShowing())

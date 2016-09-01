@@ -197,14 +197,6 @@ public class MyInfoFragment extends Fragment {
         /** Folder RecyclerView Adapter 등록 **/
         folder_recyclerview.setAdapter(folderListAdapter);
 
-
-        //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
-        //파카소 라이브러리를 이용하여 이미지 로딩//
-        Picasso.with(getActivity()) //profileUrl//
-                .load("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4") //url//
-                .transform(new CropCircleTransformation())
-                .into(profile_imageview);
-
         /** RecyclerView 이벤트 처리 **/
         folder_recyclerrefreshview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
@@ -466,7 +458,12 @@ public class MyInfoFragment extends Fragment {
                     following_count_button.setText("" + followingCount);
                     btnScrapCount.setText("" + scrapCount);
 
-
+                    //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
+                    //파카소 라이브러리를 이용하여 이미지 로딩//
+                    Picasso.with(getActivity()) //profileUrl//
+                            .load(profileUrl) //url//
+                            .transform(new CropCircleTransformation())
+                            .into(profile_imageview);
                 }
             });
         }
