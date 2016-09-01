@@ -51,7 +51,10 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
-
+    private static final String KEY_NEWS_AUTHOR = "KEY_NEWS_AUTHOR";
+    private static final String KEY_NEWS_WRITE_TIME = "KEY_NEWS_WRITE_TIME";
+    private static final String KEY_NEWS_CONTENT = "KEY_NEWS_CONTENT";
+    private static final String KEY_NEWS_IMGURL = "KEY_NEWS_IMGURL";
 
     Button btn;
     /**
@@ -212,6 +215,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String folder_name = scrapfolderData.scrapfolderlist.get(position).get_scrap_folder_list_data();
+                String folder_id = "" + scrapfolderData.scrapfolderlist.get(position).get_scrap_folder_id();
 
                 Toast.makeText(SelectNewsDetailActivity.this, folder_name + " 폴더 선택", Toast.LENGTH_SHORT).show();
 
@@ -219,6 +223,13 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
                 //필요한 정보를 넘겨준다.//
                 //기존 프리뷰로 사용할 정보들을 넘겨주기.(뉴스 이미지, author, date, title, content)//
+                intent.putExtra(KEY_FOLDER_ID, folder_id);
+                intent.putExtra(KEY_NEWS_AUTHOR, news_author);
+                intent.putExtra(KEY_NEWS_CONTENT, news_content);
+                intent.putExtra(KEY_NEWS_IMGURL, news_imageUrl);
+                intent.putExtra(NEWS_TITLE, title);
+                intent.putExtra(NEWS_ID, news_id);
+                intent.putExtra(KEY_NEWS_WRITE_TIME, news_ntime);
 
                 startActivity(intent);
 
@@ -337,6 +348,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                         ScrapFolderListData new_folderdata = new ScrapFolderListData();
 
                         new_folderdata.set_scrap_folder_list_data(newsContentDetailRequestResultList.get(i).getName());
+                        new_folderdata.set_scrap_folder_id(newsContentDetailRequestResultList.get(i).getId());
 
                         scrapfolderData.scrapfolderlist.add(new_folderdata);
                     }
