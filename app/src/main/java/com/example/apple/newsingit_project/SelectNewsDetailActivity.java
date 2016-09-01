@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequest;
 import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequestResult;
+import com.example.apple.newsingit_project.data.json_data.newsdetailscrapfolderlist.NewsDetailScrapFolderListRequest;
+import com.example.apple.newsingit_project.data.json_data.newsdetailscrapfolderlist.NewsDetailScrapFolderListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.ScrapFolderListData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
@@ -32,6 +34,9 @@ import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
@@ -100,6 +105,27 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             NewsContentDetailRequest newsContentDetailRequest = gson.fromJson(response_data, NewsContentDetailRequest.class);
 
             set_NewsDetail_Data(newsContentDetailRequest.getResult());
+        }
+    };
+    private Callback requestscrapfolderlistcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) //접속 실패의 경우.//
+        {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+            Gson gson = new Gson();
+
+            NewsDetailScrapFolderListRequest newsDetailScrapFolderListRequest = gson.fromJson(response_data, NewsDetailScrapFolderListRequest.class);
+
+            set_Scrapfolder_list(newsDetailScrapFolderListRequest.getResults(), newsDetailScrapFolderListRequest.getResults().length);
         }
     };
 
@@ -257,9 +283,65 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         });
 
         //Dummy Data 설정//
-        set_Dummy_ScrapFolder_Date();
+        //set_Dummy_ScrapFolder_Date();
 
         get_NewsDetail_info(news_id);
+        get_ScrapFolder_Data();
+    }
+
+    public void get_ScrapFolder_Data() {
+        /** 네트워크 설정을 한다. **/
+        /** OkHttp 자원 설정 **/
+        manager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = manager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //나의 폴더 리스트이기에 me//
+        builder.addPathSegment("categories");
+
+        builder.addQueryParameter("usage", "scrap");
+        builder.addQueryParameter("page", "1");
+        builder.addQueryParameter("count", "20");
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestscrapfolderlistcallback);
+    }
+
+    public void set_Scrapfolder_list(final NewsDetailScrapFolderListRequestResults newsDetailScrapFolderListRequestResults[], final int news_detail_folderlist_size) {
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<NewsDetailScrapFolderListRequestResults> newsContentDetailRequestResultList = new ArrayList<>();
+
+                    newsContentDetailRequestResultList.addAll(Arrays.asList(newsDetailScrapFolderListRequestResults));
+
+                    for (int i = 0; i < news_detail_folderlist_size; i++) {
+                        ScrapFolderListData new_folderdata = new ScrapFolderListData();
+
+                        new_folderdata.set_scrap_folder_list_data(newsContentDetailRequestResultList.get(i).getName());
+
+                        scrapfolderData.scrapfolderlist.add(new_folderdata);
+                    }
+
+                    scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
+                }
+            });
+        }
     }
 
     public void get_NewsDetail_info(String news_id) {

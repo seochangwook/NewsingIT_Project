@@ -157,6 +157,11 @@ public class MyInfoFragment extends Fragment {
         folder_recyclerview.setItemAnimator(new DefaultItemAnimator());
         folder_recyclerview.setHasFixedSize(true);
 
+        /** EmptyView 화면 설정. **/
+        View my_empty_list_view = getActivity().getLayoutInflater().inflate(R.layout.my_rv_list_emptyview, null, false);
+        folder_recyclerview.setEmptyView(my_empty_list_view);
+        folder_recyclerview.setEmptyViewKeepShowHeadOrFooter(true);
+
         /** 폴더 데이터 클래스 초기화 및 어댑터 초기화 **/
         folderData = new FolderData();
         folderListAdapter = new FolderListAdapter(getActivity());
