@@ -363,7 +363,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         if (is_private == true) {
             multipart_builder.addFormDataPart("locked", "1"); //true//
         } else if (is_private == false) {
-            multipart_builder.addFormDataPart("locked", "1"); //true//
+            multipart_builder.addFormDataPart("locked", "0"); //false//
         }
 
         //이미지 처리//
