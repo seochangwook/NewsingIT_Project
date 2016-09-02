@@ -69,4 +69,6 @@
 * 스크랩 수정 dummy test / 메인 화면, 마이페이지 ui 수정 - 임지수 (16/09/01 20:23)
 * CreateScrap부분 MultipartBody를 적용하여 POST test 완료 - 서창욱 (16/09/01 20:50)
 * 각 RecyclerView에 EmptyView설정 완료 - 서창욱 (16/09/02 02:05)
+* 아이콘 적용 - 임지수 (16/09/02 13:01)
+* 검색에 SearchView 적용 - 임지수 (16/09/02 17:47)
 
