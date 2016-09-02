@@ -197,6 +197,8 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         tag_enroll_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mBeautyTagGroup.setVisibility(View.VISIBLE);
+
                 Toast.makeText(CreateScrapContentActivity.this, "해시 태그 등록", Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < tag_array.size(); i++) {

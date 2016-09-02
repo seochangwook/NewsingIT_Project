@@ -50,7 +50,8 @@
             android:name=".EditMyInfoActivity"
             android:exported="true"
             android:label="@string/title_activity_edit_my_info"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".AlarmListActivity"
             android:exported="true"
@@ -59,7 +60,8 @@
         <activity
             android:name=".CreateFolderActivity"
             android:label="@string/title_activity_create__folder_"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".FollowerListActivity"
             android:exported="true"
@@ -84,17 +86,20 @@
             android:name=".UserSelectScrapContentActivity"
             android:exported="true"
             android:label="@string/title_activity_user_select_scrap_content"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".EditScrapContentActivity"
             android:exported="true"
             android:label="@string/title_activity_edit_scrap_content"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".SearchTabActivity"
             android:exported="true"
             android:label="@string/title_activity_search_tab"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".UserScrapContentListActivity"
             android:label="@string/title_activity_user_scrap_content_list"
@@ -106,7 +111,8 @@
         <activity
             android:name=".CreateScrapContentActivity"
             android:label="@string/title_activity_create_scrap_content"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".dialog.ScrapContentEditDialog"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
@@ -123,7 +129,8 @@
         <activity
             android:name=".EditFolderActivity"
             android:label="@string/title_activity_edit"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

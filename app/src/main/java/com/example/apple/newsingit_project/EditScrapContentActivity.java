@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,6 +32,14 @@ import java.util.List;
 
 import mabbas007.tagsedittext.TagsEditText;
 import me.gujun.android.taggroup.TagGroup;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class EditScrapContentActivity extends AppCompatActivity implements TagsEditText.TagsEditListener {
     /**
@@ -88,6 +97,22 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     NetworkManager networkManager;
     private TagsEditText mTagsEditText; //태그를 지정할 수 있는 에디트 텍스트//
     private TagGroup mBeautyTagGroup; //태그를 나타낼 스타일 뷰//
+    private Callback requesteditscrapcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -270,12 +295,12 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         String edit_scrap_content = appCompatEditText.getText().toString();
 
         //저장될 정보 출력//
-        Log.d("scrap title", edit_scrap_title);
+        /*Log.d("scrap title", edit_scrap_title);
         Log.d("scrap content", edit_scrap_content);
         Log.d("scrap id", scrap_id);
-        Log.d("scrap lock", "" + scrap_isprivate);
+        Log.d("scrap lock", "" + scrap_isprivate);*/
 
-        //새로 입력된 해시태그//
+        //새로 입력된 해시태그 처리//
         int array_size = tag_array.size();
 
         if (array_size > 0) {
@@ -290,21 +315,71 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
                 str_data_sample_tag_array = original_tag_str.split(",");
             }
-
-            for (int i = 0; i < str_data_sample_tag_array.length; i++) {
-                tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
-            }
         }
 
-        for (int i = 0; i < tag_data_str.length; i++) {
-            Log.d("new tags", tag_data_str[i]);
+        //새로 추가된 태그//
+        for (int i = 0; i < str_data_sample_tag_array.length; i++) {
+            tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
+
+            //Log.d("scrap tags", tag_data_str[i].toString());
         }
 
-        //기존에 존재하였던 해시태그 배열//
+        //기존 입력된 태그//
+        /*for (int i = 0; i < scrap_tags.length; i++) {
+            Log.d("scrap tags", scrap_tags[i]);
+        }
+
+        /** 네트워크 정보 초기화 **/
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        /** PUT방식의 프로토콜 요청 설정 **/
+        /** URL 설정 **/
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http"); //스킴정의(Http / Https)
+        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com"); //host정의.//
+        builder.addPathSegment("scraps");
+        builder.addPathSegment(scrap_id); //스크랩 id를 변수로 넣어준다.//
+
+        MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("title", edit_scrap_title)
+                .addFormDataPart("content", edit_scrap_content);
+
+        if (scrap_isprivate == true) //true이면 1//
+        {
+            multipart_builder.addFormDataPart("locked", "1"); //true//
+        } else if (scrap_isprivate == false) {
+            multipart_builder.addFormDataPart("locked", "0"); //true//
+        }
+
+        //태그//
+        for (int i = 0; i < str_data_sample_tag_array.length; i++) {
+            tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
+
+            //Log.d("scrap tags", tag_data_str[i].toString());
+            multipart_builder.addFormDataPart("tags", tag_data_str[i].toString()); //true//
+        }
+
         for (int i = 0; i < scrap_tags.length; i++) {
-            Log.d("scraps tags", scrap_tags[i].toString());
+            //Log.d("scrap tags", scrap_tags[i]);
+            multipart_builder.addFormDataPart("tags", scrap_tags[i].toString());
         }
 
+        /** RequestBody 설정(Multipart로 설정) **/
+        RequestBody body = multipart_builder.build();
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body) //PUT방식 적용.//
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requesteditscrapcallback);
     }
 
     /**

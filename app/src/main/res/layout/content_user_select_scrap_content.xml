@@ -61,13 +61,10 @@
         <me.gujun.android.taggroup.TagGroup
             android:id="@+id/tag_group_scrap_beauty"
             style="@style/TagGroup.Beauty_Red"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="70dp"
             android:layout_below="@+id/draw_line_2"
-            android:layout_marginLeft="5dp"
-            android:layout_alignLeft="@+id/text_scrap_date"
-            android:layout_alignStart="@+id/text_scrap_date"
-            android:layout_below="@+id/draw_line_3"
+            android:layout_marginLeft="50dp"
             app:atg_inputHint="태그를 등록해주세요" />
 
     <TextView
@@ -141,9 +138,8 @@
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/img_scrap_user_content"
-            android:layout_alignStart="@+id/img_scrap_user_content"
-            android:layout_alignTop="@+id/tag_group_scrap_beauty"
+            android:layout_below="@+id/draw_line_2"
+            android:layout_marginTop="1dp"
             android:src="@mipmap/ic_tag" />
 
     </RelativeLayout>

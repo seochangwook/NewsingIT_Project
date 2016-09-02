@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.ScrapContentListRequestError;
 import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.ScrapContentListRequestErrorResults;
+import com.example.apple.newsingit_project.data.json_data.tagdetaillist.TagDetailListRequest;
+import com.example.apple.newsingit_project.data.json_data.tagdetaillist.TagDetailListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.UserScrapContentAdapter;
@@ -35,11 +37,12 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final String SCRAP_LOCK = "SCRAP_LOCK";
     private static final String SCRAP_ID = "SCRAP_ID";
-
+    private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
 
     String folder_name;
     String is_user_my;
     String folder_id;
+    String flag_tag = null;
     boolean scrap_private;
 
     UserScrapContentData userScrapContentData;
@@ -65,6 +68,26 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
             ScrapContentListRequestError request = gson.fromJson(responseData, ScrapContentListRequestError.class);
             setData(request.getResults(), request.getResults().length);
+        }
+    };
+    private Callback requestSearchTagListCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
+            Gson gson = new Gson();
+
+            TagDetailListRequest tagDetailListRequest = gson.fromJson(responseData, TagDetailListRequest.class);
+
+            set_Taglist_Data(tagDetailListRequest.getResults(), tagDetailListRequest.getResults().length);
         }
     };
 
@@ -93,7 +116,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         hidepDialog();
     }
 
-
     private void setData(final ScrapContentListRequestErrorResults[] results, final int size) {
         if (this != null) {
             this.runOnUiThread(new Runnable() {
@@ -117,12 +139,12 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
                         userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
                     }
+
                     mAdapter.setUserScrapContentData(userScrapContentData, is_user_my);
                 }
             });
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +161,13 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         //사용자 검색으로 들어올 경우 해당 사용자의 스크랩 목록을 봐야 하기에 사용자 폴더의 id값이 넘어온다.//
         folder_name = intent.getStringExtra(KEY_FOLDER_NAME);
         is_user_my = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
+        flag_tag = intent.getStringExtra(KEY_TAGSEARCH_FLAG); //태그로 검색 시 이 부분에 값이 "TAG"로 할당//
+
+        if (flag_tag != null) {
+            Log.d("intent flag", flag_tag);
+        } else if (flag_tag == null) {
+            flag_tag = "";
+        }
 
         if (folder_id != null) {
             Log.d("intent data", folder_id);
@@ -206,8 +235,72 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             }
         });
 
-        getScrapContentListNetworkData();
-//        initDummyData();
+        if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
+        {
+            Log.d("tag name", folder_name);
+
+            //태그이름으로 세부검색 후 리스트 목록//
+            getTagData(folder_id);
+        } else //태그가 아닌 일반 폴더리스트에서 선택 후 온 경우//
+        {
+            getScrapContentListNetworkData();
+        }
+//
+//      initDummyData();
+    }
+
+    public void getTagData(String folder_name) {
+        /** 네트워크 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("search")
+                .addQueryParameter("target", "4") //4는 태그상세 검색//
+                .addQueryParameter("word", folder_name) //word는 검색단어(태그 상세검색 시 필요)//
+                .addQueryParameter("page", "1")
+                .addQueryParameter("count", "10");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestSearchTagListCallback);
+    }
+
+    public void set_Taglist_Data(final TagDetailListRequestResults tagDetailListRequestResults[], final int tag_detail_list_size) {
+        if (this != null) {
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<TagDetailListRequestResults> tagDetailListRequestResultsList = new ArrayList<>();
+
+                    tagDetailListRequestResultsList.addAll(Arrays.asList(tagDetailListRequestResults));
+
+                    for (int i = 0; i < tag_detail_list_size; i++) {
+                        UserScrapContentData newUserScrapCotentData = new UserScrapContentData();
+
+                        newUserScrapCotentData.setTitle(tagDetailListRequestResultsList.get(i).getTitle());
+                        newUserScrapCotentData.setNcTitle(tagDetailListRequestResultsList.get(i).getNc_title());
+                        newUserScrapCotentData.setNcImgUrl(tagDetailListRequestResultsList.get(i).getNc_img_url());
+                        newUserScrapCotentData.setNcAuthor(tagDetailListRequestResultsList.get(i).getNc_author());
+                        newUserScrapCotentData.setNcTime(tagDetailListRequestResultsList.get(i).getNc_ntime());
+                        newUserScrapCotentData.setLike(tagDetailListRequestResultsList.get(i).getFavorite_cnt());
+                        newUserScrapCotentData.setLikeFlag(tagDetailListRequestResultsList.get(i).getFavorite());
+                        //newUserScrapCotentData.setLock(tagDetailListRequestResultsList.get(i).getLock());
+                        newUserScrapCotentData.setId(tagDetailListRequestResultsList.get(i).getId());
+
+                        userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
+                    }
+
+                    mAdapter.setUserScrapContentData(userScrapContentData, is_user_my);
+                }
+            });
+        }
     }
 
 

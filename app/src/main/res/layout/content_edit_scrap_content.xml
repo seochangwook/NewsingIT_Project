@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+
             android:hint="스크랩 제목을 수정하세요." />
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
