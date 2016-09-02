@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequest;
@@ -34,6 +35,9 @@ public class FollowingListActivity extends AppCompatActivity {
 
     FollowingListAdapter mAdapter;
     FollowingData followingData;
+
+    SearchView searchView;
+
     NetworkManager networkManager;
     private FamiliarRecyclerView recyclerview;
     private ProgressDialog pDialog;
@@ -83,6 +87,27 @@ public class FollowingListActivity extends AppCompatActivity {
 
         hidepDialog();
     }
+
+    private void searchFollowingNetworkData(String query) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .addPathSegment("follows");
+        // 검색 query 전달 //
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestFollowingListCallback);
+
+    }
+
 
     private void setData(final FollowingListRequestResults[] results, final int size) {
         if (this != null) {
@@ -136,6 +161,22 @@ public class FollowingListActivity extends AppCompatActivity {
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.following_rv_list);
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
+        searchView = (SearchView) headerView.findViewById(R.id.search_my_follow);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //   searchFollowingNetworkData(query);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_following_emptyview, null);

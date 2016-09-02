@@ -8,15 +8,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.apple.newsingit_project.view.EditTextWithDeleteButton;
 import com.example.apple.newsingit_project.view.view_fragment.SearchNewsFragment;
 import com.example.apple.newsingit_project.view.view_fragment.SearchTagFragment;
 import com.example.apple.newsingit_project.view.view_fragment.SearchUserFragment;
@@ -38,6 +38,7 @@ public class SearchTabActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +47,20 @@ public class SearchTabActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        EditTextWithDeleteButton customEdit = (EditTextWithDeleteButton) findViewById(R.id.edit_text);
-        customEdit.addTextChangedListener(editTextChanged());
-
-        customEdit.setOnClickListener(new View.OnClickListener() {
+        SearchView searchView = (SearchView) findViewById(R.id.search_tab);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(SearchTabActivity.this, "search", Toast.LENGTH_SHORT).show();
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -68,25 +74,6 @@ public class SearchTabActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         setTitle(""); //타이틀 자리에 에디트 텍스트가 올 것이니 타이틀은 생략.//
-    }
-
-    private EditTextWithDeleteButton.TextChangedListener editTextChanged() {
-        return new EditTextWithDeleteButton.TextChangedListener() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        };
     }
 
 

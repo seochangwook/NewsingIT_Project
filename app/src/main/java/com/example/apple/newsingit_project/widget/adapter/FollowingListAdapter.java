@@ -29,7 +29,7 @@ import okhttp3.Response;
  */
 public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    FollowingData followingData;
+    FollowingData followingData, searchList;
     Context context;
 
     NetworkManager networkManager;
@@ -52,6 +52,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     public FollowingListAdapter(Context context) {
         this.context = context;
         followingData = new FollowingData();
+        searchList = new FollowingData();
 
     }
 
@@ -105,6 +106,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     public void setFollowingData(FollowingData followingData){
         if (this.followingData != followingData) {
             this.followingData = followingData;
+            searchList = followingData;
             notifyDataSetChanged();
         }
     }
@@ -171,5 +173,6 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         }
         throw new IllegalArgumentException("invalid position");
     }
+
 
 }
