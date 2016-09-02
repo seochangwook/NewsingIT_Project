@@ -62,6 +62,19 @@ public class MyInfoFragment extends Fragment {
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
 
+    /**
+     * Folder 정보 수정 시 필요한 정보
+     **/
+    private static final String KEY_FOLDER_IMG = "KEY_FOLDER_IMG";
+    private static final String KEY_FOLDER_LOCKED = "KEY_FOLDER_LOCKED";
+
+    /**
+     * 나의 정보 수정 시 필요한 정보
+     **/
+    private static final String KEY_MY_IMG = "KEY_USER_IMG";
+    private static final String KEY_MY_NAME = "KEY_USER_NAME";
+    private static final String KEY_MY_ABOUTME = "KEY_USER_ABOUTME";
+
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
     TextView profile_name_textview;
@@ -80,6 +93,7 @@ public class MyInfoFragment extends Fragment {
     private FamiliarRefreshRecyclerView folder_recyclerrefreshview;
     private FamiliarRecyclerView folder_recyclerview;
     private ProgressDialog pDialog;
+
     private Callback requestMyInfoListCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -224,12 +238,19 @@ public class MyInfoFragment extends Fragment {
         folder_recyclerrefreshview.setOnItemLongClickListener(new FamiliarRecyclerView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                //폴더를 삭제하기 위해서 폴더의 id값이 필요.//
+                //폴더를 삭제/수정하기 위해서 폴더의 id값이 필요.//
                 int folder_id = folderData.folder_list.get(position).get_folderid();
+                String folder_name = folderData.folder_list.get(position).get_folder_name();
+                String folder_img = folderData.folder_list.get(position).get_folder_imageUrl();
+                boolean folder_locked = folderData.folder_list.get(position).get_folder_private();
 
                 Intent intent = new Intent(getActivity(), EditFolderActivity.class);
 
+                //필요한 정보를 넘긴다.//
                 intent.putExtra(KEY_FOLDER_ID, "" + folder_id);
+                intent.putExtra(KEY_FOLDER_NAME, folder_name);
+                intent.putExtra(KEY_FOLDER_IMG, folder_img);
+                intent.putExtra(KEY_FOLDER_LOCKED, folder_locked);
 
                 startActivity(intent);
 
@@ -267,7 +288,16 @@ public class MyInfoFragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "내 정보 수정하기 화면으로 이동", Toast.LENGTH_SHORT).show();
 
+                String my_name = profile_name_textview.getText().toString();
+                String my_aboutme = profile_my_introduce_textview.getText().toString();
+                String my_imgUrl = profileUrl;
+
                 Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
+
+                //필요한 정보를 넘겨준다.//
+                intent.putExtra(KEY_MY_NAME, my_name);
+                intent.putExtra(KEY_MY_ABOUTME, my_aboutme);
+                intent.putExtra(KEY_MY_IMG, my_imgUrl);
 
                 startActivity(intent);
             }

@@ -21,7 +21,7 @@
         card:cardElevation="4dp">
 
         <ImageView
-            android:id="@+id/folder_create_imageview"
+            android:id="@+id/folder_edit_imageview"
             android:layout_width="@dimen/folder_create_image_layout_width"
             android:layout_height="@dimen/folder_create_image_layout_height"
             android:src="@mipmap/ic_launcher" />
@@ -40,7 +40,7 @@
         android:text="폴더 이름" />
 
     <EditText
-        android:id="@+id/folder_create_name_edittext"
+        android:id="@+id/folder_edit_name_edittext"
         android:layout_width="@dimen/folder_create_name_edittext_layout_width"
         android:layout_height="@dimen/folder_create_name_edittext_layout_height"
         android:layout_marginTop="@dimen/folder_create_name_edittext_margin_top"
@@ -59,7 +59,7 @@
         android:text="대표 이미지 선택" />
 
     <ImageButton
-        android:id="@+id/img_btn_create_folder_select_img"
+        android:id="@+id/img_btn_edit_folder_select_img"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginLeft="290dp"
@@ -80,7 +80,7 @@
         android:text="비공개 설정" />
 
     <Switch
-        android:id="@+id/create_folder_private_switch_button"
+        android:id="@+id/edit_folder_private_switch_button"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginLeft="220dp"

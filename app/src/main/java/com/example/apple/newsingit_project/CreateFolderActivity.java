@@ -67,6 +67,7 @@ public class CreateFolderActivity extends AppCompatActivity {
     File uploadFile = null; //이미지도 하나의 파일이기에 파일로 만든다.//
 
     String path = null;
+
     private Callback requestfoldercreatecallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -79,8 +80,6 @@ public class CreateFolderActivity extends AppCompatActivity {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
-
-
         }
     };
 

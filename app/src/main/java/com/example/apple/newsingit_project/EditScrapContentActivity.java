@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -12,9 +13,16 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,32 +33,121 @@ import mabbas007.tagsedittext.TagsEditText;
 import me.gujun.android.taggroup.TagGroup;
 
 public class EditScrapContentActivity extends AppCompatActivity implements TagsEditText.TagsEditListener {
+    /**
+     * 전달받는 값 설정
+     **/
     private static final String TAG = "Tap_Sample_Activity";
+    private static final String KEY_NEWS_AUTHOR = "KEY_NEWS_AUTHOR";
+    private static final String NEWS_TITLE = "NEWS_TITLE";
+    private static final String KEY_NEWS_WRITE_TIME = "KEY_NEWS_WRITE_TIME";
+    private static final String KEY_NEWS_CONTENT = "KEY_NEWS_CONTENT";
+    private static final String KEY_NEWS_IMGURL = "KEY_NEWS_IMGURL";
+    private static final String KEY_SCRAP_TAGS = "KEY_TAGS";
+    private static final String KEY_SCRAP_CONTENT = "KEY_SCRAP_CONTENT";
+    private static final String KEY_SCRAP_TITLE = "KEY_SCRAP_TITLE";
+    private static final String SCRAP_LOCK = "SCRAP_LOCK";
+    private static final String SCRAP_ID = "SCRAP_ID";
     private static Boolean is_private = false; //기본적으로 비활성화 상태로 구성//
 
     TextInputLayout textInputLayout;
     AppCompatEditText appCompatEditText;
 
-    Button tag_enroll_button; //태그 등록버튼.//
+    Button tag_edit_button; //태그 등록버튼.//
     List<String> tag_array = new ArrayList<>(); //태그배열(원본 에디터에서 가져온 데이터)//
     List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
-
+    /**
+     * Preview관련 위젯
+     **/
+    ImageView news_preview_image;
+    TextView news_preview_title;
+    TextView news_preview_write_time;
+    TextView news_preview_content;
+    TextView news_preview_author;
+    /**
+     * 위젯 관련
+     **/
+    EditText scrap_title_textview;
+    /**
+     * 전달받아서 쓰일 변수 관련
+     **/
+    String scarp_title_str;
+    String scrap_content_str;
+    String scrap_tags[];
+    String scrap_id;
+    boolean scrap_isprivate;
+    String news_previewimage_Url;
+    String news_preview_title_str;
+    String news_preview_writetime_str;
+    String news_preview_author_str;
+    String news_preview_content_str;
+    /**
+     * Network관련 변수
+     **/
+    String tag_data_str[];
+    String str_data_sample_tag_array[];
+    NetworkManager networkManager;
     private TagsEditText mTagsEditText; //태그를 지정할 수 있는 에디트 텍스트//
     private TagGroup mBeautyTagGroup; //태그를 나타낼 스타일 뷰//
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_scrap_content_activity_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        tag_enroll_button = (Button) findViewById(R.id.btn_tag_create);
+        tag_edit_button = (Button) findViewById(R.id.btn_tag_create);
         mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_beauty);
+        appCompatEditText = (AppCompatEditText) findViewById(R.id.text_layout_edittext_edit_scrap);
+        scrap_title_textview = (EditText) findViewById(R.id.editText4);
+
+        /** Preview **/
+        news_preview_image = (ImageView) findViewById(R.id.news_preview_image);
+        news_preview_title = (TextView) findViewById(R.id.news_preview_title);
+        news_preview_write_time = (TextView) findViewById(R.id.news_preview_write_time);
+        news_preview_content = (TextView) findViewById(R.id.news_preview_content);
+        news_preview_author = (TextView) findViewById(R.id.news_preview_author);
 
         setSupportActionBar(toolbar);
 
         setTitle(getResources().getString(R.string.title_activity_edit_scrap_news));
+
+        //정보를 전달받는다.//
+        Intent intent = getIntent();
+
+        scarp_title_str = intent.getStringExtra(KEY_SCRAP_TITLE);
+        scrap_content_str = intent.getStringExtra(KEY_SCRAP_CONTENT);
+        scrap_id = intent.getStringExtra(SCRAP_ID);
+        scrap_isprivate = intent.getBooleanExtra(SCRAP_LOCK, false);
+        scrap_tags = intent.getStringArrayExtra(KEY_SCRAP_TAGS);
+
+        news_preview_title_str = intent.getStringExtra(NEWS_TITLE);
+        news_preview_author_str = intent.getStringExtra(KEY_NEWS_AUTHOR);
+        news_preview_content_str = intent.getStringExtra(KEY_NEWS_CONTENT);
+        news_preview_writetime_str = intent.getStringExtra(KEY_NEWS_WRITE_TIME);
+        news_previewimage_Url = intent.getStringExtra(KEY_NEWS_IMGURL);
+
+        /** 이전정보를 설정 **/
+        news_preview_title.setText(news_preview_title_str);
+        news_preview_author.setText(news_preview_author_str);
+        news_preview_content.setText(news_preview_content_str);
+        news_preview_write_time.setText(news_preview_writetime_str);
+
+        Picasso.with(EditScrapContentActivity.this)
+                .load(news_previewimage_Url)
+                .into(news_preview_image);
+
+        for (int i = 0; i < scrap_tags.length; i++) {
+            tag_array.add(i, scrap_tags[i].toString());
+            tag_layout_array.add("#" + scrap_tags[i].toString());
+        }
+
+        scrap_title_textview.setText(scarp_title_str);
+        appCompatEditText.setText(scrap_content_str);
+        is_private = scrap_isprivate;
+
+        mBeautyTagGroup.setTags(tag_layout_array);
 
         /** 해시테그 설정 **/
         mTagsEditText.setHint("태그를 추가해보세요.");
@@ -86,7 +183,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         textInputLayout.setErrorEnabled(true);
         textInputLayout.setCounterMaxLength(100);
 
-
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -102,9 +198,11 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         textInputLayout.setErrorEnabled(true);
         textInputLayout.setCounterMaxLength(100);
 
-        tag_enroll_button.setOnClickListener(new View.OnClickListener() {
+        tag_edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mBeautyTagGroup.setVisibility(View.VISIBLE);
+
                 Toast.makeText(EditScrapContentActivity.this, "해시 태그 등록", Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < tag_array.size(); i++) {
@@ -135,12 +233,20 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                     mBeautyTagGroup.setTags(tag_layout_array);
 
                     //초기화.//
-                    tag_layout_array.clear();
                     mTagsEditText.setText("");
-                    mTagsEditText.setTags(null); //저장된 태그 내용 초기화.//
+                    mTagsEditText.setTags(null);
                 } else {
                     Log.d("ERROR : ", "태그정보가 없습니다");
                 }
+            }
+        });
+
+        mTagsEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mBeautyTagGroup.setVisibility(View.GONE);
+
+                return false; //false로 해야지 이벤트가 먹질 않는다.//
             }
         });
     }
@@ -148,12 +254,57 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     /**
      * 태그 입력 이벤트 리스너
      **/
-    public void onTagsChanged(Collection<String> tags) {
+    public void onTagsChanged(Collection<String> tags)
+    {
         Log.d(TAG, "Tags changed: ");
         Log.d(TAG, Arrays.toString(tags.toArray()));
 
         //Collection된 태그의 정보를 배열로 이동.//
         tag_array.addAll(Arrays.asList(String.valueOf(tags)));
+    }
+
+    //스크랩 수정//
+    public void EditScrap(String scrap_id) {
+        //저장할 정보들을 모두 불러온다.//
+        String edit_scrap_title = scrap_title_textview.getText().toString();
+        String edit_scrap_content = appCompatEditText.getText().toString();
+
+        //저장될 정보 출력//
+        Log.d("scrap title", edit_scrap_title);
+        Log.d("scrap content", edit_scrap_content);
+        Log.d("scrap id", scrap_id);
+        Log.d("scrap lock", "" + scrap_isprivate);
+
+        //새로 입력된 해시태그//
+        int array_size = tag_array.size();
+
+        if (array_size > 0) {
+            tag_data_str = new String[array_size];
+            str_data_sample_tag_array = new String[array_size];
+
+            int last_index = tag_array.size();
+
+            if (last_index > 0) {
+                String original_tag_str = tag_array.get(last_index - 1).toString().replace("[", ""); //양쪽 공백제거.//
+                original_tag_str = original_tag_str.replace("]", "");
+
+                str_data_sample_tag_array = original_tag_str.split(",");
+            }
+
+            for (int i = 0; i < str_data_sample_tag_array.length; i++) {
+                tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
+            }
+        }
+
+        for (int i = 0; i < tag_data_str.length; i++) {
+            Log.d("new tags", tag_data_str[i]);
+        }
+
+        //기존에 존재하였던 해시태그 배열//
+        for (int i = 0; i < scrap_tags.length; i++) {
+            Log.d("scraps tags", scrap_tags[i].toString());
+        }
+
     }
 
     /**
@@ -166,6 +317,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_edit_scrap, menu); //xml로 작성된 메뉴를 팽창//
+
         return true;
     }
 
@@ -181,26 +333,27 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                 item.setIcon(android.R.drawable.ic_lock_lock);
 
                 is_private = true;
+                scrap_isprivate = true;
             } else if (is_private == true) {
                 Toast.makeText(EditScrapContentActivity.this, "스크랩 해제", Toast.LENGTH_SHORT).show();
 
                 item.setIcon(R.mipmap.sample_unlock_image);
 
                 is_private = false;
+                scrap_isprivate = false;
             }
-        } else if (item_id == R.id.getimage) {
-            Toast.makeText(EditScrapContentActivity.this, "이미지 가져오기", Toast.LENGTH_SHORT).show();
         } else if (item_id == R.id.create_scrap) {
             Toast.makeText(EditScrapContentActivity.this, "수정 완료", Toast.LENGTH_SHORT).show();
 
-            //네트워크로 데이터를 보낸다.//
-
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditScrapContentActivity.this);
-            alertDialog.setMessage("저장하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+            alertDialog.setMessage("수정하시겠습니까?").setCancelable(false).setPositiveButton("확인",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //yes
+                            //네트워크로 데이터를 보낸다.//
+                            EditScrap(scrap_id);
+
                             finish();
                         }
                     }).setNegativeButton("취소", new DialogInterface.OnClickListener() {

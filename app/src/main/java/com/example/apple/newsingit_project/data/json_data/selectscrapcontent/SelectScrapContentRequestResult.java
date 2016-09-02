@@ -11,6 +11,9 @@ public class SelectScrapContentRequestResult {
     private String content;
     private int favorite_cnt;
     private String[] tags;
+    private String nc_ntime;
+    private String nc_author;
+    private String dtime;
 
     public String getNc_title() {
         return this.nc_title;
@@ -90,5 +93,29 @@ public class SelectScrapContentRequestResult {
 
     public void setTags(String[] tags) {
         this.tags = tags;
+    }
+
+    public String getNc_ntime() {
+        return this.nc_ntime;
+    }
+
+    public void setNc_ntime(String nc_time) {
+        this.nc_ntime = nc_time;
+    }
+
+    public String getNc_author() {
+        return this.nc_author;
+    }
+
+    public void setNc_author(String nc_author) {
+        this.nc_author = nc_author;
+    }
+
+    public String getDtime() {
+        return this.dtime;
+    }
+
+    public void setDtime(String dtime) {
+        this.dtime = dtime;
     }
 }

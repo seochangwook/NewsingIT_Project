@@ -1,10 +1,7 @@
 package com.example.apple.newsingit_project;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,11 +20,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,7 +65,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
      * Preview관련 위젯
      **/
     ImageView news_preview_image;
-    ImageView my_scrap_image;
     TextView news_preview_title;
     TextView news_preview_write_time;
     TextView news_preview_content;
@@ -87,8 +82,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     String news_preview_author_str;
 
     String str_data_array[];
-    File uploadFile = null; //이미지도 하나의 파일이기에 파일로 만든다.//
-    String path = null;
     String tag_data_str[];
     String str_data_sample_tag_array[];
     NetworkManager networkManager;
@@ -122,7 +115,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         tag_enroll_button = (Button) findViewById(R.id.btn_tag_create);
         mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_beauty);
-        my_scrap_image = (ImageView) findViewById(R.id.scrap_my_imageview);
         scrap_title_edittext = (EditText) findViewById(R.id.editText4);
         appCompatEditText = (TextInputEditText) findViewById(R.id.text_layout_edittext_create_scrap);
 
@@ -235,36 +227,22 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
                     mBeautyTagGroup.setTags(tag_layout_array);
 
                     //초기화.//
-                    tag_layout_array.clear();
                     mTagsEditText.setText("");
-                    mTagsEditText.setTags(null); //저장된 태그 내용 초기화.//
+                    mTagsEditText.setTags(null);
                 } else {
                     Log.d("ERROR : ", "태그정보가 없습니다");
                 }
             }
         });
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        mTagsEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mBeautyTagGroup.setVisibility(View.GONE);
 
-        if (requestCode == RC_SINGLE_IMAGE) {
-            if (resultCode == RESULT_OK) {
-                Uri fileUri = data.getData();
-                Cursor c = getContentResolver().query(fileUri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
-                if (c.moveToNext()) {
-                    path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
-                    Log.i("Single", "path : " + path);
-
-                    uploadFile = new File(path);
-
-                    Glide.with(this)
-                            .load(uploadFile)
-                            .into(my_scrap_image); //into로 보낼 위젯 선택.//
-                }
+                return false; //false로 해야지 이벤트가 먹질 않는다.//
             }
-        }
+        });
     }
 
     /**
@@ -310,13 +288,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
                 is_private = false; //해제 상태//
             }
-        } else if (item_id == R.id.getimage) {
-            Toast.makeText(CreateScrapContentActivity.this, "이미지 가져오기", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            intent.setType("image/*");
-            startActivityForResult(intent, RC_SINGLE_IMAGE);
-
         } else if (item_id == R.id.create_scrap)
         {
             Toast.makeText(CreateScrapContentActivity.this, "생성 완료", Toast.LENGTH_SHORT).show();
@@ -364,12 +335,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
             multipart_builder.addFormDataPart("locked", "1"); //true//
         } else if (is_private == false) {
             multipart_builder.addFormDataPart("locked", "0"); //false//
-        }
-
-        //이미지 처리//
-        if (uploadFile != null) {
-            multipart_builder.addFormDataPart("img", uploadFile.getName(),
-                    RequestBody.create(mediaType, uploadFile));
         }
 
         //태그처리//

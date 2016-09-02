@@ -4,7 +4,7 @@ public class ScrapContentListRequestErrorResults {
     private String nc_title;
     private String nc_img_url;
     private String nc_dtime;
-    private boolean lock;
+    private boolean locked;
     private int id;
     private String title;
     private String nc_author;
@@ -36,11 +36,11 @@ public class ScrapContentListRequestErrorResults {
     }
 
     public boolean getLock() {
-        return this.lock;
+        return this.locked;
     }
 
     public void setLock(boolean lock) {
-        this.lock = lock;
+        this.locked = lock;
     }
 
     public int getId() {

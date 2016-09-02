@@ -13,11 +13,4 @@
         android:orderInCategory="102"
         android:title=""
         app:showAsAction="always" />
-
-    <item
-        android:id="@+id/getimage"
-        android:icon="@android:drawable/ic_menu_camera"
-        android:orderInCategory="100"
-        android:title=""
-        app:showAsAction="always" />
 </menu>

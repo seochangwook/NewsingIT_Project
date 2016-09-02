@@ -33,10 +33,14 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+    private static final String SCRAP_LOCK = "SCRAP_LOCK";
+    private static final String SCRAP_ID = "SCRAP_ID";
+
 
     String folder_name;
     String is_user_my;
     String folder_id;
+    boolean scrap_private;
 
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
@@ -100,6 +104,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
                     for (int i = 0; i < size; i++) {
                         UserScrapContentData newUserScrapCotentData = new UserScrapContentData();
+
                         newUserScrapCotentData.setTitle(scrapContentList.get(i).getTitle());
                         newUserScrapCotentData.setNcTitle(scrapContentList.get(i).getNc_title());
                         newUserScrapCotentData.setNcImgUrl(scrapContentList.get(i).getNc_img_url());
@@ -176,6 +181,8 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String userSelect = userScrapContentData.userScrapContentDataList.get(position).getNcTitle().toString();
+                boolean scrap_isprivate = userScrapContentData.userScrapContentDataList.get(position).getLock();
+
                 Toast.makeText(UserScrapContentListActivity.this, "" + userSelect, Toast.LENGTH_SHORT).show();
 
                 //클릭 시 개별 스크랩 콘텐츠로 이동//
@@ -189,7 +196,10 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                     intent.putExtra("KEY_USER_IDENTIFY_FLAG", "0");
                 }
 
-                intent.putExtra("SCRAP_ID", userScrapContentData.userScrapContentDataList.get(position).getId());
+                //필요한 값을 정의한다.//
+                intent.putExtra(SCRAP_ID, userScrapContentData.userScrapContentDataList.get(position).getId());
+                intent.putExtra(SCRAP_LOCK, scrap_isprivate);
+
                 // intent.putExtra("SCRAP_AUTHOR", userScrapContentData.userScrapContentDataList.get(position).getNcAuthor());
 
                 startActivity(intent);

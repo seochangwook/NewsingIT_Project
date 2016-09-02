@@ -49,12 +49,12 @@
 
         <ImageView
             android:id="@+id/img_scrap_nc"
-        android:layout_width="match_parent"
+            android:layout_width="match_parent"
             android:layout_height="170dp"
             android:layout_alignLeft="@+id/text_scrap_nccontent"
             android:layout_alignStart="@+id/text_scrap_nccontent"
-        android:layout_below="@+id/text_scrap_press"
-        android:layout_marginTop="10dp"
+            android:layout_below="@+id/text_scrap_press"
+            android:layout_marginTop="10dp"
             android:src="@mipmap/ic_launcher" />
 
 
@@ -63,7 +63,7 @@
             style="@style/TagGroup.Beauty_Red"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_below="@+id/draw_line_3"
+            android:layout_below="@+id/draw_line_2"
             android:layout_marginLeft="5dp"
             app:atg_inputHint="태그를 등록해주세요" />
 
@@ -109,24 +109,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_scrap_my_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/line_draw" />
-
-        <ImageView
-            android:id="@+id/img_scrap_user_content"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignLeft="@+id/text_scrap_my_content"
-            android:layout_alignStart="@+id/text_scrap_my_content"
-            android:layout_below="@+id/draw_line_2"
-            android:src="@mipmap/logo_image" />
-
-        <TextView
-            android:id="@+id/draw_line_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_scrap_user_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/line_draw" />

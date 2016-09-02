@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,9 +43,16 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class EditFolderActivity extends AppCompatActivity {
+    /**
+     * Intent 관련 변수
+     **/
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
-    private static final int RC_SINGLE_IMAGE = 2;
+    private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
+    private static final String KEY_FOLDER_IMG = "KEY_FOLDER_IMG";
+    private static final String KEY_FOLDER_LOCKED = "KEY_FOLDER_LOCKED";
 
+    /** startActivityForResult요청 값 **/
+    private static final int RC_SINGLE_IMAGE = 2;
 
     ImageButton image_select_button;
     Switch private_select_switch;
@@ -61,13 +70,14 @@ public class EditFolderActivity extends AppCompatActivity {
     TextView deleteView;
 
     String folder_id;
-    String name;
+    String folder_name;
     boolean is_private;
-
+    String folder_imageUrl;
 
     File uploadFile = null; //이미지도 하나의 파일이기에 파일로 만든다.//
     String path = null;
     ImageView select_image_thumbnail;
+    ImageView folder_imageview;
 
     /**
      * Network관련 변수
@@ -111,17 +121,20 @@ public class EditFolderActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
-        image_select_button = (ImageButton) findViewById(R.id.img_btn_create_folder_select_img);
-        private_select_switch = (Switch) findViewById(R.id.create_folder_private_switch_button);
+        image_select_button = (ImageButton) findViewById(R.id.img_btn_edit_folder_select_img);
+        private_select_switch = (Switch) findViewById(R.id.edit_folder_private_switch_button);
         deleteView = (TextView) findViewById(R.id.delete_folder);
-        nameView = (TextView) findViewById(R.id.folder_create_name_edittext);
+        nameView = (TextView) findViewById(R.id.folder_edit_name_edittext);
+        folder_imageview = (ImageView) findViewById(R.id.folder_edit_imageview);
 
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
 
         folder_id = intent.getStringExtra(KEY_FOLDER_ID);
-        //name = nameView.getText().toString();
+        folder_name = intent.getStringExtra(KEY_FOLDER_NAME);
+        folder_imageUrl = intent.getStringExtra(KEY_FOLDER_IMG);
+        is_private = intent.getBooleanExtra(KEY_FOLDER_LOCKED, false);
 
         /** Popup 화면 설정 **/
         image_select_popup_view = getLayoutInflater().inflate(R.layout.image_select_popup, null);
@@ -143,6 +156,15 @@ public class EditFolderActivity extends AppCompatActivity {
         /** TitleBar 설정 **/
         setTitle(getResources().getString(R.string.title_activity_folder_create));
 
+        //사용자에게 기존 폴더 정보를 보여줌//
+        nameView.setText(folder_name);
+
+        Picasso.with(this) //profileUrl//
+                .load(folder_imageUrl) //url//
+                .into(folder_imageview);
+
+        private_select_switch.setChecked(is_private);
+
         /** HomeAsUpEnableButton 관련 **/
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -152,6 +174,18 @@ public class EditFolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        //락 스위치에 대한 이벤트 처리//
+        private_select_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean is_check) {
+                if (is_check == true) {
+                    is_private = true;
+                } else if (is_check == false) {
+                    is_private = false;
+                }
             }
         });
 
@@ -177,7 +211,7 @@ public class EditFolderActivity extends AppCompatActivity {
                 //팝업창을 띄운다.//
                 Toast.makeText(EditFolderActivity.this, "이미지를 선택합니다.", Toast.LENGTH_SHORT).show();
 
-                image_select_popup.showAtLocation(findViewById(R.id.img_btn_create_folder_select_img), Gravity.CENTER, 0, 0);
+                image_select_popup.showAtLocation(findViewById(R.id.img_btn_edit_folder_select_img), Gravity.CENTER, 0, 0);
             }
         });
 
@@ -221,15 +255,6 @@ public class EditFolderActivity extends AppCompatActivity {
                 .addPathSegment("categories")
                 .addPathSegment(folderId);
 
-//
-//
-//        RequestBody body = new FormBody.Builder()
-//                .add("name", name)
-//                .add("img", img)
-//                .add("locked", locked)
-//                .build();
-//
-
         /** 파일 전송이므로 MultipartBody 설정 **/
         MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -249,6 +274,8 @@ public class EditFolderActivity extends AppCompatActivity {
             multipart_builder.addFormDataPart("img", uploadFile.getName(),
                     RequestBody.create(mediaType, uploadFile));
         }
+
+        //이미지가 없으면 이미지 값을 보내지 않는다.//
 
         RequestBody body = multipart_builder.build();
 
