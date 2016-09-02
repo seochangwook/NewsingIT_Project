@@ -191,23 +191,23 @@ public class AlarmListActivity extends AppCompatActivity {
         }
     }
 
-    private void initDummyData() {
-        String nameList[] = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
-        String contentList[] = {"님이 당신의 게시물을 좋아합니다", "님이 당신의 게시물을 좋아합니다", "님이 당신의 게시물을 좋아합니다"
-                , "님이 당신의 게시물을 좋아합니다", "님이 당신을 팔로우 하였습니다", "님이 새 스크랩을 하였습니다"
-                , "님이 당신의 게시물을 좋아합니다"};
-        String dateList[] = {"1시간 전", "1시간 전", "2시간 전", "2시간 전", "4시간 전", "6시간 전", "9시간 전"};
-        String acaseList[] = {"1", "1", "1", "1", "2", "3", "1"};
-
-        for (int i = 0; i < 7; i++) {
-            AlarmData new_alarmData = new AlarmData();
-            new_alarmData.name = nameList[i];
-            new_alarmData.content = contentList[i];
-            new_alarmData.date = dateList[i];
-            new_alarmData.acase = acaseList[i];
-
-            alarmData.alarmDataList.add(new_alarmData);
-        }
-        mAdapter.setAlarmDataLIist(alarmData);
-    }
+//    private void initDummyData() {
+//        String nameList[] = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
+//        String contentList[] = {"님이 당신의 게시물을 좋아합니다", "님이 당신의 게시물을 좋아합니다", "님이 당신의 게시물을 좋아합니다"
+//                , "님이 당신의 게시물을 좋아합니다", "님이 당신을 팔로우 하였습니다", "님이 새 스크랩을 하였습니다"
+//                , "님이 당신의 게시물을 좋아합니다"};
+//        String dateList[] = {"1시간 전", "1시간 전", "2시간 전", "2시간 전", "4시간 전", "6시간 전", "9시간 전"};
+//        String acaseList[] = {"1", "1", "1", "1", "2", "3", "1"};
+//
+//        for (int i = 0; i < 7; i++) {
+//            AlarmData new_alarmData = new AlarmData();
+//            new_alarmData.name = nameList[i];
+//            new_alarmData.content = contentList[i];
+//            new_alarmData.date = dateList[i];
+//            new_alarmData.acase = acaseList[i];
+//
+//            alarmData.alarmDataList.add(new_alarmData);
+//        }
+//        mAdapter.setAlarmDataLIist(alarmData);
+//    }
 }

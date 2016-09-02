@@ -4,14 +4,14 @@
     tools:context="com.example.apple.newsingit_project.MainActivity">
     <item
         android:id="@+id/keyword_menu_item"
-        android:icon="@mipmap/sample_key"
+        android:icon="@mipmap/ic_key"
         android:orderInCategory="101"
         android:title=""
         app:showAsAction="always" />
 
     <item
         android:id="@+id/search_menu_item"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@mipmap/ic_search"
         android:orderInCategory="100"
         android:title=""
         app:showAsAction="always" />

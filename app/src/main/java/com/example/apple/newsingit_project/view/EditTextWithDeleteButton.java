@@ -8,12 +8,15 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 
@@ -21,10 +24,13 @@ public class EditTextWithDeleteButton extends LinearLayout {
 	protected EditText editText;
 	protected ImageButton clearTextButton;
 	TextChangedListener editTextListener = null;
+	TextView.OnEditorActionListener setOnEditorActionListener = null;
+
 	public EditTextWithDeleteButton(Context context) {
 		super(context);
 		LayoutInflater.from(context).inflate(R.layout.activity_search_tab, this);
 	}
+
 	public EditTextWithDeleteButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initViews(context, attrs);
@@ -32,6 +38,10 @@ public class EditTextWithDeleteButton extends LinearLayout {
 	public EditTextWithDeleteButton(Context context, AttributeSet attrs, int defStyle) {
 		this(context, attrs);
 		initViews(context, attrs);
+	}
+
+	public void addEditorActionListener(TextView.OnEditorActionListener listener) {
+		this.setOnEditorActionListener = listener;
 	}
 
 	public void addTextChangedListener(TextChangedListener listener) {
@@ -48,7 +58,7 @@ public class EditTextWithDeleteButton extends LinearLayout {
 			hintText = a.getString(R.styleable.EditTextWithDeleteButton_hintText);
 			deleteButtonRes = a.getResourceId(
 					R.styleable.EditTextWithDeleteButton_deleteButtonRes,
-					R.mipmap.text_field_clear_btn);
+					R.mipmap.ic_x_cancel);
 
 
 		} finally {
@@ -121,9 +131,17 @@ public class EditTextWithDeleteButton extends LinearLayout {
 		editText.setHorizontallyScrolling(false);
 		editText.setVerticalScrollBarEnabled(true);
 		editText.setGravity(Gravity.LEFT);
+		editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 		editText.setTextColor(getResources().getColor(R.color.colorAccent));
 		editText.setBackground(null);
 		editText.setHint(hintText);
+
+		editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+				return false;
+			}
+		});
 
 		return editText;
 	}

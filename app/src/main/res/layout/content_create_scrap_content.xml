@@ -132,6 +132,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="430dp"
             android:src="@mipmap/tag_sample_image" />
+            android:layout_marginTop="510dp"
+            android:src="@mipmap/ic_tag" />
 
         <Button
             android:id="@+id/btn_tag_create"

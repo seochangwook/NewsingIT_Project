@@ -177,24 +177,24 @@ public class SearchNewsFragment extends Fragment {
             pDialog.dismiss();
     }
 
-    private void initDummyData() {
-
-        String[] titleList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
-        String[] contentList = {"VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-                , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?",
-                "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-                , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"};
-        String[] dateList = {"2016.08.20 16:10","2016.08.15 16:10","2016.08.14 16:10","2016.08.13 16:10"
-                                ,"2016.08.10 16:10","2016.08.09 16:10"};
-
-        for (int i = 0; i < 5; i++) {
-            SearchNewsData new_searchNewsData = new SearchNewsData();
-            new_searchNewsData.title = titleList[i];
-            new_searchNewsData.author = contentList[i];
-            new_searchNewsData.date = dateList[i];
-            searchNewsData.searchNewsDataArrayList.add(new_searchNewsData);
-        }
-        mAdapter.setSearchNewsData(searchNewsData);
-    }
+//    private void initDummyData() {
+//
+//        String[] titleList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
+//        String[] contentList = {"VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
+//                , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?",
+//                "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
+//                , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"};
+//        String[] dateList = {"2016.08.20 16:10","2016.08.15 16:10","2016.08.14 16:10","2016.08.13 16:10"
+//                                ,"2016.08.10 16:10","2016.08.09 16:10"};
+//
+//        for (int i = 0; i < 5; i++) {
+//            SearchNewsData new_searchNewsData = new SearchNewsData();
+//            new_searchNewsData.title = titleList[i];
+//            new_searchNewsData.author = contentList[i];
+//            new_searchNewsData.date = dateList[i];
+//            searchNewsData.searchNewsDataArrayList.add(new_searchNewsData);
+//        }
+//        mAdapter.setSearchNewsData(searchNewsData);
+//    }
 
 }

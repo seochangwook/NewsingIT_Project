@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         //메뉴에 들어갈 아이템 리스트 정의.//
         ArrayList<BottomMenu.BottomMenuItem> items = new ArrayList<>();
 
-        BottomMenu.BottomMenuItem mainnews_list_option = new BottomMenu.BottomMenuItem(R.id.bottom_menu_mainactivity, R.drawable.ic_subscriptions_black_24dp, R.color.bottom_bar_unselected, R.color.bottom_bar_selected);
+        BottomMenu.BottomMenuItem mainnews_list_option = new BottomMenu.BottomMenuItem(R.id.bottom_menu_mainactivity, R.mipmap.ic_top_news_on, R.color.bottom_bar_unselected, R.color.bottom_bar_selected);
         BottomMenu.BottomMenuItem my_info_option = new BottomMenu.BottomMenuItem(R.id.bottom_bar_my_info, R.mipmap.sample_menu_image, R.color.bottom_bar_unselected, R.color.bottom_bar_selected);
 
         items.add(mainnews_list_option);

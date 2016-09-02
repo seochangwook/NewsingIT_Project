@@ -112,6 +112,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         //파카소 라이브러리를 이용하여 이미지 로딩//
         Picasso.with(this)
                 .load(my_imgUrl)
+                .load(R.mipmap.profile_hambur)
                 .transform(new CropCircleTransformation())
                 .into(profile_fix_imageview);
 

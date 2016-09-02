@@ -278,13 +278,13 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
             if (is_private == false) {
                 Toast.makeText(CreateScrapContentActivity.this, "스크랩 잠금", Toast.LENGTH_SHORT).show();
 
-                item.setIcon(android.R.drawable.ic_lock_lock);
+                item.setIcon(R.mipmap.ic_lock);
 
                 is_private = true; //잠금상태.//
             } else if (is_private == true) {
                 Toast.makeText(CreateScrapContentActivity.this, "스크랩 해제", Toast.LENGTH_SHORT).show();
 
-                item.setIcon(R.mipmap.sample_unlock_image);
+                item.setIcon(R.mipmap.ic_lock_open);
 
                 is_private = false; //해제 상태//
             }

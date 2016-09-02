@@ -29,7 +29,7 @@ import okhttp3.Response;
  */
 public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    FollowingData followingData;
+    FollowingData followingData, searchList;
     Context context;
 
     NetworkManager networkManager;
@@ -52,6 +52,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     public FollowingListAdapter(Context context) {
         this.context = context;
         followingData = new FollowingData();
+        searchList = new FollowingData();
 
     }
 
@@ -105,6 +106,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     public void setFollowingData(FollowingData followingData){
         if (this.followingData != followingData) {
             this.followingData = followingData;
+            searchList = followingData;
             notifyDataSetChanged();
         }
     }
@@ -137,11 +139,11 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 if (flag) {//true이면 선택한 유저를 팔로우 한 상태//
                     //팔로잉 한 상태에서는 팔로우 해제//
                     followingViewHolder.btnFollowing.setText("팔로우 해제");
-                    followingViewHolder.btnFollowing.setBackgroundColor(context.getResources().getColor(R.color.follow_true));
+                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_do));
                 } else {//false이면 선택한 유저를 팔로우 하지 않은 상태//
                     //팔로잉 안 한 상태에서 팔로우 생성//
                     followingViewHolder.btnFollowing.setText("팔로우");
-                    followingViewHolder.btnFollowing.setBackgroundColor(context.getResources().getColor(R.color.follow_false));
+                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_cancel));
                 }
 
                 followingViewHolder.btnFollowing.setOnClickListener(new View.OnClickListener() {
@@ -171,5 +173,6 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         }
         throw new IllegalArgumentException("invalid position");
     }
+
 
 }

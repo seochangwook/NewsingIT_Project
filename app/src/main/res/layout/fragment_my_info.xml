@@ -12,7 +12,7 @@
         android:layout_height="@dimen/imageview_height"
         android:layout_marginLeft="@dimen/imageview_layout_margin_left"
         android:layout_marginTop="@dimen/imageview_layout_margin_top"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/profile_hambur" />
 
     <TextView
         android:id="@+id/profile_name_textview"

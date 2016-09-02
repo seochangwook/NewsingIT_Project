@@ -40,7 +40,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:singleLine="true"
-        android:src="@mipmap/sample_drawable_image" />
+
+        android:src="@mipmap/ic_more" />
 
     <TextView
         android:id="@+id/text_scrap_list_nctitle"

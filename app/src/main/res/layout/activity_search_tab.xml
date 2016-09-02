@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
@@ -24,18 +23,28 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <com.example.apple.newsingit_project.view.EditTextWithDeleteButton
-                android:id="@+id/edit_text"
+            <SearchView
+                android:id="@+id/search_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/black_color"
-                android:textCursorDrawable="@null"
-                custom:deleteButtonRes="@mipmap/text_field_clear_btn"
-                custom:hintText="검색">
+                android:closeIcon="@mipmap/ic_x_cancel"
+                android:queryHint="검색"
+                android:searchIcon="@mipmap/ic_search"
+                android:textColor="@color/black_color" />
 
-            </com.example.apple.newsingit_project.view.EditTextWithDeleteButton>
+            <!--<com.example.apple.newsingit_project.view.EditTextWithDeleteButton-->
+            <!--android:id="@+id/edit_text"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/round"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:textColor="@color/black_color"-->
+            <!--android:textCursorDrawable="@null"-->
+            <!--custom:deleteButtonRes="@mipmap/ic_x_cancel"-->
+            <!--custom:hintText="검색">-->
+
+            <!--</com.example.apple.newsingit_project.view.EditTextWithDeleteButton>-->
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout

@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/lock_scrap"
-        android:icon="@android:drawable/ic_lock_lock"
+        android:icon="@mipmap/ic_lock_open"
         android:orderInCategory="101"
         android:title=""
         app:showAsAction="always" />
     <item
         android:id="@+id/create_scrap"
-        android:icon="@android:drawable/checkbox_on_background"
+        android:icon="@mipmap/ic_check_box"
         android:orderInCategory="102"
         android:title=""
         app:showAsAction="always" />
