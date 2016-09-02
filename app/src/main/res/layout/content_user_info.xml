@@ -12,7 +12,7 @@
         android:layout_height="@dimen/imageview_height"
         android:layout_marginLeft="@dimen/imageview_layout_margin_left"
         android:layout_marginTop="@dimen/imageview_layout_margin_top"
-        android:src="@drawable/facebook_people_image" />
+        android:src="@mipmap/profile_hambur" />
 
     <TextView
         android:id="@+id/user_profile_name_textview"

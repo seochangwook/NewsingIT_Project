@@ -63,8 +63,9 @@
             style="@style/TagGroup.Beauty_Red"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_alignLeft="@+id/text_scrap_date"
+            android:layout_alignStart="@+id/text_scrap_date"
             android:layout_below="@+id/draw_line_3"
-            android:layout_marginLeft="5dp"
             app:atg_inputHint="태그를 등록해주세요" />
 
     <TextView
@@ -151,6 +152,15 @@
             android:layout_marginRight="30dp"
             android:text="좋아요"
             android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/img_scrap_user_content"
+            android:layout_alignStart="@+id/img_scrap_user_content"
+            android:layout_alignTop="@+id/tag_group_scrap_beauty"
+            android:src="@mipmap/ic_tag" />
 
     </RelativeLayout>
 </ScrollView>

@@ -38,10 +38,11 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
         folder_private = folderData.get_folder_private();
 
         if (folder_private == false) {
-            folder_private_button.setBackgroundResource(android.R.drawable.ic_partial_secure);
-        } else if (folder_private == true) {
-            folder_private_button.setBackgroundResource(android.R.drawable.ic_secure);
+            folder_private_button.setBackgroundResource(R.mipmap.btn_smalllock);
         }
+//        else if (folder_private == true) {
+//            folder_private_button.setBackgroundResource(android.R.drawable.ic_secure);
+//        }
 
         //폴더 정보 불러오기//
         folder_name_textview.setText(folderData.get_folder_name());

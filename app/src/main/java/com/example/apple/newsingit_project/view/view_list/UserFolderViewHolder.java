@@ -40,7 +40,8 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
 
         if (user_folder_private == false) //공개 처리일 경우//
         {
-            user_folder_private_button.setBackgroundResource(android.R.drawable.ic_partial_secure);
+
+            user_folder_private_button.setVisibility(View.GONE);
 
             folder_imgUrl = userfolderData.get_folder_imageUrl();
 
@@ -52,7 +53,6 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
 
         } else if (user_folder_private == true) //비공개 처리일 경우//
         {
-            user_folder_private_button.setVisibility(View.GONE);
 
             folder_imgUrl = userfolderData.get_folder_imageUrl();
 

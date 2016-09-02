@@ -136,11 +136,16 @@ public class FollowingListActivity extends AppCompatActivity {
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.following_rv_list);
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
-        recyclerview.addHeaderView(headerView);
-        mAdapter = new FollowingListAdapter(this);
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_following_emptyview, null);
+
+        recyclerview.setEmptyView(emptyview, true);
+
+        recyclerview.addHeaderView(headerView);
+
+        mAdapter = new FollowingListAdapter(this);
+
 
         recyclerview.setAdapter(mAdapter);
 

@@ -29,7 +29,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //파카소 라이브러리를 이용하여 이미지 로딩//
         Picasso.with(this)
-                .load(R.mipmap.seochangwook)
+                .load(R.mipmap.profile_hambur)
                 .transform(new CropCircleTransformation())
                 .into(profile_fix_imageview);
 

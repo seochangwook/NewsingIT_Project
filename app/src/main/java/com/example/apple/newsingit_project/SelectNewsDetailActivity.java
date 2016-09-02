@@ -472,6 +472,24 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
             scrap_folder_popup.showAtLocation(findViewById(R.id.scrap_news), Gravity.BOTTOM, 0, 0);
         }
+        if (item_id == R.id.share_news) {
+            Toast.makeText(SelectNewsDetailActivity.this, "뉴스 공유 하기", Toast.LENGTH_SHORT).show();
+
+            Intent msg = new Intent(Intent.ACTION_SEND);
+
+            msg.addCategory(Intent.CATEGORY_DEFAULT);
+
+            msg.putExtra(Intent.EXTRA_SUBJECT, "서창욱");
+
+            msg.putExtra(Intent.EXTRA_TEXT, "코딩이 취미 - 뉴스 스크랩");
+
+            msg.putExtra(Intent.EXTRA_TITLE, "제목");
+
+            msg.setType("text/plain");
+
+            startActivity(Intent.createChooser(msg, "공유"));
+
+        }
 
         return super.onOptionsItemSelected(item);
     }

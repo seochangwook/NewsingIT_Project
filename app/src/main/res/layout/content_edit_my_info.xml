@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/facebook_people_image" />
+        android:src="@mipmap/profile_hambur" />
 
     <TextView
         android:id="@+id/textView5"
@@ -58,7 +58,7 @@
         android:layout_marginLeft="220dp"
         android:layout_marginTop="140dp"
         android:background="@color/button_transparent_background"
-        android:src="@android:drawable/ic_menu_camera" />
+        android:src="@mipmap/btn_profileedit" />
 
     <Button
         android:id="@+id/enroll_fix_button"

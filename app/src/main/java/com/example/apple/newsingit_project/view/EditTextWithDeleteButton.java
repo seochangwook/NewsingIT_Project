@@ -48,7 +48,7 @@ public class EditTextWithDeleteButton extends LinearLayout {
 			hintText = a.getString(R.styleable.EditTextWithDeleteButton_hintText);
 			deleteButtonRes = a.getResourceId(
 					R.styleable.EditTextWithDeleteButton_deleteButtonRes,
-					R.mipmap.text_field_clear_btn);
+					R.mipmap.ic_x_cancel);
 
 
 		} finally {

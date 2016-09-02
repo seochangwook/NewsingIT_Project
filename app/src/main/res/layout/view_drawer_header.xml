@@ -51,6 +51,6 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView4"
         android:background="@color/button_transparent_background"
-        android:src="@android:drawable/ic_popup_reminder" />
+        android:src="@mipmap/ic_hambu_alarm" />
 
 </RelativeLayout>

@@ -96,9 +96,9 @@ public class NoticeAdapter extends BaseExpandableListAdapter {
 
         //group indicator를 custom한다//
         if(expanded){ //group이 펼쳐졌을 때 indicator 이미지//
-            imageView.setImageResource(android.R.drawable.arrow_up_float);
+            imageView.setImageResource(R.mipmap.ic_arrow);
         }else {  //group이 닫혔을 때 indicator 이미지//
-            imageView.setImageResource(android.R.drawable.arrow_down_float);
+            imageView.setImageResource(R.mipmap.ic_arrow_dropdown);
         }
 
         return view;

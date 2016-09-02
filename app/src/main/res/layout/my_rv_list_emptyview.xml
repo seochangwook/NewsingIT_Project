@@ -9,7 +9,7 @@
         android:layout_height="100dp"
         android:layout_marginLeft="135dp"
         android:layout_marginTop="40dp"
-        android:src="@mipmap/sample_warring_image" />
+        android:src="@mipmap/ic_folder_plus" />
 
     <TextView
         android:layout_width="wrap_content"

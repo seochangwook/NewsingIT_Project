@@ -178,13 +178,13 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
             if (is_private == false) {
                 Toast.makeText(EditScrapContentActivity.this, "스크랩 잠금", Toast.LENGTH_SHORT).show();
 
-                item.setIcon(android.R.drawable.ic_lock_lock);
+                item.setIcon(R.mipmap.ic_lock);
 
                 is_private = true;
             } else if (is_private == true) {
                 Toast.makeText(EditScrapContentActivity.this, "스크랩 해제", Toast.LENGTH_SHORT).show();
 
-                item.setIcon(R.mipmap.sample_unlock_image);
+                item.setIcon(R.mipmap.ic_lock_open);
 
                 is_private = false;
             }
