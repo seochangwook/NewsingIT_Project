@@ -100,7 +100,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("scraps")
                 .addQueryParameter("category", folder_id)
                 .addQueryParameter("page", "1")
@@ -257,7 +257,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("search")
                 .addQueryParameter("target", "4") //4는 태그상세 검색//
                 .addQueryParameter("word", folder_name) //word는 검색단어(태그 상세검색 시 필요)//

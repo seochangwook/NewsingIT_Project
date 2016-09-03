@@ -319,7 +319,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("users")
                 .addPathSegment(user_id)
                 .addPathSegment("categories");
@@ -350,7 +350,7 @@ public class UserInfoActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.host(getResources().getString(R.string.server_domain));
         builder.addPathSegment("users");
         builder.addPathSegment(user_id);
 

@@ -57,6 +57,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
             position -= alarmData.alarmDataList.size();
         }
+
         throw new IllegalArgumentException("invalid position");
 
     }

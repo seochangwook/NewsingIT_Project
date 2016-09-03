@@ -71,4 +71,7 @@
     <string name="facebook_app_id">294467057584893</string>
     <string name="title_activity_edit">EditActivity</string>
 
+    <!-- Server domain -->
+    <string name="server_domain">ec2-52-78-124-76.ap-northeast-2.compute.amazonaws.com</string>
+
 </resources>

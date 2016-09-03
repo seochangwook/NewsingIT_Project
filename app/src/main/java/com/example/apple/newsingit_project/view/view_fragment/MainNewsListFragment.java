@@ -576,7 +576,7 @@ public class MainNewsListFragment extends Fragment {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.host(getResources().getString(R.string.server_domain));
         builder.addPathSegment("newscontents");
 
         /** Request 설정 **/

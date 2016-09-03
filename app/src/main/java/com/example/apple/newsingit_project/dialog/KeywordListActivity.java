@@ -33,6 +33,7 @@ public class KeywordListActivity extends Activity {
 
     //전달할 값의 키//
     private static final String KEY_KEYWORD = "KEY_KEYWORD";
+
     KeywordListAdapter mAdapter;
     KeywordData keywordData;
     /**
@@ -141,7 +142,7 @@ public class KeywordListActivity extends Activity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의//
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com"); //호스트를 설정.//
+        builder.host(getResources().getString(R.string.server_domain)); //호스트를 설정.//
         builder.addPathSegment("keywords");
 
         /** Request 설정 **/

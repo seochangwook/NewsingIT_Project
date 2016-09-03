@@ -316,7 +316,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.host(getResources().getString(R.string.server_domain));
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //나의 폴더 리스트이기에 me//
         builder.addPathSegment("categories");
@@ -372,7 +372,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com");
+        builder.host(getResources().getString(R.string.server_domain));
         builder.addPathSegment("newscontents");
         builder.addPathSegment(news_id);
 

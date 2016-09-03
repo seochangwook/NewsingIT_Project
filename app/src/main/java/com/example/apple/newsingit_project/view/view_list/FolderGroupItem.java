@@ -1,5 +1,7 @@
 package com.example.apple.newsingit_project.view.view_list;
 
+import com.example.apple.newsingit_project.data.view_data.FolderItem;
+
 import java.util.ArrayList;
 import java.util.List;
 

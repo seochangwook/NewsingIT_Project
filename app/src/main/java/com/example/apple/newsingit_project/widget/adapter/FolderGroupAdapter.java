@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.data.view_data.FolderItem;
 import com.example.apple.newsingit_project.view.view_list.FolderGroupItem;
-import com.example.apple.newsingit_project.view.view_list.FolderItem;
 
 import java.util.ArrayList;
 import java.util.List;

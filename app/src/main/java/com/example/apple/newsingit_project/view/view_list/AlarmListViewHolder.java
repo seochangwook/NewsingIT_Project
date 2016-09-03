@@ -18,8 +18,6 @@ public class AlarmListViewHolder extends RecyclerView.ViewHolder {
     TextView nameView, contentView, dateView;
     ImageView profileView;
 
-
-
     public AlarmListViewHolder(View itemView) {
         super(itemView);
         nameView = (TextView)itemView.findViewById(R.id.text_alarm_name);

@@ -339,7 +339,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의(Http / Https)
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com"); //host정의.//
+        builder.host(getResources().getString(R.string.server_domain)); //host정의.//
         builder.addPathSegment("scraps");
         builder.addPathSegment(scrap_id); //스크랩 id를 변수로 넣어준다.//
 

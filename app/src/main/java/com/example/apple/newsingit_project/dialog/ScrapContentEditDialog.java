@@ -181,7 +181,7 @@ public class ScrapContentEditDialog extends Activity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의//
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com"); //호스트를 설정.//
+        builder.host(getResources().getString(R.string.server_domain)); //호스트를 설정.//
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //나의 정보이기에 "me"로 설정//
         builder.addPathSegment("categories");
@@ -263,7 +263,7 @@ public class ScrapContentEditDialog extends Activity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("scraps")
                 .addPathSegment(scrapId);
 

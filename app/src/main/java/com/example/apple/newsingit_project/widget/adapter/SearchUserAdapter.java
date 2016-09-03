@@ -61,7 +61,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .host(context.getResources().getString(R.string.server_domain))
                 .addPathSegment("follows");
 
         RequestBody body = new FormBody.Builder()
@@ -85,7 +85,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com")
+                .host(context.getResources().getString(R.string.server_domain))
                 .addPathSegment("follows")
                 .addPathSegment("" + userId);
 

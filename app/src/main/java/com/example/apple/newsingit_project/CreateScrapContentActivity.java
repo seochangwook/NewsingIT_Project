@@ -321,7 +321,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의(Http / Https)
-        builder.host("ec2-52-78-89-94.ap-northeast-2.compute.amazonaws.com"); //host정의.//
+        builder.host(getResources().getString(R.string.server_domain)); //host정의.//
         builder.addPathSegment("scraps");
 
         /** 파일 전송이므로 MultipartBody 설정 **/
