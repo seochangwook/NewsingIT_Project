@@ -160,7 +160,7 @@ public class DrawerFragment extends Fragment {
 
                 String userSelectAlarm = menuList[groupposition].childViewList.get(childposition).name.toString();
 
-                Toast.makeText(getActivity(), "child click : " + userSelectAlarm ,Toast.LENGTH_SHORT ).show();
+                Toast.makeText(getActivity(), "child click : " + userSelectAlarm + "/position" + childposition, Toast.LENGTH_SHORT).show();
 
                 return true;
             }

@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,116 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by Tacademy on 2016-08-23.
  */
 public class DrawerAdapter extends BaseExpandableListAdapter {
     DrawerGroup[] items;
-    Switch mSwitch;
+
+    Switch Switch_new_sscrap;
+    Switch Switch_my_scrap_favorite;
+    Switch Switch_my_page_follow;
+
     Context context;
+
+    NetworkManager networkManager;
+    private Callback requestnewscrapalarmoncallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
+    private Callback requestnewscrapalarmoffcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
+    private Callback requestmyscrapalarmoncallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
+    private Callback requestmyscrapalarmoffcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
+    private Callback requestmypagefollowoncallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
+    private Callback requestmypagefollowoffcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
 
     public DrawerAdapter(DrawerGroup[] items, Context context) {
         this.items = items;
@@ -113,49 +216,332 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
 
         if(convertView == null){
             view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.view_drawer_child, parent, false);
-            mSwitch = (Switch)view.findViewById(R.id.switch_alarm);
+
+            Switch_new_sscrap = (Switch) view.findViewById(R.id.switch_alarm_newscrap);
+            Switch_my_scrap_favorite = (Switch) view.findViewById(R.id.switch_alarm_my_scrap_favorite);
+            Switch_my_page_follow = (Switch) view.findViewById(R.id.switch_alarm_my_page_follow);
+
             childView = (TextView)view.findViewById(R.id.text_child);
 
             //child를 포함하고 있는 group에만 switch를 VISIBLE로 설정한다//
-            if(groupname.equals("알림 설정")){
-                mSwitch.setVisibility(View.VISIBLE);
+            if (groupname.equals("알림 설정")) {
+                if (childPosition == 0) {
+                    Switch_new_sscrap.setVisibility(View.VISIBLE);
+                    Switch_my_scrap_favorite.setVisibility(View.GONE);
+                    Switch_my_page_follow.setVisibility(View.GONE);
+                } else if (childPosition == 1) {
+                    Switch_new_sscrap.setVisibility(View.GONE);
+                    Switch_my_scrap_favorite.setVisibility(View.VISIBLE);
+                    Switch_my_page_follow.setVisibility(View.GONE);
+                } else if (childPosition == 2) {
+                    Switch_new_sscrap.setVisibility(View.GONE);
+                    Switch_my_scrap_favorite.setVisibility(View.GONE);
+                    Switch_my_page_follow.setVisibility(View.VISIBLE);
+                }
+
                 //switch의 상태가 바뀔 때 이벤트//
-                mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                Switch_new_sscrap.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if(checked){
-                            Toast.makeText(context , "알림 on" ,Toast.LENGTH_SHORT ).show();
+                            Toast.makeText(context, "새 스크랩 알림 on", Toast.LENGTH_SHORT).show();
+
+                            //해당 네트워크 작업과 데이터베이스 저장작업을 해준다.//
+                            set_new_scrap_alarm_on();
+
                         }else{
-                            Toast.makeText(context , "알림 off" ,Toast.LENGTH_SHORT ).show();
+                            Toast.makeText(context, "새 스크랩 알림 off", Toast.LENGTH_SHORT).show();
+
+                            set_new_scrap_alarm_off();
                         }
                     }
                 });
-            }else{
-                mSwitch.setVisibility(View.GONE);
+
+                Switch_my_scrap_favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                        if (checked) {
+                            Toast.makeText(context, "내 스크랩 알림 on", Toast.LENGTH_SHORT).show();
+
+                            set_my_scrap_alarm_on();
+                        } else {
+                            Toast.makeText(context, "내 스크랩 알림 off", Toast.LENGTH_SHORT).show();
+
+                            set_my_scrap_alarm_off();
+                        }
+                    }
+                });
+
+                Switch_my_page_follow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                        if (checked) {
+                            Toast.makeText(context, "마이페이지 알림 on", Toast.LENGTH_SHORT).show();
+
+                            set_my_page_follow_alarm_on();
+                        } else {
+                            Toast.makeText(context, "마이페이지 알림 off", Toast.LENGTH_SHORT).show();
+
+                            set_my_page_follow_alarm_off();
+                        }
+                    }
+                });
+            } else {
+                Switch_new_sscrap.setVisibility(View.GONE);
+                Switch_my_scrap_favorite.setVisibility(View.GONE);
+                Switch_my_page_follow.setVisibility(View.GONE);
             }
 
-        }else{
+        } else {
             view = convertView;
-            mSwitch = (Switch)view.findViewById(R.id.switch_alarm);
+
+            Switch_new_sscrap = (Switch) view.findViewById(R.id.switch_alarm_newscrap);
+            Switch_my_scrap_favorite = (Switch) view.findViewById(R.id.switch_alarm_my_scrap_favorite);
+            Switch_my_page_follow = (Switch) view.findViewById(R.id.switch_alarm_my_page_follow);
+
             childView = (TextView)view.findViewById(R.id.text_child);
 
-            if(groupname.equals("알림 설정")) {
-                mSwitch.setVisibility(View.VISIBLE);
+            if (groupname.equals("알림 설정")) {
+                if (childPosition == 0) {
+                    Switch_new_sscrap.setVisibility(View.VISIBLE);
+                    Switch_my_scrap_favorite.setVisibility(View.GONE);
+                    Switch_my_page_follow.setVisibility(View.GONE);
+                } else if (childPosition == 1) {
+                    Switch_new_sscrap.setVisibility(View.GONE);
+                    Switch_my_scrap_favorite.setVisibility(View.VISIBLE);
+                    Switch_my_page_follow.setVisibility(View.GONE);
+                } else if (childPosition == 2) {
+                    Switch_new_sscrap.setVisibility(View.GONE);
+                    Switch_my_scrap_favorite.setVisibility(View.GONE);
+                    Switch_my_page_follow.setVisibility(View.VISIBLE);
+                }
             }
 
             else
             {
-                mSwitch.setVisibility(View.GONE);
+                Switch_new_sscrap.setVisibility(View.GONE);
+                Switch_my_scrap_favorite.setVisibility(View.GONE);
+                Switch_my_page_follow.setVisibility(View.GONE);
             }
         }
 
-
         childView.setText(items[groupPosition].childViewList.get(childPosition).name);
+
         return view;
     }
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
         return true;
+    }
+
+    public void set_new_scrap_alarm_on() {
+        /** 네트워크 설정을 해준다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
+
+        builder.addQueryParameter("nt", "fs"); //새 스크랩에 대한 알람 설정//
+
+        /** Delete이기에 RequestBody를 만든다 **/
+        RequestBody body = new FormBody.Builder()
+                .add("locked", "1") //true이기에 1//
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestnewscrapalarmoncallback);
+    }
+
+    public void set_new_scrap_alarm_off() {
+        /** 네트워크 설정을 해준다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
+
+        builder.addQueryParameter("nt", "fs"); //새 스크랩에 대한 알람 설정//
+
+        /** Delete이기에 RequestBody를 만든다 **/
+        RequestBody body = new FormBody.Builder()
+                .add("locked", "0") //false이기에 0//
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestnewscrapalarmoffcallback);
+    }
+
+    public void set_my_scrap_alarm_on() {
+        /** 네트워크 설정을 해준다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
+
+        builder.addQueryParameter("nt", "s"); //새 스크랩에 대한 알람 설정//
+
+        /** Delete이기에 RequestBody를 만든다 **/
+        RequestBody body = new FormBody.Builder()
+                .add("locked", "1") //true이기에 1//
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestmyscrapalarmoncallback);
+    }
+
+    public void set_my_scrap_alarm_off() {
+        /** 네트워크 설정을 해준다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
+
+        builder.addQueryParameter("nt", "s"); //새 스크랩에 대한 알람 설정//
+
+        /** Delete이기에 RequestBody를 만든다 **/
+        RequestBody body = new FormBody.Builder()
+                .add("locked", "0") //false이기에 0//
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestmyscrapalarmoffcallback);
+    }
+
+    public void set_my_page_follow_alarm_on() {
+        /** 네트워크 설정을 해준다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
+
+        builder.addQueryParameter("nt", "f"); //새 스크랩에 대한 알람 설정//
+
+        /** Delete이기에 RequestBody를 만든다 **/
+        RequestBody body = new FormBody.Builder()
+                .add("locked", "1") //true이기에 1//
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestmypagefollowoncallback);
+    }
+
+    public void set_my_page_follow_alarm_off() {
+        /** 네트워크 설정을 해준다. **/
+        /** OkHttp 자원 설정 **/
+        networkManager = NetworkManager.getInstance();
+
+        /** Client 설정 **/
+        OkHttpClient client = networkManager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http");
+        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.addPathSegment("users");
+        builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
+
+        builder.addQueryParameter("nt", "f"); //새 스크랩에 대한 알람 설정//
+
+        /** Delete이기에 RequestBody를 만든다 **/
+        RequestBody body = new FormBody.Builder()
+                .add("locked", "0") //false이기에 0//
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestmypagefollowoffcallback);
     }
 }

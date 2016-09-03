@@ -6,25 +6,53 @@
     >
 
     <TextView
+        android:id="@+id/text_child"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/text_child"
         android:layout_marginLeft="10dp"
+        android:padding="10dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Switch
+        android:id="@+id/switch_alarm_newscrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_child"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:padding="10dp" />
 
     <Switch
+        android:id="@+id/switch_alarm_my_scrap_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switch_alarm"
-        android:clickable="true"
+        android:layout_alignBottom="@+id/text_child"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp"
         android:checked="false"
+        android:clickable="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:padding="10dp" />
+
+    <Switch
+        android:id="@+id/switch_alarm_my_page_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/text_child"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
+        android:checked="false"
+        android:clickable="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:padding="10dp" />
 </RelativeLayout>
