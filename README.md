@@ -73,4 +73,5 @@
 * 검색에 SearchView 적용 - 임지수 (16/09/02 17:47)
 * EditScarp부분 Dummy Data test 완료, PUT test 완료(사용자 입력에 대한 완벽한 예외처리 생략) - 서창욱 (16/09/02 20:50)
 * Search부분에서 Tag검색 2단계 GET요청 DummyData test 완료 - 서창욱 (16/09/03 00:49)
+* Server Domain 주소 변경에 따른 수정작업 진행 (strings파일에 적용) - 서창욱 (16/09/04 00:48)
 
