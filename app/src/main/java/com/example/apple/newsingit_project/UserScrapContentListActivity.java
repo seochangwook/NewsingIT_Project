@@ -306,6 +306,13 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         //newUserScrapCotentData.setLock(tagDetailListRequestResultsList.get(i).getLock());
                         newUserScrapCotentData.setId(tagDetailListRequestResultsList.get(i).getId());
 
+                        //태그 검색은 기본적으로 다른 사용자임을 가정//
+                        /*if (newUserScrapCotentData.getLock() == false) {
+                            userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
+                        } else if (newUserScrapCotentData.getLock() == true) {
+                            //다른 사람 개시물일 경우 잠금이 있을 시 보여주지 않는다.//
+                        }*/
+
                         userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
                     }
 
