@@ -12,6 +12,7 @@ public class SearchNewsData {
     public String title;
     public String author;
     public String date;
+
     public List<SearchNewsData> searchNewsDataArrayList = new ArrayList<>();
 
     public void setSearchNewsDataArrayList(List<SearchNewsData> searchNewsDataArrayList) {

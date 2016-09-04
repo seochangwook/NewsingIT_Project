@@ -10,6 +10,7 @@ public class SearchTagData {
     public int id;
     public String tag;
     // public String count;
+
     public List<SearchTagData> searchTagDataList = new ArrayList<>();
 
     //   public void setCount(String count) {

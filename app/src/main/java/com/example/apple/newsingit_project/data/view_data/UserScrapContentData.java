@@ -15,9 +15,8 @@ public class UserScrapContentData {
     private String ncTime;
     private int like;
     private boolean likeFlag;
-    private boolean lock;
+    private boolean locked;
     private String ncImgUrl;
-
 
     public String getNcImgUrl() {
         return ncImgUrl;
@@ -57,7 +56,7 @@ public class UserScrapContentData {
     }
 
     public boolean isLock() {
-        return lock;
+        return locked;
     }
 
     public String getNcTitle() {
@@ -101,10 +100,10 @@ public class UserScrapContentData {
     }
 
     public boolean getLock() {
-        return this.lock;
+        return this.locked;
     }
 
     public void setLock(boolean lock) {
-        this.lock = lock;
+        this.locked = lock;
     }
 }

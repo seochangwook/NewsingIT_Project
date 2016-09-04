@@ -127,6 +127,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                     for (int i = 0; i < size; i++) {
                         UserScrapContentData newUserScrapCotentData = new UserScrapContentData();
 
+                        //if문으로 locked의 유무에 따라 배열에 넣고를 판단한다.//
                         newUserScrapCotentData.setTitle(scrapContentList.get(i).getTitle());
                         newUserScrapCotentData.setNcTitle(scrapContentList.get(i).getNc_title());
                         newUserScrapCotentData.setNcImgUrl(scrapContentList.get(i).getNc_img_url());
@@ -137,7 +138,18 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setLock(scrapContentList.get(i).getLock());
                         newUserScrapCotentData.setId(scrapContentList.get(i).getId());
 
-                        userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
+                        if (is_user_my.equals("1")) //다른 사람 스크랩 목록//
+                        {
+                            if (newUserScrapCotentData.getLock() == false) {
+                                userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
+                            } else if (newUserScrapCotentData.getLock() == true) {
+                                //다른 사람 개시물일 경우 잠금이 있을 시 보여주지 않는다.//
+                            }
+                        } else if (is_user_my.equals("0")) //내 스크랩 목록//
+                        {
+                            //잠금여부 상관없이 보여준다.//
+                            userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
+                        }
                     }
 
                     mAdapter.setUserScrapContentData(userScrapContentData, is_user_my);
