@@ -4,7 +4,8 @@
     tools:context="com.example.apple.newsingit_project.SearchTabActivity">
     <item
         android:id="@+id/search_cancel"
+        android:icon="@mipmap/cancle"
         android:orderInCategory="100"
-        android:title="@string/cancel_menu_title"
+        android:title=""
         app:showAsAction="always" />
 </menu>

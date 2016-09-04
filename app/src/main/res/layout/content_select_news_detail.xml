@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/btn_go_detail" />
+        android:background="@mipmap/butt_more_news" />
 
     <TextView
         android:id="@+id/text_news_date"

@@ -94,13 +94,17 @@ public class MainNewsListFragment extends Fragment {
      * Network variable
      **/
     NetworkManager manager;
+    /**
+     * Header, emptyview
+     **/
+    View fix_headerview;
+    View emptyview;
     private FamiliarRefreshRecyclerView mainnews_recyclerrefreshview;
     private FamiliarRecyclerView mainnews_recyclerview;
     /**
      * 기타 로딩 기능
      **/
     private ProgressDialog pDialog;
-
     private Callback requestmainnewslistcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) //접속 실패의 경우.//
@@ -164,9 +168,13 @@ public class MainNewsListFragment extends Fragment {
         mainnews_recyclerview.setAdapter(newsAdapter); //어댑터 할당.//
 
         /** EmptyView를 설정 **/
-        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_mainnews_empty_layout, null);
+        emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_mainnews_empty_layout, null);
+
+        /** HeaderView를 설정 **/
+        fix_headerview = getActivity().getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
 
         mainnews_recyclerview.setEmptyView(emptyview, true);
+        mainnews_recyclerview.addHeaderView(fix_headerview);
 
         /** 뉴스 리스트 선택 이벤트 설정(개수가 고정되어 있기에 직접할당,일반적으로는 동적할당) **/
         mainnews_recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
@@ -456,6 +464,7 @@ public class MainNewsListFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         mainnews_recyclerrefreshview.pullRefreshComplete();
+                        mainnews_recyclerview.removeHeaderView(fix_headerview);
 
                         //기존 데이터를 전부 지운다.//
                         Data_Init();

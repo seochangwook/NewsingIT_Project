@@ -125,14 +125,22 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     //좋아요를 눌렀을 때와 누르지 않았을 때//
 
                     if (flag) {  //좋아요//
-                        uvh.likeButton.setImageResource(android.R.drawable.star_big_on);
+                        uvh.likeButton.setImageResource(R.mipmap.favorite_on);
                     } else { //좋아요 취소//
-                        uvh.likeButton.setImageResource(android.R.drawable.star_big_off);
+                        uvh.likeButton.setImageResource(R.mipmap.favorite_off);
                     }
                 } else {
                     //내 스크랩//
                     uvh.likeButton.setEnabled(false);
-                    uvh.likeButton.setImageResource(android.R.drawable.star_big_on); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+                    //uvh.likeButton.setImageResource(R.mipmap.favorite_on); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+
+                    int favorite_count = Integer.parseInt("" + uvh.likeView.getText());
+
+                    if (favorite_count == 0) {
+                        uvh.likeButton.setImageResource(R.mipmap.favorite_off); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+                    } else if (favorite_count > 0) {
+                        uvh.likeButton.setImageResource(R.mipmap.favorite_on); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+                    }
                 }
 
                 uvh.likeButton.setOnClickListener(new View.OnClickListener() {

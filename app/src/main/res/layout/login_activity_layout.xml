@@ -11,6 +11,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@mipmap/login_background"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -20,25 +21,6 @@
         tools:showIn="@layout/login_activity_layout">
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="154dp"
-            android:src="@mipmap/logo_image" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="350dp"
-            android:text="NEWSING"
-            android:textColor="#000000"
-            android:textSize="30dp" />
-
-
         <Button
             android:id="@+id/btn_facebook_login"
             style="?android:attr/buttonStyleSmall"
@@ -46,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="460dp"
-            android:text="facebook" />
+            android:background="@color/button_transparent_background" />
 
         <Button
             android:id="@+id/btn_twitter_login"
@@ -55,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="138dp"
             android:layout_marginTop="460dp"
-            android:text="twitter" />
+            android:background="@color/button_transparent_background" />
 
         <Button
             android:id="@+id/btn_google_login"
@@ -64,17 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="220dp"
             android:layout_marginTop="460dp"
-            android:text="google" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="62dp"
-            android:text="IT, 키워드로 읽다"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:background="@color/button_transparent_background" />
 
         <Button
             android:id="@+id/btn_test"
@@ -84,7 +56,7 @@
             android:layout_alignLeft="@+id/btn_facebook_login"
             android:layout_alignStart="@+id/btn_facebook_login"
             android:layout_below="@+id/btn_facebook_login"
-            android:text="New Button" />
+            android:background="@color/button_transparent_background" />
 
     </RelativeLayout>
 

@@ -109,12 +109,12 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             groupItem_view = LayoutInflater.from(parent.getContext()).inflate(R.layout.foldergroup_item, parent, false);
 
-            indicator_image = (ImageView) groupItem_view.findViewById(R.id.image_indicate_arrow);
+            indicator_image = (ImageView) groupItem_view.findViewById(R.mipmap.ic_arrow_dropdown);
             group_name_text = (TextView) groupItem_view.findViewById(R.id.group_name_text);
         } else {
             groupItem_view = convertView;
 
-            indicator_image = (ImageView) groupItem_view.findViewById(R.id.image_indicate_arrow);
+            indicator_image = (ImageView) groupItem_view.findViewById(R.mipmap.ic_arrow);
             group_name_text = (TextView) groupItem_view.findViewById(R.id.group_name_text);
         }
 

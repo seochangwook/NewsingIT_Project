@@ -39,9 +39,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:background="@color/button_transparent_background"
         android:singleLine="true"
-
-        android:src="@mipmap/ic_more" />
+        android:src="@mipmap/ic_more_scrap" />
 
     <TextView
         android:id="@+id/text_scrap_list_nctitle"
@@ -90,7 +90,7 @@
         android:layout_toLeftOf="@+id/text_scrap_list_like"
         android:layout_toStartOf="@+id/text_scrap_list_like"
         android:background="@color/button_transparent_background"
-        android:src="@android:drawable/btn_star_big_off" />
+        android:src="@mipmap/favorite_off" />
 
 </RelativeLayout>
 </android.support.v7.widget.CardView>

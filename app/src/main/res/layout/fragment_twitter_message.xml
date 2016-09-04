@@ -6,8 +6,6 @@
     <ImageButton
         android:id="@+id/twitter_link_button"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/button_transparent_background"
-        android:src="@mipmap/sample_twitter_button" />
-
+        android:layout_height="wrap_content"
+        android:background="@mipmap/twitter_buttob_background" />
 </FrameLayout>

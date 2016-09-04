@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,12 +11,13 @@
         android:layout_marginLeft="@dimen/main_news_keyword_layout_margin_left"
         android:text="Sample Category"
         android:textColor="@color/blue_color"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="10dp"
+        android:layout_below="@+id/keyword_name_text"
         android:background="@drawable/line_draw" />
 
-</LinearLayout>
+</RelativeLayout>

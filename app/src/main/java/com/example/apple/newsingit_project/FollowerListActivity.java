@@ -162,15 +162,15 @@ public class FollowerListActivity extends AppCompatActivity {
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.follower_rv_list);
 
         /** HeaderView 설정 **/
-        View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
+        View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null);
+
+        search_edit = (SearchView) headerView.findViewById(R.id.search_my_follow);
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_follower_emptyview, null);
 
         recyclerview.setEmptyView(emptyview, true);
-
-        search_edit = (SearchView) headerView.findViewById(R.id.search_my_follow);
-
+        recyclerview.addHeaderView(headerView, true);
 
         search_edit.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -197,7 +197,6 @@ public class FollowerListActivity extends AppCompatActivity {
 //            }
 //        });
 
-        recyclerview.addHeaderView(headerView);
         mAdapter = new FollowerListAdapter(this);
 
         recyclerview.setAdapter(mAdapter);
