@@ -20,6 +20,19 @@
 * compile 'com.android.support:multidex:1.0.1'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
+< Algorithm image >
+
+<p align="left">
+  <img src="https://github.com/seochangwook/Android-Source-Code-Team-Project-Sample-Code-/blob/master/Project_SampleImage/android_network_info_image_1.png" width="650" height="350">
+</p>
+
+<p align="left">
+  <img src="https://github.com/seochangwook/Android-Source-Code-Team-Project-Sample-Code-/blob/master/Project_SampleImage/android_network_info_image_2.png" width="650" height="350">
+</p>
+
+<p align="left">
+  <img src="https://github.com/seochangwook/Team-Project-Sample-Code-android-/blob/master/Project_SampleImage/network_info_image_1.png" width="650" height="350">
+</p>
 
 < Update Content >
 
