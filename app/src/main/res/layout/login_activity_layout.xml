@@ -49,6 +49,12 @@
             android:layout_marginTop="460dp"
             android:background="@color/button_transparent_background" />
 
+        <Button
+            android:id="@+id/dummy_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/button_transparent_background" />
+
     </RelativeLayout>
 
 

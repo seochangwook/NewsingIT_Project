@@ -2,6 +2,7 @@ package com.example.apple.newsingit_project;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.view.view_fragment.MainNewsListFragment;
 import com.example.apple.newsingit_project.view.view_fragment.MyInfoFragment;
 import com.example.apple.newsingit_project.widget.menuwidget.BottomMenu;
@@ -33,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout; //드로워블 레이아웃.//
     ImageButton alarm_imagebutton;
     ImageView profile_imageview;
+    TextView profile_name_textview;
+
+    /**
+     * Shraed 저장소 관련 변수
+     **/
+    SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
+    SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
+
+    String profile_name;
+    String profile_imgUrl;
 
     private BackPressCloseHandler backPressCloseHandler; //뒤로가기 처리//
 
@@ -54,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         bottommenu = (BottomMenu) findViewById(R.id.bottom_menu_mainactivity);
         alarm_imagebutton = (ImageButton) findViewById(R.id.btn_alarm);
         profile_imageview = (ImageView) findViewById(R.id.prrofile_image);
+        profile_name_textview = (TextView) findViewById(R.id.textView4);
 
         setSupportActionBar(toolbar); //툴바 생성.//
         setupBottomMenu(); //하단 메뉴 네비게이션 버튼 생성.//
@@ -63,13 +77,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.sample_drawable_image_2);
 
+        profile_name = PropertyManager.getInstance().get_name();
+        profile_imgUrl = PropertyManager.getInstance().get_pf_Url();
+
         /** 사용자 프로필 이미지 설정 **/
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //파카소 라이브러리를 이용하여 이미지 로딩//
         Picasso.with(this)
-                .load(R.mipmap.seochangwook)
+                .load(profile_imgUrl)
                 .transform(new CropCircleTransformation())
                 .into(profile_imageview);
+
+        profile_name_textview.setText(profile_name);
 
         /** Alarm화면으로 이동하는 이벤트. **/
         alarm_imagebutton.setOnClickListener(new View.OnClickListener() {

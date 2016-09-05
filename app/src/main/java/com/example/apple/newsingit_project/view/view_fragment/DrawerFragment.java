@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.view.view_fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.LoginActivity;
@@ -60,6 +63,18 @@ public class DrawerFragment extends Fragment {
 
     NetworkManager networkManager;
     LoginManager mLoginManager;
+
+    /**
+     * profile 정보
+     **/
+    ImageView profile_image;
+    ImageButton alarm_imagebutton;
+
+    /**
+     * Shraed 저장소 관련 변수
+     **/
+    SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
+    SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
 
     private Callback requestLogoutCallback = new Callback() {
         @Override
@@ -115,7 +130,6 @@ public class DrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drawer, container, false);
         View drawerHeader = inflater.inflate(R.layout.view_drawer_header, container, false);
-
 
         expandableListView = (ExpandableListView)view.findViewById(R.id.expandableListView);
         expandableListView.addHeaderView(drawerHeader);

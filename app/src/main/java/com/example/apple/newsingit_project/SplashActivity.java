@@ -60,16 +60,30 @@ public class SplashActivity extends AppCompatActivity {
 
             if (response.code() == 401) //로그인 안함.//
             {
-                Log.d("json data", response_data);
+                Log.d("json data+", response_data);
 
-                //401에러는 성공이긴 하나 사용자가 로그인이 되어 있지 않아서 발생한것이기 때문에 로그인 화면으로 이동한다.//
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                String name = PropertyManager.getInstance().get_name();
+                String facebookid = PropertyManager.getInstance().get_facebookid();
 
-                startActivity(intent);
+                if (name.equals("") && facebookid.equals("")) {
+                    Log.d("login message", "account fail");
 
-                finish();
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+
+                    startActivity(intent);
+
+                    finish();
+                } else  //로그인도 되어 있고 공유 프래퍼런스에 저장도 된 경우//
+                {
+                    //401에러는 성공이긴 하나 사용자가 로그인이 되어 있지 않아서 발생한것이기 때문에 로그인 화면으로 이동한다.//
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+
+                    startActivity(intent);
+
+                    finish();
+                }
             } else if (response.code() == 200) {
-                Log.d("json data", response_data);
+                Log.d("json data-", response_data);
 
                 //보안 상 한번 더 비교해본다. 즉 로그인은 되었지만 다른 사용자일 수 있기에 기존 정보랑 비교//
                 //만약 요기서 실패 시 다시 로그인으로 이동//
