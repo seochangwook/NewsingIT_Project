@@ -22,6 +22,8 @@
 
 < Algorithm image >
 
+* AutoLogin
+
 <p align="left">
   <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_1.png" width="650" height="350">
 </p>
