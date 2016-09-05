@@ -586,6 +586,7 @@ public class MainNewsListFragment extends Fragment {
 
         builder.scheme("http");
         builder.host(getResources().getString(R.string.server_domain));
+        builder.port(8080);
         builder.addPathSegment("newscontents");
 
         /** Request 설정 **/
@@ -628,8 +629,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -648,8 +649,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -667,8 +668,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -701,8 +702,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -721,8 +722,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -740,8 +741,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -774,8 +775,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -794,8 +795,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -813,8 +814,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -847,8 +848,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -867,8 +868,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -886,8 +887,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -920,8 +921,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -940,8 +941,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -959,8 +960,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -993,8 +994,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1013,8 +1014,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1032,8 +1033,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1066,8 +1067,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1086,8 +1087,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1105,8 +1106,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1139,8 +1140,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1159,8 +1160,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1178,8 +1179,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1212,8 +1213,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1232,8 +1233,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1251,8 +1252,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1285,8 +1286,8 @@ public class MainNewsListFragment extends Fragment {
                                 if (content_size == 0) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1305,8 +1306,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 1) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
@@ -1324,8 +1325,8 @@ public class MainNewsListFragment extends Fragment {
                                 } else if (content_size == 2) {
                                     String title = news_content[content_size].getTitle();
                                     String author = news_content[content_size].getAuthor();
-                                    //String img_Url = news_content[content_size].getImg_url();
-                                    String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                                    String img_Url = news_content[content_size].getImg_url();
+                                    //String img_Url = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                                     int news_id = news_content[content_size].getId();
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();

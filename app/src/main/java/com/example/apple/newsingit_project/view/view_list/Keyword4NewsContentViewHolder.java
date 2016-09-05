@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.Keyword4NewsContentData;
-import com.squareup.picasso.Picasso;
-
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by apple on 2016. 8. 26..
@@ -49,9 +47,8 @@ public class Keyword4NewsContentViewHolder extends RecyclerView.ViewHolder {
         /** 사용자 프로필 이미지 설정 **/
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //파카소 라이브러리를 이용하여 이미지 로딩//
-        Picasso.with(context)
+        Glide.with(context)
                 .load(thumbnailUrl_str)
-                .transform(new CropCircleTransformation())
                 .into(news_thumbnailUrl_imageview);
     }
 }

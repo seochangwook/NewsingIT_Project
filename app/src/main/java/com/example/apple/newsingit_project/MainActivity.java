@@ -21,6 +21,7 @@ import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.view.view_fragment.MainNewsListFragment;
 import com.example.apple.newsingit_project.view.view_fragment.MyInfoFragment;
 import com.example.apple.newsingit_project.widget.menuwidget.BottomMenu;
+import com.facebook.FacebookSdk;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.drawer_activity);
 
         setTitle(getResources().getString(R.string.title_activity_main));

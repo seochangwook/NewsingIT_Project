@@ -48,7 +48,6 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
     Button facebook_login_button; //로그인 버튼 커스텀//
-    Button dummy_button;
 
     /**
      * Facebook 관련 변수
@@ -129,7 +128,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity_layout);
 
         facebook_login_button = (Button) findViewById(R.id.btn_test);
-        dummy_button = (Button) findViewById(R.id.dummy_button);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -147,15 +145,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     loginFacebook();
                 }
-            }
-        });
-
-        dummy_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-                startActivity(intent);
             }
         });
 

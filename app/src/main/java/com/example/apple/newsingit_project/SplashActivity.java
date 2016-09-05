@@ -11,6 +11,8 @@ import android.util.Log;
 
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 
 import java.io.IOException;
 
@@ -30,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
      * Network variable
      **/
     NetworkManager manager;
-
+    LoginManager mLoginManager;
     /**
      * SharedPreference(PropertyManager) 정보
      **/
@@ -60,30 +62,26 @@ public class SplashActivity extends AppCompatActivity {
 
             if (response.code() == 401) //로그인 안함.//
             {
-                Log.d("json data+", response_data);
+                Log.d("json data", response_data);
 
-                String name = PropertyManager.getInstance().get_name();
-                String facebookid = PropertyManager.getInstance().get_facebookid();
+                //로그인으로 이동하기 전 로그아웃을 한다.//
+                mLoginManager.logOut();
 
-                if (name.equals("") && facebookid.equals("")) {
-                    Log.d("login message", "account fail");
+                //공유 프래퍼런스 초기화.//
+                PropertyManager.getInstance().set_facebookid("");
+                PropertyManager.getInstance().set_name("");
+                PropertyManager.getInstance().set_pf_Url("");
+                PropertyManager.getInstance().set_nt_fs("");
+                PropertyManager.getInstance().set_nt_f("");
+                PropertyManager.getInstance().set_nt_s("");
 
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
 
-                    startActivity(intent);
+                startActivity(intent);
 
-                    finish();
-                } else  //로그인도 되어 있고 공유 프래퍼런스에 저장도 된 경우//
-                {
-                    //401에러는 성공이긴 하나 사용자가 로그인이 되어 있지 않아서 발생한것이기 때문에 로그인 화면으로 이동한다.//
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-
-                    startActivity(intent);
-
-                    finish();
-                }
+                finish();
             } else if (response.code() == 200) {
-                Log.d("json data-", response_data);
+                Log.d("json data", response_data);
 
                 //보안 상 한번 더 비교해본다. 즉 로그인은 되었지만 다른 사용자일 수 있기에 기존 정보랑 비교//
                 //만약 요기서 실패 시 다시 로그인으로 이동//
@@ -96,6 +94,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.splah_activity_layout);
 
         mHandler = new Handler(Looper.getMainLooper());
@@ -103,6 +102,8 @@ public class SplashActivity extends AppCompatActivity {
         //프래퍼런스를 셋팅.//
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mPrefs.edit();
+
+        mLoginManager = LoginManager.getInstance(); //로그인 매니저 등록//
 
         Auto_Login();
     }
@@ -162,6 +163,17 @@ public class SplashActivity extends AppCompatActivity {
         //이름하고 페이스북 id가 없는 경우//
         if (name.equals("") && facebookid.equals("")) {
             Log.d("login message", "account fail");
+
+            //로그인으로 이동하기 전 로그아웃을 한다.//
+            mLoginManager.logOut();
+
+            //공유 프래퍼런스 초기화.//
+            PropertyManager.getInstance().set_facebookid("");
+            PropertyManager.getInstance().set_name("");
+            PropertyManager.getInstance().set_pf_Url("");
+            PropertyManager.getInstance().set_nt_fs("");
+            PropertyManager.getInstance().set_nt_f("");
+            PropertyManager.getInstance().set_nt_s("");
 
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
 
