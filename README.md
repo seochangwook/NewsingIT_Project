@@ -77,4 +77,5 @@
 * 각 Alarm(새 스크랩/내 스크랩/마이 페이지)기능 PUT test완료 - 서창욱 (16/09/04 03:07)
 * ScrapList출력 시 사용자와 나를 구분하고, locked로 유효한 데이터만 저장 test완료 - 서창욱 (16/09/04 12:24)
 * 현 앱에서 필요한 icon, font등을 수정 (작업 중) - 서창욱, 임지수 (16/09/04 23:55)
+* AutoLogin구현(Https), PropertyManager(SharedPreference) - 서창욱 (16/09/05 19:02) 
 
