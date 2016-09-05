@@ -127,6 +127,10 @@ public class SearchNewsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_news_layout, container, false);
 
+
+        Bundle b = getArguments();
+        Log.d("SEARCH_FRAGMENT_TAG", "" + b.getString("SEARCH_FRAGMENT_TAG"));
+
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);

@@ -82,6 +82,9 @@ public class SearchUserFragment extends Fragment {
 
         searchUserData = new SearchUserData();
 
+        Bundle b = getArguments();
+        Log.d("SEARCH_FRAGMENT_TAG", "" + b.getString("SEARCH_FRAGMENT_TAG"));
+
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);

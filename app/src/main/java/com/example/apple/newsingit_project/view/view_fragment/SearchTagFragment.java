@@ -91,6 +91,8 @@ public class SearchTagFragment extends Fragment {
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "10");
 
+        //  Log.d("searchQuery",searchQuery);
+
         Request request = new Request.Builder()
                 .url(builder.build())
                 .tag(getActivity())
@@ -131,6 +133,10 @@ public class SearchTagFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_tag_layout, container, false);
 
         searchTagData = new SearchTagData();
+
+
+        Bundle b = getArguments();
+        Log.d("SEARCH_FRAGMENT_TAG", "" + b.getString("SEARCH_FRAGMENT_TAG"));
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");

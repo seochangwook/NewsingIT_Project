@@ -51,7 +51,9 @@ public class SearchTabActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(SearchTabActivity.this, "search", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchTabActivity.this, "" + query, Toast.LENGTH_SHORT).show();
+
+
                 return false;
             }
 
@@ -151,7 +153,9 @@ public class SearchTabActivity extends AppCompatActivity {
             switch (position) {
                 case 0: {
                     SearchNewsFragment search_news_fragment = new SearchNewsFragment();
-
+                    Bundle b = new Bundle();
+                    b.putString("SEARCH_FRAGMENT_TAG", "NEWS_FRAGMENT");
+                    search_news_fragment.setArguments(b);
                     /*
                     /** Fragment로 값을 전달할 필요가 있을 경우 *
                     Bundle bundle = new Bundle(); //Fragment에게 값을 전달하기 위해서 Bundle사용.//
@@ -166,12 +170,17 @@ public class SearchTabActivity extends AppCompatActivity {
 
                 case 1: {
                     SearchUserFragment search_user_fragment = new SearchUserFragment();
-
+                    Bundle b = new Bundle();
+                    b.putString("SEARCH_FRAGMENT_TAG", "USER_FRAGMENT");
+                    search_user_fragment.setArguments(b);
                     return search_user_fragment;
                 }
 
                 case 2: {
                     SearchTagFragment search_tag_fragment = new SearchTagFragment();
+                    Bundle b = new Bundle();
+                    b.putString("SEARCH_FRAGMENT_TAG", "TAG_FRAGMENT");
+                    search_tag_fragment.setArguments(b);
 
                     return search_tag_fragment;
                 }
@@ -199,6 +208,4 @@ public class SearchTabActivity extends AppCompatActivity {
             return null;
         }
     }
-
-
 }
