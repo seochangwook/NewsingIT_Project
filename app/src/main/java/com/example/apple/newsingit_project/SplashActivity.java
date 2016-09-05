@@ -45,6 +45,13 @@ public class SplashActivity extends AppCompatActivity {
         {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+
+            //에러가 나면 우선 문제가 있다는 것이니 로그인 화면으로 이동.//
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+
+            startActivity(intent);
+
+            finish();
         }
 
         @Override
@@ -53,7 +60,7 @@ public class SplashActivity extends AppCompatActivity {
 
             if (response.code() == 401) //로그인 안함.//
             {
-                Log.d("fail json data", response_data);
+                Log.d("json data", response_data);
 
                 //401에러는 성공이긴 하나 사용자가 로그인이 되어 있지 않아서 발생한것이기 때문에 로그인 화면으로 이동한다.//
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
@@ -62,7 +69,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 finish();
             } else if (response.code() == 200) {
-                Log.d("success json data", response_data);
+                Log.d("json data", response_data);
 
                 //보안 상 한번 더 비교해본다. 즉 로그인은 되었지만 다른 사용자일 수 있기에 기존 정보랑 비교//
                 //만약 요기서 실패 시 다시 로그인으로 이동//
@@ -93,10 +100,10 @@ public class SplashActivity extends AppCompatActivity {
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //로그인이 되어있는지 검사//
+                        //최초 앱을 실행 시 로그인이 되어있는지 검사//
                         is_login_check();
                     }
-                }, 2000);
+                }, 1500);
             }
         });
     }
@@ -149,13 +156,13 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         } else  //로그인도 되어 있고 공유 프래퍼런스에 저장도 된 경우//
         {
-            Log.d("name", name);
-            Log.d("facebookid", facebookid);
-            Log.d("fcm id", fcm_id);
-            Log.d("pf url", pf_Url);
-            Log.d("nt fs", nt_fs);
-            Log.d("nt f", nt_f);
-            Log.d("nt s", nt_s);
+            Log.d("profile", name);
+            Log.d("profile", facebookid);
+            Log.d("profile", fcm_id);
+            Log.d("profile", pf_Url);
+            Log.d("profile", nt_fs);
+            Log.d("profile", nt_f);
+            Log.d("profile", nt_s);
 
             //메인 화면으로 이동//
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
