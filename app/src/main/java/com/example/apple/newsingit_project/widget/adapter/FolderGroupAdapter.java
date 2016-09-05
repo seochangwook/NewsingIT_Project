@@ -30,7 +30,7 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
         this.context = context;
     }
 
-    public void set_List_Data(String groupName, String childName) {
+    public void set_List_Data(String groupName, String[] childName) {
         FolderGroupItem group = null;
 
         for (FolderGroupItem g : items) {
@@ -50,13 +50,17 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
         }
 
         //그룹 당 자식의 객체를 생성.//
-        if (!TextUtils.isEmpty(childName)) {
-            FolderItem child = new FolderItem(); //자식을 생성.//
+        for (int i = 0; i < childName.length; i++) {
+            if (!TextUtils.isEmpty(childName.clone().toString())) {
+                FolderItem child = new FolderItem(); //자식을 생성.//
 
-            child.folder_name = childName;
+                child.folder_name = childName[i];
 
-            group.folder.add(child); //해당 그룹에 자식을 등록.//
+                group.folder.add(child); //해당 그룹에 자식을 등록.//
+            }
         }
+
+        notifyDataSetChanged();
     }
 
     @Override
@@ -109,12 +113,13 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             groupItem_view = LayoutInflater.from(parent.getContext()).inflate(R.layout.foldergroup_item, parent, false);
 
-            indicator_image = (ImageView) groupItem_view.findViewById(R.mipmap.ic_arrow_dropdown);
+            indicator_image = (ImageView) groupItem_view.findViewById(R.id.image_indicate_arrow);
             group_name_text = (TextView) groupItem_view.findViewById(R.id.group_name_text);
+
         } else {
             groupItem_view = convertView;
 
-            indicator_image = (ImageView) groupItem_view.findViewById(R.mipmap.ic_arrow);
+            indicator_image = (ImageView) groupItem_view.findViewById(R.id.image_indicate_arrow);
             group_name_text = (TextView) groupItem_view.findViewById(R.id.group_name_text);
         }
 
@@ -122,9 +127,9 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
 
         //group indicator를 custom한다//
         if (isExpanded) { //group이 펼쳐졌을 때 indicator 이미지//
-            indicator_image.setImageResource(android.R.drawable.arrow_up_float);
+            indicator_image.setImageResource(R.mipmap.ic_arrow);
         } else {  //group이 닫혔을 때 indicator 이미지//
-            indicator_image.setImageResource(android.R.drawable.arrow_down_float);
+            indicator_image.setImageResource(R.mipmap.ic_arrow_dropdown);
         }
 
         return groupItem_view;

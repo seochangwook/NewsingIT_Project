@@ -19,6 +19,7 @@ import com.example.apple.newsingit_project.data.view_data.DrawerChild;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.DrawerAdapter;
+import com.facebook.login.LoginManager;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -56,7 +57,9 @@ public class DrawerFragment extends Fragment {
 
     ExpandableListView expandableListView;
     DrawerAdapter mAdapter;
+
     NetworkManager networkManager;
+    LoginManager mLoginManager;
 
     private Callback requestLogoutCallback = new Callback() {
         @Override
@@ -104,6 +107,7 @@ public class DrawerFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAdapter = new DrawerAdapter(menuList, getActivity());
+        mLoginManager = LoginManager.getInstance();
     }
 
     @Override
@@ -137,7 +141,10 @@ public class DrawerFragment extends Fragment {
 
                 //로그아웃 - 로그인 화면으로 이동//
                 if (groupposition == 2) {
-                    getLogoutNetworkData();
+
+                    getLogoutNetworkData(); //우리 앱 로그아웃
+                    mLoginManager.logOut(); //페이스북 로그아웃
+
 
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -150,6 +157,7 @@ public class DrawerFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), NoticeActivity.class);
                     startActivity(intent);
                 }
+
             }
         });
 

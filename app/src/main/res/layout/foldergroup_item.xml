@@ -19,6 +19,6 @@
         android:layout_height="40dp"
         android:layout_marginLeft="250dp"
         android:layout_marginTop="5dp"
-        android:src="@android:drawable/arrow_down_float" />
+        android:src="@mipmap/ic_arrow_dropdown" />
 
 </RelativeLayout>

@@ -179,7 +179,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             //child를 포함하고 있는 group에만 indicator로 쓸 image를 VISIBLE로 설정한다//
             if(items[groupPosition].name.equals("알림 설정"))
             {
-                imageView.setImageResource(android.R.drawable.arrow_down_float);
+                imageView.setImageResource(R.mipmap.ic_arrow_dropdown);
                 imageView.setVisibility(View.VISIBLE);
             }else {
                 imageView.setVisibility(View.GONE);

@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isLogin()) {
-                    logoutFacebook();
+                    //     logoutFacebook();
                 } else {
                     loginFacebook();
                 }
