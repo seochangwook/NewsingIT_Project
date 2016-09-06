@@ -219,6 +219,10 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         scrap_recyclerrefreshview.pullRefreshComplete();
                         scrap_recyclerView.removeHeaderView(headerview);
 
+                        init_scrap_content_data(); //우선적으로 데이터 초기화.//
+
+                        getScrapContentListNetworkData(); //해당 페이지의 개수만큼 다시 로드//
+
                     }
                 }, 1000);
             }

@@ -1,7 +1,7 @@
 package com.example.apple.newsingit_project.data.json_data.mainnewslist;
 
 public class MainNewsListRequestResultsNewscontens {
-    private String contents;
+    private String content;
     private String img_url;
     private String author;
     private int id;
@@ -9,11 +9,11 @@ public class MainNewsListRequestResultsNewscontens {
     private String ntime;
 
     public String getContents() {
-        return this.contents;
+        return this.content;
     }
 
     public void setContents(String contents) {
-        this.contents = contents;
+        this.content = contents;
     }
 
     public String getImg_url() {

@@ -301,7 +301,8 @@ public class EditFolderActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(getResources().getString(R.string.server_domain));
+        builder.host(getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me");
         builder.addPathSegment("categories");

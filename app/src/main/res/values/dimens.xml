@@ -15,7 +15,7 @@
 
     <!-- profile title textview dimens -->
     <dimen name="name_textview_layout_margin_top">105dp</dimen>
-    <dimen name="name_textview_layout_matgin_left">43dp</dimen>
+    <dimen name="name_textview_layout_matgin_left">41dp</dimen>
 
     <!-- profile replace button -->
     <dimen name="profile_replace_button_width">200dp</dimen>

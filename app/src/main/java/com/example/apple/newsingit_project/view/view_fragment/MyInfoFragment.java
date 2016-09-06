@@ -142,6 +142,17 @@ public class MyInfoFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d("life cycle", "onResume");
+
+
+        //데이터 다시 로드//
+        getUserInfoNetworkData();
+    }
+
+    @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -192,6 +203,10 @@ public class MyInfoFragment extends Fragment {
                         folder_recyclerrefreshview.pullRefreshComplete();
                         folderListAdapter.set_FolderDate(folderData); //설정.//
 
+                        init_folder_list();
+
+                        getMyFolderData();
+
                     }
                 }, 1000);
             }
@@ -207,6 +222,10 @@ public class MyInfoFragment extends Fragment {
 
                         folder_recyclerrefreshview.loadMoreComplete();
                         folderListAdapter.set_FolderDate(folderData); //설정.//
+
+                        init_folder_list();
+
+                        getMyFolderData();
 
                     }
                 }, 1000);
@@ -326,6 +345,12 @@ public class MyInfoFragment extends Fragment {
         return view;
     }
 
+    public void init_folder_list() {
+        folderData.folder_list.clear();
+
+        folderListAdapter.init_folder(folderData);
+    }
+
     public void getMyFolderData() {
         /** 네트워크 설정을 한다. **/
         /** OkHttp 자원 설정 **/
@@ -339,7 +364,8 @@ public class MyInfoFragment extends Fragment {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(getResources().getString(R.string.server_domain));
+        builder.host(getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me");
         builder.addPathSegment("categories");
@@ -371,8 +397,8 @@ public class MyInfoFragment extends Fragment {
                         FolderData new_folderdata = new FolderData();
 
                         new_folderdata.setFolder_private(myFolderListRequestResultsList.get(i).getLocked());
-                        //new_folderdata.set_folder_imageUrl(myFolderListRequestResultsList.get(i).getImg_url());
-                        new_folderdata.set_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                        new_folderdata.set_folder_imageUrl(myFolderListRequestResultsList.get(i).getImg_url());
+                        //new_folderdata.set_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
                         new_folderdata.set_get_folder_name(myFolderListRequestResultsList.get(i).getName());
                         new_folderdata.set_folderid(myFolderListRequestResultsList.get(i).getId());
 
@@ -454,7 +480,8 @@ public class MyInfoFragment extends Fragment {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("users")
                 .addPathSegment("me");
 
@@ -466,7 +493,6 @@ public class MyInfoFragment extends Fragment {
         client.newCall(request).enqueue(requestMyInfoListCallback);
 
         hidepDialog();
-
     }
 
     public void setData(final UserInfoRequestResult userInfoRequestResult) {
@@ -478,9 +504,11 @@ public class MyInfoFragment extends Fragment {
                     String name, aboutMe;
                     int followerCount, followingCount, scrapCount;
 
+                    Log.d("message", "수정");
+
                     userInfoData.setName(userInfoRequestResult.getName());
-                    //userInfoData.setProfileUrl(userInfoRequestResult.getPf_url());
-                    userInfoData.setProfileUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                    userInfoData.setProfileUrl(userInfoRequestResult.getPf_url());
+                    //userInfoData.setProfileUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
                     userInfoData.setAboutMe(userInfoRequestResult.getAboutme());
                     userInfoData.setFollowerCount(userInfoRequestResult.getFollowers());
                     userInfoData.setFollwingCount(userInfoRequestResult.getFollowings());
@@ -500,9 +528,9 @@ public class MyInfoFragment extends Fragment {
                     btnScrapCount.setText("" + scrapCount);
 
                     //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
-                    //파카소 라이브러리를 이용하여 이미지 로딩//
-                    Picasso.with(getActivity()) //profileUrl//
-                            .load(profileUrl) //url//
+                    Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                    picasso.load(profileUrl)
                             .transform(new CropCircleTransformation())
                             .into(profile_imageview);
                 }

@@ -105,6 +105,7 @@ public class MainNewsListFragment extends Fragment {
      * 기타 로딩 기능
      **/
     private ProgressDialog pDialog;
+
     private Callback requestmainnewslistcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) //접속 실패의 경우.//
@@ -605,6 +606,8 @@ public class MainNewsListFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    showpDialog();
+
                     List<MainNewsListRequestResults> mainNewsListRequestResultses = new ArrayList<>();
 
                     mainNewsListRequestResultses.addAll(Arrays.asList(mainNewsListRequest));
@@ -1346,6 +1349,8 @@ public class MainNewsListFragment extends Fragment {
                     }
 
                     newsAdapter.setNewsData(keywordSection, newsContent);
+
+                    hidepDialog();
                 }
             });
         }

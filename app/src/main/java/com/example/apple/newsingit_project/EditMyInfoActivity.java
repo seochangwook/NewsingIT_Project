@@ -69,6 +69,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     File uploadFile = null; //이미지도 하나의 파일이기에 파일로 만든다.//
 
     String path = null;
+
     private Callback requesteditmyinfocallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -110,8 +111,11 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //파카소 라이브러리를 이용하여 이미지 로딩//
-        Picasso.with(this)
-                .load(my_imgUrl)
+        networkManager = NetworkManager.getInstance();
+
+        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+        picasso.load(my_imgUrl)
                 .transform(new CropCircleTransformation())
                 .into(profile_fix_imageview);
 
@@ -167,7 +171,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의(Http / Https)
-        builder.host(getResources().getString(R.string.server_domain)); //host정의.//
+        builder.host(getResources().getString(R.string.real_server_domain)); //host정의.//
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me");
         builder.addQueryParameter("nt", "no");
@@ -181,8 +186,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
         //이미지 설정//
         if (uploadFile != null) {
             //이미지 처리//
+            Log.d("image path", uploadFile.getName());
+
             multipart_builder.addFormDataPart("pf", uploadFile.getName(),
                     RequestBody.create(mediaType, uploadFile));
+        } else {
+            //이미지를 선택안할 시 아무 처리를 해주지 않는다.//
         }
 
         /** RequestBody 설정(Multipart로 설정) **/
@@ -213,8 +222,9 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
                     uploadFile = new File(path);
 
-                    Picasso.with(this)
-                            .load(uploadFile)
+                    Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                    picasso.load(uploadFile)
                             .transform(new CropCircleTransformation())
                             .into(profile_fix_imageview);
                 }
