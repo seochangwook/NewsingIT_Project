@@ -10,23 +10,12 @@
     tools:showIn="@layout/activity_user_scrap_content_list_layout">
 
 
-    <TextView
-        android:id="@+id/scrap_list_emptyView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EEAADD"
-        android:gravity="center"
-        android:text="no data"
-        android:visibility="gone" />
-
-    <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+    <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
         android:id="@+id/scrap_list_rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:frv_dividerHeight="0.5dp"
-        app:frv_emptyView="@id/scrap_list_emptyView"
-        app:frv_isEmptyViewKeepShowHeadOrFooter="false"
         app:frv_layoutManager="linear"
         app:frv_layoutManagerOrientation="vertical" />
 

@@ -167,7 +167,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         /** 폴더 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
-        scrap_folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(this));
+        scrap_folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(this, 3));
         scrap_folder_recyclerrefreshview.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         scrap_folder_recyclerrefreshview.setLoadMoreEnabled(true); //등록//
 
@@ -260,7 +260,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.text_news_part);
         textView.setMovementMethod(new ScrollingMovementMethod());
 
-
         Intent intent = getIntent();
 
         title = intent.getStringExtra(NEWS_TITLE);
@@ -299,8 +298,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         //Dummy Data 설정//
         //set_Dummy_ScrapFolder_Date();
 
-        get_NewsDetail_info(news_id);
-        get_ScrapFolder_Data();
+        get_NewsDetail_info(news_id); //뉴스 세부정보//
+        get_ScrapFolder_Data(); //스크랩 폴더 리스트//
     }
 
     public void get_ScrapFolder_Data() {
@@ -372,7 +371,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(getResources().getString(R.string.server_domain));
+        builder.host(getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("newscontents");
         builder.addPathSegment(news_id);
 
@@ -392,8 +392,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    //news_imageUrl = newsContentDetailRequestResult.getImg_url();
-                    news_imageUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                    news_imageUrl = newsContentDetailRequestResult.getImg_url();
+                    //news_imageUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                     news_author = newsContentDetailRequestResult.getAuthor();
                     news_link = newsContentDetailRequestResult.getLink();
                     news_ntime = newsContentDetailRequestResult.getNtime();
@@ -412,7 +412,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void set_Dummy_ScrapFolder_Date() {
+   /* public void set_Dummy_ScrapFolder_Date() {
         //첫번째 폴더//
         ScrapFolderListData new_folderdata_1 = new ScrapFolderListData();
 
@@ -435,7 +435,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         scrapfolderData.scrapfolderlist.add(new_folderdata_3);
 
         scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
-    }
+    }*/
 
     @Override
     protected void onResume() {
@@ -465,12 +465,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         if (item_id == R.id.scrap_news) {
             Toast.makeText(SelectNewsDetailActivity.this, "뉴스 스크랩 하기", Toast.LENGTH_SHORT).show();
 
-            //createNewsScrap이 없어서 임시로 유사한 수정 화면으로 이동//
-            /*Intent intent = new Intent(SelectNewsDetailActivity.this, CreateScrapContentActivity.class);
-
-            startActivity(intent);*/
-
-            scrap_folder_popup.showAtLocation(findViewById(R.id.scrap_news), Gravity.BOTTOM, 0, 0);
+            scrap_folder_popup.showAtLocation(findViewById(R.id.scrap_news), Gravity.BOTTOM, 0, 0); //팝업창 띄우기//
         }
         if (item_id == R.id.share_news) {
             Toast.makeText(SelectNewsDetailActivity.this, "뉴스 공유 하기", Toast.LENGTH_SHORT).show();
@@ -478,21 +473,14 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             Intent msg = new Intent(Intent.ACTION_SEND);
 
             msg.addCategory(Intent.CATEGORY_DEFAULT);
-
             msg.putExtra(Intent.EXTRA_SUBJECT, "서창욱");
-
             msg.putExtra(Intent.EXTRA_TEXT, "코딩이 취미 - 뉴스 스크랩");
-
             msg.putExtra(Intent.EXTRA_TITLE, "제목");
-
             msg.setType("text/plain");
 
             startActivity(Intent.createChooser(msg, "공유"));
-
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }

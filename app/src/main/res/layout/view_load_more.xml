@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="@string/load_more_normal"
+        android:text="@string/load_more_normal_main"
         android:textColor="#999999"
         android:textSize="16sp" />
 

@@ -46,6 +46,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
      * Network관련 변수
      **/
     NetworkManager networkManager;
+
     private Callback requestFavoriteCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -70,8 +71,18 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (this.userScrapContentData != userScrapContentData) {
             this.userScrapContentData = userScrapContentData;
             this.whoflag = whoflag;
-            notifyDataSetChanged();
         }
+
+        notifyDataSetChanged();
+    }
+
+    public void init_ScrapContent_Data(UserScrapContentData userScrapContentData, String whoflag) {
+        if (this.userScrapContentData != userScrapContentData) {
+            this.userScrapContentData = userScrapContentData;
+            this.whoflag = whoflag;
+        }
+
+        notifyDataSetChanged();
     }
 
     @Override
@@ -79,6 +90,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (userScrapContentData == null) {
             return 0;
         }
+
         return userScrapContentData.userScrapContentDataList.size();
     }
 

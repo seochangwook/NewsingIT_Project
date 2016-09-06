@@ -199,7 +199,7 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         /** 폴더 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
-        user_folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(this));
+        user_folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(this, 3));
         user_folder_recyclerrefreshview.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         user_folder_recyclerrefreshview.setLoadMoreEnabled(true); //등록//
 
