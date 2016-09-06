@@ -75,7 +75,7 @@ public class SearchTagFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void getSearchTagNetworkData() {
+    private void getSearchTagNetworkData(String query) {
         showpDialog();
 
         networkManager = NetworkManager.getInstance();
@@ -87,7 +87,7 @@ public class SearchTagFragment extends Fragment {
                 .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("search")
                 .addQueryParameter("target", "3")
-                .addQueryParameter("word", "단어")
+                .addQueryParameter("word", "" + query)
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "10");
 
@@ -136,7 +136,8 @@ public class SearchTagFragment extends Fragment {
 
 
         Bundle b = getArguments();
-        Log.d("SEARCH_FRAGMENT_TAG", "" + b.getString("SEARCH_FRAGMENT_TAG"));
+        Log.d("SEARCH_QUERY", "TAG " + b.getString("SEARCH_QUERY"));
+        String query = b.getString("SEARCH_QUERY");
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
@@ -171,12 +172,16 @@ public class SearchTagFragment extends Fragment {
             }
         });
 
-        getSearchTagNetworkData();
 
-        //initDummyData();
+        if (query == null) {
+            query = "";
+        }
+        initDummyData(query);
+        // getSearchTagNetworkData(query);
 
         return view;
     }
+
 
 
     private void hidepDialog() {
@@ -190,19 +195,31 @@ public class SearchTagFragment extends Fragment {
     }
 
 
-//
-//    private void initDummyData() {
-//
-//        String[] tagList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
-//        String[] countList = {"1,000개", "500개", "1,111개", "4,235,32개", "4,234개"};
-//
-//        for (int i = 0; i < 5; i++) {
-//            SearchTagData new_searchTagData = new SearchTagData();
-//            new_searchTagData.tag = "# "+tagList[i];
-//            new_searchTagData.count = countList[i];
-//            searchTagData.searchTagDataList.add(new_searchTagData);
-//        }
-//        mAdapter.setSearchTagData(searchTagData);
-//    }
+    private void initDummyData(String query) {
+
+        if (query.equals("사드")) {
+            String[] tagList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
+            int[] idList = {1, 2, 3, 4, 5};
+            for (int i = 0; i < 5; i++) {
+                SearchTagData new_searchTagData = new SearchTagData();
+                new_searchTagData.setTag(tagList[i]);
+                new_searchTagData.setId(idList[i]);
+
+                searchTagData.searchTagDataList.add(new_searchTagData);
+            }
+
+        } else {
+            String[] tagList = {"테스트", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
+            int[] idList = {1, 2, 3, 4, 5};
+            for (int i = 0; i < 5; i++) {
+                SearchTagData new_searchTagData = new SearchTagData();
+                new_searchTagData.setTag(tagList[i]);
+                new_searchTagData.setId(idList[i]);
+
+                searchTagData.searchTagDataList.add(new_searchTagData);
+            }
+        }
+        mAdapter.setSearchTagData(searchTagData);
+    }
 
 }

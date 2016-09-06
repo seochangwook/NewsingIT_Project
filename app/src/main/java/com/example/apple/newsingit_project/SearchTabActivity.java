@@ -23,6 +23,8 @@ import com.example.apple.newsingit_project.view.view_fragment.SearchUserFragment
 
 public class SearchTabActivity extends AppCompatActivity {
 
+    Bundle bundle;
+    SearchView searchView;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -32,12 +34,10 @@ public class SearchTabActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +47,49 @@ public class SearchTabActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SearchView searchView = (SearchView) findViewById(R.id.search_tab);
+        searchView = (SearchView) findViewById(R.id.search_tab);
+
+        bundle = new Bundle();
+
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //뷰 페이저의 페이지가 전환 될 시점에 검색어를 초기화 해줌//
+                searchView.setQuery("", true); //뒤에 boolean 값은 정확한 의미를 잘 모르겠음..//
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 Toast.makeText(SearchTabActivity.this, "" + query, Toast.LENGTH_SHORT).show();
+
+                //검색어를 입력 후 검색 버튼을 눌렀을 때//
+                //검색어 전달//
+                bundle.putString("SEARCH_QUERY", "" + query);
+                //검색 결과 리스트 갱신//
+                mSectionsPagerAdapter.notifyDataSetChanged();
 
 
                 return false;
@@ -64,16 +102,6 @@ public class SearchTabActivity extends AppCompatActivity {
         });
 
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
 
         setTitle(""); //타이틀 자리에 에디트 텍스트가 올 것이니 타이틀은 생략.//
     }
@@ -142,8 +170,11 @@ public class SearchTabActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        //  private Bundle bundle ;
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+            //     this.bundle = bundle;
         }
 
         @Override
@@ -153,9 +184,12 @@ public class SearchTabActivity extends AppCompatActivity {
             switch (position) {
                 case 0: {
                     SearchNewsFragment search_news_fragment = new SearchNewsFragment();
-                    Bundle b = new Bundle();
-                    b.putString("SEARCH_FRAGMENT_TAG", "NEWS_FRAGMENT");
-                    search_news_fragment.setArguments(b);
+
+                    //   b.putString("SEARCH_FRAGMENT_TAG", "NEWS_FRAGMENT");
+                    search_news_fragment.setArguments(bundle);
+
+                    //  searchView.setQuery("", true);
+                    Toast.makeText(SearchTabActivity.this, "notifyDataSetChanged", Toast.LENGTH_SHORT).show();
                     /*
                     /** Fragment로 값을 전달할 필요가 있을 경우 *
                     Bundle bundle = new Bundle(); //Fragment에게 값을 전달하기 위해서 Bundle사용.//
@@ -170,18 +204,23 @@ public class SearchTabActivity extends AppCompatActivity {
 
                 case 1: {
                     SearchUserFragment search_user_fragment = new SearchUserFragment();
-                    Bundle b = new Bundle();
-                    b.putString("SEARCH_FRAGMENT_TAG", "USER_FRAGMENT");
-                    search_user_fragment.setArguments(b);
+
+                    //   b.putString("SEARCH_FRAGMENT_TAG", "USER_FRAGMENT");
+                    search_user_fragment.setArguments(bundle);
+
+                    //    searchView.setQuery("", true);
+                    Toast.makeText(SearchTabActivity.this, "notifyDataSetChanged", Toast.LENGTH_SHORT).show();
                     return search_user_fragment;
                 }
 
                 case 2: {
                     SearchTagFragment search_tag_fragment = new SearchTagFragment();
-                    Bundle b = new Bundle();
-                    b.putString("SEARCH_FRAGMENT_TAG", "TAG_FRAGMENT");
-                    search_tag_fragment.setArguments(b);
 
+                    //  b.putString("SEARCH_FRAGMENT_TAG", "TAG_FRAGMENT");
+                    search_tag_fragment.setArguments(bundle);
+                    Toast.makeText(SearchTabActivity.this, "notifyDataSetChanged", Toast.LENGTH_SHORT).show();
+
+                    //     searchView.setQuery("", true);
                     return search_tag_fragment;
                 }
             }
@@ -206,6 +245,12 @@ public class SearchTabActivity extends AppCompatActivity {
                     return "태그";
             }
             return null;
+        }
+
+        //리스트뷰 갱신을 위해 override//
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
     }
 }
