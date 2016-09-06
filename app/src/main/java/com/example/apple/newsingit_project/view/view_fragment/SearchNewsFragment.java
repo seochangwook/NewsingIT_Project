@@ -43,6 +43,9 @@ import okhttp3.Response;
 public class SearchNewsFragment extends Fragment {
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
+    private static final int LOAD_MORE_TAG = 5;
+
+    String query;
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     FamiliarRecyclerView recyclerView;
@@ -80,6 +83,7 @@ public class SearchNewsFragment extends Fragment {
     private void getSearchNewsNetworkData(String query) {
         showpDialog();
 
+        Log.d("search", "network");
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = new OkHttpClient();
@@ -89,7 +93,7 @@ public class SearchNewsFragment extends Fragment {
                 .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("search")
                 .addQueryParameter("target", "1")
-                .addQueryParameter("word", "" + query)
+                .addQueryParameter("word", query)
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "10");
 
@@ -137,7 +141,7 @@ public class SearchNewsFragment extends Fragment {
 
 
         Bundle b = getArguments();
-        String query = b.getString("SEARCH_QUERY");
+        query = b.getString("SEARCH_QUERY");
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
@@ -147,7 +151,7 @@ public class SearchNewsFragment extends Fragment {
 
         familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) view.findViewById(R.id.search_news_rv_list);
         familiarRefreshRecyclerView.setId(android.R.id.list);
-        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity()));
+        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity(), LOAD_MORE_TAG));
         familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         familiarRefreshRecyclerView.setLoadMoreEnabled(true);
 
@@ -162,7 +166,9 @@ public class SearchNewsFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
-                        mAdapter.setSearchNewsData(searchNewsData);
+                        //   mAdapter.setSearchNewsData(searchNewsData);
+                        Log.d("search", "pull refresh");
+
 
                     }
                 }, 1000);
@@ -178,8 +184,13 @@ public class SearchNewsFragment extends Fragment {
                         Log.i("EVENT :", "새로고침 완료");
 
                         familiarRefreshRecyclerView.loadMoreComplete();
+                        initSearchNewsDataList();
 
-                        mAdapter.setSearchNewsData(searchNewsData);
+                        Log.d("search", "load more");
+                        getSearchNewsNetworkData(query);
+
+
+                        //   mAdapter.setSearchNewsData(searchNewsData);
 
                     }
                 }, 1000);
@@ -223,8 +234,8 @@ public class SearchNewsFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-        initDummyData(query);
-        // getSearchNewsNetworkData(query); //네트워크//
+        // initDummyData(query); //더미//
+        getSearchNewsNetworkData(query); //네트워크//
 
         return view;
     }
@@ -237,6 +248,11 @@ public class SearchNewsFragment extends Fragment {
     private void hidepDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    public void initSearchNewsDataList() {
+        searchNewsData.searchNewsDataArrayList.clear();
+        mAdapter.initSearchNewsData(searchNewsData);
     }
 
     private void initDummyData(String query) {

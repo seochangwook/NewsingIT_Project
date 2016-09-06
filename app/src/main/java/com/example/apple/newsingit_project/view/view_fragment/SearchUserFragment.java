@@ -45,7 +45,8 @@ public class SearchUserFragment extends Fragment {
     //인텐트 전달객체 변수 설정//
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
-
+    private static final int LOAD_MORE_TAG = 4;
+    String query;
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     FamiliarRecyclerView recyclerView;
@@ -91,7 +92,7 @@ public class SearchUserFragment extends Fragment {
         searchUserData = new SearchUserData();
 
         Bundle b = getArguments();
-        String query = b.getString("SEARCH_QUERY");
+        query = b.getString("SEARCH_QUERY");
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
@@ -99,7 +100,7 @@ public class SearchUserFragment extends Fragment {
 
         familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) view.findViewById(R.id.search_user_rv_list);
         familiarRefreshRecyclerView.setId(android.R.id.list);
-        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity()));
+        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity(), LOAD_MORE_TAG));
         familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         familiarRefreshRecyclerView.setLoadMoreEnabled(true);
 
@@ -113,7 +114,8 @@ public class SearchUserFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
-                        mAdapter.setSearchUserData(searchUserData);
+                        //  mAdapter.setSearchUserData(searchUserData);
+
 
                     }
                 }, 1000);
@@ -129,8 +131,10 @@ public class SearchUserFragment extends Fragment {
                         Log.i("EVENT :", "새로고침 완료");
 
                         familiarRefreshRecyclerView.loadMoreComplete();
+                        initSearchUserDataList();
+                        get_User_search_Data(query);
 
-                        mAdapter.setSearchUserData(searchUserData);
+                        //   mAdapter.setSearchUserData(searchUserData);
 
                     }
                 }, 1000);
@@ -173,12 +177,17 @@ public class SearchUserFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-        initDummyData(query);
+        // initDummyData(query); //더미//
 
         /** 데이터 셋팅 **/
-        //get_User_search_Data(query);
+        get_User_search_Data(query);
 
         return view;
+    }
+
+    private void initSearchUserDataList() {
+        searchUserData.searchUserDataArrayList.clear();
+        mAdapter.initSearchUserData(searchUserData);
     }
 
     public void get_User_search_Data(String query) {

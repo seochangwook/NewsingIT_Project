@@ -77,11 +77,11 @@ public class LoadMoreView extends FrameLayout implements IFamiliarLoadMore {
         } else if (flag == 3) {
             mTvLoadText.setText(getResources().getString(R.string.load_more_normal_folder));
         } else if (flag == 4) {
-            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_search_user));
         } else if (flag == 5) {
-            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_search_news));
         } else if (flag == 6) {
-            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_search_tag));
         }
     }
 
@@ -97,11 +97,11 @@ public class LoadMoreView extends FrameLayout implements IFamiliarLoadMore {
         } else if (flag == 3) {
             mTvLoadText.setText(getResources().getString(R.string.load_more_loading_folder));
         } else if (flag == 4) {
-            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_main));
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_search_user));
         } else if (flag == 5) {
-            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_main));
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_search_news));
         } else if (flag == 6) {
-            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_main));
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_search_tag));
         }
     }
 

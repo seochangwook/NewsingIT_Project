@@ -26,8 +26,15 @@ public class SearchTagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void setSearchTagData(SearchTagData searchTagData) {
         if (this.searchTagData != searchTagData) {
             this.searchTagData = searchTagData;
-            notifyDataSetChanged();
         }
+        notifyDataSetChanged();
+    }
+
+    public void initSearchTagData(SearchTagData searchTagData) {
+        if (this.searchTagData != searchTagData) {
+            this.searchTagData = searchTagData;
+        }
+        notifyDataSetChanged();
     }
 
     @Override

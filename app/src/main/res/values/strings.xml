@@ -47,6 +47,19 @@
     <string name="load_more_normal_folder">폴더 더보기</string>
     <string name="load_more_loading_folder">폴더 정보 가져오는 중...</string>
     <string name="load_more_error_folder">폴더 항목이 더 이상 없습니다</string>
+
+    <string name="load_more_normal_search_news">뉴스 검색 결과 더보기</string>
+    <string name="load_more_loading_search_news">뉴스 검색 결과 가져오는 중...</string>
+    <string name="load_more_error_search_news">뉴스 검색 결과가 더 이상 없습니다</string>
+
+    <string name="load_more_normal_search_user">사용자 검색 결과 더보기</string>
+    <string name="load_more_loading_search_user">사용자 검색 결과 가져오는 중...</string>
+    <string name="load_more_error_search_user">사용자 검색 결과가 더 이상 없습니다</string>
+
+    <string name="load_more_normal_search_tag">태그 검색 결과 더보기</string>
+    <string name="load_more_loading_search_tag">태그 검색 결과 가져오는 중...</string>
+    <string name="load_more_error_search_tag">태그 검색 결과가 더 이상 없습니다.</string>
+
     <string name="title_activity_create__folder_">Create_Folder_Activity</string>
 
 

@@ -44,6 +44,10 @@ public class SearchTagFragment extends Fragment {
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+    private static final int LOAD_MORE_TAG = 6;
+
+    String query;
+
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     FamiliarRecyclerView recyclerView;
@@ -92,7 +96,7 @@ public class SearchTagFragment extends Fragment {
                 .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("search")
                 .addQueryParameter("target", "3")
-                .addQueryParameter("word", "" + query)
+                .addQueryParameter("word", query)
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "10");
 
@@ -141,7 +145,7 @@ public class SearchTagFragment extends Fragment {
 
 
         Bundle b = getArguments();
-        String query = b.getString("SEARCH_QUERY");
+        query = b.getString("SEARCH_QUERY");
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
@@ -150,7 +154,7 @@ public class SearchTagFragment extends Fragment {
 
         familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) view.findViewById(R.id.search_tag_rv_list);
         familiarRefreshRecyclerView.setId(android.R.id.list);
-        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity()));
+        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity(), LOAD_MORE_TAG));
         familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         familiarRefreshRecyclerView.setLoadMoreEnabled(true);
 
@@ -165,7 +169,9 @@ public class SearchTagFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
-                        mAdapter.setSearchTagData(searchTagData);
+                        //mAdapter.setSearchTagData(searchTagData);
+
+
 
                     }
                 }, 1000);
@@ -182,7 +188,11 @@ public class SearchTagFragment extends Fragment {
 
                         familiarRefreshRecyclerView.loadMoreComplete();
 
-                        mAdapter.setSearchTagData(searchTagData);
+                        initSearchTagDataList();
+
+                        //  mAdapter.setSearchTagData(searchTagData);
+                        getSearchTagNetworkData(query);
+
 
                     }
                 }, 1000);
@@ -225,12 +235,16 @@ public class SearchTagFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-        initDummyData(query);
-        // getSearchTagNetworkData(query); //네트워크//
+        //  initDummyData(query); //더미//
+        getSearchTagNetworkData(query); //네트워크//
 
         return view;
     }
 
+    private void initSearchTagDataList() {
+        searchTagData.searchTagDataList.clear();
+        mAdapter.initSearchTagData(searchTagData);
+    }
 
 
     private void hidepDialog() {

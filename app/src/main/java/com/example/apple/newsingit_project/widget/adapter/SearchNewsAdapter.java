@@ -26,8 +26,15 @@ public class SearchNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void setSearchNewsData(SearchNewsData searchNewsData) {
         if (this.searchNewsData != searchNewsData) {
             this.searchNewsData = searchNewsData;
-            notifyDataSetChanged();
         }
+        notifyDataSetChanged();
+    }
+
+    public void initSearchNewsData(SearchNewsData searchNewsData) {
+        if (this.searchNewsData != searchNewsData) {
+            this.searchNewsData = searchNewsData;
+        }
+        notifyDataSetChanged();
     }
 
     @Override

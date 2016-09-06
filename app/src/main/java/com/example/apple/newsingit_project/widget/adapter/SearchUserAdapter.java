@@ -46,12 +46,27 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             Log.d("json data", responseData);
 
+
         }
     };
 
     public SearchUserAdapter(Context context) {
         this.context = context;
         searchUserData = new SearchUserData();
+    }
+
+    public void setSearchUserData(SearchUserData searchUserData) {
+        if (this.searchUserData != searchUserData) {
+            this.searchUserData = searchUserData;
+        }
+        notifyDataSetChanged();
+    }
+
+    public void initSearchUserData(SearchUserData searchUserData) {
+        if (this.searchUserData != searchUserData) {
+            this.searchUserData = searchUserData;
+        }
+        notifyDataSetChanged();
     }
 
     private void setFollowing(int userId) {
@@ -101,12 +116,6 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         client.newCall(request).enqueue(requestSetFollowingCallback);
     }
 
-    public void setSearchUserData(SearchUserData searchUserData) {
-        if (this.searchUserData != searchUserData) {
-            this.searchUserData = searchUserData;
-            notifyDataSetChanged();
-        }
-    }
 
     @Override
     public int getItemCount() {
