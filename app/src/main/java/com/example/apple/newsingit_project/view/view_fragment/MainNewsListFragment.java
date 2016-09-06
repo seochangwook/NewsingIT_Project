@@ -123,6 +123,7 @@ public class MainNewsListFragment extends Fragment {
 
             MainNewsListRequest mainNewsListRequest = gson.fromJson(response_data, MainNewsListRequest.class);
 
+
             setData(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
         }
     };
@@ -152,7 +153,7 @@ public class MainNewsListFragment extends Fragment {
 
         //리사이클뷰 설정//
         /** 메인뉴스 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
-        mainnews_recyclerrefreshview.setLoadMoreView(new LoadMoreView(getActivity()));
+        mainnews_recyclerrefreshview.setLoadMoreView(new LoadMoreView(getActivity(), 1));
         mainnews_recyclerrefreshview.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         mainnews_recyclerrefreshview.setLoadMoreEnabled(true); //등록//
 
@@ -167,13 +168,11 @@ public class MainNewsListFragment extends Fragment {
 
         mainnews_recyclerview.setAdapter(newsAdapter); //어댑터 할당.//
 
-        /** EmptyView를 설정 **/
+        /** EmptyView, HeaderView를 설정 **/
         emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_mainnews_empty_layout, null);
-
-        /** HeaderView를 설정 **/
-        fix_headerview = getActivity().getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
-
         mainnews_recyclerview.setEmptyView(emptyview, true);
+
+        fix_headerview = getActivity().getLayoutInflater().inflate(R.layout.view_mainnews_refreshheader, null);
         mainnews_recyclerview.addHeaderView(fix_headerview);
 
         /** 뉴스 리스트 선택 이벤트 설정(개수가 고정되어 있기에 직접할당,일반적으로는 동적할당) **/

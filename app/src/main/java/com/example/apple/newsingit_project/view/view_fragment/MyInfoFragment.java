@@ -163,7 +163,7 @@ public class MyInfoFragment extends Fragment {
 
 
         /** 폴더 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
-        folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(getActivity()));
+        folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(getActivity(), 3));
         folder_recyclerrefreshview.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         folder_recyclerrefreshview.setLoadMoreEnabled(true); //등록//
 

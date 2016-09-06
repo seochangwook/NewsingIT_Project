@@ -2,8 +2,10 @@ package com.example.apple.newsingit_project;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.example.apple.newsingit_project.data.json_data.tagdetaillist.TagDetai
 import com.example.apple.newsingit_project.data.json_data.tagdetaillist.TagDetailListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.UserScrapContentAdapter;
 import com.google.gson.Gson;
 
@@ -24,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
+import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -39,6 +43,8 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private static final String SCRAP_ID = "SCRAP_ID";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
 
+    static int page_count = 1;
+
     String folder_name;
     String is_user_my;
     String folder_id;
@@ -48,7 +54,10 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
     NetworkManager networkManager;
-    private FamiliarRecyclerView recyclerView;
+    View headerview;
+    View emptyview;
+    private FamiliarRefreshRecyclerView scrap_recyclerrefreshview;
+    private FamiliarRecyclerView scrap_recyclerView;
     private ProgressDialog pDialog;
 
     private Callback requestUserScrapContetnListCallback = new Callback() {
@@ -98,13 +107,16 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         OkHttpClient client = networkManager.getClient();
 
+        Log.d("page count", "" + page_count);
+
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
                 .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("scraps")
                 .addQueryParameter("category", folder_id)
-                .addQueryParameter("page", "1")
-                .addQueryParameter("count", "20");
+                //page값은 스와이프 유무에 따라 동적으로 변화된다.//
+                .addQueryParameter("page", "" + page_count)
+                .addQueryParameter("count", "20"); //count는 20개로 고정.//
 
         Request request = new Request.Builder()
                 .url(builder.build())
@@ -163,6 +175,8 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_scrap_content_list_layout);
 
+        scrap_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.scrap_list_rv_list);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -174,6 +188,73 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         folder_name = intent.getStringExtra(KEY_FOLDER_NAME);
         is_user_my = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
         flag_tag = intent.getStringExtra(KEY_TAGSEARCH_FLAG); //태그로 검색 시 이 부분에 값이 "TAG"로 할당//
+
+        page_count = 1;
+
+        /** 리사이클뷰 설정 **/
+        scrap_recyclerrefreshview.setLoadMoreView(new LoadMoreView(this, 2));
+        scrap_recyclerrefreshview.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
+        scrap_recyclerrefreshview.setLoadMoreEnabled(true); //등록//
+
+        scrap_recyclerView = scrap_recyclerrefreshview.getFamiliarRecyclerView();
+        scrap_recyclerView.setItemAnimator(new DefaultItemAnimator());
+        scrap_recyclerView.setHasFixedSize(true);
+
+        /** Header, Empty 설정 **/
+        emptyview = getLayoutInflater().inflate(R.layout.view_scraplist_emptyview, null);
+        scrap_recyclerView.setEmptyView(emptyview, true);
+
+        headerview = getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
+        scrap_recyclerView.addHeaderView(headerview);
+
+        /** Swape event **/
+        scrap_recyclerrefreshview.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
+            @Override
+            public void onPullRefresh() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "당겨서 새로고침 중...");
+
+                        scrap_recyclerrefreshview.pullRefreshComplete();
+                        scrap_recyclerView.removeHeaderView(headerview);
+
+                    }
+                }, 1000);
+            }
+        });
+
+        scrap_recyclerrefreshview.setOnLoadMoreListener(new FamiliarRefreshRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "스크랩 정보 불러오기...");
+
+                        scrap_recyclerrefreshview.loadMoreComplete();
+
+                        //아래에서 새로고침 시 현재 리스트에서 page count를 증가(페이지수는 1씩 증가)//
+                        page_count += 1;
+
+                        if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
+                        {
+                            Log.d("message", "tag load");
+
+                            init_scrap_content_data(); //우선적으로 데이터 초기화.//
+
+                            getTagData(folder_id); //해당 페이지의 개수만큼 다시 로드//
+                        } else {
+                            Log.d("message", "scrap load");
+
+                            init_scrap_content_data(); //우선적으로 데이터 초기화.//
+
+                            getScrapContentListNetworkData(); //해당 페이지의 개수만큼 다시 로드//
+                        }
+                    }
+                }, 1000);
+            }
+        });
 
         if (flag_tag != null) {
             Log.d("intent flag", flag_tag);
@@ -213,12 +294,12 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         //리사이클러 뷰 설정//
         userScrapContentData = new UserScrapContentData();
-        recyclerView = (FamiliarRecyclerView) findViewById(R.id.scrap_list_rv_list);
 
         mAdapter = new UserScrapContentAdapter(this);
-        recyclerView.setAdapter(mAdapter);
 
-        recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
+        scrap_recyclerView.setAdapter(mAdapter);
+
+        scrap_recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String userSelect = userScrapContentData.userScrapContentDataList.get(position).getNcTitle().toString();
@@ -261,6 +342,12 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 //      initDummyData();
     }
 
+    public void init_scrap_content_data() {
+        userScrapContentData.userScrapContentDataList.clear();
+
+        mAdapter.init_ScrapContent_Data(userScrapContentData, is_user_my);
+    }
+
     public void getTagData(String folder_name) {
         /** 네트워크 설정 **/
         networkManager = NetworkManager.getInstance();
@@ -273,8 +360,9 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                 .addPathSegment("search")
                 .addQueryParameter("target", "4") //4는 태그상세 검색//
                 .addQueryParameter("word", folder_name) //word는 검색단어(태그 상세검색 시 필요)//
-                .addQueryParameter("page", "1")
-                .addQueryParameter("count", "10");
+                //page값은 스와이프 유무에 따라 동적으로 변화된다.//
+                .addQueryParameter("page", "" + page_count)
+                .addQueryParameter("count", "20"); //count는 20개로 고정.//
 
         Request request = new Request.Builder()
                 .url(builder.build())

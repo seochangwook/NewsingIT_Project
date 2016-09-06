@@ -24,9 +24,25 @@ public class LoadMoreView extends FrameLayout implements IFamiliarLoadMore {
 
     private boolean isLoading = false; // 是否加载中
 
+    private int flag;
 
-    public LoadMoreView(Context context) {
+    /**
+     * flag
+     * 1 - Main News List
+     * 2 - Scrap content list
+     * 3 - Folder List
+     * 4 - User search List
+     * 5 - News search List
+     * 6 - Tag search List
+     *
+     * @param context
+     * @param flag
+     */
+
+    public LoadMoreView(Context context, int flag) {
         this(context, null);
+
+        this.flag = flag;
     }
 
     public LoadMoreView(Context context, AttributeSet attrs) {
@@ -53,14 +69,40 @@ public class LoadMoreView extends FrameLayout implements IFamiliarLoadMore {
     public void showNormal() {
         isLoading = false;
         mPbLoad.setVisibility(GONE);
-        mTvLoadText.setText(getResources().getString(R.string.load_more_normal));
+
+        if (flag == 1) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+        } else if (flag == 2) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_scrap));
+        } else if (flag == 3) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_folder));
+        } else if (flag == 4) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+        } else if (flag == 5) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+        } else if (flag == 6) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+        }
     }
 
     @Override
     public void showLoading() {
         isLoading = true;
         mPbLoad.setVisibility(VISIBLE);
-        mTvLoadText.setText(getResources().getString(R.string.load_more_loading));
+
+        if (flag == 1) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_main));
+        } else if (flag == 2) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_scrap));
+        } else if (flag == 3) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_folder));
+        } else if (flag == 4) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_main));
+        } else if (flag == 5) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_main));
+        } else if (flag == 6) {
+            mTvLoadText.setText(getResources().getString(R.string.load_more_loading_main));
+        }
     }
 
     @Override

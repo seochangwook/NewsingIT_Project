@@ -1,9 +1,11 @@
 package com.example.apple.newsingit_project;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
@@ -294,8 +296,27 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         {
             Toast.makeText(CreateScrapContentActivity.this, "생성 완료", Toast.LENGTH_SHORT).show();
 
-            //네트워크로 데이터를 보낸다.//
-            create_Scrap();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateScrapContentActivity.this);
+            alertDialog.setMessage("수정하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //yes
+                            //네트워크로 데이터를 보낸다.//
+                            create_Scrap();
+
+                            finish();
+                        }
+                    }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //no
+
+                }
+            });
+
+            AlertDialog alert = alertDialog.create();
+            alert.show();
 
             finish();
         }
