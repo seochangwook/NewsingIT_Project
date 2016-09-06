@@ -32,4 +32,37 @@
     <!-- follow button color-->
     <color name="follow_true">#b1b1ef</color>
     <color name="follow_false">#FFFFFFFF</color>
+
+
+    <!--alarm color-->
+    <color name="alarm_message">#7d7d7d</color>
+    <color name="alarm_time">#dadada</color>
+    <color name="alarm_background">#ffffff</color>
+
+
+    <!--user scrap list color-->
+    <color name="scrap_list_background">#ffffff</color>
+    <color name="scrap_list_title">#454444</color>
+    <color name="scrap_list_content">#454444</color>
+    <color name="scrap_list_author">#7d7d7d</color>
+    <color name="scrap_list_time">#7d7d7d</color>
+    <color name="scrap_list_like_cnt">#939191</color>
+
+
+    <!--uesr scrap content color-->
+    <color name="scrap_content_background">#ffffff</color>
+    <color name="scrap_content_title">#454444</color>
+    <color name="scrap_content_author">#454444</color>
+    <color name="scrap_content_time">#7d7d7d</color>
+    <color name="scrap_content_content">#454444</color>
+    <color name="scrap_content_tag">#8b8a8a</color>
+    <color name="scrap_content_like_cnt">#939191</color>
+
+    <!--search news color-->
+    <color name="search_news_author">#7d7d7d</color>
+    <color name="search_news_time">#c9c9c9</color>
+    <color name="search_news_content">#454444</color>
+    <color name="search_news_background">#ffffff</color>
+
+
 </resources>

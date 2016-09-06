@@ -144,7 +144,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setNcTitle(scrapContentList.get(i).getNc_title());
                         newUserScrapCotentData.setNcImgUrl(scrapContentList.get(i).getNc_img_url());
                         newUserScrapCotentData.setNcAuthor(scrapContentList.get(i).getNc_author());
-                        newUserScrapCotentData.setNcTime(scrapContentList.get(i).getNc_dtime());
+                        newUserScrapCotentData.setNcTime(scrapContentList.get(i).getNc_ntime());
                         newUserScrapCotentData.setLike(scrapContentList.get(i).getFavorite_cnt());
                         newUserScrapCotentData.setLikeFlag(scrapContentList.get(i).getFavorite());
                         newUserScrapCotentData.setLock(scrapContentList.get(i).getLock());

@@ -8,7 +8,8 @@
     card:cardElevation="4dp">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/search_news_background">
 
 
 
@@ -16,33 +17,34 @@
         android:id="@+id/text_search_news_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-
+        android:layout_marginLeft="@dimen/search_news_author_margin_left"
+        android:layout_marginTop="@dimen/search_news_author_margin_top"
         android:text="author"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/search_news_author"
+        android:textSize="@dimen/search_news_author_size" />
 
     <TextView
         android:id="@+id/text_search_news_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/search_news_time_margin_left"
+        android:layout_marginTop="@dimen/search_news_time_margin_top"
         android:layout_toEndOf="@+id/text_search_news_author"
         android:layout_toRightOf="@+id/text_search_news_author"
         android:text="ncTime"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/search_news_time"
+        android:textSize="@dimen/search_news_time_size" />
 
     <TextView
         android:id="@+id/text_search_news_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_search_news_author"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/search_news_content_margin_botton"
+        android:layout_marginLeft="@dimen/search_news_content_margin_left"
+        android:layout_marginTop="@dimen/search_news_content_margin_top"
         android:text="title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

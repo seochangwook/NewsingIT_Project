@@ -4,51 +4,39 @@
     android:id="@+id/l"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/alarm_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ImageView
         android:id="@+id/img_alarm_profile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="20dp"
-        android:src="@mipmap/ic_alarmlist_prof" />
-
-    <TextView
-        android:id="@+id/text_alarm_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/img_alarm_profile"
-        android:layout_marginLeft="20dp"
-        android:layout_toEndOf="@+id/img_alarm_profile"
-        android:layout_toRightOf="@+id/img_alarm_profile"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginBottom="@dimen/alarm_margin_bottom"
+        android:layout_marginLeft="@dimen/alarm_margin_left"
+        android:layout_marginTop="@dimen/alarm_margin_top"
+        android:src="@mipmap/ic_alarmlist_prof" />
 
     <TextView
         android:id="@+id/text_alarm_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_alarm_name"
-        android:layout_toEndOf="@+id/text_alarm_name"
-        android:layout_toRightOf="@+id/text_alarm_name"
+        android:layout_marginLeft="@dimen/alarm_messga_margin_left"
+        android:layout_marginTop="@dimen/alarm_message_margin_top"
+
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/alarm_message"
+        android:textSize="@dimen/alarm_message_size" />
 
     <TextView
         android:id="@+id/text_alarm_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_alarm_name"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/img_alarm_profile"
-        android:layout_toRightOf="@+id/img_alarm_profile"
+        android:layout_marginLeft="@dimen/alarm_time_margin_left"
+        android:layout_marginTop="@dimen/alarm_time_margin_top"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/alarm_time"
+        android:textSize="@dimen/alarm_time_size" />
 
 </RelativeLayout>

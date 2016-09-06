@@ -113,4 +113,101 @@
     <dimen name="floatingbutton_margin_left">290dp</dimen>
     <dimen name="floatingbutton_margin_top">435dp</dimen>
 
+
+    <!-- Alarm List dimen-->
+    <dimen name="alarm_margin_top">17dp</dimen>
+    <dimen name="alarm_margin_left">37dp</dimen>
+    <dimen name="alarm_margin_right">28dp</dimen>
+    <dimen name="alarm_margin_bottom">17dp</dimen>
+
+    <dimen name="alarm_message_size">13dp</dimen>
+    <dimen name="alarm_message_margin_top">27dp</dimen>
+    <dimen name="alarm_messga_margin_left">112dp</dimen>
+
+    <dimen name="alarm_time_size">11dp</dimen>
+    <dimen name="alarm_time_margin_top">40dp</dimen>
+    <dimen name="alarm_time_margin_left">112dp</dimen>
+
+
+    <!--user scrap list dimen-->
+    <dimen name="scrap_list_img_margin_top">4dp</dimen>
+    <dimen name="scrap_list_img_margin_bottom">4dp</dimen>
+    <dimen name="scrap_list_img_width">100dp</dimen>
+    <dimen name="scrap_list_img_height">100dp</dimen>
+
+    <dimen name="scrap_list_title_margin_top">22dp</dimen>
+    <dimen name="scrap_list_title_margin_left">112dp</dimen>
+    <dimen name="scrap_list_title_size">14sp</dimen>
+
+    <dimen name="scrap_list_content_margin_top">50dp</dimen>
+    <dimen name="scrap_list_content_margin_left">112dp</dimen>
+    <dimen name="scrap_list_content_size">11sp</dimen>
+
+    <dimen name="scrap_list_author_margin_top">82dp</dimen>
+    <dimen name="scrap_list_author_margin_right">7dp</dimen>
+    <dimen name="scrap_list_author_size">10sp</dimen>
+
+    <dimen name="scrap_list_time_margin_top">82dp</dimen>
+    <dimen name="scrap_list_time_margin_right">12dp</dimen>
+    <dimen name="scrap_list_time_size">10sp</dimen>
+
+    <dimen name="scrap_list_like_img_width">24dp</dimen>
+    <dimen name="scrap_list_like_img_height">24dp</dimen>
+    <dimen name="scrap_list_like_img_margin_top">17dp</dimen>
+
+    <dimen name="scrap_list_like_cnt_margin_top">17dp</dimen>
+    <dimen name="scrap_list_like_cnt_margin_right">35dp</dimen>
+    <dimen name="scrap_list_like_cnt_size">11sp</dimen>
+
+    <dimen name="scrap_list_setting_width">24dp</dimen>
+    <dimen name="scrap_list_setting_height">24dp</dimen>
+    <dimen name="scrap_list_setting_margin_top">15dp</dimen>
+    <dimen name="scrap_list_setting_margin_right">9dp</dimen>
+
+
+    <!--user scrap content dimen-->
+    <dimen name="scrap_content_title_margin_top">55dp</dimen>
+    <dimen name="scrap_content_title_margin_left">38dp</dimen>
+    <dimen name="scrap_content_title_size">16sp</dimen>
+
+    <dimen name="scrap_content_author_margin_top">28dp</dimen>
+    <dimen name="scrap_content_author_margin_left">38dp</dimen>
+    <dimen name="scrap_content_author_size">8sp</dimen>
+
+    <dimen name="scrap_content_time_margin_top">28dp</dimen>
+    <dimen name="scrap_content_time_margin_left">7dp</dimen>
+    <dimen name="scrap_content_time_size">8sp</dimen>
+
+    <dimen name="scrap_content_like_img_width">24dp</dimen>
+    <dimen name="scrap_content_like_img_height">24dp</dimen>
+    <dimen name="scrap_content_like_img_margin_top">20dp</dimen>
+
+    <dimen name="scrap_content_like_cnt_margin_top">28dp</dimen>
+    <dimen name="scrap_content_like_cnt_size">11sp</dimen>
+
+    <dimen name="scrap_content_content_margin_top">21dp</dimen>
+    <dimen name="scrap_content_content_size">13sp</dimen>
+
+    <dimen name="scrap_content_tag_margin_top">44dp</dimen>
+
+    <dimen name="scrap_content_tag_img_margin_left">16dp</dimen>
+    <dimen name="scrap_content_tag_img_width">48dp</dimen>
+    <dimen name="scrap_content_tag_img_height">48dp</dimen>
+
+
+    <!--search news dimen-->
+    <dimen name="search_news_author_margin_top">25dp</dimen>
+    <dimen name="search_news_author_margin_left">26dp</dimen>
+    <dimen name="search_news_author_size">10sp</dimen>
+
+    <dimen name="search_news_time_margin_top">25dp</dimen>
+    <dimen name="search_news_time_margin_left">17dp</dimen>
+    <dimen name="search_news_time_size">10sp</dimen>
+
+    <dimen name="search_news_content_margin_top">10dp</dimen>
+    <dimen name="search_news_content_margin_left">26dp</dimen>
+    <dimen name="search_news_content_margin_botton">28dp</dimen>
+    <dimen name="search_news_content_size">15sp</dimen>
+
+
 </resources>

@@ -3,7 +3,7 @@ package com.example.apple.newsingit_project.data.json_data.scrapcontentlist;
 public class ScrapContentListRequestErrorResults {
     private String nc_title;
     private String nc_img_url;
-    private String nc_dtime;
+    private String nc_ntime;
     private boolean locked;
     private int id;
     private String title;
@@ -27,12 +27,12 @@ public class ScrapContentListRequestErrorResults {
         this.nc_img_url = nc_img_url;
     }
 
-    public String getNc_dtime() {
-        return this.nc_dtime;
+    public String getNc_ntime() {
+        return this.nc_ntime;
     }
 
-    public void setNc_dtime(String nc_dtime) {
-        this.nc_dtime = nc_dtime;
+    public void setNc_ntime(String nc_ntime) {
+        this.nc_ntime = nc_ntime;
     }
 
     public boolean getLock() {

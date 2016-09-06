@@ -20,7 +20,7 @@ public class AlarmListViewHolder extends RecyclerView.ViewHolder {
 
     public AlarmListViewHolder(View itemView) {
         super(itemView);
-        nameView = (TextView)itemView.findViewById(R.id.text_alarm_name);
+        // nameView = (TextView)itemView.findViewById(R.id.text_alarm_name);
         contentView = (TextView)itemView.findViewById(R.id.text_alarm_content);
         dateView = (TextView)itemView.findViewById(R.id.text_alarm_date);
         profileView = (ImageView)itemView.findViewById(R.id.img_alarm_profile);
@@ -28,7 +28,7 @@ public class AlarmListViewHolder extends RecyclerView.ViewHolder {
 
     public void setAlarmData(AlarmData alarmData, Context context) {
         this.alarmData = alarmData;
-        nameView.setText(alarmData.getName());
+        //    nameView.setText(alarmData.getName());
         contentView.setText(alarmData.getContent());
         dateView.setText(alarmData.getDate());
     }

@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card:cardBackgroundColor="#FFFFFF"
     card:cardCornerRadius="8dp"
     card:cardElevation="4dp">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/scrap_list_background">
 
     <ImageView
         android:id="@+id/img_scrap_list"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="@dimen/scrap_list_img_width"
+        android:layout_height="@dimen/scrap_list_img_width"
+        android:layout_marginBottom="@dimen/scrap_list_img_margin_bottom"
+        android:layout_marginTop="@dimen/scrap_list_img_margin_top"
         android:src="@android:drawable/sym_def_app_icon" />
 
     <TextView
         android:id="@+id/text_scrap_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/img_scrap_list"
-        android:layout_toRightOf="@+id/img_scrap_list"
+        android:layout_marginLeft="@dimen/scrap_list_title_margin_left"
+        android:layout_marginTop="@dimen/scrap_list_title_margin_top"
         android:text="title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/scrap_list_title"
+        android:textSize="@dimen/scrap_list_title_size"
+        android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/img_btn_scrap_setting"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/scrap_list_setting_width"
+        android:layout_height="@dimen/scrap_list_setting_height"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/scrap_list_setting_margin_right"
+        android:layout_marginTop="@dimen/scrap_list_setting_margin_top"
         android:background="@color/button_transparent_background"
         android:singleLine="true"
         android:src="@mipmap/ic_more_scrap" />
 
     <TextView
         android:id="@+id/text_scrap_list_nctitle"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/text_scrap_list_date"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/img_scrap_list"
-        android:layout_toRightOf="@+id/img_scrap_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/scrap_list_content_margin_left"
+        android:layout_marginTop="@dimen/scrap_list_content_margin_top"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="nctitle"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/scrap_list_content"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/scrap_list_content_size" />
 
     <TextView
         android:id="@+id/text_scrap_list_date"
@@ -63,34 +63,46 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/img_btn_scrap_list_like"
-        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/scrap_list_time_margin_right"
+        android:layout_marginTop="@dimen/scrap_list_time_margin_top"
         android:text="ncTime"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/scrap_list_time"
+        android:textSize="@dimen/scrap_list_time_size" />
 
     <TextView
         android:id="@+id/text_scrap_list_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/text_scrap_list_date"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="40dp"
-        android:layout_toLeftOf="@+id/text_scrap_list_date"
-        android:layout_toStartOf="@+id/text_scrap_list_date"
-        android:paddingRight="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/scrap_list_like_cnt_margin_right"
+        android:layout_marginTop="@dimen/scrap_list_like_cnt_margin_top"
         android:text="like"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/scrap_list_like_cnt"
+        android:textSize="@dimen/scrap_list_like_cnt_size" />
 
     <ImageButton
         android:id="@+id/img_btn_scrap_list_like"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignBottom="@+id/text_scrap_list_title"
-        android:layout_marginRight="10dp"
+        android:layout_width="@dimen/scrap_list_like_img_width"
+        android:layout_height="@dimen/scrap_list_like_img_height"
+        android:layout_marginTop="@dimen/scrap_list_like_img_margin_top"
         android:layout_toLeftOf="@+id/text_scrap_list_like"
-        android:layout_toStartOf="@+id/text_scrap_list_like"
         android:background="@color/button_transparent_background"
         android:src="@mipmap/favorite_off" />
+
+    <TextView
+        android:id="@+id/text_scrap_list_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/scrap_list_author_margin_right"
+        android:layout_marginTop="@dimen/scrap_list_author_margin_top"
+        android:layout_toLeftOf="@+id/text_scrap_list_date"
+        android:text="author"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/scrap_list_author"
+        android:textSize="@dimen/scrap_list_author_size" />
 
 </RelativeLayout>
 </android.support.v7.widget.CardView>
