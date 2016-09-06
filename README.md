@@ -95,4 +95,6 @@
 * 페이스북 로그아웃/ 폴더 dialog의 폴더 리스트가 안 뜨는 문제 해결 - 임지수 (16/09/05 16:03)
 * AutoLogin구현(Https), PropertyManager(SharedPreference) - 서창욱 (16/09/05 19:02) 
 * autologin 관련 이중 세션 적용 issue 해결 -> 이중 세션이 일어나면 로그인 버튼이 동작을 하지 않게되므로 사용자가 로그인을 할 필요가 있을 경우 이전에 로그인 되어 있던 상태를 logout을 하고 저장된 SharedPreference의 정보도 초기화한다. 이로서 기존 세션은 제거되고, 새롭게 로그인을 하여서 HTTP 401에러를 방지할 수 있다. - 서창욱 (16/09/06 00:28)
+* MyInfopage image download Picasso issue solution -> https://github.com/JakeWharton/picasso2-okhttp3-downloader
+* CreateFolder / EditFolder / EditMyInfo real server test complete - 서창욱 (16/09/06 18:23)
 
