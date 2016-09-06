@@ -17,7 +17,7 @@
             android:id="@+id/folder_imageview"
             android:layout_width="@dimen/folder_imageview_width"
             android:layout_height="@dimen/folder_imageview_height"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/no_image" />
 
         <TextView
             android:id="@+id/folder_name_textview"

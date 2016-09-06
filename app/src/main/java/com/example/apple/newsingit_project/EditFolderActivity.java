@@ -24,13 +24,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -152,16 +152,25 @@ public class EditFolderActivity extends AppCompatActivity {
         image_select_popup.getContentView().setFocusableInTouchMode(true);
         image_select_popup.getContentView().setFocusable(true);
 
-
         /** TitleBar 설정 **/
         setTitle(getResources().getString(R.string.title_activity_folder_create));
 
         //사용자에게 기존 폴더 정보를 보여줌//
         nameView.setText(folder_name);
 
-        Picasso.with(this) //profileUrl//
-                .load(folder_imageUrl) //url//
-                .into(folder_imageview);
+        networkManager = NetworkManager.getInstance();
+
+        if (folder_imageUrl.equals("default")) {
+            Picasso.with(this)
+                    .load(R.mipmap.no_image)
+                    .transform(new CropCircleTransformation())
+                    .into(folder_imageview); //into로 보낼 위젯 선택.//
+        } else {
+            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+            picasso.load(folder_imageUrl)
+                    .into(folder_imageview);
+        }
 
         private_select_switch.setChecked(is_private);
 
@@ -248,8 +257,10 @@ public class EditFolderActivity extends AppCompatActivity {
         OkHttpClient client = networkManager.getClient();
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
+
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("users")
                 .addPathSegment("me")
                 .addPathSegment("categories")
@@ -352,9 +363,10 @@ public class EditFolderActivity extends AppCompatActivity {
 
                     uploadFile = new File(path);
 
-                    Glide.with(this)
-                            .load(uploadFile)
-                            .into(select_image_thumbnail); //into로 보낼 위젯 선택.//
+                    Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                    picasso.load(uploadFile)
+                            .into(folder_imageview);
                 }
             }
         }
