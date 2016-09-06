@@ -13,6 +13,8 @@ import com.example.apple.newsingit_project.data.view_data.FolderData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 /**
  * Created by apple on 2016. 8. 24..
  */
@@ -57,11 +59,19 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
 
         Log.d("folder image", folder_imageUrl);
 
-        networkManager = NetworkManager.getInstance();
+        if (folder_imageUrl.equals("default")) //이미지가 없는 경우//
+        {
+            Picasso.with(context)
+                    .load(R.mipmap.no_image)
+                    .transform(new CropCircleTransformation())
+                    .into(folder_imageview); //into로 보낼 위젯 선택.//
+        } else {
+            networkManager = NetworkManager.getInstance();
 
-        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
 
-        picasso.load(folder_imageUrl)
-                .into(folder_imageview);
+            picasso.load(folder_imageUrl)
+                    .into(folder_imageview);
+        }
     }
 }

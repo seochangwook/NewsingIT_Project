@@ -142,17 +142,6 @@ public class MyInfoFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        Log.d("life cycle", "onResume");
-
-
-        //데이터 다시 로드//
-        getUserInfoNetworkData();
-    }
-
-    @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -171,7 +160,6 @@ public class MyInfoFragment extends Fragment {
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
-
 
         /** 폴더 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
         folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(getActivity(), 3));
