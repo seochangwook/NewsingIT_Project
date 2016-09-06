@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/drawer_child"
+    android:layout_height="wrap_content"
+    android:background="@color/drawer_child_background"
     >
 
     <TextView
         android:id="@+id/text_child"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:padding="10dp"
+        android:layout_marginBottom="@dimen/drawer_child_margin_bottom"
+        android:layout_marginLeft="@dimen/drawer_child_margin_left"
+        android:layout_marginTop="@dimen/drawer_child_margin_top"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/drawer_child"
+        android:textSize="@dimen/drawer_child_size" />
 
     <Switch
         android:id="@+id/switch_alarm_newscrap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/text_child"
+
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
@@ -32,7 +35,7 @@
         android:id="@+id/switch_alarm_my_scrap_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/text_child"
+
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
@@ -46,7 +49,7 @@
         android:id="@+id/switch_alarm_my_page_follow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/text_child"
+
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"

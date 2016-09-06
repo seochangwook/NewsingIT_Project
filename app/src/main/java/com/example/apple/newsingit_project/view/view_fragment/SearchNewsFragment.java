@@ -20,6 +20,7 @@ import com.example.apple.newsingit_project.data.json_data.searchnewslist.SearchN
 import com.example.apple.newsingit_project.data.view_data.SearchNewsData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
+import com.example.apple.newsingit_project.view.SimpleDividerItemDecoration;
 import com.example.apple.newsingit_project.widget.adapter.SearchNewsAdapter;
 import com.google.gson.Gson;
 
@@ -201,6 +202,7 @@ public class SearchNewsFragment extends Fragment {
         recyclerView = familiarRefreshRecyclerView.getFamiliarRecyclerView();
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(R.color.line_color, 1)); //색깔이 안 먹히넴//
 
         mAdapter = new SearchNewsAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);

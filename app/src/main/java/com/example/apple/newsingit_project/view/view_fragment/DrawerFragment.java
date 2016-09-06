@@ -51,12 +51,13 @@ public class DrawerFragment extends Fragment {
     public static final String CHILD_FOLLOW_MY_PAGE = "마이페이지 팔로우";
 
     DrawerGroup[] menuList = {
-            new DrawerGroup(MENU_MY_PAGE),
+
+            new DrawerGroup(MENU_LOGOUT),
             new DrawerGroup(MENU_SET_ALARM,
                     new DrawerChild(CHILD_NEW_SCRAP),
                     new DrawerChild(CHILD_LIKE_MY_SCRAP),
                     new DrawerChild(CHILD_FOLLOW_MY_PAGE)),
-            new DrawerGroup(MENU_LOGOUT),
+            new DrawerGroup(MENU_MY_PAGE),
             new DrawerGroup(MENU_NOTICE)
     };
 
