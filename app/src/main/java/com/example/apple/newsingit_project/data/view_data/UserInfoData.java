@@ -5,9 +5,9 @@ package com.example.apple.newsingit_project.data.view_data;
  */
 public class UserInfoData {
     String name;
-    String profileUrl;
+    String pf_url;
     String aboutMe;
-    int scrapCount;
+    int scrapings;
     int followerCount;
     int follwingCount;
 
@@ -20,11 +20,11 @@ public class UserInfoData {
     }
 
     public String getProfileUrl() {
-        return profileUrl;
+        return pf_url;
     }
 
     public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
+        this.pf_url = profileUrl;
     }
 
     public String getAboutMe() {
@@ -36,11 +36,11 @@ public class UserInfoData {
     }
 
     public int getScrapCount() {
-        return scrapCount;
+        return scrapings;
     }
 
     public void setScrapCount(int scrapCount) {
-        this.scrapCount = scrapCount;
+        this.scrapings = scrapCount;
     }
 
     public int getFollowerCount() {

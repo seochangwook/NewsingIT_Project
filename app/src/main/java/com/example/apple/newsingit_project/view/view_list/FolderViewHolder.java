@@ -2,6 +2,7 @@ package com.example.apple.newsingit_project.view.view_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -9,9 +10,8 @@ import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
-
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by apple on 2016. 8. 24..
@@ -23,6 +23,11 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
     public boolean folder_private;
     //폴더 데이터 클래스//
     FolderData folderData;
+
+    /**
+     * Network관련 변수
+     **/
+    NetworkManager networkManager;
 
     public FolderViewHolder(View itemView) {
         super(itemView);
@@ -50,10 +55,13 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
 
         String folder_imageUrl = folderData.get_folder_imageUrl();
 
-        //이미지를 로드.//
-        Picasso.with(context)
-                .load(folder_imageUrl)
-                .transform(new CropCircleTransformation())
+        Log.d("folder image", folder_imageUrl);
+
+        networkManager = NetworkManager.getInstance();
+
+        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+        picasso.load(folder_imageUrl)
                 .into(folder_imageview);
     }
 }

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_fragment.MainNewsListFragment;
 import com.example.apple.newsingit_project.view.view_fragment.MyInfoFragment;
 import com.example.apple.newsingit_project.widget.menuwidget.BottomMenu;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     String profile_name;
     String profile_imgUrl;
+
+    NetworkManager networkManager;
 
     private BackPressCloseHandler backPressCloseHandler; //뒤로가기 처리//
 
@@ -85,8 +88,11 @@ public class MainActivity extends AppCompatActivity {
         /** 사용자 프로필 이미지 설정 **/
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //파카소 라이브러리를 이용하여 이미지 로딩//
-        Picasso.with(this)
-                .load(profile_imgUrl)
+        networkManager = NetworkManager.getInstance();
+
+        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+        picasso.load(profile_imgUrl)
                 .transform(new CropCircleTransformation())
                 .into(profile_imageview);
 

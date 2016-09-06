@@ -24,8 +24,8 @@ import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -183,9 +183,12 @@ public class CreateFolderActivity extends AppCompatActivity {
 
                     uploadFile = new File(path);
 
-                    Glide.with(this)
-                            .load(uploadFile)
-                            .into(select_image_thumbnail); //into로 보낼 위젯 선택.//
+                    networkManager = NetworkManager.getInstance();
+
+                    Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                    picasso.load(uploadFile)
+                            .into(select_image_thumbnail);
                 }
             }
         }
@@ -210,7 +213,8 @@ public class CreateFolderActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의(Http / Https)
-        builder.host(getResources().getString(R.string.server_domain)); //host정의.//
+        builder.host(getResources().getString(R.string.real_server_domain)); //host정의.//
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me");
         builder.addPathSegment("categories");
@@ -233,6 +237,8 @@ public class CreateFolderActivity extends AppCompatActivity {
             //이미지 처리//
             multipart_builder.addFormDataPart("img", uploadFile.getName(),
                     RequestBody.create(mediaType, uploadFile));
+        } else {
+            //이미지 선택을 안할 시 아무 수행도 안함//
         }
 
         /** RequestBody 설정(Multipart로 설정) **/

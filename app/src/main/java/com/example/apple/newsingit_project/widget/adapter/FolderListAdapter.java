@@ -35,6 +35,14 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    public void init_folder(FolderData folderData) {
+        if (this.folderData != folderData) {
+            this.folderData = folderData;
+        }
+
+        notifyDataSetChanged();
+    }
+
     //리사이클뷰에 들어갈 뷰 초기화.//
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

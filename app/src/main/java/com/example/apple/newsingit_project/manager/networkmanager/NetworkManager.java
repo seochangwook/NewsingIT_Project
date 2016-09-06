@@ -8,6 +8,8 @@ import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.jakewharton.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +41,9 @@ public class NetworkManager {
      **/
     //객체를 private로 선언하여 SingleTone Pattern적용//
     private static NetworkManager instance;
+
     OkHttpClient client;
+    Picasso picasso;
 
     /**
      * 싱글톤 패턴을 적용해야지 여러 네트워크부분에서 같은 쿠키, client값을 공유할 수 있다
@@ -74,6 +78,11 @@ public class NetworkManager {
         disableCertificateValidation(context, builder); //https를 위한 인증서 등록//
 
         client = builder.build(); //클라이언트를 만든다.//
+
+        //피카소를 okhttp3에 맞추어서 다시 다운로더 작성(이미지 처리 issue해결)//
+        picasso = new Picasso.Builder(context)
+                .downloader(new OkHttp3Downloader(client))
+                .build();
     }
 
     static void disableCertificateValidation(Context context, OkHttpClient.Builder builder) {
@@ -137,5 +146,9 @@ public class NetworkManager {
 
     public OkHttpClient getClient() {
         return client;
+    }
+
+    public Picasso getPicasso() {
+        return picasso;
     }
 }
