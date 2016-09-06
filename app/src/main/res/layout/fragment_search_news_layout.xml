@@ -11,7 +11,7 @@
     <!--android:layout_height="match_parent"-->
     <!--android:text="@string/fragment_1" />-->
 
-    <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+    <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
         android:id="@+id/search_news_rv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

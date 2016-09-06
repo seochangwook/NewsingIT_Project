@@ -3,8 +3,10 @@ package com.example.apple.newsingit_project.view.view_fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.apple.newsingit_project.data.json_data.searchtaglist.SearchTa
 import com.example.apple.newsingit_project.data.json_data.searchtaglist.SearchTagListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.SearchTagData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.SearchTagAdapter;
 import com.google.gson.Gson;
 
@@ -26,6 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
+import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -41,6 +45,7 @@ public class SearchTagFragment extends Fragment {
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
 
+    FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     FamiliarRecyclerView recyclerView;
     SearchTagAdapter mAdapter;
 
@@ -136,14 +141,57 @@ public class SearchTagFragment extends Fragment {
 
 
         Bundle b = getArguments();
-        Log.d("SEARCH_QUERY", "TAG " + b.getString("SEARCH_QUERY"));
         String query = b.getString("SEARCH_QUERY");
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
-        recyclerView = (FamiliarRecyclerView) view.findViewById(R.id.search_tag_rv_list);
+
+        familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) view.findViewById(R.id.search_tag_rv_list);
+        familiarRefreshRecyclerView.setId(android.R.id.list);
+        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity()));
+        familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
+        familiarRefreshRecyclerView.setLoadMoreEnabled(true);
+
+
+        /** 폴더 리스트뷰 Refresh 이벤트 등록 **/
+        familiarRefreshRecyclerView.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
+            @Override
+            public void onPullRefresh() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "당겨서 새로고침 중...");
+
+                        familiarRefreshRecyclerView.pullRefreshComplete();
+                        mAdapter.setSearchTagData(searchTagData);
+
+                    }
+                }, 1000);
+            }
+        });
+
+        familiarRefreshRecyclerView.setOnLoadMoreListener(new FamiliarRefreshRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "새로고침 완료");
+
+                        familiarRefreshRecyclerView.loadMoreComplete();
+
+                        mAdapter.setSearchTagData(searchTagData);
+
+                    }
+                }, 1000);
+            }
+        });
+
+        recyclerView = familiarRefreshRecyclerView.getFamiliarRecyclerView();
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
 
         mAdapter = new SearchTagAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
@@ -152,6 +200,7 @@ public class SearchTagFragment extends Fragment {
         View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_searchtag_emptyview, null);
 
         recyclerView.setEmptyView(emptyview, true);
+        recyclerView.setEmptyViewKeepShowHeadOrFooter(true);
 
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
@@ -177,7 +226,7 @@ public class SearchTagFragment extends Fragment {
             query = "";
         }
         initDummyData(query);
-        // getSearchTagNetworkData(query);
+        // getSearchTagNetworkData(query); //네트워크//
 
         return view;
     }

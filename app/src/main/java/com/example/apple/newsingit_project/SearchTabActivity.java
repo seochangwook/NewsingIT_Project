@@ -184,12 +184,8 @@ public class SearchTabActivity extends AppCompatActivity {
             switch (position) {
                 case 0: {
                     SearchNewsFragment search_news_fragment = new SearchNewsFragment();
-
-                    //   b.putString("SEARCH_FRAGMENT_TAG", "NEWS_FRAGMENT");
                     search_news_fragment.setArguments(bundle);
 
-                    //  searchView.setQuery("", true);
-                    Toast.makeText(SearchTabActivity.this, "notifyDataSetChanged", Toast.LENGTH_SHORT).show();
                     /*
                     /** Fragment로 값을 전달할 필요가 있을 경우 *
                     Bundle bundle = new Bundle(); //Fragment에게 값을 전달하기 위해서 Bundle사용.//
@@ -204,23 +200,15 @@ public class SearchTabActivity extends AppCompatActivity {
 
                 case 1: {
                     SearchUserFragment search_user_fragment = new SearchUserFragment();
-
-                    //   b.putString("SEARCH_FRAGMENT_TAG", "USER_FRAGMENT");
                     search_user_fragment.setArguments(bundle);
 
-                    //    searchView.setQuery("", true);
-                    Toast.makeText(SearchTabActivity.this, "notifyDataSetChanged", Toast.LENGTH_SHORT).show();
                     return search_user_fragment;
                 }
 
                 case 2: {
                     SearchTagFragment search_tag_fragment = new SearchTagFragment();
-
-                    //  b.putString("SEARCH_FRAGMENT_TAG", "TAG_FRAGMENT");
                     search_tag_fragment.setArguments(bundle);
-                    Toast.makeText(SearchTabActivity.this, "notifyDataSetChanged", Toast.LENGTH_SHORT).show();
 
-                    //     searchView.setQuery("", true);
                     return search_tag_fragment;
                 }
             }
