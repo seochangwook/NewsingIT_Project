@@ -3,8 +3,10 @@ package com.example.apple.newsingit_project.view.view_fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.apple.newsingit_project.data.json_data.searchnewslist.SearchN
 import com.example.apple.newsingit_project.data.json_data.searchnewslist.SearchNewsListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.SearchNewsData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.SearchNewsAdapter;
 import com.google.gson.Gson;
 
@@ -26,6 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
+import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -39,9 +43,13 @@ import okhttp3.Response;
 public class SearchNewsFragment extends Fragment {
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
+
+    FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     FamiliarRecyclerView recyclerView;
+
     SearchNewsAdapter mAdapter;
     SearchNewsData searchNewsData;
+
     NetworkManager networkManager;
     private ProgressDialog pDialog;
     private Callback requestSearchNewsListCallback = new Callback() {
@@ -69,7 +77,7 @@ public class SearchNewsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private void getSearchNewsNetworkData() {
+    private void getSearchNewsNetworkData(String query) {
         showpDialog();
 
         networkManager = NetworkManager.getInstance();
@@ -81,7 +89,7 @@ public class SearchNewsFragment extends Fragment {
                 .host(getResources().getString(R.string.server_domain))
                 .addPathSegment("search")
                 .addQueryParameter("target", "1")
-                .addQueryParameter("word", "단어")
+                .addQueryParameter("word", "" + query)
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "10");
 
@@ -129,22 +137,68 @@ public class SearchNewsFragment extends Fragment {
 
 
         Bundle b = getArguments();
-        Log.d("SEARCH_FRAGMENT_TAG", "" + b.getString("SEARCH_FRAGMENT_TAG"));
+        String query = b.getString("SEARCH_QUERY");
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
         searchNewsData = new SearchNewsData();
-        recyclerView = (FamiliarRecyclerView) view.findViewById(R.id.search_news_rv_list);
 
-        /** EmptyView 설정 **/
-        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_search_news_emptyview, null);
+        familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) view.findViewById(R.id.search_news_rv_list);
+        familiarRefreshRecyclerView.setId(android.R.id.list);
+        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity()));
+        familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
+        familiarRefreshRecyclerView.setLoadMoreEnabled(true);
 
-        recyclerView.setEmptyView(emptyview, true);
+
+        /** 폴더 리스트뷰 Refresh 이벤트 등록 **/
+        familiarRefreshRecyclerView.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
+            @Override
+            public void onPullRefresh() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "당겨서 새로고침 중...");
+
+                        familiarRefreshRecyclerView.pullRefreshComplete();
+                        mAdapter.setSearchNewsData(searchNewsData);
+
+                    }
+                }, 1000);
+            }
+        });
+
+        familiarRefreshRecyclerView.setOnLoadMoreListener(new FamiliarRefreshRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "새로고침 완료");
+
+                        familiarRefreshRecyclerView.loadMoreComplete();
+
+                        mAdapter.setSearchNewsData(searchNewsData);
+
+                    }
+                }, 1000);
+            }
+        });
+
+
+        recyclerView = familiarRefreshRecyclerView.getFamiliarRecyclerView();
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
 
         mAdapter = new SearchNewsAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
+
+        /** EmptyView 설정 **/
+        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_search_news_emptyview, null);
+        recyclerView.setEmptyView(emptyview, true);
+        recyclerView.setEmptyViewKeepShowHeadOrFooter(true);
+
 
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
@@ -165,8 +219,12 @@ public class SearchNewsFragment extends Fragment {
             }
         });
 
-        // initDummyData();
-        getSearchNewsNetworkData();
+
+        if (query == null) {
+            query = "";
+        }
+        initDummyData(query);
+        // getSearchNewsNetworkData(query); //네트워크//
 
         return view;
     }
@@ -181,24 +239,48 @@ public class SearchNewsFragment extends Fragment {
             pDialog.dismiss();
     }
 
-//    private void initDummyData() {
-//
-//        String[] titleList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
-//        String[] contentList = {"VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-//                , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?",
-//                "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-//                , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"};
-//        String[] dateList = {"2016.08.20 16:10","2016.08.15 16:10","2016.08.14 16:10","2016.08.13 16:10"
-//                                ,"2016.08.10 16:10","2016.08.09 16:10"};
-//
-//        for (int i = 0; i < 5; i++) {
-//            SearchNewsData new_searchNewsData = new SearchNewsData();
-//            new_searchNewsData.title = titleList[i];
-//            new_searchNewsData.author = contentList[i];
-//            new_searchNewsData.date = dateList[i];
-//            searchNewsData.searchNewsDataArrayList.add(new_searchNewsData);
-//        }
-//        mAdapter.setSearchNewsData(searchNewsData);
-//    }
+    private void initDummyData(String query) {
+
+        if (query.equals("사드")) {
+            int[] idList = {1, 2, 3, 4, 5};
+            String[] titleList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
+            String[] contentList = {"VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
+                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?",
+                    "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
+                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"};
+            String[] dateList = {"2016.08.20 16:10", "2016.08.15 16:10", "2016.08.14 16:10", "2016.08.13 16:10"
+                    , "2016.08.10 16:10", "2016.08.09 16:10"};
+
+            for (int i = 0; i < 5; i++) {
+                SearchNewsData new_searchNewsData = new SearchNewsData();
+                new_searchNewsData.setId(idList[i]);
+                new_searchNewsData.title = titleList[i];
+                new_searchNewsData.author = contentList[i];
+                new_searchNewsData.date = dateList[i];
+                searchNewsData.searchNewsDataArrayList.add(new_searchNewsData);
+            }
+        } else {
+            int[] idList = {1, 2, 3, 4, 5};
+            String[] titleList = {"테스트", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
+            String[] contentList = {"VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
+                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?",
+                    "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
+                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"};
+            String[] dateList = {"2016.08.20 16:10", "2016.08.15 16:10", "2016.08.14 16:10", "2016.08.13 16:10"
+                    , "2016.08.10 16:10", "2016.08.09 16:10"};
+
+            for (int i = 0; i < 5; i++) {
+                SearchNewsData new_searchNewsData = new SearchNewsData();
+                new_searchNewsData.setId(idList[i]);
+                new_searchNewsData.title = titleList[i];
+                new_searchNewsData.author = contentList[i];
+                new_searchNewsData.date = dateList[i];
+                searchNewsData.searchNewsDataArrayList.add(new_searchNewsData);
+            }
+        }
+
+
+        mAdapter.setSearchNewsData(searchNewsData);
+    }
 
 }
