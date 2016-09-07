@@ -36,6 +36,12 @@
   <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_3.png" width="650" height="350">
 </p>
 
+* FCM
+
+<p align="left">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/cloudmessage.png" width="650" height="350">
+</p>
+
 < Update Content >
 
 * 플로팅 버튼 제거 - 임지수 (16/08/23 11:20)
@@ -100,4 +106,5 @@
 * 알람 목록, 스크랩 목록, 뉴스 검색 목록에 디자인 가이드 적용 - 임지수 (16/09/06 18:17)
 * MyInfopage image download Picasso issue solution -> https://github.com/JakeWharton/picasso2-okhttp3-downloader
 * CreateFolder / EditFolder / EditMyInfo real server test complete - 서창욱 (16/09/06 18:23)
+* drawer 메뉴 디자인 가이드 적용 / recycler view 구분선 적용 - 임지수 (16/09/06 20:33)
 
