@@ -111,4 +111,8 @@
 * CreateFolder / EditFolder / EditMyInfo real server test complete - 서창욱 (16/09/06 18:23)
 * drawer 메뉴 디자인 가이드 적용 / recycler view 구분선 적용 - 임지수 (16/09/06 20:33)
 * autologin <-> FCM id 간 Merge, Receiver로 fcm id를 먼저 획득 후 로그인 과정을 진행 - 서창욱 (16/09/07 09:51)
+* 태그검색,유저검색,팔로잉/팔로워 목록,스크랩 상세화면 디자인 가이드 적용 - 임지수 (16/09/07 18:03)
+* 마이페이지 수정화면,폴더 수정화면 디자인 가이드 적용 - 임지수 (16/09/07 19:44)
+* 구분선을 line 이미지로 적용 - 임지수 (16/09/07 20:51)
+
 
