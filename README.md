@@ -17,6 +17,7 @@
 * compile 'com.squareup.okhttp3:okhttp:3.4.1'
 * compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
 * compile 'com.facebook.android:facebook-android-sdk:4.8.2'
+* compile('com.twitter.sdk.android:twitter:1.14.1@aar') { transitive = true; }
 * compile 'com.android.support:multidex:1.0.1'
 * compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
 * compile 'com.google.android.gms:play-services-gcm:9.4.0'
