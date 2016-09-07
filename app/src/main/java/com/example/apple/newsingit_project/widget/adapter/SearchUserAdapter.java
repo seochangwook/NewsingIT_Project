@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.SearchUserData;
@@ -139,41 +138,41 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 SearchUserViewHolder searchUserViewHolder = (SearchUserViewHolder) holder;
                 searchUserViewHolder.setSearchUserData(searchUserData.searchUserDataArrayList.get(position), context);
 
-                final int pos = position;
+//                final int pos = position;
 
-                final boolean flag = searchUserData.searchUserDataArrayList.get(pos).getFlag();
+//                final boolean flag = searchUserData.searchUserDataArrayList.get(pos).getFlag();
 
-                if (flag) {//true이면 선택한 유저를 팔로우 한 상태//
-                    //팔로잉 한 상태에서는 팔로우 해제//
-                    searchUserViewHolder.btnSearchUser.setText("팔로우 해제");
-                    searchUserViewHolder.btnSearchUser.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_do));
-                } else {//false이면 선택한 유저를 팔로우 하지 않은 상태//
-                    //팔로잉 안 한 상태에서 팔로우 생성//
-                    searchUserViewHolder.btnSearchUser.setText("팔로우");
-                    searchUserViewHolder.btnSearchUser.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_cancel));
-                }
+//                if (flag) {//true이면 선택한 유저를 팔로우 한 상태//
+//                    //팔로잉 한 상태에서는 팔로우 해제//
+//                    searchUserViewHolder.btnSearchUser.setText("팔로우 해제");
+//                    searchUserViewHolder.btnSearchUser.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_do));
+//                } else {//false이면 선택한 유저를 팔로우 하지 않은 상태//
+//                    //팔로잉 안 한 상태에서 팔로우 생성//
+//                    searchUserViewHolder.btnSearchUser.setText("팔로우");
+//                    searchUserViewHolder.btnSearchUser.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_cancel));
+//                }
 
 
-                searchUserViewHolder.btnSearchUser.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int userSelectId = searchUserData.searchUserDataArrayList.get(pos).getId();
-                        Toast.makeText(context, userSelectId + " 선택", Toast.LENGTH_SHORT).show();
-
-                        if (flag) {
-                            //팔로잉 한 상태에서는 팔로우 해제//
-                            deleteFollowing(userSelectId);
-                        } else {
-                            //팔로잉 안 한 상태에서 팔로우 생성//
-                            setFollowing(userSelectId);
-                        }
-
-                        //실제 네트워크 통신 전까지 안드로이드에서 값을 임시로 바꿔줌//
-                        searchUserData.searchUserDataArrayList.get(pos).setFlag(!flag);
-
-                        notifyDataSetChanged();
-                    }
-                });
+//                searchUserViewHolder.btnSearchUser.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        int userSelectId = searchUserData.searchUserDataArrayList.get(pos).getId();
+//                        Toast.makeText(context, userSelectId + " 선택", Toast.LENGTH_SHORT).show();
+//
+//                        if (flag) {
+//                            //팔로잉 한 상태에서는 팔로우 해제//
+//                            deleteFollowing(userSelectId);
+//                        } else {
+//                            //팔로잉 안 한 상태에서 팔로우 생성//
+//                            setFollowing(userSelectId);
+//                        }
+//
+//                        //실제 네트워크 통신 전까지 안드로이드에서 값을 임시로 바꿔줌//
+//                        searchUserData.searchUserDataArrayList.get(pos).setFlag(!flag);
+//
+//                        notifyDataSetChanged();
+//                    }
+//                });
 
                 return;
             }

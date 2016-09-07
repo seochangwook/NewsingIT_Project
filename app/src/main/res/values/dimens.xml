@@ -165,34 +165,64 @@
     <dimen name="scrap_list_setting_margin_right">9dp</dimen>
 
 
-    <!--user scrap content dimen-->
-    <dimen name="scrap_content_title_margin_top">55dp</dimen>
-    <dimen name="scrap_content_title_margin_left">38dp</dimen>
+    <!--user select scrap content dimen-->
+    <dimen name="scrap_content_title_margin_top">18dp</dimen>
+    <dimen name="scrap_content_title_margin_left">23dp</dimen>
+    <dimen name="scrap_content_title_margin_right">100dp</dimen>
+    <dimen name="scrap_content_title_margin_bottom">13dp</dimen>
     <dimen name="scrap_content_title_size">16sp</dimen>
 
-    <dimen name="scrap_content_author_margin_top">28dp</dimen>
-    <dimen name="scrap_content_author_margin_left">38dp</dimen>
-    <dimen name="scrap_content_author_size">8sp</dimen>
+    <dimen name="scrap_content_news_box_width">325dp</dimen>
+    <dimen name="scrap_content_news_box_height">355dp</dimen>
+    <dimen name="scrap_content_news_box_margin_top">10dp</dimen>
+    <dimen name="scrap_content_news_box_margin_left">23dp</dimen>
+    <dimen name="scrap_content_news_box_margin_right">18dp</dimen>
 
-    <dimen name="scrap_content_time_margin_top">28dp</dimen>
-    <dimen name="scrap_content_time_margin_left">7dp</dimen>
-    <dimen name="scrap_content_time_size">8sp</dimen>
+    <dimen name="scrap_content_news_box_title_margin_top">13dp</dimen>
+    <dimen name="scrap_content_news_box_title_margin_left">13dp</dimen>
+    <dimen name="scrap_content_news_box_title_margin_right">13dp</dimen>
+    <dimen name="scrap_content_news_box_title_size">16sp</dimen>
 
-    <dimen name="scrap_content_like_img_width">24dp</dimen>
-    <dimen name="scrap_content_like_img_height">24dp</dimen>
-    <dimen name="scrap_content_like_img_margin_top">20dp</dimen>
+    <dimen name="scrap_content_news_box_author_margin_top">10dp</dimen>
+    <dimen name="scrap_content_news_box_author_margin_left">13dp</dimen>
+    <dimen name="scrap_content_news_box_author_size">8sp</dimen>
 
-    <dimen name="scrap_content_like_cnt_margin_top">28dp</dimen>
-    <dimen name="scrap_content_like_cnt_size">11sp</dimen>
+    <dimen name="scrap_content_news_box_time_margin_top">10dp</dimen>
+    <dimen name="scrap_content_news_box_time_margin_left">7dp</dimen>
+    <dimen name="scrap_content_news_box_time_size">8sp</dimen>
 
-    <dimen name="scrap_content_content_margin_top">21dp</dimen>
-    <dimen name="scrap_content_content_size">13sp</dimen>
+    <dimen name="scrap_content_news_box_img_height">170dp</dimen>
+    <dimen name="scrap_content_news_box_img_margin_top">11dp</dimen>
+    <dimen name="scrap_content_news_box_img_margin_left">13dp</dimen>
+    <dimen name="scrap_content_news_box_img_margin_right">13dp</dimen>
 
-    <dimen name="scrap_content_tag_margin_top">44dp</dimen>
+    <dimen name="scrap_content_news_box_content_height">150dp</dimen>
+    <dimen name="scrap_content_news_box_content_margin_top">13dp</dimen>
+    <dimen name="scrap_content_news_box_content_margin_left">13dp</dimen>
+    <dimen name="scrap_content_news_box_content_margin_right">13dp</dimen>
+    <dimen name="scrap_content_news_box_content_margin_bottom">13dp</dimen>
+    <dimen name="scrap_content_news_box_content_size">13sp</dimen>
 
-    <dimen name="scrap_content_tag_img_margin_left">16dp</dimen>
+    <dimen name="scrap_content_content_margin_top">13dp</dimen>
+    <dimen name="scrap_content_content_margin_left">23dp</dimen>
+    <dimen name="scrap_content_content_margin_right">18dp</dimen>
+    <dimen name="scrap_content_content_margin_bottom">13dp</dimen>
+    <dimen name="scrap_content_content_size">12sp</dimen>
+
     <dimen name="scrap_content_tag_img_width">48dp</dimen>
     <dimen name="scrap_content_tag_img_height">48dp</dimen>
+    <dimen name="scrap_content_tag_img_margin_top">16dp</dimen>
+    <dimen name="scrap_content_tag_img_margin_left">23dp</dimen>
+
+    <dimen name="scrap_content_tag_margin_top">16dp</dimen>
+    <dimen name="scrap_content_tag_margin_right">18dp</dimen>
+
+    <dimen name="scrap_content_like_size">11sp</dimen>
+    <dimen name="scrap_content_like_margin_right">33dp</dimen>
+
+    <dimen name="scrap_content_like_img_margin_right">4dp</dimen>
+    <dimen name="scrap_content_like_img_width">24dp</dimen>
+    <dimen name="scrap_content_like_img_height">24dp</dimen>
 
 
     <!--search news dimen-->
@@ -210,6 +240,39 @@
     <dimen name="search_news_content_size">15sp</dimen>
 
 
+    <!--search user dimen-->
+    <dimen name="search_user_height">88dp</dimen>
+
+    <dimen name="search_user_img_width">48dp</dimen>
+    <dimen name="search_user_img_height">48dp</dimen>
+    <dimen name="search_user_img_margin_top">20dp</dimen>
+    <dimen name="search_user_img_margin_left">37dp</dimen>
+    <dimen name="search_user_img_margin_right">37dp</dimen>
+    <dimen name="search_user_img_margin_bottom">20dp</dimen>
+
+    <dimen name="search_user_id_margin_top">28dp</dimen>
+    <dimen name="search_user_id_size">13sp</dimen>
+
+    <dimen name="search_user_about_me_margin_top">7dp</dimen>
+    <dimen name="search_user_about_me_margin_bottom">28dp</dimen>
+    <dimen name="search_user_about_me_size">12sp</dimen>
+
+
+    <!--search tag dimen-->
+    <dimen name="search_tag_height">90dp</dimen>
+
+    <dimen name="search_tag_sharp_size">24sp</dimen>
+    <dimen name="search_tag_sharp_margin_top">33dp</dimen>
+    <dimen name="search_tag_sharp_margin_left">55dp</dimen>
+    <dimen name="search_tag_sharp_margin_right">55dp</dimen>
+
+    <dimen name="search_tag_title_size">15sp</dimen>
+    <dimen name="search_tag_title_margin_top">30dp</dimen>
+
+    <dimen name="search_tag_cnt_size">12sp</dimen>
+    <dimen name="search_tag_cnt_margin_top">3dp</dimen>
+
+
     <!--drawer menu dimen-->
     <dimen name="drawer_profile_img_width">107dp</dimen>
     <dimen name="drawer_profile_img_height">107dp</dimen>
@@ -225,7 +288,7 @@
 
     <dimen name="drawer_alarm_img_width">48dp</dimen>
     <dimen name="drawer_alarm_img_height">48dp</dimen>
-    <dimen name="drawer_alarm_img_margin_top">170dp</dimen>
+    <dimen name="drawer_alarm_img_margin_top">178dp</dimen>
     <dimen name="drawer_alarm_img_margin_right">21dp</dimen>
     <dimen name="drawer_alarm_img_margin_bottom">14dp</dimen>
 
@@ -236,10 +299,119 @@
 
     <dimen name="drawer_indicator_margin_right">21dp</dimen>
 
-
     <dimen name="drawer_child_size">13sp</dimen>
     <dimen name="drawer_child_margin_top">15dp</dimen>
     <dimen name="drawer_child_margin_left">54dp</dimen>
     <dimen name="drawer_child_margin_bottom">15dp</dimen>
+
+
+    <!--edit scrap dimen-->
+    <dimen name="edit_scrap_title_margin_top">26dp</dimen>
+    <dimen name="edit_scrap_title_margin_left">16dp</dimen>
+    <dimen name="edit_scrap_title_margin_right">18dp</dimen>
+    <dimen name="edit_scrap_title_margin_bottom">9dp</dimen>
+    <dimen name="edit_scrap_title_size">14sp</dimen>
+
+    <dimen name="edit_scrap_news_box_margin_top">11dp</dimen>
+    <dimen name="edit_scrap_news_box_margin_left">16dp</dimen>
+    <dimen name="edit_scrap_news_box_margin_right">18dp</dimen>
+
+    <dimen name="edit_scrap_news_box_img_width">60dp</dimen>
+    <dimen name="edit_scrap_news_box_img_height">60dp</dimen>
+    <dimen name="edit_scrap_news_box_img_margin_top">14dp</dimen>
+    <dimen name="edit_scrap_news_box_img_margin_left">14dp</dimen>
+    <dimen name="edit_scrap_news_box_img_margin_right">14dp</dimen>
+    <dimen name="edit_scrap_news_box_img_margin_bottom">14dp</dimen>
+
+    <dimen name="edit_scrap_news_box_author_margin_top">27dp</dimen>
+    <dimen name="edit_scrap_news_box_author_size">8sp</dimen>
+
+    <dimen name="edit_scrap_news_box_time_margin_top">27dp</dimen>
+    <dimen name="edit_scrap_news_box_time_margin_left">3dp</dimen>
+    <dimen name="edit_scrap_news_box_time_size">8sp</dimen>
+
+    <dimen name="edit_scrap_news_box_title_margin_top">7dp</dimen>
+    <dimen name="edit_scrap_news_box_title_size">11sp</dimen>
+
+    <dimen name="edit_scrap_news_box_content_margin_bottom">25dp</dimen>
+    <dimen name="edit_scrap_news_box_content_size">9sp</dimen>
+
+    <dimen name="edit_scrap_content_layout_height">250dp</dimen>
+    <dimen name="edit_scrap_content_height">200dp</dimen>
+    <dimen name="edit_scrap_content_margin_top">11dp</dimen>
+    <dimen name="edit_scrap_content_margin_left">16dp</dimen>
+    <dimen name="edit_scrap_content_margin_right">18dp</dimen>
+    <dimen name="edit_scrap_content_size">12sp</dimen>
+    <dimen name="edit_scrap_content_hint_msg_margin_left">7dp</dimen>
+    <dimen name="edit_scrap_content_hint_msg_size">12sp</dimen>
+    <dimen name="edit_scrap_content_text_cnt_margin_right">18dp</dimen>
+    <dimen name="edit_scrap_content_text_cnt_margin_bottom">7dp</dimen>
+    <dimen name="edit_scrap_content_text_cnt_size">10sp</dimen>
+
+    <dimen name="edit_scrap_tag_img_margin_top">19dp</dimen>
+    <dimen name="edit_scrap_tag_img_margin_left">16dp</dimen>
+    <dimen name="edit_scrap_tag_img_width">48dp</dimen>
+    <dimen name="edit_scrap_tag_img_height">48dp</dimen>
+
+    <dimen name="edit_scrap_tag_width">230dp</dimen>
+    <dimen name="edit_scrap_tag_margin_right">50dp</dimen>
+    <dimen name="edit_scrap_tag_margin_top">19dp</dimen>
+    <dimen name="edit_scrap_tag_margin_bottom">10dp</dimen>
+    <dimen name="edit_scrap_tag_hint_msg_size">12sp</dimen>
+
+    <dimen name="edit_scrap_tag_btn_margin_top">27dp</dimen>
+    <dimen name="edit_scrap_tag_btn_margin_right">20dp</dimen>
+    <dimen name="edit_scrap_tag_btn_margin_bottom">6dp</dimen>
+
+    <dimen name="edit_scrap_tag_view_margin_top">16dp</dimen>
+    <dimen name="edit_scrap_tag_view_margin_left">31dp</dimen>
+    <dimen name="edit_scrap_tag_view_margin_right">18dp</dimen>
+
+
+    <!--follow header dimen-->
+    <dimen name="follow_header_margin_top">13dp</dimen>
+    <dimen name="follow_header_margin_left">30dp</dimen>
+    <dimen name="follow_header_margin_right">30dp</dimen>
+    <dimen name="follow_header_width">328dp</dimen>
+    <dimen name="follow_header_height">28dp</dimen>
+    <dimen name="follow_header_search_size">15sp</dimen>
+
+
+    <!--follower list dimen-->
+    <dimen name="follower_height">75dp</dimen>
+
+    <dimen name="follower_img_width">42dp</dimen>
+    <dimen name="follower_img_height">42dp</dimen>
+    <dimen name="follower_img_margin_top">17dp</dimen>
+    <dimen name="follower_img_margin_left">13dp</dimen>
+
+    <dimen name="follower_name_margin_top">31dp</dimen>
+    <dimen name="follower_name_margin_left">37dp</dimen>
+    <dimen name="follower_name_margin_bottom">31dp</dimen>
+    <dimen name="follower_name_size">13sp</dimen>
+
+    <dimen name="follower_btn_width">72dp</dimen>
+    <dimen name="follower_btn_height">24dp</dimen>
+    <dimen name="follower_btn_margin_top">26dp</dimen>
+    <dimen name="follower_btn_margin_right">18dp</dimen>
+
+    <!--following list dimen-->
+    <dimen name="following_height">75dp</dimen>
+
+    <dimen name="following_img_width">42dp</dimen>
+    <dimen name="following_img_height">42dp</dimen>
+    <dimen name="following_img_margin_top">17dp</dimen>
+    <dimen name="following_img_margin_left">13dp</dimen>
+
+    <dimen name="following_name_margin_top">31dp</dimen>
+    <dimen name="following_name_margin_left">37dp</dimen>
+    <dimen name="following_name_margin_bottom">31dp</dimen>
+    <dimen name="following_name_size">13sp</dimen>
+
+    <dimen name="following_btn_width">72dp</dimen>
+    <dimen name="following_btn_height">24dp</dimen>
+    <dimen name="following_btn_margin_top">26dp</dimen>
+    <dimen name="following_btn_margin_right">18dp</dimen>
+
 
 </resources>

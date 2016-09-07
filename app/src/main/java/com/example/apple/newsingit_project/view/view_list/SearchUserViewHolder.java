@@ -3,7 +3,6 @@ package com.example.apple.newsingit_project.view.view_list;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +19,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
 
     public SearchUserData searchUserData;
     public TextView nameView, introView;
-    public Button btnSearchUser;
+    // public Button btnSearchUser;
     public ImageView searchUserImgView;
 
     public String user_imgUrl;
@@ -30,7 +29,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         nameView = (TextView) itemView.findViewById(R.id.text_search_user_name);
         introView = (TextView)itemView.findViewById(R.id.text_search_user_intro);
-        btnSearchUser = (Button) itemView.findViewById(R.id.btn_search_user);
+        // btnSearchUser = (Button) itemView.findViewById(R.id.btn_search_user);
         searchUserImgView = (ImageView) itemView.findViewById(R.id.img_search_user);
     }
 

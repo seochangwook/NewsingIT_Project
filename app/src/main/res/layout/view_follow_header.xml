@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/follow_header_background">
 
-    <android.widget.SearchView
+    <SearchView
         android:id="@+id/search_my_follow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_height="@dimen/follow_header_height"
+        android:layout_marginLeft="@dimen/follow_header_margin_left"
+        android:layout_marginRight="@dimen/follow_header_margin_right"
+        android:layout_marginTop="@dimen/follow_header_margin_top"
         android:background="@drawable/round"
         android:closeIcon="@mipmap/ic_x_cancel"
         android:queryHint="검색"
-        android:searchIcon="@mipmap/ic_search" />
+        android:searchIcon="@mipmap/ic_search"
+        android:textColor="@color/follow_header_search_query"
+        android:textSize="@dimen/follow_header_search_size" />
 
 </RelativeLayout>

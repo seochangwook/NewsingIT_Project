@@ -196,8 +196,8 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() >= 100) {
-                    textInputLayout.setError("100글자 이하로 입력하세요");
+                if (editable.length() >= 1000) {
+                    textInputLayout.setError("1000글자 이하로 입력하세요");
                 } else {
                     textInputLayout.setError(null);
                 }
@@ -206,7 +206,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
         textInputLayout.setCounterEnabled(true);
         textInputLayout.setErrorEnabled(true);
-        textInputLayout.setCounterMaxLength(100);
+        textInputLayout.setCounterMaxLength(1000);
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);

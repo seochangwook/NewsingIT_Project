@@ -44,23 +44,39 @@
     <color name="scrap_list_like_cnt">#939191</color>
 
 
-    <!--uesr scrap content color-->
+    <!--uesr select scrap content color-->
     <color name="scrap_content_background">#ffffff</color>
+    <color name="scrap_content_news_box_background">#e3e2e2</color>
     <color name="scrap_content_title">#454444</color>
-    <color name="scrap_content_author">#454444</color>
-    <color name="scrap_content_time">#7d7d7d</color>
+    <color name="scrap_content_news_box_title">#454444</color>
+    <color name="scrap_content_news_box_author">#454444</color>
+    <color name="scrap_content_news_box_time">#7d7d7d</color>
+    <color name="scrap_content_news_box_content">#454444</color>
     <color name="scrap_content_content">#454444</color>
-    <color name="scrap_content_tag">#8b8a8a</color>
+    <color name="scrap_content_tag">#0d47a1</color>
     <color name="scrap_content_like_cnt">#939191</color>
 
+
     <!--search news color-->
+    <color name="search_news_background">#ffffff</color>
     <color name="search_news_author">#7d7d7d</color>
     <color name="search_news_time">#c9c9c9</color>
     <color name="search_news_content">#454444</color>
-    <color name="search_news_background">#ffffff</color>
+
+    <!--search user color-->
+    <color name="search_user_background">#ffffff</color>
+    <color name="search_user_id">#454444</color>
+    <color name="search_user_about_me">#7d7d7d</color>
+
+    <!--search tag color-->
+    <color name="search_tag_background">#ffffff</color>
+    <color name="search_tag_sharp">#0d47a1</color>
+    <color name="search_tag_title">#454444</color>
+    <color name="search_tag_cnt">#7d7d7d</color>
+
 
     <!--list view line color-->
-    <color name="line_color">#f20d0d</color>
+    <color name="line_color">#8b8a8a</color>
 
 
     <!-- drwer menu -->
@@ -78,5 +94,34 @@
 
     <color name="drawer_text">#FFFEFEFE</color>
 
+
+    <!--edit scrap color-->
+    <color name="edit_scrap_background">#ffffff</color>
+
+    <color name="edit_scrap_news_box_background">#e3e2e2</color>
+    <color name="edit_scrap_news_box_title">#7d7d7d</color>
+    <color name="edit_scrap_news_box_content">#7d7d7d</color>
+    <color name="edit_scrap_news_box_author">#454444</color>
+    <color name="edit_scrap_news_box_time">#7d7d7d</color>
+
+    <color name="edit_scrap_title">#454444</color>
+    <color name="edit_scrap_content">#7d7d7d</color>
+    <color name="edit_scrap_hint_msg">#7d7d7d</color>
+
+    <color name="edit_scrap_tag_hint">#7d7d7d</color>
+    <color name="edit_scrap_tag_btn_background">#8b8a8a</color>
+    <color name="edit_scrap_tag_btn_text">#ffffff</color>
+
+    <!--follow header color-->
+    <color name="follow_header_background">#ffffff</color>
+    <color name="follow_header_search_query">#ffffff</color>
+
+    <!--follower list color-->
+    <color name="follower_name">#454444</color>
+    <color name="follower_background">#ffffff</color>
+
+    <!--following list color-->
+    <color name="following_name">#454444</color>
+    <color name="following_background">#ffffff</color>
 
 </resources>
