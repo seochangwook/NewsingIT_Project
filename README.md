@@ -36,6 +36,12 @@
   <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_3.png" width="650" height="350">
 </p>
 
+* FCM
+
+<p align="left">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_1.png" width="650" height="350">
+</p>
+
 < Update Content >
 
 * 플로팅 버튼 제거 - 임지수 (16/08/23 11:20)
