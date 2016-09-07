@@ -124,4 +124,16 @@
     <color name="following_name">#454444</color>
     <color name="following_background">#ffffff</color>
 
+    <!--edit my info color-->
+    <color name="edit_my_info_background">#ffffff</color>
+    <color name="edit_my_info_name">#454444</color>
+    <color name="edit_my_info_input_name">#7d7d7d</color>
+    <color name="edit_my_info_about_me">#454444</color>
+    <color name="edit_my_info_input_about_me">#7d7d7d</color>
+
+    <!--create folder color-->
+    <color name="create_folder_background">#ffffff</color>
+    <color name="create_folder_text">#454444</color>
+    <color name="create_folder_input">#454444</color>
+
 </resources>

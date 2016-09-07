@@ -413,5 +413,61 @@
     <dimen name="following_btn_margin_top">26dp</dimen>
     <dimen name="following_btn_margin_right">18dp</dimen>
 
+    <!--edit my page dimen-->
+    <dimen name="edit_my_info_img_margin_top">49dp</dimen>
+    <dimen name="edit_my_info_img_width">92dp</dimen>
+    <dimen name="edit_my_info_img_height">92dp</dimen>
+
+    <dimen name="edit_my_info_name_margin_top">187dp</dimen>
+    <dimen name="edit_my_info_name_margin_left">70dp</dimen>
+    <dimen name="edit_my_info_name_size">15sp</dimen>
+
+    <dimen name="edit_my_info_camera_width">48dp</dimen>
+    <dimen name="edit_my_info_camera_height">48dp</dimen>
+    <dimen name="edit_my_info_camera_margin_top">90dp</dimen>
+    <dimen name="edit_my_info_camera_margin_left">200dp</dimen>
+
+    <dimen name="edit_my_info_input_name_width">240dp</dimen>
+    <dimen name="edit_my_info_input_name_height">30dp</dimen>
+    <dimen name="edit_my_info_input_name_margin_top">11dp</dimen>
+    <dimen name="edit_my_info_input_name_margin_left">70dp</dimen>
+    <dimen name="edit_my_info_input_name_margin_right">57dp</dimen>
+    <dimen name="edit_my_info_input_name_size">12sp</dimen>
+
+    <dimen name="edit_my_info_about_me_margin_top">25dp</dimen>
+    <dimen name="edit_my_info_about_me_margin_left">70dp</dimen>
+    <dimen name="edit_my_info_about_me_size">15sp</dimen>
+
+    <dimen name="edit_my_info_input_about_me_margin_top">11dp</dimen>
+    <dimen name="edit_my_info_input_about_me_margin_left">70dp</dimen>
+    <dimen name="edit_my_info_input_about_me_margin_right">57dp</dimen>
+    <dimen name="edit_my_info_input_about_me_width">240dp</dimen>
+    <dimen name="edit_my_info_input_about_me_height">140dp</dimen>
+    <dimen name="edit_my_info_input_about_me_size">12sp</dimen>
+
+
+    <!--create folder dimen-->
+    <dimen name="create_folder_img_width">100dp</dimen>
+    <dimen name="create_folder_img_height">80dp</dimen>
+    <dimen name="create_folder_img_margin_top">12dp</dimen>
+    <dimen name="create_folder_img_margin_left">12dp</dimen>
+    <dimen name="create_folder_img_margin_bottom">12dp</dimen>
+
+    <dimen name="create_folder_text_margin_top">20dp</dimen>
+    <dimen name="create_folder_text_margin_left">14dp</dimen>
+    <dimen name="create_folder_text_size">15sp</dimen>
+    <dimen name="create_folder_text_margin_bottom">20dp</dimen>
+
+    <dimen name="create_folder_input_name_margin_top">16dp</dimen>
+    <dimen name="create_folder_input_name_margin_left">14dp</dimen>
+    <dimen name="create_folder_input_name_margin_bottom">16dp</dimen>
+    <dimen name="create_folder_input_name_size">12sp</dimen>
+
+    <dimen name="create_folder_btn_width">48dp</dimen>
+    <dimen name="create_folder_btn_height">48dp</dimen>
+    <dimen name="create_folder_btn_margin_top">2dp</dimen>
+    <dimen name="create_folder_btn_margin_right">18dp</dimen>
+    <dimen name="create_folder_bnt_margin_bottom">2dp</dimen>
+
 
 </resources>

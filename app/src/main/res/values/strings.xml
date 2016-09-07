@@ -107,4 +107,8 @@
     <!--search tag shapr-->
     <string name="search_tag_sharp">#</string>
 
+    <!--edit my info string-->
+    <string name="edit_my_info_name_hint">이름을 입력해 주세요.</string>
+    <string name="edit_my_info_about_me_hint">자기소개를 입력해 주세요.</string>
+
 </resources>

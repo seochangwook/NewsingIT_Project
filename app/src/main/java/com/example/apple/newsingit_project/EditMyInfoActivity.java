@@ -8,8 +8,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -49,7 +50,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
      * 필요한 위젯 정의
      **/
     ImageView profile_fix_imageview;
-    Button enroll_fix_button;
+    //Button enroll_fix_button;
     EditText my_name_fix_edit;
     EditText my_introduce_fix_edit;
     ImageButton get_image_button;
@@ -91,7 +92,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.edit_my_info_activity_layout);
 
         profile_fix_imageview = (ImageView) findViewById(R.id.my_profile_imageview);
-        enroll_fix_button = (Button) findViewById(R.id.enroll_fix_button);
+        //enroll_fix_button = (Button) findViewById(R.id.enroll_fix_button);
         my_name_fix_edit = (EditText) findViewById(R.id.my_name_fix_edittext);
         my_introduce_fix_edit = (EditText) findViewById(R.id.my_introduce_fix_edit);
         get_image_button = (ImageButton) findViewById(R.id.select_gallery_picture);
@@ -132,15 +133,15 @@ public class EditMyInfoActivity extends AppCompatActivity {
             }
         });
 
-        enroll_fix_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //수정작업//
-                edit_user();
-
-                finish();
-            }
-        });
+//        enroll_fix_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //수정작업//
+//                edit_user();
+//
+//                finish();
+//            }
+//        });
 
         get_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,5 +231,24 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_edit_my_info, menu); //xml로 작성된 메뉴를 팽창//
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int item_id = item.getItemId();
+
+        if (item_id == R.id.menu_edit_my_info) {
+            edit_user();
+
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
