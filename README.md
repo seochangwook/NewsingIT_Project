@@ -18,6 +18,8 @@
 * compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
 * compile 'com.facebook.android:facebook-android-sdk:4.8.2'
 * compile 'com.android.support:multidex:1.0.1'
+* compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+* compile 'com.google.android.gms:play-services-gcm:9.4.0'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 < Algorithm image >
