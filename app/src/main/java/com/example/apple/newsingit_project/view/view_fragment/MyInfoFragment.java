@@ -211,10 +211,6 @@ public class MyInfoFragment extends Fragment {
                         folder_recyclerrefreshview.loadMoreComplete();
                         folderListAdapter.set_FolderDate(folderData); //설정.//
 
-                        init_folder_list();
-
-                        getMyFolderData();
-
                     }
                 }, 1000);
             }

@@ -24,7 +24,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class SplashActivity extends AppCompatActivity {
-
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     Handler mHandler;
 
@@ -38,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
      **/
     SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
     SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
+
     /**
      * Callback메소드 등록
      **/

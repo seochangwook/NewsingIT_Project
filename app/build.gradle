@@ -10,6 +10,7 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'com.google.gms.google-services'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -69,4 +70,6 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.8.2'
 
     compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+
+    compile 'com.google.android.gms:play-services-gcm:9.4.0'
 }

@@ -91,6 +91,10 @@
     <string name="facebook_app_id">294467057584893</string>
     <string name="title_activity_edit">EditActivity</string>
 
+    <!-- FCM Server API Key / Sender ID -->
+    <string name="server_apikey">AIzaSyCLHs9K2Fp5WLGhRz7lIH5Q3rgaRjzHzfs</string>
+    <string name="sender_id">44678253807</string>
+
     <!-- Server(Dummy, real(port추가)) domain -->
     <string name="server_domain">ec2-52-78-124-76.ap-northeast-2.compute.amazonaws.com</string>
     <string name="real_server_domain">ec2-52-78-124-76.ap-northeast-2.compute.amazonaws.com</string>

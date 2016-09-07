@@ -30,7 +30,6 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -163,7 +162,6 @@ public class EditFolderActivity extends AppCompatActivity {
         if (folder_imageUrl.equals("default")) {
             Picasso.with(this)
                     .load(R.mipmap.no_image)
-                    .transform(new CropCircleTransformation())
                     .into(folder_imageview); //into로 보낼 위젯 선택.//
         } else {
             Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//

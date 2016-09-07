@@ -1,13 +1,17 @@
 package com.example.apple.newsingit_project;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -20,6 +24,8 @@ import com.example.apple.newsingit_project.data.json_data.login.LoginRequest;
 import com.example.apple.newsingit_project.data.json_data.login.LoginRequestResult;
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.example.apple.newsingit_project.service.fcm.QuickstartPreferences;
+import com.example.apple.newsingit_project.service.fcm.RegistrationIntentService;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -30,6 +36,8 @@ import com.facebook.login.DefaultAudience;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -47,6 +55,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "LoginActivity";
+
     Button facebook_login_button; //로그인 버튼 커스텀//
 
     /**
@@ -61,9 +72,10 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
     /** 네트워크 관련 변수 **/
     NetworkManager manager;
+    String register_id;
     private CallbackManager callbackManager; //세션연결 콜백관리자.//
     /** FCM 관련 변수 **/
-
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
     private BackPressCloseHandler backPressCloseHandler; //뒤로가기 처리//
 
     private Callback requestloginCallback = new Callback() {
@@ -127,6 +139,8 @@ public class LoginActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.login_activity_layout);
 
+        registBroadcastReceiver();
+
         facebook_login_button = (Button) findViewById(R.id.btn_test);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -151,6 +165,86 @@ public class LoginActivity extends AppCompatActivity {
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         mLoginManager = LoginManager.getInstance(); //로그인 매니저 등록//
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_READY));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_GENERATING));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+    }
+
+    /**
+     * 앱이 화면에서 사라지면 등록된 LocalBoardcast를 모두 삭제한다.
+     */
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
+    /**
+     * Instance ID를 이용하여 디바이스 토큰을 가져오는 RegistrationIntentService를 실행한다.
+     */
+    public void getInstanceIdToken() {
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+    }
+
+    public void registBroadcastReceiver() {
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+
+
+                if (action.equals(QuickstartPreferences.REGISTRATION_READY)) {
+                    // 액션이 READY일 경우
+                    //mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
+                    //mInformationTextView.setVisibility(View.GONE);
+                } else if (action.equals(QuickstartPreferences.REGISTRATION_GENERATING)) {
+                    // 액션이 GENERATING일 경우
+                    //mRegistrationProgressBar.setVisibility(ProgressBar.VISIBLE);
+                    //mInformationTextView.setVisibility(View.VISIBLE);
+                    //mInformationTextView.setText(getString(R.string.registering_message_generating));
+                } else if (action.equals(QuickstartPreferences.REGISTRATION_COMPLETE)) {
+                    // 액션이 COMPLETE일 경우
+                    //mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
+                    //mRegistrationButton.setText(getString(R.string.registering_message_complete));
+                    //mRegistrationButton.setEnabled(false);
+                    String token = intent.getStringExtra("token");
+                    register_id = token;
+
+                    Log.d("token fcm id : ", register_id);
+                    //mInformationTextView.setText(token);
+                }
+            }
+        };
+    }
+
+    /**
+     * Google Play Service를 사용할 수 있는 환경이지를 체크한다.
+     */
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -197,6 +291,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 //Access Token값을 가져온다.//
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
+
+                getInstanceIdToken(); //FCM ID값 획득//
+
                 token = accessToken.getToken();
 
                 Log.d("token : ", token);

@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "44678253807",
+    "project_id": "newsingit"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44678253807:android:fb4eaf292818e406",
+        "android_client_info": {
+          "package_name": "com.example.apple.newsingit_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT1MdQwLPr-j66frfqeQontFfJF5ZHNkY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
