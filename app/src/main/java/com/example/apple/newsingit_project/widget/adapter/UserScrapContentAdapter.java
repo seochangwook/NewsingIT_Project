@@ -31,6 +31,7 @@ import okhttp3.Response;
  * Created by Tacademy on 2016-08-25.
  */
 public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final String SCRAP_ID = "SCRAP_ID";
 
     UserScrapContentData userScrapContentData;
     Context context;
@@ -120,7 +121,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                         //팝업창//
                         Intent intent = new Intent(context, ScrapContentEditDialog.class);
-                        intent.putExtra("SCRAP_ID", "" + scrapId);
+                        intent.putExtra(SCRAP_ID, "" + scrapId);
 
                         Toast.makeText(context, "" + scrapId, Toast.LENGTH_SHORT).show();
 
@@ -185,6 +186,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             position -= userScrapContentData.userScrapContentDataList.size();
         }
+
         throw new IllegalArgumentException("invalid position");
     }
 
@@ -198,7 +200,8 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(context.getResources().getString(R.string.server_domain))
+                .host(context.getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("scraps")
                 .addPathSegment(select_scrap_id)
                 .addPathSegment("favorites")
@@ -224,7 +227,8 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(context.getResources().getString(R.string.server_domain))
+                .host(context.getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("scraps")
                 .addPathSegment(select_scrap_id)
                 .addPathSegment("favorites");

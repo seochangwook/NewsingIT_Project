@@ -175,6 +175,9 @@ public class MyInfoFragment extends Fragment {
         folder_recyclerview.setEmptyView(my_empty_list_view);
         folder_recyclerview.setEmptyViewKeepShowHeadOrFooter(true);
 
+        /** HeaderView 화면 설정 **/
+        final View header_info_view = getActivity().getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
+
         /** 폴더 데이터 클래스 초기화 및 어댑터 초기화 **/
         folderData = new FolderData();
         folderListAdapter = new FolderListAdapter(getActivity());
@@ -192,8 +195,9 @@ public class MyInfoFragment extends Fragment {
                         folderListAdapter.set_FolderDate(folderData); //설정.//
 
                         init_folder_list();
-
                         getMyFolderData();
+
+                        folder_recyclerview.removeHeaderView(header_info_view);
 
                     }
                 }, 1000);
@@ -257,6 +261,9 @@ public class MyInfoFragment extends Fragment {
 
                 startActivity(intent);
 
+                folder_recyclerview.addHeaderView(header_info_view);
+                folder_recyclerview.smoothScrollToPosition(0);
+
                 //Toast.makeText(getActivity(), folder_name + "폴더 제거" + "" + position, Toast.LENGTH_SHORT).show();
 
                 return true;
@@ -314,6 +321,9 @@ public class MyInfoFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), CreateFolderActivity.class);
 
                 startActivity(intent);
+
+                folder_recyclerview.addHeaderView(header_info_view);
+                folder_recyclerview.smoothScrollToPosition(0);
             }
         });
 
@@ -333,11 +343,14 @@ public class MyInfoFragment extends Fragment {
         folderData.folder_list.clear();
 
         folderListAdapter.init_folder(folderData);
+
+        folderListAdapter.notifyDataSetChanged();
     }
 
     public void getMyFolderData() {
         /** 네트워크 설정을 한다. **/
         /** OkHttp 자원 설정 **/
+
         networkManager = NetworkManager.getInstance();
 
         /** Client 설정 **/
@@ -387,9 +400,9 @@ public class MyInfoFragment extends Fragment {
                         new_folderdata.set_folderid(myFolderListRequestResultsList.get(i).getId());
 
                         folderData.folder_list.add(new_folderdata);
-
-                        folderListAdapter.set_FolderDate(folderData);
                     }
+
+                    folderListAdapter.set_FolderDate(folderData);
                 }
             });
         }

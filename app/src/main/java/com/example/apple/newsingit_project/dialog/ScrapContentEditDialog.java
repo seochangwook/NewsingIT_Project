@@ -35,6 +35,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ScrapContentEditDialog extends Activity {
+    private static final String SCRAP_ID = "SCRAP_ID";
+
     ExpandableListView expandablelistview;
     FolderGroupAdapter mAdapter;
 
@@ -44,6 +46,8 @@ public class ScrapContentEditDialog extends Activity {
     String group_name;
     //String group_name[];
     String child_name[];
+    int scrap_folder_id[];
+    String scrap_id;
     /**
      * Network 관련 변수
      **/
@@ -107,6 +111,11 @@ public class ScrapContentEditDialog extends Activity {
         mAdapter = new FolderGroupAdapter(this);
         expandablelistview.setAdapter(mAdapter);
 
+        //스크랩 id를 얻어온다.//
+        Intent intent = getIntent();
+
+        scrap_id = intent.getStringExtra(SCRAP_ID);
+
         //expandablelistview의 group indicator를 cusotom해주기 위해 기본 indicator를 제거한다//
         expandablelistview.setGroupIndicator(null);
 
@@ -128,11 +137,16 @@ public class ScrapContentEditDialog extends Activity {
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
                 Toast.makeText(ScrapContentEditDialog.this, "선택된 카테고리 : " + child_name[childPosition], Toast.LENGTH_SHORT).show();
 
+                int move_scrap_folder_id = scrap_folder_id[childPosition];
+
                 if (childPosition == child_name.length - 1) //마지막 자식
                 {
                     Intent intent = new Intent(ScrapContentEditDialog.this, CreateFolderActivity.class);
 
                     startActivity(intent);
+                } else {
+                    //카테고리 이동관련. 이동을 할려면 스크랩 id와 이동할 폴더의 id가 필요.//
+                    Scrap_move(scrap_id, move_scrap_folder_id);
                 }
 
                 expandableListView.collapseGroup(0);
@@ -159,7 +173,7 @@ public class ScrapContentEditDialog extends Activity {
             public void onClick(View view) {
 
                 Intent intent = getIntent();
-                String scrapId = intent.getStringExtra("SCRAP_ID");
+                String scrapId = intent.getStringExtra(SCRAP_ID);
                 //  Log.d("scrap_id", scrapId);
                 deleteScrapData(scrapId);
 
@@ -173,6 +187,12 @@ public class ScrapContentEditDialog extends Activity {
 
         /** 네트워크로 부터 데이터를 불러온다. **/
         get_Category_Data();
+    }
+
+    public void Scrap_move(String scrap_id, int move_scrap_folder_id) {
+        Log.d("data", scrap_id + "/" + move_scrap_folder_id);
+
+        //폴더 이동작업//
     }
 
     public void get_Category_Data() {
@@ -191,7 +211,8 @@ public class ScrapContentEditDialog extends Activity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의//
-        builder.host(getResources().getString(R.string.server_domain)); //호스트를 설정.//
+        builder.host(getResources().getString(R.string.real_server_domain)); //호스트를 설정.//
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //나의 정보이기에 "me"로 설정//
         builder.addPathSegment("categories");
@@ -228,17 +249,20 @@ public class ScrapContentEditDialog extends Activity {
                     group_name = "스크랩 폴더 이동";
                     //  group_name = new String[]{"스크랩 폴더 이동"};
                     child_name = new String[array_last_size]; //스크랩 사이즈의 개수로 배열을 할당.//
+                    scrap_folder_id = new int[array_last_size]; //스크랩 사이즈의 개수로 정수배열을 할당.//
 
                     for (int i = 0; i < array_last_size; i++) {
                         if (i == array_last_size - 1) {
                             child_name[i] = "+ 폴더만들기";
                         } else {
+                            //id, name을 각각 배열에 저장//
                             child_name[i] = scrapFolderListRequestResultsList.get(i).getName();
-                            System.out.print("child : " + child_name[i]);
+                            scrap_folder_id[i] = scrapFolderListRequestResultsList.get(i).getId();
                         }
 
                         Log.d("data", child_name[i]);
                     }
+
                     mAdapter.set_List_Data(group_name, child_name);
 
 //                     //Child를 설정//
@@ -289,7 +313,8 @@ public class ScrapContentEditDialog extends Activity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("scraps")
                 .addPathSegment(scrapId);
 

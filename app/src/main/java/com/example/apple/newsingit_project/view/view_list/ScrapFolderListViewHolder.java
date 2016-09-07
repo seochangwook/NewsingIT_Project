@@ -24,5 +24,6 @@ public class ScrapFolderListViewHolder extends RecyclerView.ViewHolder {
         this.scrapFolderListData = scrapFolderListData;
 
         scrapfolderlist_text.setText(scrapFolderListData.get_scrap_folder_list_data());
+
     }
 }

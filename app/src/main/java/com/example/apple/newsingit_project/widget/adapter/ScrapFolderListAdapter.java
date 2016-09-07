@@ -31,6 +31,18 @@ public class ScrapFolderListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             notifyDataSetChanged();
         }
+
+        notifyDataSetChanged();
+    }
+
+    public void init_data(ScrapFolderListData scrapFolderListData) {
+        if (this.scrapFolderListData != scrapFolderListData) {
+            this.scrapFolderListData = scrapFolderListData;
+
+            notifyDataSetChanged();
+        }
+
+        notifyDataSetChanged();
     }
 
     @Override

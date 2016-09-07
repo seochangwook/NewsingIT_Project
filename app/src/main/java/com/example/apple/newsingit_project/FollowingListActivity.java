@@ -72,7 +72,8 @@ public class FollowingListActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("follows")
                 .addQueryParameter("direction", "to")
                 .addQueryParameter("page", "1")
@@ -95,7 +96,8 @@ public class FollowingListActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("follows");
         // 검색 query 전달 //
 

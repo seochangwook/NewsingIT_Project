@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -24,6 +25,8 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
     public String folder_imgUrl;
     //폴더 데이터 클래스//
     UserFolderData userfolderData;
+
+    NetworkManager networkManager;
 
     public UserFolderViewHolder(View itemView) {
         super(itemView);
@@ -45,22 +48,36 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
 
             folder_imgUrl = userfolderData.get_folder_imageUrl();
 
-            //이미지를 로드.//
-            Picasso.with(context)
-                    .load(folder_imgUrl)
-                    .transform(new CropCircleTransformation())
-                    .into(user_folder_imageview);
+            if (folder_imgUrl.equals("default")) {
+                Picasso.with(context)
+                        .load(R.mipmap.no_image)
+                        .into(user_folder_imageview); //into로 보낼 위젯 선택.//
+            } else {
+                //이미지를 로드.//
+                Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                picasso.load(folder_imgUrl)
+                        .transform(new CropCircleTransformation())
+                        .into(user_folder_imageview);
+            }
 
         } else if (user_folder_private == true) //비공개 처리일 경우//
         {
 
             folder_imgUrl = userfolderData.get_folder_imageUrl();
 
-            //이미지를 로드.//
-            Picasso.with(context)
-                    .load(folder_imgUrl)
-                    .transform(new CropCircleTransformation())
-                    .into(user_folder_imageview);
+            if (folder_imgUrl.equals("default")) {
+                Picasso.with(context)
+                        .load(R.mipmap.no_image)
+                        .into(user_folder_imageview); //into로 보낼 위젯 선택.//
+            } else {
+                //이미지를 로드.//
+                Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                picasso.load(folder_imgUrl)
+                        .transform(new CropCircleTransformation())
+                        .into(user_folder_imageview);
+            }
         }
 
         //폴더 정보 불러오기//

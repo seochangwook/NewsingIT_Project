@@ -229,6 +229,9 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     Switch_new_sscrap.setVisibility(View.VISIBLE);
                     Switch_my_scrap_favorite.setVisibility(View.GONE);
                     Switch_my_page_follow.setVisibility(View.GONE);
+
+                    //해당 스위치의 설정을 공유 프래퍼런스를 가지고 설정//
+
                 } else if (childPosition == 1) {
                     Switch_new_sscrap.setVisibility(View.GONE);
                     Switch_my_scrap_favorite.setVisibility(View.VISIBLE);

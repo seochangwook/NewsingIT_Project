@@ -63,7 +63,8 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(context.getResources().getString(R.string.server_domain))
+                .host(context.getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("follows");
 
         RequestBody body = new FormBody.Builder()
@@ -87,7 +88,8 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(context.getResources().getString(R.string.server_domain))
+                .host(context.getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("follows")
                 .addPathSegment("" + userId);
 

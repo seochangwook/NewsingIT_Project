@@ -93,12 +93,13 @@ public class SearchTagFragment extends Fragment {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("search")
                 .addQueryParameter("target", "3")
                 .addQueryParameter("word", query)
                 .addQueryParameter("page", "1")
-                .addQueryParameter("count", "10");
+                .addQueryParameter("count", "20");
 
         //  Log.d("searchQuery",searchQuery);
 

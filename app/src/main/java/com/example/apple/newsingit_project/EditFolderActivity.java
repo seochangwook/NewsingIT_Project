@@ -231,6 +231,9 @@ public class EditFolderActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, RC_SINGLE_IMAGE);
+
+                //팝업창 제거//
+                image_select_popup.dismiss();
             }
         });
 

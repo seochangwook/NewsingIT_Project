@@ -111,9 +111,10 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("scraps")
-                .addQueryParameter("category", folder_id)
+                .addQueryParameter("category", folder_id) //해당 폴더의 세부 스크랩 정보를 알기 위해서 id값을 넣어준다.//
                 //page값은 스와이프 유무에 따라 동적으로 변화된다.//
                 .addQueryParameter("page", "" + page_count)
                 .addQueryParameter("count", "20"); //count는 20개로 고정.//
@@ -147,7 +148,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setNcTime(scrapContentList.get(i).getNc_ntime());
                         newUserScrapCotentData.setLike(scrapContentList.get(i).getFavorite_cnt());
                         newUserScrapCotentData.setLikeFlag(scrapContentList.get(i).getFavorite());
-                        newUserScrapCotentData.setLock(scrapContentList.get(i).getLock());
+                        newUserScrapCotentData.setLock(scrapContentList.get(i).getLock()); //락 설정을 위해서 필요//
                         newUserScrapCotentData.setId(scrapContentList.get(i).getId());
 
                         if (is_user_my.equals("1")) //다른 사람 스크랩 목록//
@@ -360,7 +361,8 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("search")
                 .addQueryParameter("target", "4") //4는 태그상세 검색//
                 .addQueryParameter("word", folder_name) //word는 검색단어(태그 상세검색 시 필요)//

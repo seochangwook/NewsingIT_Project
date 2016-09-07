@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.SearchUserData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
@@ -25,6 +26,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
 
     public String user_imgUrl;
 
+    NetworkManager networkManager;
 
     public SearchUserViewHolder(View itemView) {
         super(itemView);
@@ -42,9 +44,17 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
 
         user_imgUrl = searchUserData.get_User_imgUrl();
         //이미지 뷰 작업.//
-        Picasso.with(context)
-                .load(user_imgUrl)
-                .transform(new CropCircleTransformation())
-                .into(searchUserImgView);
+        if (user_imgUrl.equals("default")) {
+            Picasso.with(context)
+                    .load(R.mipmap.no_image)
+                    .into(searchUserImgView); //into로 보낼 위젯 선택.//
+        } else {
+            //이미지를 로드.//
+            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+            picasso.load(user_imgUrl)
+                    .transform(new CropCircleTransformation())
+                    .into(searchUserImgView);
+        }
     }
 }

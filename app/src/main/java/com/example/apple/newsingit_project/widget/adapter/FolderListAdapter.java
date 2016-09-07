@@ -2,6 +2,7 @@ package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,19 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_list.FolderViewHolder;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by apple on 2016. 8. 24..
@@ -22,7 +35,21 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     /**
      * Network 관련 변수
      **/
+    NetworkManager networkManager;
+    private Callback requestfolderunlockedCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
 
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
 
     //생성자로 데이터 클래스 할당과 프래그먼트 자원 초기화.//
     public FolderListAdapter(Context context) {
@@ -38,11 +65,15 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             notifyDataSetChanged();
         }
+
+        notifyDataSetChanged();
     }
 
     public void init_folder(FolderData folderData) {
         if (this.folderData != folderData) {
             this.folderData = folderData;
+
+            notifyDataSetChanged();
         }
 
         notifyDataSetChanged();
@@ -84,18 +115,14 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                         folderData.folder_list.get(position).setFolder_private(false);
 
+                        //폴더변경에 필요한 정보(폴더id, 폴더 lock정보)를 얻는다.//
+                        int folder_id = folderData.folder_list.get(position).get_folderid();
+                        boolean folder_locked = folderData.folder_list.get(position).get_folder_private();
+
                         //인증해제 작업을 해준다.//
-
-
-                    } else if (folder_private == false) { //잠금 설정//
-                        Toast.makeText(context, "잠금모드 설정", Toast.LENGTH_SHORT).show();
-
-                        folderData.folder_list.get(position).setFolder_private(true);
-
-                        //인증작업을 해준다.//
-
-
+                        set_folder_unlocked(folder_id, folder_locked);
                     }
+
                     notifyDataSetChanged();
                 }
             });
@@ -106,5 +133,41 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public int getItemCount() {
         return folderData.folder_list.size(); //해당 폴더 목록만큼 반환.//
+    }
+
+    public void set_folder_unlocked(int folder_id, boolean folder_locked) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http")
+                .host(context.getResources().getString(R.string.real_server_domain))
+                .port(8080)
+                .addPathSegment("users")
+                .addPathSegment("me")
+                .addPathSegment("categories")
+                .addPathSegment("" + folder_id);
+
+        /** 전송해야할 body가 여러개이므로 MultipartBody 설정 **/
+        MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
+
+        //비공개, 공개여부에 의해서 1/0으로 판단.//
+        if (folder_locked == false) //잠금모드 비활성화//
+        {
+            multipart_builder.addFormDataPart("locked", "0"); //false//
+        }
+
+        RequestBody body = multipart_builder.build();
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .put(body)
+                .build();
+
+        client.newCall(request).enqueue(requestfolderunlockedCallback);
     }
 }

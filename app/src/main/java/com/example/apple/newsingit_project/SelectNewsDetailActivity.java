@@ -143,7 +143,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         /** 팝업에서 사용되는 변수들 초기화 **/
-
         scrap_folderlist_view = getLayoutInflater().inflate(R.layout.scrap_folder_select, null);
 
         scrap_folder_create_button = (Button) scrap_folderlist_view.findViewById(R.id.create_scrap_folder_button);
@@ -179,6 +178,13 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         scrapfolderData = new ScrapFolderListData();
         scrapfolderListAdapter = new ScrapFolderListAdapter(this);
 
+        /** 폴더 리스트 헤더뷰 **/
+        final View headerview = getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
+
+        /** 폴더 리스트 EmptyView **/
+        View emptyview = getLayoutInflater().inflate(R.layout.view_scrapfolder_emptyview, null);
+        scrap_folder_recyclerview.setEmptyView(emptyview, true);
+
         /** 폴더 리스트뷰 Refresh 이벤트 등록 **/
         scrap_folder_recyclerrefreshview.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
             @Override
@@ -189,6 +195,13 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         scrap_folder_recyclerrefreshview.pullRefreshComplete();
+
+                        scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
+
+                        init_scrap_folder_list();
+                        get_ScrapFolder_Data();
+
+                        scrap_folder_recyclerview.removeHeaderView(headerview);
                     }
                 }, 1000);
             }
@@ -243,6 +256,9 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectNewsDetailActivity.this, CreateFolderActivity.class);
 
                 startActivity(intent);
+
+                scrap_folder_recyclerview.addHeaderView(headerview);
+                scrap_folder_recyclerview.smoothScrollToPosition(0);
             }
         });
 
@@ -302,6 +318,14 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         get_ScrapFolder_Data(); //스크랩 폴더 리스트//
     }
 
+    public void init_scrap_folder_list() {
+        scrapfolderData.scrapfolderlist.clear();
+
+        scrapfolderListAdapter.init_data(scrapfolderData);
+
+        scrapfolderListAdapter.notifyDataSetChanged();
+    }
+
     public void get_ScrapFolder_Data() {
         /** 네트워크 설정을 한다. **/
         /** OkHttp 자원 설정 **/
@@ -315,7 +339,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(getResources().getString(R.string.server_domain));
+        builder.host(getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //나의 폴더 리스트이기에 me//
         builder.addPathSegment("categories");

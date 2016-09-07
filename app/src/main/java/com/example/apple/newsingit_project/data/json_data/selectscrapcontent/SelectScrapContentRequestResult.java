@@ -2,7 +2,7 @@ package com.example.apple.newsingit_project.data.json_data.selectscrapcontent;
 
 public class SelectScrapContentRequestResult {
     private String nc_title;
-    private String nc_contents;
+    private String nc_content;
     private String nc_img_url;
     private String img_url;
     private String title;
@@ -24,11 +24,11 @@ public class SelectScrapContentRequestResult {
     }
 
     public String getNc_contents() {
-        return this.nc_contents;
+        return this.nc_content;
     }
 
     public void setNc_contents(String nc_contents) {
-        this.nc_contents = nc_contents;
+        this.nc_content = nc_contents;
     }
 
     public String getNc_img_url() {

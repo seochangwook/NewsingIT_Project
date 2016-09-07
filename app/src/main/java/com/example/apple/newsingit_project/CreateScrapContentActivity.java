@@ -36,7 +36,6 @@ import me.gujun.android.taggroup.TagGroup;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -297,7 +296,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
             Toast.makeText(CreateScrapContentActivity.this, "생성 완료", Toast.LENGTH_SHORT).show();
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateScrapContentActivity.this);
-            alertDialog.setMessage("수정하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+            alertDialog.setMessage("스크랩 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -317,8 +316,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
             AlertDialog alert = alertDialog.create();
             alert.show();
-
-            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -330,9 +327,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         String scrap_content = appCompatEditText.getText().toString();
 
         /** Networok 설정 **/
-        //파일 전송을 위한 설정.//
-        MediaType mediaType = MediaType.parse("image/jpeg");
-
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -342,7 +336,8 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의(Http / Https)
-        builder.host(getResources().getString(R.string.server_domain)); //host정의.//
+        builder.host(getResources().getString(R.string.real_server_domain)); //host정의.//
+        builder.port(8080);
         builder.addPathSegment("scraps");
 
         /** 파일 전송이므로 MultipartBody 설정 **/

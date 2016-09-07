@@ -34,6 +34,17 @@ public class UserFolderListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
+    //어댑터랑 연동되는 객체를 설정.//
+    public void init_FolderDate(UserFolderData userfolderDate) {
+        if (this.userfolderData != userfolderDate) {
+            this.userfolderData = userfolderDate;
+
+            notifyDataSetChanged();
+        }
+
+        notifyDataSetChanged();
+    }
+
     //리사이클뷰에 들어갈 뷰 초기화.//
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

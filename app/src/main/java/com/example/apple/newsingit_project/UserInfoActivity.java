@@ -1,9 +1,11 @@
 package com.example.apple.newsingit_project;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
@@ -86,6 +88,8 @@ public class UserInfoActivity extends AppCompatActivity {
         {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+
+
         }
 
         @Override
@@ -94,11 +98,32 @@ public class UserInfoActivity extends AppCompatActivity {
 
             Log.d("json data", response_data);
 
-            Gson gson = new Gson();
+            if (response.code() == 404) {
+                Log.d("json control", "유저 검색 실패");
 
-            UserInfoRequest userInfoRequest = gson.fromJson(response_data, UserInfoRequest.class);
+                if (this != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserInfoActivity.this);
+                            alertDialog.setMessage("등록되지 않은 사용자 입니다").setCancelable(false).setPositiveButton("확인",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            finish();
+                                        }
+                                    });
 
-            set_UserInfo_Data(userInfoRequest.getResult());
+                            AlertDialog alert = alertDialog.create();
+                            alert.show();
+                        }
+                    });
+                }
+            } else {
+                Gson gson = new Gson();
+
+                UserInfoRequest userInfoRequest = gson.fromJson(response_data, UserInfoRequest.class);
+            }
         }
     };
 
@@ -143,10 +168,11 @@ public class UserInfoActivity extends AppCompatActivity {
 
                             new_user_folderdata.setFolder_id(userFolderListRequestResultsList.get(i).getId());
                             new_user_folderdata.set_get_folder_name(userFolderListRequestResultsList.get(i).getName());
-                            //new_user_folderdata.set_get_folder_imageUrl(userFolderListRequestResultsList.get(i).getImg_url());
-                            new_user_folderdata.set_get_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                            new_user_folderdata.set_get_folder_imageUrl(userFolderListRequestResultsList.get(i).getImg_url());
+                            //new_user_folderdata.set_get_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
                             new_user_folderdata.setFolder_private(userFolderListRequestResultsList.get(i).getLocked());
 
+                            //기본적으로 서버에서 비공개 처리폴더에 대한 정보는 오지 않는다.//
                             user_folderData.user_folder_list.add(new_user_folderdata);
                         }
                     }
@@ -226,6 +252,13 @@ public class UserInfoActivity extends AppCompatActivity {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         user_folder_recyclerrefreshview.pullRefreshComplete();
+                        user_folderListAdapter.set_UserFolderDate(user_folderData); //설정.//
+
+                        init_folder_list();
+
+                        get_User_Folder_Data(get_user_id); //id값이 조건으로 필요하다.//
+
+                        Log.d("json control", "사용자 폴더 리스트 초기화");
                     }
                 }, 1000);
             }
@@ -312,6 +345,14 @@ public class UserInfoActivity extends AppCompatActivity {
         get_User_Folder_Data(get_user_id); //id값이 조건으로 필요하다.//
     }
 
+    public void init_folder_list() {
+        user_folderData.user_folder_list.clear();
+
+        user_folderListAdapter.init_FolderDate(user_folderData);
+
+        user_folderListAdapter.notifyDataSetChanged();
+    }
+
     public void get_User_Folder_Data(String user_id) {
         networkManager = NetworkManager.getInstance();
 
@@ -319,7 +360,8 @@ public class UserInfoActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("users")
                 .addPathSegment(user_id)
                 .addPathSegment("categories");
@@ -350,7 +392,8 @@ public class UserInfoActivity extends AppCompatActivity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(getResources().getString(R.string.server_domain));
+        builder.host(getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment(user_id);
 
@@ -374,8 +417,8 @@ public class UserInfoActivity extends AppCompatActivity {
                     scrap_count = "" + userInfoRequestResult.getScrapings();
                     following_count = "" + userInfoRequestResult.getFollowings();
                     follower_count = "" + userInfoRequestResult.getFollowers();
-                    //user_imgUrl = userInfoRequestResult.getPf_url();
-                    user_imgUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                    user_imgUrl = userInfoRequestResult.getPf_url();
+                    //user_imgUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
 
                     /*Log.d("user aboutMe", user_intro);
                     Log.d("user scrap count", scrap_count);
@@ -384,9 +427,10 @@ public class UserInfoActivity extends AppCompatActivity {
                     Log.d("user imgUrl", user_imgUrl);*/
 
                     //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
-                    //파카소 라이브러리를 이용하여 이미지 로딩//
-                    Picasso.with(UserInfoActivity.this)
-                            .load(user_imgUrl)
+                    //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
+                    Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                    picasso.load(user_imgUrl)
                             .transform(new CropCircleTransformation())
                             .into(user_profile_imageview);
 

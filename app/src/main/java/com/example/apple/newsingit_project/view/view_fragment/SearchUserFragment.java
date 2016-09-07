@@ -202,7 +202,8 @@ public class SearchUserFragment extends Fragment {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(getResources().getString(R.string.server_domain));
+        builder.host(getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("search");
 
         //전달할 파라미터 값을 생성//
@@ -249,8 +250,8 @@ public class SearchUserFragment extends Fragment {
                         new_searchUserData.setName(searchUserRequestResultsList.get(i).getName());
                         new_searchUserData.setAboutMe(searchUserRequestResultsList.get(i).getAboutme());
                         new_searchUserData.setFlag(searchUserRequestResultsList.get(i).getFlag());
-                        //new_searchUserData.set_User_imgUrl(searchUserRequestResultsList.get(i).getPf_url());
-                        new_searchUserData.set_User_imgUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
+                        new_searchUserData.set_User_imgUrl(searchUserRequestResultsList.get(i).getPf_url());
+                        //new_searchUserData.set_User_imgUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
 
                         searchUserData.searchUserDataArrayList.add(new_searchUserData);
                     }

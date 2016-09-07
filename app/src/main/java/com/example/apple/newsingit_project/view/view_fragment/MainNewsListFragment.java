@@ -564,7 +564,11 @@ public class MainNewsListFragment extends Fragment {
         /** Data Setting **/
         //initDummyData();
 
+        showpDialog();
+
         get_MainNewsData();
+
+        hidepDialog();
 
         return view;
     }
@@ -572,7 +576,6 @@ public class MainNewsListFragment extends Fragment {
     public void get_MainNewsData() {
         /** 네트워크 작업 설정 **/
         //네트워크로 부터 데이터를 가져온다.//
-        showpDialog();
 
         /** Network 자원을 설정 **/
         manager = NetworkManager.getInstance(); //싱글톤 객체를 가져온다.//
@@ -597,8 +600,6 @@ public class MainNewsListFragment extends Fragment {
 
         /** 비동기 방식(enqueue)으로 Callback 구현 **/
         client.newCall(request).enqueue(requestmainnewslistcallback);
-
-        hidepDialog();
     }
 
     public void setData(final MainNewsListRequestResults mainNewsListRequest[], final int mainNewsListRequest_size) {
@@ -606,8 +607,6 @@ public class MainNewsListFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    showpDialog();
-
                     List<MainNewsListRequestResults> mainNewsListRequestResultses = new ArrayList<>();
 
                     mainNewsListRequestResultses.addAll(Arrays.asList(mainNewsListRequest));
@@ -1349,8 +1348,6 @@ public class MainNewsListFragment extends Fragment {
                     }
 
                     newsAdapter.setNewsData(keywordSection, newsContent);
-
-                    hidepDialog();
                 }
             });
         }

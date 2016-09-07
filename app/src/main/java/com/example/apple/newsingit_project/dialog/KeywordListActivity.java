@@ -142,7 +142,8 @@ public class KeywordListActivity extends Activity {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http"); //스킴정의//
-        builder.host(getResources().getString(R.string.server_domain)); //호스트를 설정.//
+        builder.host(getResources().getString(R.string.real_server_domain)); //호스트를 설정.//
+        builder.port(8080);
         builder.addPathSegment("keywords");
 
         /** Request 설정 **/

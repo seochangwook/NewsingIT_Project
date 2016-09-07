@@ -16,26 +16,16 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/button_transparent_background"
             android:text="폴더선택"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/scrap_folder_rv_list_empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#EEAADD"
-            android:gravity="center"
-            android:text="생성된 폴더가 없습니다. 폴더 만들기 버튼을 눌러 폴더를 생성해주세요!!"
-            android:visibility="gone" />
 
         <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
             android:id="@+id/scrap_folder_rv_list"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="130dp"
             android:scrollbars="vertical"
             app:frv_dividerHeight="0.5dp"
-            app:frv_emptyView="@id/scrap_folder_rv_list_empty"
-            app:frv_isEmptyViewKeepShowHeadOrFooter="true"
             app:frv_layoutManager="linear"
             app:frv_layoutManagerOrientation="vertical" />
 
@@ -48,6 +38,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginTop="5dp"
                 android:src="@android:drawable/ic_input_add" />
 
             <Button

@@ -84,8 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
 
-            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
-
             logoutFacebook(); //실패하면 꼬임을 방지하기 위해서 로그아웃을 한다.//
         }
 

@@ -69,11 +69,15 @@ public class SearchNewsFragment extends Fragment {
 
             Log.d("json data", responseData);
 
-            Gson gson = new Gson();
+            if (response.code() == 401) {
+                Log.d("ERROR", "401");
+            } else {
+                Gson gson = new Gson();
 
-            SearchNewsListRequest searchNewsListRequest = gson.fromJson(responseData, SearchNewsListRequest.class);
+                SearchNewsListRequest searchNewsListRequest = gson.fromJson(responseData, SearchNewsListRequest.class);
 
-            setData(searchNewsListRequest.getResults(), searchNewsListRequest.getResults().length);
+                setData(searchNewsListRequest.getResults(), searchNewsListRequest.getResults().length);
+            }
         }
     };
 
@@ -91,12 +95,13 @@ public class SearchNewsFragment extends Fragment {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("search")
                 .addQueryParameter("target", "1")
                 .addQueryParameter("word", query)
                 .addQueryParameter("page", "1")
-                .addQueryParameter("count", "10");
+                .addQueryParameter("count", "20");
 
         Request request = new Request.Builder()
                 .url(builder.build())
@@ -127,6 +132,7 @@ public class SearchNewsFragment extends Fragment {
                         searchNewsData.searchNewsDataArrayList.add(newSearchNewsData);
 
                     }
+
                     mAdapter.setSearchNewsData(searchNewsData);
                 }
             });
