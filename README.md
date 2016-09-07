@@ -107,4 +107,5 @@
 * MyInfopage image download Picasso issue solution -> https://github.com/JakeWharton/picasso2-okhttp3-downloader
 * CreateFolder / EditFolder / EditMyInfo real server test complete - 서창욱 (16/09/06 18:23)
 * drawer 메뉴 디자인 가이드 적용 / recycler view 구분선 적용 - 임지수 (16/09/06 20:33)
+* autologin <-> FCM id 간 Merge, Receiver로 fcm id를 먼저 획득 후 로그인 과정을 진행 - 서창욱 (16/09/07 09:51)
 
