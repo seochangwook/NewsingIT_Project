@@ -140,12 +140,14 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
 
                 if (flag) {//true이면 선택한 유저를 팔로우 한 상태//
                     //팔로잉 한 상태에서는 팔로우 해제//
-                    followingViewHolder.btnFollowing.setText("팔로우 해제");
-                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_do));
+                    followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_following);
+//                    followingViewHolder.btnFollowing.setText("팔로우 해제");
+//                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_do));
                 } else {//false이면 선택한 유저를 팔로우 하지 않은 상태//
                     //팔로잉 안 한 상태에서 팔로우 생성//
-                    followingViewHolder.btnFollowing.setText("팔로우");
-                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_cancel));
+                    followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_follow);
+//                    followingViewHolder.btnFollowing.setText("팔로우");
+//                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_cancel));
                 }
 
                 followingViewHolder.btnFollowing.setOnClickListener(new View.OnClickListener() {

@@ -15,6 +15,7 @@ import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerL
 import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.FollowerData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.example.apple.newsingit_project.view.SimpleDividerItemDecoration;
 import com.example.apple.newsingit_project.widget.adapter.FollowerListAdapter;
 import com.google.gson.Gson;
 
@@ -123,7 +124,7 @@ public class FollowerListActivity extends AppCompatActivity {
                         FollowerData newFollowerData = new FollowerData();
                         newFollowerData.setId(followerList.get(i).getId());
                         newFollowerData.setProfileUrl(followerList.get(i).getPf_url());
-                        newFollowerData.setAboutMe(followerList.get(i).getAboutme());
+                        // newFollowerData.setAboutMe(followerList.get(i).getAboutme());
                         newFollowerData.setName(followerList.get(i).getName());
                         newFollowerData.setFlag(followerList.get(i).getFlag());
 
@@ -201,6 +202,8 @@ public class FollowerListActivity extends AppCompatActivity {
         mAdapter = new FollowerListAdapter(this);
 
         recyclerview.setAdapter(mAdapter);
+        recyclerview.addItemDecoration(new SimpleDividerItemDecoration(R.color.line_color, 1)); //색깔이 안 먹히넴//
+
 
         //리사이클러 뷰 각 항목 클릭//
         recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {

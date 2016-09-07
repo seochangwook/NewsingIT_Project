@@ -18,6 +18,7 @@ import com.example.apple.newsingit_project.data.json_data.tagdetaillist.TagDetai
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
+import com.example.apple.newsingit_project.view.SimpleDividerItemDecoration;
 import com.example.apple.newsingit_project.widget.adapter.UserScrapContentAdapter;
 import com.google.gson.Gson;
 
@@ -200,6 +201,8 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         scrap_recyclerView = scrap_recyclerrefreshview.getFamiliarRecyclerView();
         scrap_recyclerView.setItemAnimator(new DefaultItemAnimator());
         scrap_recyclerView.setHasFixedSize(true);
+        scrap_recyclerView.addItemDecoration(new SimpleDividerItemDecoration(R.color.line_color, 1)); //색깔이 안 먹히넴//
+
 
         /** Header, Empty 설정 **/
         emptyview = getLayoutInflater().inflate(R.layout.view_scraplist_emptyview, null);

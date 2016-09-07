@@ -161,7 +161,7 @@ public class EditFolderActivity extends AppCompatActivity {
 
         if (folder_imageUrl.equals("default")) {
             Picasso.with(this)
-                    .load(R.mipmap.no_image)
+                    .load(R.mipmap.ic_image_default)
                     .into(folder_imageview); //into로 보낼 위젯 선택.//
         } else {
             Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//

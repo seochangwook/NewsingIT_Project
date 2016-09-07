@@ -19,6 +19,7 @@ import com.example.apple.newsingit_project.data.json_data.searchuserlist.SearchU
 import com.example.apple.newsingit_project.data.view_data.SearchUserData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
+import com.example.apple.newsingit_project.view.SimpleDividerItemDecoration;
 import com.example.apple.newsingit_project.widget.adapter.SearchUserAdapter;
 import com.google.gson.Gson;
 
@@ -145,6 +146,8 @@ public class SearchUserFragment extends Fragment {
         recyclerView = familiarRefreshRecyclerView.getFamiliarRecyclerView();
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(R.color.line_color, 1)); //색깔이 안 먹히넴//
+
 
 
         mAdapter = new SearchUserAdapter(getActivity());

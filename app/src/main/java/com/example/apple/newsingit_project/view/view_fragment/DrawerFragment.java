@@ -155,8 +155,9 @@ public class DrawerFragment extends Fragment {
             public void onGroupExpand(int groupposition) {
                 //  Toast.makeText(getActivity(), "공지사항 화면 이동" + groupposition, Toast.LENGTH_SHORT).show();
 
+
                 //로그아웃 - 로그인 화면으로 이동//
-                if (groupposition == 2) {
+                if (groupposition == 0) {
                     //공유저장소 내용을 초기화.//
                     //프래퍼런스를 셋팅.//
                     mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

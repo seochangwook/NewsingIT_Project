@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="240dp"
     android:background="@color/colorPrimary">
 
     <TextView
@@ -29,7 +29,6 @@
         android:layout_alignLeft="@+id/prrofile_image"
         android:layout_alignRight="@+id/prrofile_image"
         android:layout_below="@+id/prrofile_image"
-        android:layout_marginBottom="@dimen/drawer_name_margin_bottom"
         android:layout_marginTop="@dimen/drawer_name_margin_top"
         android:gravity="center"
         android:text="서창욱"
@@ -45,8 +44,9 @@
         android:layout_alignParentEnd="true"
 
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/drawer_alarm_img_margin_right"
+        android:layout_marginBottom="@dimen/drawer_alarm_img_margin_bottom"
 
+        android:layout_marginRight="@dimen/drawer_alarm_img_margin_right"
         android:layout_marginTop="@dimen/drawer_alarm_img_margin_top"
         android:background="@color/button_transparent_background"
         android:src="@mipmap/ic_hambu_alarm" />

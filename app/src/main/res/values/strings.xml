@@ -99,4 +99,16 @@
     <string name="server_domain">ec2-52-78-124-76.ap-northeast-2.compute.amazonaws.com</string>
     <string name="real_server_domain">ec2-52-78-124-76.ap-northeast-2.compute.amazonaws.com</string>
 
+    <!--edit scrap string-->
+    <string name="edit_scrap_content_hint">내 생각을 적어보세요.</string>
+    <string name="edit_scrap_tag_hint">태그를 등록해보세요.</string>
+    <string name="edit_scrap_tag_btn">등록</string>
+
+    <!--search tag shapr-->
+    <string name="search_tag_sharp">#</string>
+
+    <!--edit my info string-->
+    <string name="edit_my_info_name_hint">이름을 입력해 주세요.</string>
+    <string name="edit_my_info_about_me_hint">자기소개를 입력해 주세요.</string>
+
 </resources>

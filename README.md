@@ -17,7 +17,10 @@
 * compile 'com.squareup.okhttp3:okhttp:3.4.1'
 * compile 'com.github.franmontiel:PersistentCookieJar:v1.0.0'
 * compile 'com.facebook.android:facebook-android-sdk:4.8.2'
+* compile('com.twitter.sdk.android:twitter:1.14.1@aar') { transitive = true; }
 * compile 'com.android.support:multidex:1.0.1'
+* compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
+* compile 'com.google.android.gms:play-services-gcm:9.4.0'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
 < Algorithm image >
@@ -107,4 +110,5 @@
 * MyInfopage image download Picasso issue solution -> https://github.com/JakeWharton/picasso2-okhttp3-downloader
 * CreateFolder / EditFolder / EditMyInfo real server test complete - 서창욱 (16/09/06 18:23)
 * drawer 메뉴 디자인 가이드 적용 / recycler view 구분선 적용 - 임지수 (16/09/06 20:33)
+* autologin <-> FCM id 간 Merge, Receiver로 fcm id를 먼저 획득 후 로그인 과정을 진행 - 서창욱 (16/09/07 09:51)
 

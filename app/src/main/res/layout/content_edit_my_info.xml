@@ -4,68 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/edit_my_info_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.apple.newsingit_project.EditMyInfoActivity"
     tools:showIn="@layout/edit_my_info_activity_layout">
 
     <ImageView
         android:id="@+id/my_profile_imageview"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/edit_my_info_img_width"
+        android:layout_height="@dimen/edit_my_info_img_height"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/edit_my_info_img_margin_top"
         android:src="@mipmap/profile_hambur" />
+
+
+    <ImageButton
+        android:id="@+id/select_gallery_picture"
+        android:layout_width="@dimen/edit_my_info_camera_width"
+        android:layout_height="48dp"
+        android:layout_marginLeft="@dimen/edit_my_info_camera_margin_left"
+        android:layout_marginTop="@dimen/edit_my_info_camera_margin_top"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/btn_pro_ph_edit" />
+
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginLeft="@dimen/edit_my_info_name_margin_left"
+        android:layout_marginTop="@dimen/edit_my_info_name_margin_top"
         android:text="이름"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/edit_my_info_name"
+        android:textSize="@dimen/edit_my_info_name_size" />
 
     <EditText
         android:id="@+id/my_name_fix_edittext"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="220dp"
-        android:background="@android:drawable/editbox_background_normal" />
+        android:layout_width="@dimen/edit_my_info_input_name_width"
+        android:layout_height="@dimen/edit_my_info_input_name_height"
+        android:layout_below="@+id/textView5"
+        android:layout_marginLeft="@dimen/edit_my_info_input_name_margin_left"
+        android:layout_marginRight="@dimen/edit_my_info_input_name_margin_right"
+        android:layout_marginTop="@dimen/edit_my_info_input_name_margin_top"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColor="@color/edit_my_info_input_name"
+        android:textSize="@dimen/edit_my_info_input_name_size" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="280dp"
+        android:layout_below="@+id/my_name_fix_edittext"
+        android:layout_marginLeft="@dimen/edit_my_info_about_me_margin_left"
+        android:layout_marginTop="@dimen/edit_my_info_about_me_margin_top"
         android:text="자기소개"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/edit_my_info_about_me"
+        android:textSize="@dimen/edit_my_info_about_me_size" />
 
     <EditText
         android:id="@+id/my_introduce_fix_edit"
-        android:layout_width="250dp"
-        android:layout_height="130dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="310dp"
-        android:background="@android:drawable/editbox_background_normal" />
+        android:layout_width="@dimen/edit_my_info_input_about_me_width"
+        android:layout_height="@dimen/edit_my_info_input_about_me_height"
+        android:layout_below="@+id/textView6"
+        android:layout_marginLeft="@dimen/edit_my_info_input_about_me_margin_left"
+        android:layout_marginRight="@dimen/edit_my_info_input_about_me_margin_right"
+        android:layout_marginTop="@dimen/edit_my_info_input_about_me_margin_top"
+        android:background="@android:drawable/editbox_background_normal"
+        android:textColor="@color/edit_my_info_input_about_me"
+        android:textSize="@dimen/edit_my_info_input_about_me_size" />
 
-    <ImageButton
-        android:id="@+id/select_gallery_picture"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="140dp"
-        android:background="@color/button_transparent_background"
-        android:src="@mipmap/btn_profileedit" />
+    <!--android:background="@color/button_transparent_background"-->
 
-    <Button
-        android:id="@+id/enroll_fix_button"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="460dp"
-        android:text="완료" />
+
+    <!--<Button-->
+    <!--android:id="@+id/enroll_fix_button"-->
+    <!--android:layout_width="70dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:layout_marginLeft="250dp"-->
+    <!--android:layout_marginTop="460dp"-->
+    <!--android:text="완료" />-->
 
 </RelativeLayout>

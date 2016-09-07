@@ -1,58 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    card:cardBackgroundColor="#FFFFFF"
-    card:cardCornerRadius="8dp"
-    card:cardElevation="4dp">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/following_height"
+    android:background="@color/following_background">
 
 
     <ImageView
         android:id="@+id/img_following"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_face_black_24dp" />
+        android:layout_width="@dimen/following_img_width"
+        android:layout_height="@dimen/following_img_height"
+        android:layout_marginLeft="@dimen/following_img_margin_left"
+        android:layout_marginTop="@dimen/following_img_margin_top"
+        android:src="@mipmap/profile_hambur" />
 
     <TextView
         android:id="@+id/text_fing_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/following_name_margin_left"
+        android:layout_marginTop="@dimen/following_name_margin_top"
+        android:layout_toRightOf="@+id/img_following"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignTop="@+id/img_following"
-        android:layout_toRightOf="@+id/img_following"
-        android:layout_toEndOf="@+id/img_following"
-        android:layout_marginLeft="20dp" />
 
-    <Button
+        android:textColor="@color/following_name"
+        android:textSize="@dimen/following_name_size" />
+
+    <ImageButton
         android:id="@+id/btn_following"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/following_btn_width"
+        android:layout_height="@dimen/following_btn_height"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/following" />
+        android:layout_marginRight="@dimen/following_btn_margin_right"
+        android:layout_marginTop="@dimen/following_btn_margin_top"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/btn_following" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/text_fing_intro"
-        android:layout_below="@+id/text_fing_name"
-        android:layout_alignLeft="@+id/text_fing_name"
-        android:layout_alignStart="@+id/text_fing_name"
-        android:layout_marginTop="10dp" />
+    <!--<Button-->
+    <!--android:id="@+id/btn_following"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:layout_marginRight="20dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:text="@string/following" />-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+    <!--android:text="Small Text"-->
+    <!--android:id="@+id/text_fing_intro"-->
+    <!--android:layout_below="@+id/text_fing_name"-->
+    <!--android:layout_alignLeft="@+id/text_fing_name"-->
+    <!--android:layout_alignStart="@+id/text_fing_name"-->
+    <!--android:layout_marginTop="10dp" />-->
 
 </RelativeLayout>
-</android.support.v7.widget.CardView>
