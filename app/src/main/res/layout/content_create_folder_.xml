@@ -32,9 +32,9 @@
     <TextView
         android:id="@+id/create_folder_line_one"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/line_dimen"
         android:layout_below="@+id/create_folder_card"
-        android:background="@drawable/line_draw" />
+        android:background="@mipmap/line" />
 
     <TextView
         android:id="@+id/textView7"
@@ -62,9 +62,9 @@
     <TextView
         android:id="@+id/create_folder_line_two"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/line_dimen"
         android:layout_below="@+id/folder_name_edittext"
-        android:background="@drawable/line_draw" />
+        android:background="@mipmap/line" />
 
     <TextView
         android:id="@+id/textview8"
@@ -92,9 +92,9 @@
     <TextView
         android:id="@+id/textview9"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/line_dimen"
         android:layout_below="@+id/textview8"
-        android:background="@drawable/line_draw" />
+        android:background="@mipmap/line" />
 
     <TextView
         android:id="@+id/textview10"
@@ -119,8 +119,8 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/line_dimen"
         android:layout_below="@+id/textview10"
-        android:background="@drawable/line_draw" />
+        android:background="@mipmap/line" />
 
 </RelativeLayout>

@@ -136,4 +136,9 @@
     <color name="create_folder_text">#454444</color>
     <color name="create_folder_input">#454444</color>
 
+    <!--create folder color-->
+    <color name="edit_folder_background">#ffffff</color>
+    <color name="edit_folder_text">#454444</color>
+    <color name="edit_folder_input">#454444</color>
+
 </resources>

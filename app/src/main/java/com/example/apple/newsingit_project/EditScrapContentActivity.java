@@ -15,8 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,7 +61,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     TextInputLayout textInputLayout;
     AppCompatEditText appCompatEditText;
 
-    Button tag_edit_button; //태그 등록버튼.//
+    ImageButton tag_edit_button; //태그 등록버튼.//
     List<String> tag_array = new ArrayList<>(); //태그배열(원본 에디터에서 가져온 데이터)//
     List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
     /**
@@ -121,7 +121,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         setContentView(R.layout.edit_scrap_content_activity_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        tag_edit_button = (Button) findViewById(R.id.btn_tag_create);
+        tag_edit_button = (ImageButton) findViewById(R.id.btn_tag_create);
         mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_beauty);
         appCompatEditText = (AppCompatEditText) findViewById(R.id.text_layout_edittext_edit_scrap);

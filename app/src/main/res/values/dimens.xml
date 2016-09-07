@@ -114,6 +114,9 @@
     <dimen name="floatingbutton_margin_top">435dp</dimen>
 
 
+    <!--line dimen-->
+    <dimen name="line_dimen">2dp</dimen>
+
     <!-- Alarm List dimen-->
     <dimen name="alarm_margin_top">17dp</dimen>
     <dimen name="alarm_margin_left">37dp</dimen>
@@ -359,6 +362,8 @@
     <dimen name="edit_scrap_tag_margin_bottom">10dp</dimen>
     <dimen name="edit_scrap_tag_hint_msg_size">12sp</dimen>
 
+    <dimen name="edit_scrap_tag_btn_width">40dp</dimen>
+    <dimen name="edit_scrap_tag_btn_height">28dp</dimen>
     <dimen name="edit_scrap_tag_btn_margin_top">27dp</dimen>
     <dimen name="edit_scrap_tag_btn_margin_right">20dp</dimen>
     <dimen name="edit_scrap_tag_btn_margin_bottom">6dp</dimen>
@@ -469,5 +474,28 @@
     <dimen name="create_folder_btn_margin_right">18dp</dimen>
     <dimen name="create_folder_bnt_margin_bottom">2dp</dimen>
 
+
+    <!--edit folder dimen-->
+    <dimen name="edit_folder_img_width">100dp</dimen>
+    <dimen name="edit_folder_img_height">80dp</dimen>
+    <dimen name="edit_folder_img_margin_top">12dp</dimen>
+    <dimen name="edit_folder_img_margin_left">12dp</dimen>
+    <dimen name="edit_folder_img_margin_bottom">12dp</dimen>
+
+    <dimen name="edit_folder_text_margin_top">20dp</dimen>
+    <dimen name="edit_folder_text_margin_left">14dp</dimen>
+    <dimen name="edit_folder_text_size">15sp</dimen>
+    <dimen name="edit_folder_text_margin_bottom">20dp</dimen>
+
+    <dimen name="edit_folder_input_name_margin_top">16dp</dimen>
+    <dimen name="edit_folder_input_name_margin_left">14dp</dimen>
+    <dimen name="edit_folder_input_name_margin_bottom">16dp</dimen>
+    <dimen name="edit_folder_input_name_size">12sp</dimen>
+
+    <dimen name="edit_folder_btn_width">48dp</dimen>
+    <dimen name="edit_folder_btn_height">48dp</dimen>
+    <dimen name="edit_folder_btn_margin_top">2dp</dimen>
+    <dimen name="edit_folder_btn_margin_right">18dp</dimen>
+    <dimen name="edit_folder_bnt_margin_bottom">2dp</dimen>
 
 </resources>
