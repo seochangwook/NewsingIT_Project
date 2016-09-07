@@ -19,6 +19,11 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     FolderData folderData;
     Context context;
 
+    /**
+     * Network 관련 변수
+     **/
+
+
     //생성자로 데이터 클래스 할당과 프래그먼트 자원 초기화.//
     public FolderListAdapter(Context context) {
         this.context = context;
@@ -80,12 +85,16 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                         folderData.folder_list.get(position).setFolder_private(false);
 
                         //인증해제 작업을 해준다.//
+
+
                     } else if (folder_private == false) { //잠금 설정//
                         Toast.makeText(context, "잠금모드 설정", Toast.LENGTH_SHORT).show();
 
                         folderData.folder_list.get(position).setFolder_private(true);
 
                         //인증작업을 해준다.//
+
+
                     }
                     notifyDataSetChanged();
                 }

@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (isLogin()) {
                     //     logoutFacebook();
                 } else {
-                    loginFacebook();
+                    getInstanceIdToken(); //FCM ID값 획득//
                 }
             }
         });
@@ -207,23 +207,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (action.equals(QuickstartPreferences.REGISTRATION_READY)) {
                     // 액션이 READY일 경우
-                    //mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
-                    //mInformationTextView.setVisibility(View.GONE);
+
                 } else if (action.equals(QuickstartPreferences.REGISTRATION_GENERATING)) {
                     // 액션이 GENERATING일 경우
-                    //mRegistrationProgressBar.setVisibility(ProgressBar.VISIBLE);
-                    //mInformationTextView.setVisibility(View.VISIBLE);
-                    //mInformationTextView.setText(getString(R.string.registering_message_generating));
+
                 } else if (action.equals(QuickstartPreferences.REGISTRATION_COMPLETE)) {
                     // 액션이 COMPLETE일 경우
-                    //mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
-                    //mRegistrationButton.setText(getString(R.string.registering_message_complete));
-                    //mRegistrationButton.setEnabled(false);
                     String token = intent.getStringExtra("token");
                     register_id = token;
 
                     Log.d("token fcm id : ", register_id);
-                    //mInformationTextView.setText(token);
+
+                    //토큰을 받은 이 후 로그인을 진행한다.//
+                    loginFacebook();
                 }
             }
         };
@@ -292,7 +288,7 @@ public class LoginActivity extends AppCompatActivity {
                 //Access Token값을 가져온다.//
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
-                getInstanceIdToken(); //FCM ID값 획득//
+                //getInstanceIdToken();
 
                 token = accessToken.getToken();
 
@@ -338,7 +334,7 @@ public class LoginActivity extends AppCompatActivity {
 
         builder.scheme("https"); //인증서가 있어야 가능//
         builder.host(getResources().getString(R.string.real_server_domain));
-        builder.port(4433);
+        builder.port(4433); //https인증은 포트가 4433이다.//
         builder.addPathSegment("auth");
         builder.addPathSegment("facebook");
         builder.addPathSegment("token");
@@ -346,6 +342,7 @@ public class LoginActivity extends AppCompatActivity {
         /** RequestBody 설정 **/
         RequestBody body = new FormBody.Builder()
                 .add("access_token", token)
+                .add("registration_token", register_id)
                 .build();
 
         /** Request 설정 **/
