@@ -39,7 +39,7 @@
 * FCM
 
 <p align="left">
-  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_1.png" width="650" height="350">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/cloudmessage.png" width="650" height="350">
 </p>
 
 < Update Content >
