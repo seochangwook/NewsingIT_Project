@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
+import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 
 import java.io.IOException;
@@ -39,7 +41,17 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
 
     Context context;
 
+    /**
+     * Network관련 변수
+     **/
     NetworkManager networkManager;
+
+    /**
+     * 공유 프래퍼런스 관련 변수
+     **/
+    SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
+    SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
+
     private Callback requestnewscrapalarmoncallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -231,15 +243,37 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     Switch_my_page_follow.setVisibility(View.GONE);
 
                     //해당 스위치의 설정을 공유 프래퍼런스를 가지고 설정//
+                    String locked_state = PropertyManager.getInstance().get_nt_s();
 
+                    if (locked_state.equals("true")) {
+                        Switch_new_sscrap.setChecked(true);
+                    } else if (locked_state.equals("false")) {
+                        Switch_new_sscrap.setChecked(false);
+                    }
                 } else if (childPosition == 1) {
                     Switch_new_sscrap.setVisibility(View.GONE);
                     Switch_my_scrap_favorite.setVisibility(View.VISIBLE);
                     Switch_my_page_follow.setVisibility(View.GONE);
+
+                    String locked_state = PropertyManager.getInstance().get_nt_f();
+
+                    if (locked_state.equals("true")) {
+                        Switch_my_scrap_favorite.setChecked(true);
+                    } else if (locked_state.equals("false")) {
+                        Switch_my_scrap_favorite.setChecked(false);
+                    }
                 } else if (childPosition == 2) {
                     Switch_new_sscrap.setVisibility(View.GONE);
                     Switch_my_scrap_favorite.setVisibility(View.GONE);
                     Switch_my_page_follow.setVisibility(View.VISIBLE);
+
+                    String locked_state = PropertyManager.getInstance().get_nt_fs();
+
+                    if (locked_state.equals("true")) {
+                        Switch_my_page_follow.setChecked(true);
+                    } else if (locked_state.equals("false")) {
+                        Switch_my_page_follow.setChecked(false);
+                    }
                 }
 
                 //switch의 상태가 바뀔 때 이벤트//
@@ -248,6 +282,8 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if(checked){
                             Toast.makeText(context, "새 스크랩 알림 on", Toast.LENGTH_SHORT).show();
+
+                            //공유 프래퍼런스의 값도 변경해준다.//
 
                             //해당 네트워크 작업과 데이터베이스 저장작업을 해준다.//
                             set_new_scrap_alarm_on();

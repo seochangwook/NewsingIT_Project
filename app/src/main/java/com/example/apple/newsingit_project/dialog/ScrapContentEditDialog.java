@@ -77,6 +77,22 @@ public class ScrapContentEditDialog extends Activity {
         }
     };
 
+    private Callback requestsmovecategorycallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
+        }
+    };
+
     private Callback requestDeleteScrapContentCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -193,6 +209,35 @@ public class ScrapContentEditDialog extends Activity {
         Log.d("data", scrap_id + "/" + move_scrap_folder_id);
 
         //폴더 이동작업//
+        /** Network 자원을 설정 **/
+        manager = NetworkManager.getInstance(); //싱글톤 객체를 가져온다.//
+
+        /** Client 설정 **/
+        OkHttpClient client = manager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http"); //스킴정의//
+        builder.host(getResources().getString(R.string.real_server_domain)); //호스트를 설정.//
+        builder.port(8080);
+        builder.addPathSegment("scraps");
+        builder.addPathSegment(scrap_id);
+        builder.addQueryParameter("category", "" + move_scrap_folder_id);
+
+        RequestBody body = new FormBody.Builder()
+                .build();
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(ScrapContentEditDialog.this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestsmovecategorycallback);
     }
 
     public void get_Category_Data() {

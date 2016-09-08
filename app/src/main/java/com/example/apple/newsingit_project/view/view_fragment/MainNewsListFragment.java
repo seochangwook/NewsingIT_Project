@@ -120,12 +120,16 @@ public class MainNewsListFragment extends Fragment {
 
             Log.d("json data", response_data);
 
-            Gson gson = new Gson();
+            if (response.code() == 403 || response.code() == 401) //인증이 안된 경우//
+            {
 
-            MainNewsListRequest mainNewsListRequest = gson.fromJson(response_data, MainNewsListRequest.class);
+            } else {
+                Gson gson = new Gson();
 
+                MainNewsListRequest mainNewsListRequest = gson.fromJson(response_data, MainNewsListRequest.class);
 
-            setData(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
+                setData(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
+            }
         }
     };
 

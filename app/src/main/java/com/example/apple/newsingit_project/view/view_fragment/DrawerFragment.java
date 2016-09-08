@@ -108,7 +108,8 @@ public class DrawerFragment extends Fragment {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("logout");
 
         Request request = new Request.Builder()

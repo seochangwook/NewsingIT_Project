@@ -2,7 +2,9 @@ package com.example.apple.newsingit_project;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -240,17 +242,34 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         if (item_id == R.id.share_scrap) {
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 공유", Toast.LENGTH_SHORT).show();
 
-            Intent msg = new Intent(Intent.ACTION_SEND);
+            //여러 공유목록 중 트위터와 페이스북만 나오게 설정//
+            String scrap_title = titleView.getText().toString();
+            String scrap_content = contentView.getText().toString();
+            String scrap_tags = "";
 
-            msg.addCategory(Intent.CATEGORY_DEFAULT);
+            for (int i = 0; i < tag_layout_array.size(); i++) {
+                scrap_tags += tag_layout_array.get(i).toString();
+            }
 
-            msg.putExtra(Intent.EXTRA_SUBJECT, "서창욱");
-            msg.putExtra(Intent.EXTRA_TEXT, "코딩이 취미");
-            msg.putExtra(Intent.EXTRA_TITLE, "제목");
+            scrap_content = scrap_content + "/ HashTag : " + scrap_tags;
 
-            msg.setType("text/plain");
+            List<Intent> targetedSharedIntents = new ArrayList<Intent>();
 
-            startActivity(Intent.createChooser(msg, "공유"));
+            //페이스북//
+            Intent facebookIntent = getShareIntent("facebook", scrap_title, scrap_content);
+            if (facebookIntent != null) {
+                targetedSharedIntents.add(facebookIntent);
+            }
+
+            // 트위터
+            Intent twitterIntent = getShareIntent("twitter", scrap_title, scrap_content);
+            if (twitterIntent != null) {
+                targetedSharedIntents.add(twitterIntent);
+            }
+
+            Intent chooser = Intent.createChooser(targetedSharedIntents.remove(0), "공유목록");
+            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetedSharedIntents.toArray(new Parcelable[]{}));
+            startActivity(chooser);
         } else if (item_id == R.id.setting_scrap)
         {
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 설정", Toast.LENGTH_SHORT).show();
@@ -319,5 +338,38 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             pDialog.show();
     }
 
+    /**
+     * @param name    패키지나 앱 이름
+     * @param subject 제목
+     * @param text    내용
+     * @return
+     */
+    private Intent getShareIntent(String name, String subject, String text) {
+        boolean found = false;
 
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        // gets the list of intents that can be loaded.
+        List<ResolveInfo> resInfo = getPackageManager().queryIntentActivities(intent, 0);
+
+        if (resInfo == null)
+            return null;
+
+        for (ResolveInfo info : resInfo) {
+            if (info.activityInfo.packageName.toLowerCase().contains(name) ||
+                    info.activityInfo.name.toLowerCase().contains(name)) {
+                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                intent.putExtra(Intent.EXTRA_TEXT, text);
+                intent.setPackage(info.activityInfo.packageName);
+                found = true;
+                break;
+            }
+        }
+
+        if (found)
+            return intent;
+
+        return null;
+    }
 }

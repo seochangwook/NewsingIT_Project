@@ -35,8 +35,8 @@ import mabbas007.tagsedittext.TagsEditText;
 import me.gujun.android.taggroup.TagGroup;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -46,7 +46,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
     private static final int RC_SINGLE_IMAGE = 2;
 
-    private static final String TAG = "Tap_Sample_Activity";
+    private static final String TAG = "json control";
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
@@ -103,8 +103,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
-
-
         }
     };
 
@@ -251,10 +249,12 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     /**
      * 태그 입력 이벤트 리스너
      **/
-    public void onTagsChanged(Collection<String> tags) {
-        Log.d(TAG, "Tags changed: ");
-        Log.d(TAG, Arrays.toString(tags.toArray()));
 
+    public void onTagsChanged(Collection<String> tags) {
+        String input_tag = Arrays.toString(tags.toArray());
+
+        //태그 중복 비교//
+        Log.d(TAG, input_tag);
         //Collection된 태그의 정보를 배열로 이동.//
         tag_array.addAll(Arrays.asList(String.valueOf(tags)));
     }
@@ -265,6 +265,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     public void onEditingFinished() {
         Log.d(TAG, "OnEditing finished");
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -325,6 +326,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         //저장에 필요한 변수들을 뽑는다//
         String scrap_title = scrap_title_edittext.getText().toString();
         String scrap_content = appCompatEditText.getText().toString();
+        String scrap_locked = "0";
 
         /** Networok 설정 **/
         networkManager = NetworkManager.getInstance();
@@ -335,25 +337,25 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         /** URL 설정 **/
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
-        builder.scheme("http"); //스킴정의(Http / Https)
+        builder.scheme("http"); //스킴정의(Http / Https)//
         builder.host(getResources().getString(R.string.real_server_domain)); //host정의.//
         builder.port(8080);
         builder.addPathSegment("scraps");
 
-        /** 파일 전송이므로 MultipartBody 설정 **/
-        MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("cid", folder_id)
-                .addFormDataPart("ncid", news_id)
-                .addFormDataPart("title", scrap_title)
-                .addFormDataPart("content", scrap_content);
-
         //lock설정//
         if (is_private == true) {
-            multipart_builder.addFormDataPart("locked", "1"); //true//
+            scrap_locked = "1";
         } else if (is_private == false) {
-            multipart_builder.addFormDataPart("locked", "0"); //false//
+            scrap_locked = "0";
         }
+
+        //여러개를 보낼려면 FormBody가 필요//
+        FormBody.Builder formBuilder = new FormBody.Builder()
+                .add("cid", folder_id)
+                .add("ncid", news_id)
+                .add("title", scrap_title)
+                .add("content", scrap_content)
+                .add("locked", scrap_locked);
 
         //태그처리//
         int array_size = tag_array.size();
@@ -377,13 +379,14 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
                 tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
             }
 
-            for (int i = 0; i < tag_data_str.length; i++) {
-                multipart_builder.addFormDataPart("tags", tag_data_str[i]); //true//
+            for (int i = 0; i < str_data_sample_tag_array.length; i++) {
+                Log.d("json tag", tag_data_str[i]);
+                formBuilder.add("tags", tag_data_str[i]);
             }
         }
 
         /** RequestBody 설정(Multipart로 설정) **/
-        RequestBody body = multipart_builder.build();
+        RequestBody body = formBuilder.build();
 
         /** Request 설정 **/
         Request request = new Request.Builder()
