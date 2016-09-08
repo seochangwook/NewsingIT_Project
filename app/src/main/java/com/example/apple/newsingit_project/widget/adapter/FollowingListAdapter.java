@@ -68,7 +68,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 .addPathSegment("follows");
 
         RequestBody body = new FormBody.Builder()
-                .add("id", "" + userId)
+                .add("ofid", "" + userId)
                 .build();
 
         Request request = new Request.Builder()
@@ -91,7 +91,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 .host(context.getResources().getString(R.string.real_server_domain))
                 .port(8080)
                 .addPathSegment("follows")
-                .addPathSegment("" + userId);
+                .addPathSegment("ofid" + userId);
 
         RequestBody body = new FormBody.Builder()
                 .build();

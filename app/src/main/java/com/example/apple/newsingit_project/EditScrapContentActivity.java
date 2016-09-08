@@ -421,8 +421,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                 scrap_isprivate = false;
             }
         } else if (item_id == R.id.create_scrap) {
-            Toast.makeText(EditScrapContentActivity.this, "수정 완료", Toast.LENGTH_SHORT).show();
-
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditScrapContentActivity.this);
             alertDialog.setMessage("수정하시겠습니까?").setCancelable(false).setPositiveButton("확인",
                     new DialogInterface.OnClickListener() {
@@ -431,6 +429,8 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                             //yes
                             //네트워크로 데이터를 보낸다.//
                             EditScrap(scrap_id);
+
+                            Toast.makeText(EditScrapContentActivity.this, "수정 완료", Toast.LENGTH_SHORT).show();
 
                             finish();
                         }

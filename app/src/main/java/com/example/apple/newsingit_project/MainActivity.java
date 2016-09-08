@@ -1,17 +1,24 @@
 package com.example.apple.newsingit_project;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -90,13 +97,87 @@ public class MainActivity extends AppCompatActivity {
         //파카소 라이브러리를 이용하여 이미지 로딩//
         networkManager = NetworkManager.getInstance();
 
-        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+        if (profile_imgUrl.isEmpty()) //이미지가 Empty라는 것은 인증(로그인)이 안되었자는 의미//
+        {
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            String type = intent.getType();
 
-        picasso.load(profile_imgUrl)
-                .transform(new CropCircleTransformation())
-                .into(profile_imageview);
+            // 인텐트 정보가 있는 경우 실행
+            if (Intent.ACTION_SEND.equals(action) && type != null) {
+                if ("text/plain".equals(type)) {
+                    String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);    // 가져온 인텐트의 텍스트 정보
 
-        profile_name_textview.setText(profile_name);
+                    // AlertDialog 객체 선언
+                    AlertDialog dialog = create_inputDialog_notlogin(sharedText);
+
+                    // Context 얻고, 해당 컨텍스트의 레이아웃 정보 얻기
+                    Context context = getApplicationContext();
+                    LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+                    // 레이아웃 설정
+                    View layout = inflater.inflate(R.layout.view_share, (ViewGroup) findViewById(R.id.popup_root));
+
+                    EditText content_edit = (EditText) layout.findViewById(R.id.toolEvent_popup_input);
+                    content_edit.setText(sharedText);
+                    content_edit.setEnabled(false);
+
+                    // Input 소프트 키보드 보이기
+                    //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
+                    // AlertDialog에 레이아웃 추가
+                    dialog.setView(layout);
+                    dialog.show();
+                }
+            } else //FCM일 경우//
+            {
+
+            }
+        } else //공유 정보에 저장이 되어있다는 것은 로그인이 되었다는 증거//
+        {
+            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+            picasso.load(profile_imgUrl)
+                    .transform(new CropCircleTransformation())
+                    .into(profile_imageview);
+
+            profile_name_textview.setText(profile_name);
+
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            String type = intent.getType();
+
+            // 인텐트 정보가 있는 경우 실행
+            if (Intent.ACTION_SEND.equals(action) && type != null) {
+                if ("text/plain".equals(type)) {
+                    String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);    // 가져온 인텐트의 텍스트 정보
+
+                    // AlertDialog 객체 선언
+                    AlertDialog dialog = create_inputDialog_login(sharedText);
+
+                    // Context 얻고, 해당 컨텍스트의 레이아웃 정보 얻기
+                    Context context = getApplicationContext();
+                    LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+                    // 레이아웃 설정
+                    View layout = inflater.inflate(R.layout.view_share, (ViewGroup) findViewById(R.id.popup_root));
+
+                    // Input 소프트 키보드 보이기
+                    EditText content_edit = (EditText) layout.findViewById(R.id.toolEvent_popup_input);
+                    content_edit.setText(sharedText);
+                    content_edit.setEnabled(false);
+
+                    //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
+                    // AlertDialog에 레이아웃 추가
+                    dialog.setView(layout);
+                    dialog.show();
+                }
+            } else //FCM일 경우//
+            {
+
+            }
+        }
 
         /** Alarm화면으로 이동하는 이벤트. **/
         alarm_imagebutton.setOnClickListener(new View.OnClickListener() {
@@ -230,6 +311,50 @@ public class MainActivity extends AppCompatActivity {
                 //bottommenu.
             }
         }
+    }
+
+    private AlertDialog create_inputDialog_notlogin(final String content_text) {
+        AlertDialog dialogBox = new AlertDialog.Builder(this)
+                .setTitle("Newsing Share")
+                .setMessage("해당 주소값을 복사해서 스크랩 시 붙여넣기 하세요!!(확인버튼을 누를 시 클립보드에 저장됩니다.)")
+                .setCancelable(false)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 예 버튼 눌렀을때 액션 구현
+                        //클립보드에 저장.//
+                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        clipboardManager.setText(content_text);
+
+                        Toast.makeText(MainActivity.this, "스크랩 기능은 로그인 후 이용가능합니다. 로그인 페이지로 이동합니다.", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+
+                        startActivity(intent);
+
+                        finish();
+                    }
+                }).create();
+
+        return dialogBox;
+    }
+
+    private AlertDialog create_inputDialog_login(final String content_text) {
+        AlertDialog dialogBox = new AlertDialog.Builder(this)
+                .setTitle("Newsing Share")
+                .setMessage("해당 주소값을 복사해서 스크랩 시 붙여넣기 하세요!!(확인버튼을 누를 시 클립보드에 저장됩니다.)")
+                .setCancelable(false)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 예 버튼 눌렀을때 액션 구현
+                        Toast.makeText(MainActivity.this, "스크랩 화면으로 이동하세요!!", Toast.LENGTH_SHORT).show();
+
+                        //클립보드에 저장.//
+                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                        clipboardManager.setText(content_text);
+                    }
+                }).create();
+
+        return dialogBox;
     }
 
     /**

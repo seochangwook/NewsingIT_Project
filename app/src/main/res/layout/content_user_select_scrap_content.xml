@@ -160,6 +160,7 @@
             android:layout_marginLeft="@dimen/scrap_content_content_margin_left"
             android:layout_marginRight="@dimen/scrap_content_content_margin_right"
             android:layout_marginTop="@dimen/scrap_content_content_margin_top"
+            android:autoLink="web"
             android:text="content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/scrap_content_content"
