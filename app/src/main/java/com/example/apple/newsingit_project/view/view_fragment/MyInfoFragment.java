@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,15 +78,16 @@ public class MyInfoFragment extends Fragment {
 
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
-    TextView profile_name_textview;
+    // TextView profile_name_textview;
     TextView profile_my_introduce_textview;
-    Button follower_count_button;
-    Button following_count_button;
+    TextView follower_count_button;
+    TextView following_count_button;
     Button my_info_replace_button;
-    Button btnScrapCount;
+    TextView btnScrapCount;
+    String name;
 
     //폴더 관련 변수.//
-    Button folder_add_button;
+    ImageButton folder_add_button;
     FolderData folderData; //폴더 데이터 클래스//
     FolderListAdapter folderListAdapter; //폴더 어댑태 클래스//
     String profileUrl;
@@ -148,13 +150,13 @@ public class MyInfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_info, container, false);
 
         profile_imageview = (ImageView) view.findViewById(R.id.profile_imageview);
-        profile_name_textview = (TextView) view.findViewById(R.id.profile_name_textview);
+        //profile_name_textview = (TextView) view.findViewById(R.id.profile_name_textview);
         profile_my_introduce_textview = (TextView) view.findViewById(R.id.profile_my_introduce_textview);
-        follower_count_button = (Button) view.findViewById(R.id.follower_button);
-        following_count_button = (Button) view.findViewById(R.id.following_button);
+        follower_count_button = (TextView) view.findViewById(R.id.follower_button);
+        following_count_button = (TextView) view.findViewById(R.id.following_button);
         my_info_replace_button = (Button) view.findViewById(R.id.myinfo_replace_button);
-        folder_add_button = (Button) view.findViewById(R.id.category_add_button);
-        btnScrapCount = (Button) view.findViewById(R.id.scrapt_count_button);
+        folder_add_button = (ImageButton) view.findViewById(R.id.category_add_button);
+        btnScrapCount = (TextView) view.findViewById(R.id.scrapt_count_button);
         folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) view.findViewById(R.id.folder_rv_list);
 
         pDialog = new ProgressDialog(getActivity());
@@ -298,14 +300,14 @@ public class MyInfoFragment extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "내 정보 수정하기 화면으로 이동", Toast.LENGTH_SHORT).show();
 
-                String my_name = profile_name_textview.getText().toString();
+                // String my_name = profile_name_textview.getText().toString();
                 String my_aboutme = profile_my_introduce_textview.getText().toString();
                 String my_imgUrl = profileUrl;
 
                 Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
 
                 //필요한 정보를 넘겨준다.//
-                intent.putExtra(KEY_MY_NAME, my_name);
+                intent.putExtra(KEY_MY_NAME, name);
                 intent.putExtra(KEY_MY_ABOUTME, my_aboutme);
                 intent.putExtra(KEY_MY_IMG, my_imgUrl);
 
@@ -498,7 +500,7 @@ public class MyInfoFragment extends Fragment {
                 @Override
                 public void run() {
                     UserInfoData userInfoData = new UserInfoData();
-                    String name, aboutMe;
+                    String aboutMe;
                     int followerCount, followingCount, scrapCount;
 
                     Log.d("message", "수정");
@@ -518,7 +520,7 @@ public class MyInfoFragment extends Fragment {
                     followingCount = userInfoData.getFollwingCount();
                     scrapCount = userInfoData.getScrapCount();
 
-                    profile_name_textview.setText(name);
+                    //profile_name_textview.setText(name);
                     profile_my_introduce_textview.setText(aboutMe);
                     follower_count_button.setText("" + followerCount);
                     following_count_button.setText("" + followingCount);

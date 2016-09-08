@@ -12,7 +12,6 @@ import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListReq
 import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.AlarmData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
-import com.example.apple.newsingit_project.view.SimpleDividerItemDecoration;
 import com.example.apple.newsingit_project.widget.adapter.AlarmListAdapter;
 import com.google.gson.Gson;
 
@@ -89,7 +88,6 @@ public class AlarmListActivity extends AppCompatActivity {
 
         mAdapter = new AlarmListAdapter(this);
         recyclerview.setAdapter(mAdapter);
-        recyclerview.addItemDecoration(new SimpleDividerItemDecoration(R.color.line_color, 1)); //색깔이 안 먹히넴//
 
 
         recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {

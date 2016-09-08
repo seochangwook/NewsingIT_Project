@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/scrap_list_height"
     android:background="@color/scrap_list_background">
 
 
@@ -98,4 +98,10 @@
         android:textColor="@color/scrap_list_author"
         android:textSize="@dimen/scrap_list_author_size" />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_dimen"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line" />
 </RelativeLayout>

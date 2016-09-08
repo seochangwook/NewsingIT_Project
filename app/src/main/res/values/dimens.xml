@@ -118,6 +118,8 @@
     <dimen name="line_dimen">2dp</dimen>
 
     <!-- Alarm List dimen-->
+    <dimen name="alarm_list_height">81dp</dimen>
+
     <dimen name="alarm_margin_top">17dp</dimen>
     <dimen name="alarm_margin_left">37dp</dimen>
     <dimen name="alarm_margin_right">28dp</dimen>
@@ -133,6 +135,8 @@
 
 
     <!--user scrap list dimen-->
+    <dimen name="scrap_list_height">110dp</dimen>
+
     <dimen name="scrap_list_img_margin_top">4dp</dimen>
     <dimen name="scrap_list_img_margin_bottom">4dp</dimen>
     <dimen name="scrap_list_img_width">100dp</dimen>
@@ -194,12 +198,12 @@
     <dimen name="scrap_content_news_box_time_margin_left">7dp</dimen>
     <dimen name="scrap_content_news_box_time_size">8sp</dimen>
 
-    <dimen name="scrap_content_news_box_img_height">170dp</dimen>
+    <dimen name="scrap_content_news_box_img_height">151dp</dimen>
     <dimen name="scrap_content_news_box_img_margin_top">11dp</dimen>
     <dimen name="scrap_content_news_box_img_margin_left">13dp</dimen>
     <dimen name="scrap_content_news_box_img_margin_right">13dp</dimen>
 
-    <dimen name="scrap_content_news_box_content_height">150dp</dimen>
+    <dimen name="scrap_content_news_box_content_height">106dp</dimen>
     <dimen name="scrap_content_news_box_content_margin_top">13dp</dimen>
     <dimen name="scrap_content_news_box_content_margin_left">13dp</dimen>
     <dimen name="scrap_content_news_box_content_margin_right">13dp</dimen>
@@ -229,6 +233,8 @@
 
 
     <!--search news dimen-->
+    <dimen name="search_news_height">89dp</dimen>
+
     <dimen name="search_news_author_margin_top">25dp</dimen>
     <dimen name="search_news_author_margin_left">26dp</dimen>
     <dimen name="search_news_author_size">10sp</dimen>
@@ -308,7 +314,7 @@
     <dimen name="drawer_child_margin_bottom">15dp</dimen>
 
 
-    <!--edit scrap dimen-->
+    <!--create scrap/edit scrap dimen-->
     <dimen name="edit_scrap_title_margin_top">26dp</dimen>
     <dimen name="edit_scrap_title_margin_left">16dp</dimen>
     <dimen name="edit_scrap_title_margin_right">18dp</dimen>
@@ -497,5 +503,106 @@
     <dimen name="edit_folder_btn_margin_top">2dp</dimen>
     <dimen name="edit_folder_btn_margin_right">18dp</dimen>
     <dimen name="edit_folder_bnt_margin_bottom">2dp</dimen>
+
+
+    <!--news detail dimen-->
+    <dimen name="news_detail_margin_left">38dp</dimen>
+    <dimen name="news_detail_margin_right">33dp</dimen>
+
+    <dimen name="news_detail_title_margin_top">55dp</dimen>
+    <dimen name="news_detail_title_size">13sp</dimen>
+
+    <dimen name="news_detail_author_margin_top">28dp</dimen>
+    <dimen name="news_detail_author_size">8sp</dimen>
+
+    <dimen name="news_detail_time_margin_top">28dp</dimen>
+    <dimen name="news_detail_time_margin_left">7dp</dimen>
+    <dimen name="news_detail_time_size">8sp</dimen>
+
+    <dimen name="news_detail_img_margin_top">11dp</dimen>
+    <dimen name="news_detail_img_height">151dp</dimen>
+
+    <dimen name="news_detail_content_margin_top">21dp</dimen>
+    <dimen name="news_detail_content_height">106dp</dimen>
+    <dimen name="news_detail_content_size">12sp</dimen>
+
+    <dimen name="news_detail_btn_margin_top">63dp</dimen>
+    <dimen name="news_detail_btn_margin_left">34dp</dimen>
+    <dimen name="news_detail_btn_margin_bottom">59dp</dimen>
+
+
+    <!--my info dimen-->
+    <dimen name="my_info_img_width">92dp</dimen>
+    <dimen name="my_info_img_height">92dp</dimen>
+    <dimen name="my_info_img_margin_top">25dp</dimen>
+    <dimen name="my_info_img_margin_left">23dp</dimen>
+    <dimen name="my_info_img_margin_right">23dp</dimen>
+    <dimen name="my_info_img_margin_bottom">35dp</dimen>
+
+    <dimen name="my_info_sff_margin_top">9dp</dimen>
+    <dimen name="my_info_sff_margin_left">4dp</dimen>
+    <dimen name="my_info_sff_width">64dp</dimen>
+    <dimen name="my_info_sff_height">62dp</dimen>
+    <dimen name="my_info_sff_num_margin_top">18dp</dimen>
+    <dimen name="my_info_sff_num_size">16sp</dimen>
+    <dimen name="my_info_sff_text_size">10sp</dimen>
+    <dimen name="my_info_sff_text_margin_top">9dp</dimen>
+    <dimen name="my_info_sff_text_margin_bottom">12dp</dimen>
+
+    <dimen name="my_info_pf_edit_width">200dp</dimen>
+    <dimen name="my_info_pf_edit_height">24dp</dimen>
+
+    <dimen name="my_info_about_me_margin_top">15dp</dimen>
+    <dimen name="my_info_about_me_margin_bottom">30dp</dimen>
+    <dimen name="my_info_about_me_size">12sp</dimen>
+
+    <dimen name="my_info_btn_create_folder_layout_height">44dp</dimen>
+    <dimen name="my_info_btn_create_folder_width">132dp</dimen>
+    <dimen name="my_info_btn_create_folder_height">24dp</dimen>
+    <dimen name="my_info_btn_create_folder_margin_top">8dp</dimen>
+    <dimen name="my_info_btn_create_folder_margin_left">114dp</dimen>
+    <dimen name="my_info_btn_create_folder_margin_right">114dp</dimen>
+    <dimen name="my_info_btn_create_folder_margin_bottom">8dp</dimen>
+
+    <dimen name="my_info_folder_width">180dp</dimen>
+    <dimen name="my_info_folder_height">180dp</dimen>
+    <dimen name="my_info_folder_margin_all">2dp</dimen>
+    <dimen name="my_info_folder_title_width">179dp</dimen>
+    <dimen name="my_info_folder_title_height">32dp</dimen>
+    <dimen name="my_info_folder_title_padding_top">10dp</dimen>
+    <dimen name="my_info_folder_title_padding_bottom">10dp</dimen>
+    <dimen name="my_info_folder_title_size">12sp</dimen>
+
+    <dimen name="my_info_lock_img_width">48dp</dimen>
+    <dimen name="my_info_lock_img_height">48dp</dimen>
+
+
+    <!--user info dimen-->
+    <dimen name="user_info_img_width">92dp</dimen>
+    <dimen name="user_info_img_height">92dp</dimen>
+    <dimen name="user_info_img_margin_top">36dp</dimen>
+    <dimen name="user_info_img_margin_left">18dp</dimen>
+    <dimen name="user_info_img_margin_right">18dp</dimen>
+
+    <dimen name="user_info_sff_width">64dp</dimen>
+    <dimen name="user_info_sff_height">62dp</dimen>
+    <dimen name="user_info_sff_margin_top">18dp</dimen>
+    <dimen name="user_info_sff_margin_left">4dp</dimen>
+
+    <dimen name="user_info_btn_follow_width">200dp</dimen>
+    <dimen name="user_info_btn_follow_height">24dp</dimen>
+
+    <dimen name="user_info_about_me_width">200dp</dimen>
+    <dimen name="user_info_about_me_margin_top">15dp</dimen>
+    <dimen name="user_info_about_me_margin_bottom">34dp</dimen>
+
+
+    <!--folder list empty view dimen-->
+    <dimen name="my_info_folder_empty_img_width">65dp</dimen>
+    <dimen name="my_info_folder_empty_img_height">65dp</dimen>
+    <dimen name="my_info_folder_empty_img_margin_top">104dp</dimen>
+    <dimen name="my_info_folder_empty_msg_margin_top">21dp</dimen>
+    <dimen name="my_info_folder_empty_msg_size">13sp</dimen>
+
 
 </resources>

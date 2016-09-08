@@ -5,32 +5,33 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="133dp"
-        android:layout_marginTop="90dp"
-        android:src="@mipmap/sample_warring_image" />
+        android:id="@+id/empty_img_user"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_info_folder_empty_img_height"
+        android:layout_marginTop="@dimen/my_info_folder_empty_img_margin_top"
+        android:gravity="center"
+        android:src="@mipmap/ic_folder_x" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/empty_msg_user"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="220dp"
-        android:text="등록된 폴더가 없습니다"
-        android:textColor="#000000"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/empty_img_user"
+        android:layout_marginTop="@dimen/my_info_folder_empty_msg_margin_top"
+        android:gravity="center"
+        android:text="폴더가 없습니다."
+        android:textColor="@color/my_info_folder_empty_msg"
+        android:textSize="@dimen/my_info_folder_empty_msg_size" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="108dp"
-        android:layout_marginTop="260dp"
+        android:layout_below="@+id/empty_msg_user"
+        android:layout_marginTop="@dimen/my_info_folder_empty_msg_margin_top"
+        android:gravity="center"
         android:text="네트워크 연결을 다시 확인해주세요"
-        android:textColor="#ff0000"
-        android:textSize="11dp"
+        android:textColor="@color/red_color"
+        android:textSize="@dimen/my_info_folder_empty_msg_size"
         android:textStyle="bold" />
 
 </RelativeLayout>

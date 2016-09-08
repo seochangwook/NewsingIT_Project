@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,15 +54,16 @@ public class UserInfoActivity extends AppCompatActivity {
     ImageView user_profile_imageview;
     TextView user_profile_name_textview;
     TextView user_profile_my_introduce_textview;
-    Button user_follower_count_button;
-    Button user_following_count_button;
-    Button user_following_button;
+    TextView user_follower_count_button;
+    TextView user_following_count_button;
+    ImageButton user_following_button;
     Button user_scrap_button;
 
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
 
+    String name;
     String get_user_id = null;
     String get_user_name = null;
 
@@ -190,11 +192,11 @@ public class UserInfoActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         user_profile_imageview = (ImageView) findViewById(R.id.user_profile_imageview);
-        user_profile_name_textview = (TextView) findViewById(R.id.user_profile_name_textview);
+        //  user_profile_name_textview = (TextView) findViewById(R.id.user_profile_name_textview);
         user_profile_my_introduce_textview = (TextView) findViewById(R.id.user_profile_my_introduce_textview);
-        user_follower_count_button = (Button) findViewById(R.id.user_follower_button);
-        user_following_count_button = (Button) findViewById(R.id.user_following_button);
-        user_following_button = (Button) findViewById(R.id.user_follow_button);
+        user_follower_count_button = (TextView) findViewById(R.id.user_follower_button);
+        user_following_count_button = (TextView) findViewById(R.id.user_following_button);
+        user_following_button = (ImageButton) findViewById(R.id.user_follow_button);
         user_scrap_button = (Button) findViewById(R.id.scrapt_count_button);
 
         user_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.user_folder_rv_list);
@@ -212,7 +214,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         /** 타이틀과 이름 값 초기화 **/
         setTitle(get_user_name);
-        user_profile_name_textview.setText(get_user_name);
+        //   user_profile_name_textview.setText(get_user_name);
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -324,13 +326,15 @@ public class UserInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (dummy_follow_state == false) {
-                    user_following_button.setBackgroundColor(getResources().getColor(R.color.bottom_bar_unselected));
-                    user_following_button.setText("!팔로잉");
+                    user_following_button.setImageResource(R.mipmap.btn_following_600_72);
+                    //   user_following_button.setBackgroundColor(getResources().getColor(R.color.bottom_bar_unselected));
+                    //   user_following_button.setText("!팔로잉");
 
                     dummy_follow_state = true;
                 } else if (dummy_follow_state == true) {
-                    user_following_button.setBackgroundColor(getResources().getColor(R.color.button_transparent_background));
-                    user_following_button.setText("+팔로우");
+                    user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
+                    //user_following_button.setBackgroundColor(getResources().getColor(R.color.button_transparent_background));
+                    //ser_following_button.setText("+팔로우");
 
                     dummy_follow_state = false;
                 }

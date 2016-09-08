@@ -45,4 +45,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/search_user_about_me"
         android:textSize="@dimen/search_user_about_me_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_dimen"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line" />
 </RelativeLayout>

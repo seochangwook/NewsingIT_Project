@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <TextViewe
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/line_draw" />
+        android:layout_height="@dimen/line_dimen"
+        android:background="@mipmap/line" />
 </LinearLayout>

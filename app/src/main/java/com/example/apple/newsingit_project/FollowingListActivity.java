@@ -15,7 +15,6 @@ import com.example.apple.newsingit_project.data.json_data.followinglist.Followin
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.FollowingData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
-import com.example.apple.newsingit_project.view.SimpleDividerItemDecoration;
 import com.example.apple.newsingit_project.widget.adapter.FollowingListAdapter;
 import com.google.gson.Gson;
 
@@ -192,8 +191,6 @@ public class FollowingListActivity extends AppCompatActivity {
 
 
         recyclerview.setAdapter(mAdapter);
-
-        recyclerview.addItemDecoration(new SimpleDividerItemDecoration(R.color.line_color, 1)); //색깔이 안 먹히넴//
 
 
         //리사이클러 뷰 각 항목 클릭//

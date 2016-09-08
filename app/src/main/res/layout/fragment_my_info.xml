@@ -8,126 +8,172 @@
     <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/profile_imageview"
-        android:layout_width="@dimen/imageview_width"
-        android:layout_height="@dimen/imageview_height"
-        android:layout_marginLeft="@dimen/imageview_layout_margin_left"
-        android:layout_marginTop="@dimen/imageview_layout_margin_top"
+        android:layout_width="@dimen/my_info_img_width"
+        android:layout_height="@dimen/my_info_img_height"
+        android:layout_marginBottom="@dimen/my_info_img_margin_bottom"
+        android:layout_marginLeft="@dimen/my_info_img_margin_left"
+        android:layout_marginRight="@dimen/my_info_img_margin_right"
+        android:layout_marginTop="@dimen/my_info_img_margin_top"
         android:src="@mipmap/profile_hambur" />
 
     <TextView
-        android:id="@+id/profile_name_textview"
-        android:layout_width="wrap_content"
+        android:id="@+id/my_sff_container"
+        android:layout_width="@dimen/my_info_sff_width"
+        android:layout_height="@dimen/my_info_sff_height"
+        android:layout_marginTop="@dimen/my_info_sff_margin_top"
+        android:layout_toRightOf="@+id/profile_imageview"
+        android:background="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/scrapt_count_button"
+        android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/name_textview_layout_matgin_left"
-        android:layout_marginTop="@dimen/name_textview_layout_margin_top"
+        android:layout_alignTop="@id/my_sff_container"
+        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+        android:layout_toRightOf="@+id/profile_imageview"
+        android:background="@null"
         android:gravity="center"
-        android:text="서창욱"
-        android:textColor="#000000"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        android:text="33"
+        android:textColor="@color/my_info_sff_num"
+        android:textSize="@dimen/my_info_sff_num_size" />
+
+    <TextView
+        android:layout_width="@dimen/my_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrapt_count_button"
+        android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
+        android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
+        android:layout_toRightOf="@+id/profile_imageview"
+        android:gravity="center"
+        android:text="@string/scrapt_textview"
+        android:textColor="@color/my_info_sff_text"
+        android:textSize="@dimen/my_info_sff_text_size" />
+
+
+
+    <TextView
+        android:id="@+id/follower_button"
+        android:layout_width="@dimen/my_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/my_sff_container"
+        android:layout_marginLeft="@dimen/my_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+        android:layout_toRightOf="@+id/scrapt_count_button"
+        android:background="@null"
+        android:gravity="center"
+        android:text="303"
+        android:textColor="@color/my_info_sff_num"
+        android:textSize="@dimen/my_info_sff_num_size" />
+
+
+    <TextView
+        android:layout_width="@dimen/my_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/follower_button"
+        android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
+        android:layout_marginLeft="@dimen/my_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
+        android:layout_toRightOf="@+id/my_sff_container"
+        android:gravity="center"
+        android:text="@string/follower_textview"
+        android:textColor="@color/my_info_sff_text"
+        android:textSize="@dimen/my_info_sff_text_size" />
+
+
+    <TextView
+        android:id="@+id/following_button"
+        android:layout_width="@dimen/my_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/my_sff_container"
+        android:layout_marginLeft="@dimen/my_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+        android:layout_toRightOf="@+id/follower_button"
+        android:background="@null"
+        android:gravity="center"
+        android:text="312"
+        android:textColor="@color/my_info_sff_num"
+        android:textSize="@dimen/my_info_sff_num_size" />
+
+
+    <TextView
+        android:layout_width="@dimen/my_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/following_button"
+        android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
+        android:layout_marginLeft="@dimen/my_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
+        android:layout_toRightOf="@+id/follower_button"
+        android:gravity="center"
+        android:text="@string/following_textview"
+        android:textColor="@color/my_info_sff_text"
+        android:textSize="@dimen/my_info_sff_text_size" />
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/profile_name_textview"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="@dimen/name_textview_layout_matgin_left"-->
+    <!--android:layout_marginTop="@dimen/name_textview_layout_margin_top"-->
+    <!--android:gravity="center"-->
+    <!--android:text="서창욱"-->
+    <!--android:textColor="#000000"-->
+    <!--android:textSize="15dp"-->
+    <!--android:textStyle="bold" />-->
+
 
     <Button
         android:id="@+id/myinfo_replace_button"
-        android:layout_width="@dimen/profile_replace_button_width"
-        android:layout_height="@dimen/profile_replace_button_height"
-        android:layout_marginLeft="@dimen/profile_replace_button_layout_left"
-        android:layout_marginTop="@dimen/profile_replace_button_layout_top"
-        android:text="@string/replace_myinfo_string" />
+        android:layout_width="@dimen/my_info_pf_edit_width"
+        android:layout_height="@dimen/my_info_pf_edit_height"
+        android:layout_below="@+id/my_sff_container"
+        android:layout_toRightOf="@+id/profile_imageview"
+        android:background="@mipmap/btn_profileedit" />
 
     <TextView
         android:id="@+id/profile_my_introduce_textview"
-        android:layout_width="@dimen/introduce_my_textview_width"
+        android:layout_width="@dimen/my_info_pf_edit_width"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/introduce_my_textview_layout_margin_left"
-        android:layout_marginTop="@dimen/introduce_my_textview_layout_margin_top"
+        android:layout_below="@+id/myinfo_replace_button"
+        android:layout_marginBottom="@dimen/my_info_about_me_margin_bottom"
+        android:layout_marginTop="@dimen/my_info_about_me_margin_top"
+        android:layout_toRightOf="@+id/profile_imageview"
         android:text="안녕하세요!! 안드로이드 개발반 서창욱 입니다."
-        android:textSize="10dp" />
-
-    <Button
-        android:id="@+id/scrapt_count_button"
-        android:layout_width="@dimen/scrapt_button_width"
-        android:layout_height="@dimen/scrapt_button_height"
-        android:layout_marginLeft="@dimen/scrapt_button_layout_margin_left"
-        android:layout_marginTop="@dimen/scrapt_button_layout_margin_top"
-        android:background="@color/button_transparent_background"
-        android:gravity="center"
-        android:text="33" />
-
-    <Button
-        android:id="@+id/follower_button"
-        android:layout_width="@dimen/follower_button_width"
-        android:layout_height="@dimen/follower_button_height"
-        android:layout_marginLeft="@dimen/follower_button_layout_margin_left"
-        android:layout_marginTop="@dimen/follower_button_layout_margin_top"
-        android:background="@color/button_transparent_background"
-        android:text="303" />
-
-    <Button
-        android:id="@+id/following_button"
-        android:layout_width="@dimen/following_button_width"
-        android:layout_height="@dimen/following_button_height"
-        android:layout_marginLeft="@dimen/following_button_layout_margin_left"
-        android:layout_marginTop="@dimen/following_button_layout_margin_top"
-        android:background="@color/button_transparent_background"
-        android:text="312" />
+        android:textSize="@dimen/my_info_about_me_size" />
 
     <TextView
-        android:layout_width="@dimen/scrapt_textview_width"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/scrapt_textview_layout_margin_left"
-        android:layout_marginTop="@dimen/scrapt_textview_layout_margin_top"
-        android:gravity="center"
-        android:text="@string/scrapt_textview"
-        android:textSize="@dimen/scrapt_button_textsize" />
-
-    <TextView
-        android:layout_width="@dimen/follower_textview_width"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/follower_textview_layout_margin_left"
-        android:layout_marginTop="@dimen/follower_textview_layout_margin_top"
-        android:gravity="center"
-        android:text="@string/follower_textview"
-        android:textSize="@dimen/follower_button_textsize" />
-
-    <TextView
-        android:layout_width="@dimen/following_textview_width"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/following_textview_layout_margin_left"
-        android:layout_marginTop="@dimen/following_textview_layout_margin_top"
-        android:gravity="center"
-        android:text="@string/following_textview"
-        android:textSize="@dimen/scrapt_button_textsize" />
-
-    <TextView
+        android:id="@+id/my_info_line"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/line_margin_top"
-        android:background="@drawable/line_draw" />
+        android:layout_height="@dimen/line_dimen"
+        android:layout_below="@+id/profile_my_introduce_textview"
+        android:background="@mipmap/line" />
+
 
     <!-- Category view layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/my_info_linearlayout_layout_margintop"
+        android:layout_below="@+id/my_info_line"
         android:orientation="vertical">
 
-        <Button
+        <ImageButton
             android:id="@+id/category_add_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/button_transparent_background"
-            android:text="@string/folder_add_string"
-            android:textColor="@color/black_color"
-            android:textStyle="bold" />
+            android:layout_width="@dimen/my_info_btn_create_folder_width"
+            android:layout_height="@dimen/my_info_btn_create_folder_height"
+            android:layout_marginBottom="@dimen/my_info_btn_create_folder_margin_bottom"
+            android:layout_marginLeft="@dimen/my_info_btn_create_folder_margin_left"
+            android:layout_marginRight="@dimen/my_info_btn_create_folder_margin_right"
+            android:layout_marginTop="@dimen/my_info_btn_create_folder_margin_top"
+            android:background="@mipmap/btn_foldermake" />
 
         <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
             android:id="@+id/folder_rv_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/category_add_button"
             android:scrollbars="vertical"
-            app:frv_dividerHorizontalHeight="5dp"
-            app:frv_dividerVerticalHeight="5dp"
-            app:frv_itemViewBothSidesMargin="5dp"
+            app:frv_dividerHorizontalHeight="@dimen/my_info_folder_margin_all"
+            app:frv_dividerVerticalHeight="@dimen/my_info_folder_margin_all"
             app:frv_layoutManager="grid"
             app:frv_layoutManagerOrientation="vertical" />
     </LinearLayout>

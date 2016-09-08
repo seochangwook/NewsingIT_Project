@@ -50,7 +50,7 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
 
             if (folder_imgUrl.equals("default")) {
                 Picasso.with(context)
-                        .load(R.mipmap.no_image)
+                        .load(R.mipmap.ic_image_default)
                         .into(user_folder_imageview); //into로 보낼 위젯 선택.//
             } else {
                 //이미지를 로드.//
@@ -68,7 +68,7 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
 
             if (folder_imgUrl.equals("default")) {
                 Picasso.with(context)
-                        .load(R.mipmap.no_image)
+                        .load(R.mipmap.ic_image_default)
                         .into(user_folder_imageview); //into로 보낼 위젯 선택.//
             } else {
                 //이미지를 로드.//

@@ -5,31 +5,33 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="135dp"
-        android:layout_marginTop="40dp"
+        android:id="@+id/empty_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_info_folder_empty_img_height"
+        android:layout_marginTop="@dimen/my_info_folder_empty_img_margin_top"
+        android:gravity="center"
         android:src="@mipmap/ic_folder_plus" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/empty_msg"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="117dp"
-        android:layout_marginTop="170dp"
-        android:text="폴더를 추가해주세요"
-        android:textColor="#000000"
-        android:textSize="16dp"
+        android:layout_below="@+id/empty_img"
+        android:layout_marginTop="@dimen/my_info_folder_empty_msg_margin_top"
+        android:gravity="center"
+        android:text="폴더를 만들어보세요."
+        android:textColor="@color/my_info_folder_empty_msg"
+        android:textSize="@dimen/my_info_folder_empty_msg_size"
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="105dp"
-        android:layout_marginTop="210dp"
+        android:layout_below="@+id/empty_msg"
+        android:layout_marginTop="@dimen/my_info_folder_empty_msg_margin_top"
+        android:gravity="center"
         android:text="네트워크 연결을 다시 확인해주세요"
-        android:textColor="#ff0000"
-        android:textSize="11dp"
+        android:textColor="@color/red_color"
+        android:textSize="@dimen/my_info_folder_empty_msg_size"
         android:textStyle="bold" />
 </RelativeLayout>

@@ -23,6 +23,11 @@
         android:textColor="@color/follower_name"
         android:textSize="@dimen/follower_name_size" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_dimen"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line" />
 
     <!--<TextView-->
     <!--android:layout_width="wrap_content"-->

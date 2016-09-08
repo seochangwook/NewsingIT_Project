@@ -59,7 +59,7 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
 
         if (news_image_url.equals("default")) {
             Picasso.with(context)
-                    .load(R.mipmap.no_image)
+                    .load(R.mipmap.ic_image_default)
                     .into(scrap_news_imageview); //into로 보낼 위젯 선택.//
         } else {
             //이미지 처리 작업.//

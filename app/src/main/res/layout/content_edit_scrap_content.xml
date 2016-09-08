@@ -75,7 +75,7 @@
                     android:layout_toRightOf="@+id/news_preview_image"
                     android:text="한국경제"
                     android:textColor="@color/edit_scrap_news_box_author"
-                    android:textSize="10dp"
+                    android:textSize="@dimen/edit_scrap_news_box_author_size"
                     android:textStyle="bold" />
 
                 <TextView
@@ -88,7 +88,7 @@
                     android:layout_toRightOf="@+id/news_preview_author"
                     android:text="2016.08.11"
                     android:textColor="@color/edit_scrap_news_box_time"
-                    android:textSize="7dp" />
+                    android:textSize="@dimen/edit_scrap_news_box_time_size" />
 
                 <TextView
                     android:id="@+id/news_preview_title"
@@ -180,7 +180,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="@dimen/edit_scrap_tag_btn_width"
             android:layout_height="@dimen/edit_scrap_tag_btn_height"
-            android:layout_alignBottom="@+id/tagsEditText"
+            android:layout_alignBottom="@+id/edit_scrap_tag_img"
             android:layout_marginBottom="@dimen/edit_scrap_tag_margin_bottom"
             android:layout_marginRight="@dimen/edit_scrap_tag_btn_margin_right"
             android:layout_marginTop="@dimen/edit_scrap_tag_btn_margin_top"

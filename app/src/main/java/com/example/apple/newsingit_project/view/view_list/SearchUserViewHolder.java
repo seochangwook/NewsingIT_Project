@@ -45,7 +45,7 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
         //이미지 뷰 작업.//
         if (user_imgUrl.equals("default")) {
             Picasso.with(context)
-                    .load(R.mipmap.no_image)
+                    .load(R.mipmap.ic_image_default)
                     .into(searchUserImgView); //into로 보낼 위젯 선택.//
         } else {
             //이미지를 로드.//

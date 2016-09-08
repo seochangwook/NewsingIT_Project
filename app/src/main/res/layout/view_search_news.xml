@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/search_news_height"
     android:background="@color/search_news_background">
     <TextView
         android:id="@+id/text_search_news_author"
@@ -32,10 +32,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_search_news_author"
-        android:layout_marginBottom="@dimen/search_news_content_margin_botton"
         android:layout_marginLeft="@dimen/search_news_content_margin_left"
         android:layout_marginTop="@dimen/search_news_content_margin_top"
         android:text="title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_dimen"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line" />
 </RelativeLayout>

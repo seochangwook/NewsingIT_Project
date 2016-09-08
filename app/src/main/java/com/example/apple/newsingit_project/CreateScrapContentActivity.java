@@ -16,8 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +58,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     EditText scrap_title_edittext;
     TextInputLayout textInputLayout;
     AppCompatEditText appCompatEditText;
-    Button tag_enroll_button; //태그 등록버튼.//
+    ImageButton tag_enroll_button; //태그 등록버튼.//
     List<String> tag_array = new ArrayList<>(); //태그배열(원본 에디터에서 가져온 데이터)//
     List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
 
@@ -113,7 +113,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_scrap_content_activity_layout);
 
-        tag_enroll_button = (Button) findViewById(R.id.btn_tag_create);
+        tag_enroll_button = (ImageButton) findViewById(R.id.btn_tag_create);
         mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_beauty);
         scrap_title_edittext = (EditText) findViewById(R.id.editText4);
@@ -182,7 +182,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() >= 100) {
+                if (editable.length() >= 1000) {
                     textInputLayout.setError("100글자 이하로 입력하세요");
                 } else {
                     textInputLayout.setError(null);
@@ -193,7 +193,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         /** 태그 에디터 설정 **/
         textInputLayout.setCounterEnabled(true);
         textInputLayout.setErrorEnabled(true);
-        textInputLayout.setCounterMaxLength(100);
+        textInputLayout.setCounterMaxLength(1000);
 
         tag_enroll_button.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/user_profile_imageview"
+        android:layout_width="@dimen/user_info_img_width"
+        android:layout_height="@dimen/user_info_img_height"
+        android:layout_marginLeft="@dimen/user_info_img_margin_left"
+        android:layout_marginRight="@dimen/user_info_img_margin_right"
+        android:layout_marginTop="@dimen/user_info_img_margin_top"
+        android:src="@mipmap/profile_hambur" />
+
+
+    <ImageButton
+        android:id="@+id/user_follow_button"
+        android:layout_width="@dimen/user_info_btn_follow_width"
+        android:layout_height="@dimen/user_info_btn_follow_height"
+        android:layout_below="@+id/sff_container"
+        android:layout_toRightOf="@+id/user_profile_imageview"
+        android:background="@android:color/transparent"
+        android:src="@mipmap/btn_follow_600_72" />
+
+    <TextView
+        android:id="@+id/user_profile_my_introduce_textview"
+        android:layout_width="@dimen/user_info_about_me_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_follow_button"
+        android:layout_marginBottom="@dimen/user_info_about_me_margin_bottom"
+        android:layout_marginTop="@dimen/user_info_about_me_margin_top"
+        android:layout_toRightOf="@+id/user_profile_imageview"
+        android:text="안녕하세요!! 안드로이드 개발반 임지수 입니다."
+        android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/sff_container"
+        android:layout_width="@dimen/my_info_sff_width"
+        android:layout_height="@dimen/my_info_sff_height"
+        android:layout_marginTop="@dimen/user_info_sff_margin_top"
+        android:layout_toRightOf="@+id/user_profile_imageview" />
+
+    <TextView
+        android:id="@+id/scrapt_count_button"
+        android:layout_width="@dimen/user_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sff_container"
+        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+        android:layout_toRightOf="@+id/user_profile_imageview"
+        android:background="@color/button_transparent_background"
+        android:gravity="center"
+        android:text="10"
+        android:textColor="@color/my_info_sff_num"
+        android:textSize="@dimen/my_info_sff_num_size" />
+
+
+    <TextView
+        android:id="@+id/user_follower_button"
+        android:layout_width="@dimen/user_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sff_container"
+        android:layout_marginLeft="@dimen/user_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+        android:layout_toRightOf="@+id/scrapt_count_button"
+        android:background="@color/button_transparent_background"
+        android:gravity="center"
+        android:text="200"
+        android:textColor="@color/my_info_sff_num"
+        android:textSize="@dimen/my_info_sff_num_size" />
+
+    <TextView
+        android:id="@+id/user_following_button"
+        android:layout_width="@dimen/user_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sff_container"
+        android:layout_marginLeft="@dimen/user_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+        android:layout_toRightOf="@+id/user_follower_button"
+        android:background="@color/button_transparent_background"
+        android:gravity="center"
+        android:text="1000"
+        android:textColor="@color/my_info_sff_num"
+        android:textSize="@dimen/my_info_sff_num_size" />
+
+    <TextView
+        android:layout_width="@dimen/user_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrapt_count_button"
+        android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
+        android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
+        android:layout_toRightOf="@+id/user_profile_imageview"
+        android:gravity="center"
+        android:text="@string/scrapt_textview"
+        android:textColor="@color/my_info_sff_text"
+        android:textSize="@dimen/my_info_sff_text_size" />
+
+    <TextView
+        android:layout_width="@dimen/user_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_follower_button"
+        android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
+        android:layout_marginLeft="@dimen/user_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
+        android:layout_toRightOf="@+id/scrapt_count_button"
+        android:gravity="center"
+        android:text="@string/follower_textview"
+        android:textColor="@color/my_info_sff_text"
+        android:textSize="@dimen/my_info_sff_text_size" />
+
+    <TextView
+        android:layout_width="@dimen/user_info_sff_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_following_button"
+        android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
+        android:layout_marginLeft="@dimen/user_info_sff_margin_left"
+        android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
+        android:layout_toRightOf="@+id/user_follower_button"
+        android:gravity="center"
+        android:text="@string/following_textview"
+        android:textColor="@color/my_info_sff_text"
+        android:textSize="@dimen/my_info_sff_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_dimen"
+        android:layout_below="@+id/user_profile_my_introduce_textview"
+        android:background="@mipmap/line" />
+
+    <!-- Category view layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/my_info_linearlayout_layout_margintop"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/user_folder_rv_list_empty"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#EEAADD"
+            android:gravity="center"
+            android:text="폴더가 없습니다"
+            android:visibility="gone" />
+
+        <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
+            android:id="@+id/user_folder_rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:frv_dividerHeight="0.5dp"
+            app:frv_layoutManager="grid"
+            app:frv_layoutManagerOrientation="vertical" />
+    </LinearLayout>
+</RelativeLayout>
