@@ -57,14 +57,20 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void setSearchUserData(SearchUserData searchUserData) {
         if (this.searchUserData != searchUserData) {
             this.searchUserData = searchUserData;
+
+            notifyDataSetChanged();
         }
+
         notifyDataSetChanged();
     }
 
     public void initSearchUserData(SearchUserData searchUserData) {
         if (this.searchUserData != searchUserData) {
             this.searchUserData = searchUserData;
+
+            notifyDataSetChanged();
         }
+
         notifyDataSetChanged();
     }
 
@@ -75,11 +81,12 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(context.getResources().getString(R.string.server_domain))
+                .host(context.getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("follows");
 
         RequestBody body = new FormBody.Builder()
-                .add("id", "" + userId)
+                .add("ofid", "" + userId)
                 .build();
 
         Request request = new Request.Builder()
@@ -99,7 +106,8 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(context.getResources().getString(R.string.server_domain))
+                .host(context.getResources().getString(R.string.real_server_domain))
+                .port(8080)
                 .addPathSegment("follows")
                 .addPathSegment("" + userId);
 

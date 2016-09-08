@@ -18,7 +18,7 @@ import com.google.android.gms.gcm.GcmListenerService;
  * Created by apple on 2016. 9. 6..
  */
 public class MyGcmListenerService extends GcmListenerService {
-
+    private static final String FCM_NOTIFY_VALUE = "FCM_NOTIFY_VALUE";
     private static final String TAG = "MyGcmListenerService";
 
     /**
@@ -48,6 +48,7 @@ public class MyGcmListenerService extends GcmListenerService {
     private void sendNotification(String title, String message) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 

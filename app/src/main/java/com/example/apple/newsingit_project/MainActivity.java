@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String FCM_NOTIFY_VALUE = "FCM_NOTIFY_VALUE";
+
     Toolbar toolbar; //툴바//
     BottomMenu bottommenu; //하단 네비게이션 메뉴 바//
     /**
@@ -131,7 +133,26 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else //FCM일 경우//
             {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                alertDialog.setTitle("NewsingIT")
+                        .setCancelable(false)
+                        .setMessage("알람내역 확인은 로그인이 필요한 서비스 입니다. 로그인 화면으로 이동합니다.")
+                        .setCancelable(false).setPositiveButton("확인",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //yes
+                                //네트워크로 데이터를 보낸다.//
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
 
+                                startActivity(intent);
+
+                                finish();
+                            }
+                        });
+
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
         } else //공유 정보에 저장이 되어있다는 것은 로그인이 되었다는 증거//
         {
@@ -173,9 +194,6 @@ public class MainActivity extends AppCompatActivity {
                     dialog.setView(layout);
                     dialog.show();
                 }
-            } else //FCM일 경우//
-            {
-
             }
         }
 
@@ -240,7 +258,9 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
 
                     //프래그먼트 변경 시 타이틀 변경.//
-                    setTitle(getResources().getString(R.string.title_fragment_myinfo));
+                    /** 액티비티 타이클 설정 **/
+                    String my_name = PropertyManager.getInstance().get_name();
+                    setTitle(my_name);
                 }
             }
         });

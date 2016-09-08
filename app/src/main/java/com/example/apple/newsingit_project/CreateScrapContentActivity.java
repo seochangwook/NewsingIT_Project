@@ -46,7 +46,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
     private static final int RC_SINGLE_IMAGE = 2;
 
-    private static final String TAG = "Tap_Sample_Activity";
+    private static final String TAG = "json control";
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
@@ -103,8 +103,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
-
-
         }
     };
 
@@ -251,10 +249,12 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     /**
      * 태그 입력 이벤트 리스너
      **/
-    public void onTagsChanged(Collection<String> tags) {
-        Log.d(TAG, "Tags changed: ");
-        Log.d(TAG, Arrays.toString(tags.toArray()));
 
+    public void onTagsChanged(Collection<String> tags) {
+        String input_tag = Arrays.toString(tags.toArray());
+
+        //태그 중복 비교//
+        Log.d(TAG, input_tag);
         //Collection된 태그의 정보를 배열로 이동.//
         tag_array.addAll(Arrays.asList(String.valueOf(tags)));
     }
@@ -265,6 +265,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     public void onEditingFinished() {
         Log.d(TAG, "OnEditing finished");
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -378,7 +379,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
                 tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
             }
 
-            for (int i = 0; i < tag_data_str.length; i++) {
+            for (int i = 0; i < str_data_sample_tag_array.length; i++) {
                 Log.d("json tag", tag_data_str[i]);
                 formBuilder.add("tags", tag_data_str[i]);
             }
