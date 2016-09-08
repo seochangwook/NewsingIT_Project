@@ -474,7 +474,6 @@
     <dimen name="create_folder_btn_margin_right">18dp</dimen>
     <dimen name="create_folder_bnt_margin_bottom">2dp</dimen>
 
-
     <!--edit folder dimen-->
     <dimen name="edit_folder_img_width">100dp</dimen>
     <dimen name="edit_folder_img_height">80dp</dimen>

@@ -35,8 +35,8 @@ import mabbas007.tagsedittext.TagsEditText;
 import me.gujun.android.taggroup.TagGroup;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -325,6 +325,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         //저장에 필요한 변수들을 뽑는다//
         String scrap_title = scrap_title_edittext.getText().toString();
         String scrap_content = appCompatEditText.getText().toString();
+        String scrap_locked = "0";
 
         /** Networok 설정 **/
         networkManager = NetworkManager.getInstance();
@@ -335,25 +336,25 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         /** URL 설정 **/
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
-        builder.scheme("http"); //스킴정의(Http / Https)
+        builder.scheme("http"); //스킴정의(Http / Https)//
         builder.host(getResources().getString(R.string.real_server_domain)); //host정의.//
         builder.port(8080);
         builder.addPathSegment("scraps");
 
-        /** 파일 전송이므로 MultipartBody 설정 **/
-        MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("cid", folder_id)
-                .addFormDataPart("ncid", news_id)
-                .addFormDataPart("title", scrap_title)
-                .addFormDataPart("content", scrap_content);
-
         //lock설정//
         if (is_private == true) {
-            multipart_builder.addFormDataPart("locked", "1"); //true//
+            scrap_locked = "1";
         } else if (is_private == false) {
-            multipart_builder.addFormDataPart("locked", "0"); //false//
+            scrap_locked = "0";
         }
+
+        //여러개를 보낼려면 FormBody가 필요//
+        FormBody.Builder formBuilder = new FormBody.Builder()
+                .add("cid", folder_id)
+                .add("ncid", news_id)
+                .add("title", scrap_title)
+                .add("content", scrap_content)
+                .add("locked", scrap_locked);
 
         //태그처리//
         int array_size = tag_array.size();
@@ -378,12 +379,13 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
             }
 
             for (int i = 0; i < tag_data_str.length; i++) {
-                multipart_builder.addFormDataPart("tags", tag_data_str[i]); //true//
+                Log.d("json tag", tag_data_str[i]);
+                formBuilder.add("tags", tag_data_str[i]);
             }
         }
 
         /** RequestBody 설정(Multipart로 설정) **/
-        RequestBody body = multipart_builder.build();
+        RequestBody body = formBuilder.build();
 
         /** Request 설정 **/
         Request request = new Request.Builder()

@@ -62,6 +62,7 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
                     .load(R.mipmap.no_image)
                     .into(scrap_news_imageview); //into로 보낼 위젯 선택.//
         } else {
+            networkManager = NetworkManager.getInstance();
             //이미지 처리 작업.//
             //이미지를 로드.//
             Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//

@@ -34,8 +34,8 @@ import mabbas007.tagsedittext.TagsEditText;
 import me.gujun.android.taggroup.TagGroup;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -293,6 +293,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         //저장할 정보들을 모두 불러온다.//
         String edit_scrap_title = scrap_title_textview.getText().toString();
         String edit_scrap_content = appCompatEditText.getText().toString();
+        String edit_scrap_locked = "0"; //기본 비공개라 설정.//
 
         //저장될 정보 출력//
         /*Log.d("scrap title", edit_scrap_title);
@@ -344,33 +345,34 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         builder.addPathSegment("scraps");
         builder.addPathSegment(scrap_id); //스크랩 id를 변수로 넣어준다.//
 
-        MultipartBody.Builder multipart_builder = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("title", edit_scrap_title)
-                .addFormDataPart("content", edit_scrap_content);
-
         if (scrap_isprivate == true) //true이면 1//
         {
-            multipart_builder.addFormDataPart("locked", "1"); //true//
+            edit_scrap_locked = "1";
         } else if (scrap_isprivate == false) {
-            multipart_builder.addFormDataPart("locked", "0"); //true//
+            edit_scrap_locked = "0";
         }
+
+        //여러개를 보낼려면 FormBody가 필요//
+        FormBody.Builder formBuilder = new FormBody.Builder()
+                .add("title", edit_scrap_title)
+                .add("content", edit_scrap_content)
+                .add("locked", edit_scrap_locked);
 
         //태그//
         for (int i = 0; i < str_data_sample_tag_array.length; i++) {
             tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
 
             //Log.d("scrap tags", tag_data_str[i].toString());
-            multipart_builder.addFormDataPart("tags", tag_data_str[i].toString()); //true//
+            formBuilder.add("tags", tag_data_str[i].toString()); //true//
         }
 
         for (int i = 0; i < scrap_tags.length; i++) {
             //Log.d("scrap tags", scrap_tags[i]);
-            multipart_builder.addFormDataPart("tags", scrap_tags[i].toString());
+            formBuilder.add("tags", scrap_tags[i].toString());
         }
 
         /** RequestBody 설정(Multipart로 설정) **/
-        RequestBody body = multipart_builder.build();
+        RequestBody body = formBuilder.build();
 
         /** Request 설정 **/
         Request request = new Request.Builder()

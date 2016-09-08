@@ -16,14 +16,14 @@ public class UserScrapContentData {
     private int like;
     private boolean likeFlag;
     private boolean locked;
-    private String ncImgUrl;
+    private String nc_img_url;
 
     public String getNcImgUrl() {
-        return ncImgUrl;
+        return nc_img_url;
     }
 
     public void setNcImgUrl(String ncImgUrl) {
-        this.ncImgUrl = ncImgUrl;
+        this.nc_img_url = ncImgUrl;
     }
 
 
