@@ -49,6 +49,8 @@ public class SearchUserViewHolder extends RecyclerView.ViewHolder {
                     .into(searchUserImgView); //into로 보낼 위젯 선택.//
         } else {
             //이미지를 로드.//
+            networkManager = NetworkManager.getInstance();
+
             Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
 
             picasso.load(user_imgUrl)

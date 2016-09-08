@@ -176,7 +176,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me");
-        builder.addQueryParameter("nt", "no");
+        builder.addQueryParameter("action", "no");
 
         /** 파일 전송이므로 MultipartBody 설정 **/
         MultipartBody.Builder multipart_builder = new MultipartBody.Builder()

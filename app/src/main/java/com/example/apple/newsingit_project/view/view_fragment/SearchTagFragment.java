@@ -72,11 +72,15 @@ public class SearchTagFragment extends Fragment {
 
             Log.d("json data", responseData);
 
-            Gson gson = new Gson();
+            if (response.code() == 401) {
+                Log.d("json data", "ERROR 401");
+            } else {
+                Gson gson = new Gson();
 
-            SearchTagListRequest searchTagListRequest = gson.fromJson(responseData, SearchTagListRequest.class);
+                SearchTagListRequest searchTagListRequest = gson.fromJson(responseData, SearchTagListRequest.class);
 
-            setData(searchTagListRequest.getResults(), searchTagListRequest.getResults().length);
+                setData(searchTagListRequest.getResults(), searchTagListRequest.getResults().length);
+            }
         }
     };
 

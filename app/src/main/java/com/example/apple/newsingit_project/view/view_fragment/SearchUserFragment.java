@@ -21,6 +21,8 @@ import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.SearchUserAdapter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.LongSerializationPolicy;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,11 +72,19 @@ public class SearchUserFragment extends Fragment {
 
             Log.d("json data", responseData);
 
-            Gson gson = new Gson();
+            if (response.code() == 401) {
+                Log.d("json data", "ERROR 401");
+            } else {
+                //id값이 long -> String//
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
 
-            SearchUserRequest searchUserListRequest = gson.fromJson(responseData, SearchUserRequest.class);
+                Gson gson = gsonBuilder.create();
 
-            setData(searchUserListRequest.getResults(), searchUserListRequest.getResults().length);
+                SearchUserRequest searchUserListRequest = gson.fromJson(responseData, SearchUserRequest.class);
+
+                setData(searchUserListRequest.getResults(), searchUserListRequest.getResults().length);
+            }
         }
     };
 
@@ -246,7 +256,7 @@ public class SearchUserFragment extends Fragment {
                     for (int i = 0; i < user_list_data_length; i++) {
                         SearchUserData new_searchUserData = new SearchUserData();
 
-                        new_searchUserData.setId(searchUserRequestResultsList.get(i).getId());
+                        new_searchUserData.setId("" + searchUserRequestResultsList.get(i).getId());
                         new_searchUserData.setName(searchUserRequestResultsList.get(i).getName());
                         new_searchUserData.setAboutMe(searchUserRequestResultsList.get(i).getAboutme());
                         new_searchUserData.setFlag(searchUserRequestResultsList.get(i).getFlag());
@@ -262,78 +272,6 @@ public class SearchUserFragment extends Fragment {
                 }
             });
         }
-    }
-
-    private void initDummyData(String query) {
-
-        if (query.equals("서창욱")) {
-            int[] idList = {1, 2, 3, 4, 5, 6, 7};
-            String[] pfList = {"http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp"};
-            boolean[] flagList = {true, true, true, false, false, false, true};
-
-            String[] nameList = {"서창욱", "창욱서", "서씨", "이혜람", "신미은", "김예진", "이임수"};
-            String[] introList = {"저는 코딩이 취미입니다", "반갑습니다", "ㅇvㅇ", "^ㅇ^", "술x"
-                    , "만두만두", "=v="};
-
-            for (int i = 0; i < 7; i++) {
-                SearchUserData new_searchUserData = new SearchUserData();
-                new_searchUserData.setId(idList[i]);
-                new_searchUserData.setFlag(flagList[i]);
-                new_searchUserData.set_User_imgUrl(pfList[i]);
-                new_searchUserData.name = nameList[i];
-                new_searchUserData.setAboutMe(introList[i]);
-                searchUserData.searchUserDataArrayList.add(new_searchUserData);
-            }
-
-        } else if (query.equals("임지수")) {
-            int[] idList = {1, 2, 3, 4, 5, 6, 7};
-            String[] pfList = {"http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp"};
-            boolean[] flagList = {true, true, true, false, false, false, true};
-
-            String[] nameList = {"임지수", "지수", "임씨", "이혜람", "신미은", "김예진", "이임수"};
-            String[] introList = {"저는 코딩이 취미입니다", "반갑습니다", "ㅇvㅇ", "^ㅇ^", "술x"
-                    , "만두만두", "=v="};
-
-            for (int i = 0; i < 7; i++) {
-                SearchUserData new_searchUserData = new SearchUserData();
-                new_searchUserData.setId(idList[i]);
-                new_searchUserData.setFlag(flagList[i]);
-                new_searchUserData.set_User_imgUrl(pfList[i]);
-                new_searchUserData.name = nameList[i];
-                new_searchUserData.setAboutMe(introList[i]);
-                searchUserData.searchUserDataArrayList.add(new_searchUserData);
-            }
-
-        } else {
-            int[] idList = {1, 2, 3, 4, 5, 6, 7};
-            String[] pfList = {"http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp", "http://.../images/user/id/pf_picture.bmp"
-                    , "http://.../images/user/id/pf_picture.bmp"};
-            boolean[] flagList = {true, true, true, false, false, false, true};
-
-            String[] nameList = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
-            String[] introList = {"저는 코딩이 취미입니다", "반갑습니다", "ㅇvㅇ", "^ㅇ^", "술x"
-                    , "만두만두", "=v="};
-
-            for (int i = 0; i < 7; i++) {
-                SearchUserData new_searchUserData = new SearchUserData();
-                new_searchUserData.setId(idList[i]);
-                new_searchUserData.setFlag(flagList[i]);
-                new_searchUserData.set_User_imgUrl(pfList[i]);
-                new_searchUserData.name = nameList[i];
-                new_searchUserData.setAboutMe(introList[i]);
-                searchUserData.searchUserDataArrayList.add(new_searchUserData);
-            }
-        }
-
-        mAdapter.setSearchUserData(searchUserData);
     }
 
     private void showpDialog() {

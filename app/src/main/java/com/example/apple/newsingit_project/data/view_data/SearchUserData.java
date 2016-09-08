@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Tacademy on 2016-08-25.
  */
 public class SearchUserData {
-    public int id;
+    public String id;
     public String name;
     public String user_img_url;
     public boolean flag;
@@ -25,11 +25,11 @@ public class SearchUserData {
         this.flag = flag;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

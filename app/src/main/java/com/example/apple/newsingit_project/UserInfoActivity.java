@@ -11,7 +11,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,7 +56,7 @@ public class UserInfoActivity extends AppCompatActivity {
     TextView user_follower_count_button;
     TextView user_following_count_button;
     ImageButton user_following_button;
-    Button user_scrap_button;
+    TextView user_scrap_button;
 
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
@@ -125,6 +124,8 @@ public class UserInfoActivity extends AppCompatActivity {
                 Gson gson = new Gson();
 
                 UserInfoRequest userInfoRequest = gson.fromJson(response_data, UserInfoRequest.class);
+
+                set_UserInfo_Data(userInfoRequest.getResult());
             }
         }
     };
@@ -197,7 +198,7 @@ public class UserInfoActivity extends AppCompatActivity {
         user_follower_count_button = (TextView) findViewById(R.id.user_follower_button);
         user_following_count_button = (TextView) findViewById(R.id.user_following_button);
         user_following_button = (ImageButton) findViewById(R.id.user_follow_button);
-        user_scrap_button = (Button) findViewById(R.id.scrapt_count_button);
+        user_scrap_button = (TextView) findViewById(R.id.scrapt_count_button);
 
         user_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.user_folder_rv_list);
         setSupportActionBar(toolbar);

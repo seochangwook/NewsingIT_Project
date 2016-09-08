@@ -69,7 +69,7 @@ public class SearchNewsFragment extends Fragment {
             Log.d("json data", responseData);
 
             if (response.code() == 401) {
-                Log.d("ERROR", "401");
+                Log.d("json data", "ERROR 401");
             } else {
                 Gson gson = new Gson();
 
@@ -98,7 +98,7 @@ public class SearchNewsFragment extends Fragment {
                 .port(8080)
                 .addPathSegment("search")
                 .addQueryParameter("target", "1")
-                .addQueryParameter("word", query)
+                .addQueryParameter("word", "")
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "20");
 
