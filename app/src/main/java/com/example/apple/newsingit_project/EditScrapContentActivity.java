@@ -221,7 +221,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         /** 태그 에디터 설정 **/
         textInputLayout.setCounterEnabled(true);
         textInputLayout.setErrorEnabled(true);
-        textInputLayout.setCounterMaxLength(100);
+        textInputLayout.setCounterMaxLength(1000);
 
         tag_edit_button.setOnClickListener(new View.OnClickListener() {
             @Override

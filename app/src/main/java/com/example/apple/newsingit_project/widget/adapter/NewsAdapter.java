@@ -2,7 +2,6 @@ package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -849,9 +848,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 //키워드 배열에 있는 값을 이용.//
                 keyword1SectionViewHolder.set_KeywordSection(keywordSection.keyword1SectionDatas.get(position));
 
-                Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
+                //  Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
 
-                keyword1SectionViewHolder.keywordsection_textview.setTypeface(face);
+                //  keyword1SectionViewHolder.keywordsection_textview.setTypeface(face);
 
                 return;
             }
@@ -908,9 +907,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 //키워드 배열에 있는 값을 이용.//
                 keyword2SectionViewHolder.set_KeywordSection(keywordSection.keyword2SectionDatas.get(position));
 
-                Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
+                //  Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
 
-                keyword2SectionViewHolder.keywordsection_textview.setTypeface(face);
+                //   keyword2SectionViewHolder.keywordsection_textview.setTypeface(face);
 
                 return;
             }

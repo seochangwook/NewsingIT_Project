@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/my_info_background"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_user_info_layout">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -87,7 +91,7 @@
     <TextView
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scrapt_count_button"
+        android:layout_alignBottom="@id/sff_container"
         android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
         android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
         android:layout_toRightOf="@+id/user_profile_imageview"
@@ -99,7 +103,7 @@
     <TextView
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_follower_button"
+        android:layout_alignBottom="@id/sff_container"
         android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
         android:layout_marginLeft="@dimen/user_info_sff_margin_left"
         android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
@@ -112,7 +116,7 @@
     <TextView
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/user_following_button"
+        android:layout_alignBottom="@id/sff_container"
         android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
         android:layout_marginLeft="@dimen/user_info_sff_margin_left"
         android:layout_marginTop="@dimen/my_info_sff_text_margin_top"

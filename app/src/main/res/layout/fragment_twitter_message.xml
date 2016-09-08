@@ -1,11 +1,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/news_section_background">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageButton
         android:id="@+id/twitter_link_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/twitter_buttob_background" />
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/twit" />
 </FrameLayout>

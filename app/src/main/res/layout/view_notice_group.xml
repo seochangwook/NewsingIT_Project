@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/notice_height"
+    android:background="@color/notice_group">
 
     <TextView
         android:id="@+id/text_notice_title"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/notice_title_width"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="@dimen/notice_title_margin_bottom"
+        android:layout_marginLeft="@dimen/notice_title_margin_left"
+        android:layout_marginRight="@dimen/notice_title_margin_right"
+        android:layout_marginTop="@dimen/notice_title_margin_top"
         android:text="title"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textColor="@color/notice_title"
+        android:textSize="@dimen/notice_title_size" />
 
     <TextView
         android:id="@+id/text_notice_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_notice_title"
-        android:layout_marginBottom="10dp"
-        android:layout_toLeftOf="@+id/img_notice_indicator"
-        android:layout_toStartOf="@+id/img_notice_indicator"
+        android:layout_alignBottom="@id/text_notice_title"
+        android:layout_toRightOf="@id/text_notice_title"
         android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textColor="@color/notice_time"
+        android:textSize="@dimen/notice_time_size" />
 
     <ImageView
         android:id="@+id/img_notice_indicator"
@@ -33,5 +32,13 @@
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/notice_indicator_margin_right" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_dimen"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line" />
 </RelativeLayout>

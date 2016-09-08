@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/my_info_background"
     tools:context=".view.view_fragment.MyInfoFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -32,7 +33,7 @@
         android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
         android:layout_toRightOf="@+id/profile_imageview"
         android:background="@null"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="33"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
@@ -40,7 +41,7 @@
     <TextView
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scrapt_count_button"
+        android:layout_alignBottom="@+id/my_sff_container"
         android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
         android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
         android:layout_toRightOf="@+id/profile_imageview"
@@ -60,7 +61,7 @@
         android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
         android:layout_toRightOf="@+id/scrapt_count_button"
         android:background="@null"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="303"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
@@ -69,7 +70,7 @@
     <TextView
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/follower_button"
+        android:layout_alignBottom="@+id/my_sff_container"
         android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
         android:layout_marginLeft="@dimen/my_info_sff_margin_left"
         android:layout_marginTop="@dimen/my_info_sff_text_margin_top"
@@ -89,7 +90,7 @@
         android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
         android:layout_toRightOf="@+id/follower_button"
         android:background="@null"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:text="312"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
@@ -98,7 +99,7 @@
     <TextView
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/following_button"
+        android:layout_alignBottom="@+id/my_sff_container"
         android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
         android:layout_marginLeft="@dimen/my_info_sff_margin_left"
         android:layout_marginTop="@dimen/my_info_sff_text_margin_top"

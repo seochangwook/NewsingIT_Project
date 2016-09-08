@@ -20,7 +20,7 @@
         android:id="@+id/text_alarm_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/alarm_messga_margin_left"
+        android:layout_marginLeft="@dimen/alarm_message_margin_left"
         android:layout_marginTop="@dimen/alarm_message_margin_top"
 
         android:text="Medium Text"

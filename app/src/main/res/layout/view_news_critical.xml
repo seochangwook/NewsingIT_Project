@@ -6,6 +6,6 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_thickline" />
+        android:layout_height="@dimen/thick_line_dimen"
+        android:background="@mipmap/line" />
 </LinearLayout>

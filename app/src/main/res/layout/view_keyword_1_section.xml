@@ -2,22 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/news_section_background"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/keyword_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/main_news_keyword_layout_margin_left"
+        android:layout_marginBottom="@dimen/news_section_margin_bottom"
+        android:layout_marginLeft="@dimen/news_section_margin_left"
+        android:layout_marginTop="@dimen/news_section_margin_top"
         android:text="Sample Category"
-        android:textColor="@color/blue_color"
-        android:textSize="18dp"
+        android:textColor="@color/news_section"
+        android:textSize="@dimen/news_section_size"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_dimen"
         android:layout_below="@+id/keyword_name_text"
+        android:layout_marginBottom="@dimen/news_section_line_margin_bottom"
         android:background="@mipmap/line" />
 
 </RelativeLayout>
