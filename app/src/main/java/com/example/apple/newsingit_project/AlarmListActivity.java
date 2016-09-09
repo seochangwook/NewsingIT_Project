@@ -104,6 +104,7 @@ public class AlarmListActivity extends AppCompatActivity {
 
                     intent.putExtra("KEY_FRAGMENT_NUMBER", "1");
 
+
                     setResult(RESULT_OK, intent);
 
                     finish();
@@ -124,6 +125,7 @@ public class AlarmListActivity extends AppCompatActivity {
                     Intent intent = new Intent(AlarmListActivity.this, UserInfoActivity.class);
                     //필요한 값을 전달한다.//
                     intent.putExtra("USER_NAME", userSelect);
+
                     startActivity(intent);
                 }
 

@@ -495,15 +495,20 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         if (item_id == R.id.share_news) {
             Toast.makeText(SelectNewsDetailActivity.this, "뉴스 공유 하기", Toast.LENGTH_SHORT).show();
 
+            String scrap_title = news_headline_title_textview.getText().toString();
+            String scrap_content = news_content_textview.getText().toString();
+
             Intent msg = new Intent(Intent.ACTION_SEND);
 
             msg.addCategory(Intent.CATEGORY_DEFAULT);
-            msg.putExtra(Intent.EXTRA_SUBJECT, "서창욱");
-            msg.putExtra(Intent.EXTRA_TEXT, "코딩이 취미 - 뉴스 스크랩");
-            msg.putExtra(Intent.EXTRA_TITLE, "제목");
+
+            msg.putExtra(Intent.EXTRA_SUBJECT, scrap_title);
+
+            msg.putExtra(Intent.EXTRA_TEXT, scrap_content);
+
             msg.setType("text/plain");
 
-            startActivity(Intent.createChooser(msg, "공유"));
+            startActivity(Intent.createChooser(msg, "Newsing Share"));
         }
 
         return super.onOptionsItemSelected(item);

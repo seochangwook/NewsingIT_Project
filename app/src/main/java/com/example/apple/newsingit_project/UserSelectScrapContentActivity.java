@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -242,34 +241,20 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         if (item_id == R.id.share_scrap) {
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 공유", Toast.LENGTH_SHORT).show();
 
-            //여러 공유목록 중 트위터와 페이스북만 나오게 설정//
             String scrap_title = titleView.getText().toString();
             String scrap_content = contentView.getText().toString();
-            String scrap_tags = "";
 
-            for (int i = 0; i < tag_layout_array.size(); i++) {
-                scrap_tags += tag_layout_array.get(i).toString();
-            }
+            Intent msg = new Intent(Intent.ACTION_SEND);
 
-            scrap_content = scrap_content + "/ HashTag : " + scrap_tags;
+            msg.addCategory(Intent.CATEGORY_DEFAULT);
 
-            List<Intent> targetedSharedIntents = new ArrayList<Intent>();
+            msg.putExtra(Intent.EXTRA_SUBJECT, scrap_title);
 
-            //페이스북//
-            Intent facebookIntent = getShareIntent("facebook", scrap_title, scrap_content);
-            if (facebookIntent != null) {
-                targetedSharedIntents.add(facebookIntent);
-            }
+            msg.putExtra(Intent.EXTRA_TEXT, scrap_content);
 
-            // 트위터
-            Intent twitterIntent = getShareIntent("twitter", scrap_title, scrap_content);
-            if (twitterIntent != null) {
-                targetedSharedIntents.add(twitterIntent);
-            }
+            msg.setType("text/plain");
 
-            Intent chooser = Intent.createChooser(targetedSharedIntents.remove(0), "공유목록");
-            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetedSharedIntents.toArray(new Parcelable[]{}));
-            startActivity(chooser);
+            startActivity(Intent.createChooser(msg, "Newsing Share"));
         } else if (item_id == R.id.setting_scrap)
         {
             Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 설정", Toast.LENGTH_SHORT).show();
