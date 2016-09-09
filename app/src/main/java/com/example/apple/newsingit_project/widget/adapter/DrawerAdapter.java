@@ -252,7 +252,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     Switch_my_page_follow.setVisibility(View.GONE);
 
                     //해당 스위치의 설정을 공유 프래퍼런스를 가지고 설정//
-                    String locked_state = PropertyManager.getInstance().get_nt_s();
+                    String locked_state = PropertyManager.getInstance().get_nt_fs();
 
                     if (locked_state.equals("true")) {
                         Switch_new_sscrap.setChecked(true);
@@ -264,7 +264,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     Switch_my_scrap_favorite.setVisibility(View.VISIBLE);
                     Switch_my_page_follow.setVisibility(View.GONE);
 
-                    String locked_state = PropertyManager.getInstance().get_nt_f();
+                    String locked_state = PropertyManager.getInstance().get_nt_s();
 
                     if (locked_state.equals("true")) {
                         Switch_my_scrap_favorite.setChecked(true);
@@ -276,7 +276,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     Switch_my_scrap_favorite.setVisibility(View.GONE);
                     Switch_my_page_follow.setVisibility(View.VISIBLE);
 
-                    String locked_state = PropertyManager.getInstance().get_nt_fs();
+                    String locked_state = PropertyManager.getInstance().get_nt_f();
 
                     if (locked_state.equals("true")) {
                         Switch_my_page_follow.setChecked(true);
@@ -292,14 +292,17 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                         if(checked){
                             Toast.makeText(context, "새 스크랩 알림 on", Toast.LENGTH_SHORT).show();
 
-
                             //공유 프래퍼런스의 값도 변경해준다.//
+                            PropertyManager.getInstance().set_nt_fs("true");
 
                             //해당 네트워크 작업과 데이터베이스 저장작업을 해준다.//
                             set_new_scrap_alarm_on();
 
                         }else{
                             Toast.makeText(context, "새 스크랩 알림 off", Toast.LENGTH_SHORT).show();
+
+                            //공유 프래퍼런스의 값도 변경해준다.//
+                            PropertyManager.getInstance().set_nt_fs("false");
 
                             set_new_scrap_alarm_off();
                         }
@@ -312,9 +315,15 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                         if (checked) {
                             Toast.makeText(context, "내 스크랩 알림 on", Toast.LENGTH_SHORT).show();
 
+                            //공유 프래퍼런스의 값도 변경해준다.//
+                            PropertyManager.getInstance().set_nt_s("true");
+
                             set_my_scrap_alarm_on();
                         } else {
                             Toast.makeText(context, "내 스크랩 알림 off", Toast.LENGTH_SHORT).show();
+
+                            //공유 프래퍼런스의 값도 변경해준다.//
+                            PropertyManager.getInstance().set_nt_s("false");
 
                             set_my_scrap_alarm_off();
                         }
@@ -327,9 +336,15 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                         if (checked) {
                             Toast.makeText(context, "마이페이지 알림 on", Toast.LENGTH_SHORT).show();
 
+                            //공유 프래퍼런스의 값도 변경해준다.//
+                            PropertyManager.getInstance().set_nt_f("true");
+
                             set_my_page_follow_alarm_on();
                         } else {
                             Toast.makeText(context, "마이페이지 알림 off", Toast.LENGTH_SHORT).show();
+
+                            //공유 프래퍼런스의 값도 변경해준다.//
+                            PropertyManager.getInstance().set_nt_f("false");
 
                             set_my_page_follow_alarm_off();
                         }
@@ -363,14 +378,40 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     Switch_new_sscrap.setVisibility(View.VISIBLE);
                     Switch_my_scrap_favorite.setVisibility(View.GONE);
                     Switch_my_page_follow.setVisibility(View.GONE);
+
+                    //해당 스위치의 설정을 공유 프래퍼런스를 가지고 설정//
+                    String locked_state = PropertyManager.getInstance().get_nt_fs();
+
+                    if (locked_state.equals("true")) {
+                        Switch_new_sscrap.setChecked(true);
+                    } else if (locked_state.equals("false")) {
+                        Switch_new_sscrap.setChecked(false);
+                    }
                 } else if (childPosition == 1) {
                     Switch_new_sscrap.setVisibility(View.GONE);
                     Switch_my_scrap_favorite.setVisibility(View.VISIBLE);
                     Switch_my_page_follow.setVisibility(View.GONE);
+
+                    String locked_state = PropertyManager.getInstance().get_nt_s();
+
+                    if (locked_state.equals("true")) {
+                        Switch_my_scrap_favorite.setChecked(true);
+                    } else if (locked_state.equals("false")) {
+                        Switch_my_scrap_favorite.setChecked(false);
+                    }
+
                 } else if (childPosition == 2) {
                     Switch_new_sscrap.setVisibility(View.GONE);
                     Switch_my_scrap_favorite.setVisibility(View.GONE);
                     Switch_my_page_follow.setVisibility(View.VISIBLE);
+
+                    String locked_state = PropertyManager.getInstance().get_nt_f();
+
+                    if (locked_state.equals("true")) {
+                        Switch_my_page_follow.setChecked(true);
+                    } else if (locked_state.equals("false")) {
+                        Switch_my_page_follow.setChecked(false);
+                    }
                 }
             }
 

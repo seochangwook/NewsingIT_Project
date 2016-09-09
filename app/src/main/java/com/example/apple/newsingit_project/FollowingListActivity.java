@@ -34,6 +34,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class FollowingListActivity extends AppCompatActivity {
+    private static final String USER_ID = "USER_ID";
+    private static final String USER_NAME = "USER_NAME";
+    private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
 
     FollowingListAdapter mAdapter;
     FollowingData followingData;
@@ -206,12 +209,16 @@ public class FollowingListActivity extends AppCompatActivity {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String selectName = followingData.followingDataList.get(position).getName().toString();
                 String selectId = followingData.followingDataList.get(position).getId();
+                String serlect_flag = "" + followingData.followingDataList.get(position).getFlag();
+
                 Toast.makeText(FollowingListActivity.this, "" + selectName, Toast.LENGTH_SHORT).show();
 
                 //해당 사람의 마이 페이지로 이동//
                 Intent intent = new Intent(FollowingListActivity.this, UserInfoActivity.class);
-                intent.putExtra("USER_NAME", selectName);
-                intent.putExtra("USER_ID", "" + selectId);
+                intent.putExtra(USER_NAME, selectName);
+                intent.putExtra(USER_ID, "" + selectId);
+                intent.putExtra(USER_FOLLOW_FLAG, serlect_flag);
+
                 startActivity(intent);
             }
         });
