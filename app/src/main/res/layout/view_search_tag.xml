@@ -8,25 +8,12 @@
         android:id="@+id/search_tag_sharp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/search_tag_sharp_margin_left"
-
         android:layout_marginRight="@dimen/search_tag_sharp_margin_right"
-        android:layout_marginTop="@dimen/search_tag_sharp_margin_top"
         android:text="@string/search_tag_sharp"
         android:textColor="@color/search_tag_sharp"
         android:textSize="@dimen/search_tag_sharp_size" />
-
-    <!--<ImageView-->
-    <!--android:id="@+id/img_search_tag"-->
-    <!--android:layout_width="50dp"-->
-    <!--android:layout_height="50dp"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentStart="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_marginBottom="20dp"-->
-    <!--android:layout_marginLeft="20dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:src="@android:drawable/btn_star_big_on" />-->
 
     <TextView
         android:id="@+id/text_search_tag"
@@ -38,8 +25,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/search_tag_title"
         android:textSize="@dimen/search_tag_title_size" />
-    "
-    />
+
 
     <TextView
         android:id="@+id/text_search_tag_count"
