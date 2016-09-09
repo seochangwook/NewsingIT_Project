@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FollowerData;
+import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Tacademy on 2016-08-24.
@@ -20,6 +22,7 @@ public class FollowerViewHolder  extends RecyclerView.ViewHolder {
     public ImageButton btnFollower;
     public ImageView imgFollower;
 
+    NetworkManager networkManager;
 
     public FollowerViewHolder(View itemView) {
         super(itemView);
@@ -33,5 +36,21 @@ public class FollowerViewHolder  extends RecyclerView.ViewHolder {
         this.followerData = followerData;
         nameView.setText(followerData.getName());
         //  introView.setText(followerData.getAboutMe());
+
+        String image_Url = followerData.getProfileUrl();
+
+        if (image_Url.equals("default")) //이미지가 없는 경우//
+        {
+            Picasso.with(context)
+                    .load(R.mipmap.profile_image)
+                    .into(imgFollower); //into로 보낼 위젯 선택.//
+        } else {
+            networkManager = NetworkManager.getInstance();
+
+            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+            picasso.load(image_Url)
+                    .into(imgFollower);
+        }
     }
 }
