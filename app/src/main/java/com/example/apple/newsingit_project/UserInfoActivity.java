@@ -49,6 +49,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
+    private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
 
     boolean dummy_follow_state = false; //팔로우 하지 않음이 기본 설정.//
@@ -79,6 +80,7 @@ public class UserInfoActivity extends AppCompatActivity {
     String user_imgUrl;
     String user_name;
     String user_intro;
+    String follow_flag;
     /**
      * 네트워크 관련 변수
      **/
@@ -246,6 +248,15 @@ public class UserInfoActivity extends AppCompatActivity {
 
         get_user_id = intent.getStringExtra(USER_ID);
         get_user_name = intent.getStringExtra(USER_NAME);
+        follow_flag = intent.getStringExtra(USER_FOLLOW_FLAG);
+
+        if (follow_flag.equals("true")) //팔로잉 되있는 상태.//
+        {
+            user_following_button.setImageResource(R.mipmap.btn_following_600_72);
+        } else if (follow_flag.equals("false")) //팔로우가 되있지 않은 상태.//
+        {
+            user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
+        }
 
         /** 타이틀과 이름 값 초기화 **/
         setTitle(get_user_name);

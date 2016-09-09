@@ -34,6 +34,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class FollowerListActivity extends AppCompatActivity {
+    private static final String USER_ID = "USER_ID";
+    private static final String USER_NAME = "USER_NAME";
+    private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
 
     FollowerListAdapter mAdapter;
     FollowerData followerData;
@@ -226,13 +229,17 @@ public class FollowerListActivity extends AppCompatActivity {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String selectName = followerData.followerDataList.get(position).getName().toString();
                 String selectId = followerData.followerDataList.get(position).getId();
+                String serlect_flag = "" + followerData.followerDataList.get(position).getFlag();
 
                 Toast.makeText(FollowerListActivity.this, "" + selectName, Toast.LENGTH_SHORT).show();
 
                 //해당 사람의 마이 페이지로 이동//
                 Intent intent = new Intent(FollowerListActivity.this, UserInfoActivity.class);
-                intent.putExtra("USER_NAME", selectName);
-                intent.putExtra("USER_ID", "" + selectId);
+
+                intent.putExtra(USER_NAME, selectName);
+                intent.putExtra(USER_ID, "" + selectId);
+                intent.putExtra(USER_FOLLOW_FLAG, serlect_flag);
+
                 startActivity(intent);
             }
         });

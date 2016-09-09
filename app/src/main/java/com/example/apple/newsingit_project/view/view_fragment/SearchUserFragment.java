@@ -47,6 +47,8 @@ public class SearchUserFragment extends Fragment {
     //인텐트 전달객체 변수 설정//
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
+    private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
+
     private static final int LOAD_MORE_TAG = 4;
     String query;
 
@@ -94,7 +96,7 @@ public class SearchUserFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search_user_layout, container, false);
@@ -172,6 +174,8 @@ public class SearchUserFragment extends Fragment {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
 
                 String userSelect = searchUserData.searchUserDataArrayList.get(position).getName().toString();
+                String flag_boolean = "" + searchUserData.searchUserDataArrayList.get(position).getFlag();
+
                 // Toast.makeText(getActivity(), "" + userSelect, Toast.LENGTH_SHORT).show();
 
                 //선택한 유저의 마이 페이지로 이동//
@@ -179,6 +183,7 @@ public class SearchUserFragment extends Fragment {
 
                 intent.putExtra(USER_ID, "" + searchUserData.searchUserDataArrayList.get(position).getId());
                 intent.putExtra(USER_NAME, searchUserData.searchUserDataArrayList.get(position).getName());
+                intent.putExtra(USER_FOLLOW_FLAG, "" + searchUserData.searchUserDataArrayList.get(position).getFlag());
 
                 startActivity(intent);
 
