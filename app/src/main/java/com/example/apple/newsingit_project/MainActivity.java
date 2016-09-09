@@ -224,6 +224,28 @@ public class MainActivity extends AppCompatActivity {
 
         /** Bottom 네비게이션 메뉴의 리스너 처리는 onResume()상태에서 구현 **/
         setupBottomMenuClickListener();
+
+        profile_imgUrl = PropertyManager.getInstance().get_pf_Url();
+
+        Log.d("json control", profile_imgUrl);
+
+        profile_name = PropertyManager.getInstance().get_name();
+
+        profile_name_textview.setText(profile_name);
+
+        networkManager = NetworkManager.getInstance();
+
+        if (profile_imgUrl.isEmpty()) {
+            Picasso.with(MainActivity.this)
+                    .load(R.mipmap.ic_image_default)
+                    .into(profile_imageview); //into로 보낼 위젯 선택.//
+        } else {
+            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+            picasso.load(profile_imgUrl)
+                    .transform(new CropCircleTransformation())
+                    .into(profile_imageview);
+        }
     }
 
     /**
@@ -260,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
                     //프래그먼트 변경 시 타이틀 변경.//
                     /** 액티비티 타이클 설정 **/
                     String my_name = PropertyManager.getInstance().get_name();
+
                     setTitle(my_name);
                 }
             }

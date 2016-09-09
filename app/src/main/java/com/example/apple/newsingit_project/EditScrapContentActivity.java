@@ -347,6 +347,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         builder.port(8080);
         builder.addPathSegment("scraps");
         builder.addPathSegment(scrap_id); //스크랩 id를 변수로 넣어준다.//
+        builder.addQueryParameter("action", "udscrap");
 
         if (scrap_isprivate == true) //true이면 1//
         {

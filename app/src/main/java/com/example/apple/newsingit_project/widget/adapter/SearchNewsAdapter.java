@@ -26,6 +26,8 @@ public class SearchNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void setSearchNewsData(SearchNewsData searchNewsData) {
         if (this.searchNewsData != searchNewsData) {
             this.searchNewsData = searchNewsData;
+
+            notifyDataSetChanged();
         }
         notifyDataSetChanged();
     }
@@ -33,6 +35,8 @@ public class SearchNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void initSearchNewsData(SearchNewsData searchNewsData) {
         if (this.searchNewsData != searchNewsData) {
             this.searchNewsData = searchNewsData;
+
+            notifyDataSetChanged();
         }
         notifyDataSetChanged();
     }
@@ -42,6 +46,7 @@ public class SearchNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (searchNewsData == null) {
             return 0;
         }
+
         return searchNewsData.searchNewsDataArrayList.size();
     }
 

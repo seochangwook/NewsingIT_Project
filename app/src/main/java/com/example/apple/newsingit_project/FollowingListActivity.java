@@ -17,6 +17,8 @@ import com.example.apple.newsingit_project.data.view_data.FollowingData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.FollowingListAdapter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.LongSerializationPolicy;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,7 +56,11 @@ public class FollowingListActivity extends AppCompatActivity {
 
             Log.d("json data", responseData);
 
-            Gson gson = new Gson();
+            //id가 long타입이므로 GSON을 수정해준다.//
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+
+            Gson gson = gsonBuilder.create();
 
             FollowingListRequest followingListRequest = gson.fromJson(responseData, FollowingListRequest.class);
 
@@ -121,7 +127,7 @@ public class FollowingListActivity extends AppCompatActivity {
 
                     for (int i = 0; i < size; i++) {
                         FollowingData newFollowingData = new FollowingData();
-                        newFollowingData.setId(followingList.get(i).getId());
+                        newFollowingData.setId("" + followingList.get(i).getId());
                         newFollowingData.setProfileUrl(followingList.get(i).getPf_url());
                         newFollowingData.setName(followingList.get(i).getName());
                         newFollowingData.setAboutMe(followingList.get(i).getAboutme());
@@ -199,7 +205,7 @@ public class FollowingListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String selectName = followingData.followingDataList.get(position).getName().toString();
-                int selectId = followingData.followingDataList.get(position).getId();
+                String selectId = followingData.followingDataList.get(position).getId();
                 Toast.makeText(FollowingListActivity.this, "" + selectName, Toast.LENGTH_SHORT).show();
 
                 //해당 사람의 마이 페이지로 이동//

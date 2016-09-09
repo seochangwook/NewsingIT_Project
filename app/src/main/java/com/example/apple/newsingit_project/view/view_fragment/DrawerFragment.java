@@ -18,14 +18,12 @@ import android.widget.Toast;
 import com.example.apple.newsingit_project.LoginActivity;
 import com.example.apple.newsingit_project.NoticeActivity;
 import com.example.apple.newsingit_project.R;
-import com.example.apple.newsingit_project.data.json_data.logout.LogoutRequest;
 import com.example.apple.newsingit_project.data.view_data.DrawerChild;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.DrawerAdapter;
 import com.facebook.login.LoginManager;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -46,9 +44,9 @@ public class DrawerFragment extends Fragment {
     public static final String MENU_LOGOUT = "로그아웃";
     public static final String MENU_NOTICE = "공지사항";
 
-    public static final String CHILD_NEW_SCRAP="새 스크랩";
+    public static final String CHILD_NEW_SCRAP = "팔로잉 스크랩 알림";
     public static final String CHILD_LIKE_MY_SCRAP ="내 스크랩 좋아요";
-    public static final String CHILD_FOLLOW_MY_PAGE = "마이페이지 팔로우";
+    public static final String CHILD_FOLLOW_MY_PAGE = "팔로우 알림";
 
     DrawerGroup[] menuList = {
 
@@ -91,12 +89,9 @@ public class DrawerFragment extends Fragment {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
-
-            Gson gson = new Gson();
-
-            LogoutRequest logoutRequest = gson.fromJson(responseData, LogoutRequest.class);
         }
     };
+
     public DrawerFragment() {
         // Required empty public constructor
     }
@@ -123,6 +118,7 @@ public class DrawerFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mLoginManager = LoginManager.getInstance();
     }
 
@@ -131,6 +127,8 @@ public class DrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_drawer, container, false);
         View drawerHeader = inflater.inflate(R.layout.view_drawer_header, container, false);
+
+        Log.d("json control", "open drawer");
 
         mAdapter = new DrawerAdapter(menuList, getActivity());
 
@@ -172,6 +170,7 @@ public class DrawerFragment extends Fragment {
                     PropertyManager.getInstance().set_nt_s("");
 
                     getLogoutNetworkData(); //우리 앱 로그아웃
+
                     mLoginManager.logOut(); //페이스북 로그아웃
 
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -183,6 +182,7 @@ public class DrawerFragment extends Fragment {
                 //공지사항 이동//
                 if (groupposition == 3) {
                     Intent intent = new Intent(getActivity(), NoticeActivity.class);
+
                     startActivity(intent);
                 }
 

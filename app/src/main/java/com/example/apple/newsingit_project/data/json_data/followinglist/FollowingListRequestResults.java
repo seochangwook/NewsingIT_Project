@@ -2,7 +2,7 @@ package com.example.apple.newsingit_project.data.json_data.followinglist;
 
 public class FollowingListRequestResults {
     private String name;
-    private int id;
+    private long id;
     private String pf_url;
     private String aboutme;
     private boolean flag;
@@ -24,11 +24,11 @@ public class FollowingListRequestResults {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

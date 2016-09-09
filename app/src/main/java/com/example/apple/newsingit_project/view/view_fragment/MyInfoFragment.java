@@ -3,8 +3,10 @@ package com.example.apple.newsingit_project.view.view_fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.util.Log;
@@ -34,6 +36,7 @@ import com.example.apple.newsingit_project.data.json_data.myinfo.UserInfoRequest
 import com.example.apple.newsingit_project.data.json_data.myinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
 import com.example.apple.newsingit_project.data.view_data.UserInfoData;
+import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FolderListAdapter;
@@ -92,10 +95,14 @@ public class MyInfoFragment extends Fragment {
     FolderListAdapter folderListAdapter; //폴더 어댑태 클래스//
     String profileUrl;
     NetworkManager networkManager;
+    /**
+     * 공유 프래퍼런스 관련 변수
+     **/
+    SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
+    SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
     private FamiliarRefreshRecyclerView folder_recyclerrefreshview;
     private FamiliarRecyclerView folder_recyclerview;
     private ProgressDialog pDialog;
-
     private Callback requestMyInfoListCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -183,6 +190,10 @@ public class MyInfoFragment extends Fragment {
         /** 폴더 데이터 클래스 초기화 및 어댑터 초기화 **/
         folderData = new FolderData();
         folderListAdapter = new FolderListAdapter(getActivity());
+
+        /** 공유 저장소 초기화 **/
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mEditor = mPrefs.edit();
 
         /** 폴더 리스트뷰 Refresh 이벤트 등록 **/
         folder_recyclerrefreshview.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
@@ -512,6 +523,10 @@ public class MyInfoFragment extends Fragment {
                     userInfoData.setFollowerCount(userInfoRequestResult.getFollowers());
                     userInfoData.setFollwingCount(userInfoRequestResult.getFollowings());
                     userInfoData.setScrapCount(userInfoRequestResult.getScrapings());
+
+                    //공유 프래퍼런스 데이터도 초기화//
+                    PropertyManager.getInstance().set_pf_Url(userInfoRequestResult.getPf_url());
+                    PropertyManager.getInstance().set_name(userInfoRequestResult.getName());
 
                     name = userInfoData.getName();
                     profileUrl = userInfoData.getProfileUrl();

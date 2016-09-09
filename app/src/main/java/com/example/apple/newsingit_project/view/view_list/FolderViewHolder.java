@@ -21,6 +21,7 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
     public TextView folder_name_textview;
     public Button folder_private_button;
     public boolean folder_private;
+
     //폴더 데이터 클래스//
     FolderData folderData;
 

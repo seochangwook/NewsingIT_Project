@@ -387,15 +387,16 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.host(context.getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
 
-        builder.addQueryParameter("nt", "fs"); //새 스크랩에 대한 알람 설정//
+        builder.addQueryParameter("action", "fs"); //새 스크랩에 대한 알람 설정//
 
         /** Delete이기에 RequestBody를 만든다 **/
         RequestBody body = new FormBody.Builder()
-                .add("locked", "1") //true이기에 1//
+                .add("nt_state", "1") //true이기에 1//
                 .build(); //데이터가 없으니 그냥 build로 설정.//
 
         //최종적으로 Request 구성//
@@ -422,15 +423,16 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.host(context.getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
 
-        builder.addQueryParameter("nt", "fs"); //새 스크랩에 대한 알람 설정//
+        builder.addQueryParameter("action", "fs"); //새 스크랩에 대한 알람 설정//
 
         /** Delete이기에 RequestBody를 만든다 **/
         RequestBody body = new FormBody.Builder()
-                .add("locked", "0") //false이기에 0//
+                .add("nt_state", "0") //false이기에 0//
                 .build(); //데이터가 없으니 그냥 build로 설정.//
 
         //최종적으로 Request 구성//
@@ -457,15 +459,16 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.host(context.getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
 
-        builder.addQueryParameter("nt", "s"); //새 스크랩에 대한 알람 설정//
+        builder.addQueryParameter("action", "s"); //새 스크랩에 대한 알람 설정//
 
         /** Delete이기에 RequestBody를 만든다 **/
         RequestBody body = new FormBody.Builder()
-                .add("locked", "1") //true이기에 1//
+                .add("nt_state", "1") //true이기에 1//
                 .build(); //데이터가 없으니 그냥 build로 설정.//
 
         //최종적으로 Request 구성//
@@ -492,15 +495,16 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.host(context.getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
 
-        builder.addQueryParameter("nt", "s"); //새 스크랩에 대한 알람 설정//
+        builder.addQueryParameter("action", "s"); //새 스크랩에 대한 알람 설정//
 
         /** Delete이기에 RequestBody를 만든다 **/
         RequestBody body = new FormBody.Builder()
-                .add("locked", "0") //false이기에 0//
+                .add("nt_state", "0") //false이기에 0//
                 .build(); //데이터가 없으니 그냥 build로 설정.//
 
         //최종적으로 Request 구성//
@@ -527,15 +531,16 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.host(context.getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
 
-        builder.addQueryParameter("nt", "f"); //새 스크랩에 대한 알람 설정//
+        builder.addQueryParameter("action", "f"); //새 스크랩에 대한 알람 설정//
 
         /** Delete이기에 RequestBody를 만든다 **/
         RequestBody body = new FormBody.Builder()
-                .add("locked", "1") //true이기에 1//
+                .add("nt_state", "1") //true이기에 1//
                 .build(); //데이터가 없으니 그냥 build로 설정.//
 
         //최종적으로 Request 구성//
@@ -562,15 +567,16 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
         builder.scheme("http");
-        builder.host(context.getResources().getString(R.string.server_domain));
+        builder.host(context.getResources().getString(R.string.real_server_domain));
+        builder.port(8080);
         builder.addPathSegment("users");
         builder.addPathSegment("me"); //uid값은 자기 자신이기에 me가 된다.//
 
-        builder.addQueryParameter("nt", "f"); //새 스크랩에 대한 알람 설정//
+        builder.addQueryParameter("action", "f"); //새 스크랩에 대한 알람 설정//
 
         /** Delete이기에 RequestBody를 만든다 **/
         RequestBody body = new FormBody.Builder()
-                .add("locked", "0") //false이기에 0//
+                .add("nt_state", "0") //false이기에 0//
                 .build(); //데이터가 없으니 그냥 build로 설정.//
 
         //최종적으로 Request 구성//

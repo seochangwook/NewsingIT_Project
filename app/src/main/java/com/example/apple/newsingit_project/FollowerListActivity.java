@@ -17,6 +17,8 @@ import com.example.apple.newsingit_project.data.view_data.FollowerData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.FollowerListAdapter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.LongSerializationPolicy;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,7 +55,11 @@ public class FollowerListActivity extends AppCompatActivity {
 
             Log.d("json data", responseData);
 
-            Gson gson = new Gson();
+            //id가 long타입이므로 GSON을 수정해준다.//
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+
+            Gson gson = gsonBuilder.create();
 
             FollowerListRequest followerListRequest = gson.fromJson(responseData, FollowerListRequest.class);
 
@@ -95,7 +101,7 @@ public class FollowerListActivity extends AppCompatActivity {
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
-                .host(getResources().getString(R.string.server_domain))
+                .host(getResources().getString(R.string.real_server_domain))
                 .addPathSegment("follows")
                 .addQueryParameter("direction", "from");
         //검색~query 전달~~//
@@ -121,7 +127,7 @@ public class FollowerListActivity extends AppCompatActivity {
 
                     for (int i = 0; i < size; i++) {
                         FollowerData newFollowerData = new FollowerData();
-                        newFollowerData.setId(followerList.get(i).getId());
+                        newFollowerData.setId("" + followerList.get(i).getId());
                         newFollowerData.setProfileUrl(followerList.get(i).getPf_url());
                         // newFollowerData.setAboutMe(followerList.get(i).getAboutme());
                         newFollowerData.setName(followerList.get(i).getName());
@@ -129,6 +135,7 @@ public class FollowerListActivity extends AppCompatActivity {
 
                         followerData.followerDataList.add(newFollowerData);
                     }
+
                     mAdapter.setFollowerData(followerData);
                 }
             });
@@ -209,7 +216,7 @@ public class FollowerListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String selectName = followerData.followerDataList.get(position).getName().toString();
-                int selectId = followerData.followerDataList.get(position).getId();
+                String selectId = followerData.followerDataList.get(position).getId();
 
                 Toast.makeText(FollowerListActivity.this, "" + selectName, Toast.LENGTH_SHORT).show();
 

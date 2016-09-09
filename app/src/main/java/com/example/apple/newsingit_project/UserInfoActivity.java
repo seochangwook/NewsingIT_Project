@@ -11,6 +11,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,9 +38,11 @@ import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UserInfoActivity extends AppCompatActivity {
@@ -57,6 +60,7 @@ public class UserInfoActivity extends AppCompatActivity {
     TextView user_following_count_button;
     ImageButton user_following_button;
     TextView user_scrap_button;
+    Button follow_button;
 
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
@@ -148,6 +152,36 @@ public class UserInfoActivity extends AppCompatActivity {
             UserFolderListRequest userFolderListRequest = gson.fromJson(responseData, UserFolderListRequest.class);
 
             set_User_Folder_Data(userFolderListRequest.getResults(), userFolderListRequest.getResults().length);
+        }
+    };
+    private Callback requestSetFollowingCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
+        }
+    };
+    private Callback requestUnSetFollowingCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
         }
     };
 
@@ -255,9 +289,8 @@ public class UserInfoActivity extends AppCompatActivity {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         user_folder_recyclerrefreshview.pullRefreshComplete();
-                        user_folderListAdapter.set_UserFolderDate(user_folderData); //설정.//
 
-                        init_folder_list();
+                        init_folder_list(); //다시 리스트 정보를 초기화.//
 
                         get_User_Folder_Data(get_user_id); //id값이 조건으로 필요하다.//
 
@@ -276,6 +309,8 @@ public class UserInfoActivity extends AppCompatActivity {
                         Log.i("EVENT :", "새로고침 완료");
 
                         user_folder_recyclerrefreshview.loadMoreComplete();
+
+
                     }
                 }, 1000);
             }
@@ -332,12 +367,19 @@ public class UserInfoActivity extends AppCompatActivity {
                     //   user_following_button.setText("!팔로잉");
 
                     dummy_follow_state = true;
+
+                    //팔로우 작업//
+                    set_user_follow(get_user_id);
+
                 } else if (dummy_follow_state == true) {
                     user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
                     //user_following_button.setBackgroundColor(getResources().getColor(R.color.button_transparent_background));
                     //ser_following_button.setText("+팔로우");
 
                     dummy_follow_state = false;
+
+                    //팔로우 해제 작업//
+                    unset_user_follow(get_user_id);
                 }
             }
         });
@@ -356,6 +398,54 @@ public class UserInfoActivity extends AppCompatActivity {
         user_folderListAdapter.init_FolderDate(user_folderData);
 
         user_folderListAdapter.notifyDataSetChanged();
+    }
+
+    public void set_user_follow(String follow_user_id) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
+                .addPathSegment("follows");
+
+        RequestBody body = new FormBody.Builder()
+                .add("ofid", "" + follow_user_id)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(requestSetFollowingCallback);
+    }
+
+    public void unset_user_follow(String follow_user_id) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
+                .addPathSegment("follows")
+                .addQueryParameter("ofid", follow_user_id);
+
+        RequestBody body = new FormBody.Builder()
+                .build();
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .delete(body)
+                .build();
+
+        client.newCall(request).enqueue(requestUnSetFollowingCallback);
     }
 
     public void get_User_Folder_Data(String user_id) {

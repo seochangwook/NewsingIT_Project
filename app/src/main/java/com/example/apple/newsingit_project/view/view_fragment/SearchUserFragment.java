@@ -141,6 +141,7 @@ public class SearchUserFragment extends Fragment {
                         Log.i("EVENT :", "새로고침 완료");
 
                         familiarRefreshRecyclerView.loadMoreComplete();
+
                         initSearchUserDataList();
                         get_User_search_Data(query);
 

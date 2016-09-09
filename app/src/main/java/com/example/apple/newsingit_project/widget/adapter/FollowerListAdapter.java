@@ -56,7 +56,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
-    private void setFollowing(int userId) {
+    private void setFollowing(String userId) {
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -81,7 +81,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
-    private void deleteFollowing(int userId) {
+    private void deleteFollowing(String userId) {
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -153,7 +153,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 followerViewHolder.btnFollower.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int userSelectId = followerData.followerDataList.get(pos).getId();
+                        String userSelectId = followerData.followerDataList.get(pos).getId();
                         Toast.makeText(context, "팔로워 " + userSelectId, Toast.LENGTH_SHORT).show();
 
                         if (flag) {

@@ -32,6 +32,8 @@ public class UserFolderListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             notifyDataSetChanged();
         }
+
+        notifyDataSetChanged();
     }
 
     //어댑터랑 연동되는 객체를 설정.//

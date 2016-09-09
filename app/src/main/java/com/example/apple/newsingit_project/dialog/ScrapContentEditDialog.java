@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ExpandableListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -74,6 +75,22 @@ public class ScrapContentEditDialog extends Activity {
             ScrapFolderListRequest scrapFolderListRequest = gson.fromJson(response_data, ScrapFolderListRequest.class);
 
             set_scrap_folder_data(scrapFolderListRequest.getResults(), scrapFolderListRequest.getResults().length);
+        }
+    };
+
+    private Callback requestchangelockedcallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String response_data = response.body().string();
+
+            Log.d("json data", response_data);
+
         }
     };
 
@@ -199,10 +216,59 @@ public class ScrapContentEditDialog extends Activity {
             }
         });
 
+        //스크랩 비공개/공개 설정//
+        scrap_private_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean is_check) {
+                //스위치가 눌리지 않았을 때 (스크랩 공개 -> 비공개로 변환)//
+                if (is_check == true) {
+                    //비공개("0") 전환작업//
+                    changed_scrap_locked("0");
+                } else if (is_check == false) //(비공개 -> 공개)//
+                {
+                    //공개("1") 전환 작업//
+                    changed_scrap_locked("1");
+                }
+            }
+        });
+
         //set_ExpanList_Data();
 
         /** 네트워크로 부터 데이터를 불러온다. **/
         get_Category_Data();
+    }
+
+    public void changed_scrap_locked(String is_locked) {
+        /** Network 자원을 설정 **/
+        manager = NetworkManager.getInstance(); //싱글톤 객체를 가져온다.//
+
+        /** Client 설정 **/
+        OkHttpClient client = manager.getClient();
+
+        /** GET방식의 프로토콜 Scheme 정의 **/
+        //우선적으로 Url을 만든다.//
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+
+        builder.scheme("http"); //스킴정의//
+        builder.host(getResources().getString(R.string.real_server_domain)); //호스트를 설정.//
+        builder.port(8080);
+        builder.addPathSegment("scraps");
+        builder.addPathSegment(scrap_id);
+        builder.addQueryParameter("action", "udscrap");
+
+        RequestBody body = new FormBody.Builder()
+                .add("locked", is_locked)
+                .build();
+
+        /** Request 설정 **/
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .put(body)
+                .tag(ScrapContentEditDialog.this)
+                .build();
+
+        /** 비동기 방식(enqueue)으로 Callback 구현 **/
+        client.newCall(request).enqueue(requestchangelockedcallback);
     }
 
     public void Scrap_move(String scrap_id, int move_scrap_folder_id) {
@@ -224,9 +290,10 @@ public class ScrapContentEditDialog extends Activity {
         builder.port(8080);
         builder.addPathSegment("scraps");
         builder.addPathSegment(scrap_id);
-        builder.addQueryParameter("category", "" + move_scrap_folder_id);
+        builder.addQueryParameter("action", "mvcategory");
 
         RequestBody body = new FormBody.Builder()
+                .add("cid", "" + move_scrap_folder_id)
                 .build();
 
         /** Request 설정 **/

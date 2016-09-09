@@ -1,6 +1,9 @@
 package com.example.apple.newsingit_project;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -42,6 +46,7 @@ import okhttp3.Response;
 
 public class CreateFolderActivity extends AppCompatActivity {
     private static final int RC_SINGLE_IMAGE = 2;
+    private static final int RC_CAMERA = 1;
 
     ImageButton image_select_button;
     Switch private_select_switch;
@@ -168,6 +173,34 @@ public class CreateFolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(CreateFolderActivity.this, "카메라 버튼", Toast.LENGTH_SHORT).show();
+
+                boolean is_camera_usable = checkCameraHardware(CreateFolderActivity.this); //현재 사용자가 카메라를 사용할 수 있으므로//
+
+                if (is_camera_usable == true) {
+                    //카메라를 직접 앱에 특성에 맞게 SurfaceView를 이용해서 커스텀 할 수 있다.//
+                    //해당 앱에서는 간단히 Intent로 한다.//
+                    Intent intent = new Intent();
+                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                    startActivityForResult(intent, RC_CAMERA);
+                } else if (is_camera_usable == false) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateFolderActivity.this);
+                    alertDialog
+                            .setTitle("Newsing Picture")
+                            .setMessage("현재 다른 앱에서 카메라가 사용 중 입니다!!!")
+                            .setCancelable(false)
+                            .setPositiveButton("확인",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            //yes
+                                            //네트워크로 데이터를 보낸다.//
+                                        }
+                                    });
+
+                    AlertDialog alert = alertDialog.create();
+                    alert.show();
+                }
             }
         });
     }
@@ -193,6 +226,25 @@ public class CreateFolderActivity extends AppCompatActivity {
                     picasso.load(uploadFile)
                             .into(select_image_thumbnail);
                 }
+            }
+        } else if (requestCode == RC_CAMERA) {
+            if (resultCode == RESULT_OK) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateFolderActivity.this);
+                alertDialog
+                        .setTitle("Newsing Picture")
+                        .setMessage("카메라로 찍은 사진을 갤러리에서 선택 후 폴더이미지에 적용하세요!!")
+                        .setCancelable(false)
+                        .setPositiveButton("확인",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        //yes
+                                        //네트워크로 데이터를 보낸다.//
+                                    }
+                                });
+
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
         }
     }
@@ -275,5 +327,11 @@ public class CreateFolderActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkCameraHardware(Context context) {
+        // this device has a camera
+// no camera on this device
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 }

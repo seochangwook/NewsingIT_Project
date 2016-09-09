@@ -74,6 +74,8 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
                         .into(user_folder_imageview); //into로 보낼 위젯 선택.//
             } else {
                 //이미지를 로드.//
+                networkManager = NetworkManager.getInstance();
+
                 Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
 
                 picasso.load(folder_imgUrl)

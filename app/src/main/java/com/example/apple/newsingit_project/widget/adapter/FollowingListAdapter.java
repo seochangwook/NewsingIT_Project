@@ -56,7 +56,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
-    private void setFollowing(int userId) {
+    private void setFollowing(String userId) {
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -81,7 +81,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
-    private void deleteFollowing(int userId) {
+    private void deleteFollowing(String userId) {
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -153,7 +153,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 followingViewHolder.btnFollowing.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int userSelectId = followingData.followingDataList.get(pos).getId();
+                        String userSelectId = followingData.followingDataList.get(pos).getId();
                         Toast.makeText(context, "팔로잉 " + userSelectId, Toast.LENGTH_SHORT).show();
 
                         if (flag) { //true이면 선택한 유저를 팔로우 한 상태//

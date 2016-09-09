@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Tacademy on 2016-08-24.
  */
 public class FollowingData {
-    public int id;
+    public String id;
     public String profileUrl;
     public String name;
     public String aboutMe;
@@ -22,11 +22,11 @@ public class FollowingData {
         this.flag = flag;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

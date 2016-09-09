@@ -45,7 +45,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
      * startActivityForResult 요청값
      **/
     private static final int RC_SINGLE_IMAGE = 2;
-
+    private static final int RC_CAMERA = 1;
     /**
      * 필요한 위젯 정의
      **/

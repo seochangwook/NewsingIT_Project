@@ -79,18 +79,21 @@ public class SearchTabActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        searchView.setQueryHint("검색어를 입력하세요");
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
                 Toast.makeText(SearchTabActivity.this, "" + query, Toast.LENGTH_SHORT).show();
 
+                //서치뷰의 값을 가지고 유효검사//
+
                 //검색어를 입력 후 검색 버튼을 눌렀을 때//
                 //검색어 전달//
                 bundle.putString("SEARCH_QUERY", "" + query);
                 //검색 결과 리스트 갱신//
                 mSectionsPagerAdapter.notifyDataSetChanged();
-
 
                 return false;
             }

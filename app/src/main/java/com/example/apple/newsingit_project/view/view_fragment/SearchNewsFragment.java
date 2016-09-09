@@ -90,7 +90,7 @@ public class SearchNewsFragment extends Fragment {
         Log.d("search", "network");
         networkManager = NetworkManager.getInstance();
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = networkManager.getClient();
 
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
@@ -98,7 +98,7 @@ public class SearchNewsFragment extends Fragment {
                 .port(8080)
                 .addPathSegment("search")
                 .addQueryParameter("target", "1")
-                .addQueryParameter("word", "")
+                .addQueryParameter("word", "마")
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "20");
 
@@ -240,7 +240,7 @@ public class SearchNewsFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-        // initDummyData(query); //더미//
+
         getSearchNewsNetworkData(query); //네트워크//
 
         return view;
@@ -260,49 +260,4 @@ public class SearchNewsFragment extends Fragment {
         searchNewsData.searchNewsDataArrayList.clear();
         mAdapter.initSearchNewsData(searchNewsData);
     }
-
-    private void initDummyData(String query) {
-
-        if (query.equals("사드")) {
-            int[] idList = {1, 2, 3, 4, 5};
-            String[] titleList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
-            String[] contentList = {"VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?",
-                    "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"};
-            String[] dateList = {"2016.08.20 16:10", "2016.08.15 16:10", "2016.08.14 16:10", "2016.08.13 16:10"
-                    , "2016.08.10 16:10", "2016.08.09 16:10"};
-
-            for (int i = 0; i < 5; i++) {
-                SearchNewsData new_searchNewsData = new SearchNewsData();
-                new_searchNewsData.setId(idList[i]);
-                new_searchNewsData.title = titleList[i];
-                new_searchNewsData.author = contentList[i];
-                new_searchNewsData.date = dateList[i];
-                searchNewsData.searchNewsDataArrayList.add(new_searchNewsData);
-            }
-        } else {
-            int[] idList = {1, 2, 3, 4, 5};
-            String[] titleList = {"테스트", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
-            String[] contentList = {"VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?",
-                    "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?", "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"
-                    , "VR-AR 모방작 안돼...새로운 장르의 국산 게임들은?"};
-            String[] dateList = {"2016.08.20 16:10", "2016.08.15 16:10", "2016.08.14 16:10", "2016.08.13 16:10"
-                    , "2016.08.10 16:10", "2016.08.09 16:10"};
-
-            for (int i = 0; i < 5; i++) {
-                SearchNewsData new_searchNewsData = new SearchNewsData();
-                new_searchNewsData.setId(idList[i]);
-                new_searchNewsData.title = titleList[i];
-                new_searchNewsData.author = contentList[i];
-                new_searchNewsData.date = dateList[i];
-                searchNewsData.searchNewsDataArrayList.add(new_searchNewsData);
-            }
-        }
-
-
-        mAdapter.setSearchNewsData(searchNewsData);
-    }
-
 }
