@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/drawer_child_background"
-    >
+    android:background="@color/drawer_child_background">
 
     <TextView
         android:id="@+id/text_child"
@@ -17,45 +17,79 @@
         android:textColor="@color/drawer_child"
         android:textSize="@dimen/drawer_child_size" />
 
-    <Switch
-        android:id="@+id/switch_alarm_newscrap"
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/switch_new_scrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/drawer_child_switch_margin_right"
+        app:kswFadeBack="true" />
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/switch_like_my_scrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/drawer_child_switch_margin_right"
+        app:kswFadeBack="true" />
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/switch_follow_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentEnd="true"
+
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:checked="false"
-        android:clickable="true"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:padding="10dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/drawer_child_switch_margin_right" />
 
-    <Switch
-        android:id="@+id/switch_alarm_my_scrap_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:checked="false"
-        android:clickable="true"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:padding="10dp" />
+    <!--<Switch-->
+    <!--android:id="@+id/switch_alarm_newscrap"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:checked="false"-->
+    <!--android:clickable="true"-->
+    <!--android:focusable="false"-->
+    <!--android:focusableInTouchMode="false"-->
+    <!--android:padding="10dp" />-->
 
-    <Switch
-        android:id="@+id/switch_alarm_my_page_follow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <!--<com.kyleduo.switchbutton.SwitchButton-->
+    <!--android:id="@+id/switch_alarm_my_scrap_favorite"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:kswThumbColor="@color/switch_thumb"-->
+    <!--app:kswBackColor="@color/switch_background"-->
+    <!--app:kswFadeBack="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:checked="false"-->
+    <!--android:clickable="true"-->
+    <!--android:focusable="false"-->
+    <!--android:focusableInTouchMode="false"-->
+    <!--android:padding="10dp" />-->
 
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:checked="false"
-        android:clickable="true"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:padding="10dp" />
+    <!--<com.kyleduo.switchbutton.SwitchButton-->
+    <!--android:id="@+id/switch_alarm_my_page_follow"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:kswThumbColor="@color/switch_thumb"-->
+    <!--app:kswBackColor="@color/switch_background"-->
+    <!--app:kswFadeBack="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:checked="false"-->
+    <!--android:clickable="true"-->
+    <!--android:focusable="false"-->
+    <!--android:focusableInTouchMode="false"-->
+    <!--android:padding="10dp" />-->
 </RelativeLayout>

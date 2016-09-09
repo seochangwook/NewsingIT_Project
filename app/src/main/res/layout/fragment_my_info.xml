@@ -29,8 +29,7 @@
         android:id="@+id/scrapt_count_button"
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/my_sff_container"
-        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+        android:layout_above="@+id/my_sff_text"
         android:layout_toRightOf="@+id/profile_imageview"
         android:background="@null"
         android:gravity="center_horizontal"
@@ -39,6 +38,7 @@
         android:textSize="@dimen/my_info_sff_num_size" />
 
     <TextView
+        android:id="@+id/my_sff_text"
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/my_sff_container"
@@ -56,9 +56,9 @@
         android:id="@+id/follower_button"
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/my_sff_container"
+        android:layout_above="@+id/my_sff_text"
         android:layout_marginLeft="@dimen/my_info_sff_margin_left"
-        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+
         android:layout_toRightOf="@+id/scrapt_count_button"
         android:background="@null"
         android:gravity="center_horizontal"
@@ -85,9 +85,9 @@
         android:id="@+id/following_button"
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/my_sff_container"
+        android:layout_above="@+id/my_sff_text"
         android:layout_marginLeft="@dimen/my_info_sff_margin_left"
-        android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
+
         android:layout_toRightOf="@+id/follower_button"
         android:background="@null"
         android:gravity="center_horizontal"

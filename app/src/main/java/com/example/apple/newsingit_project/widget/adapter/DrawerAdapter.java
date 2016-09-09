@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +16,7 @@ import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.kyleduo.switchbutton.SwitchButton;
 
 import java.io.IOException;
 
@@ -35,9 +35,9 @@ import okhttp3.Response;
 public class DrawerAdapter extends BaseExpandableListAdapter {
     DrawerGroup[] items;
 
-    Switch Switch_new_sscrap;
-    Switch Switch_my_scrap_favorite;
-    Switch Switch_my_page_follow;
+    SwitchButton Switch_new_sscrap;
+    SwitchButton Switch_my_scrap_favorite;
+    SwitchButton Switch_my_page_follow;
 
     Context context;
 
@@ -229,9 +229,18 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         if(convertView == null){
             view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.view_drawer_child, parent, false);
 
-            Switch_new_sscrap = (Switch) view.findViewById(R.id.switch_alarm_newscrap);
-            Switch_my_scrap_favorite = (Switch) view.findViewById(R.id.switch_alarm_my_scrap_favorite);
-            Switch_my_page_follow = (Switch) view.findViewById(R.id.switch_alarm_my_page_follow);
+            Switch_new_sscrap = (SwitchButton) view.findViewById(R.id.switch_new_scrap);
+            Switch_my_scrap_favorite = (SwitchButton) view.findViewById(R.id.switch_like_my_scrap);
+            Switch_my_page_follow = (SwitchButton) view.findViewById(R.id.switch_follow_me);
+
+            Switch_new_sscrap.setThumbColorRes(R.color.switch_thumb_color);
+            Switch_my_scrap_favorite.setThumbColorRes(R.color.switch_thumb_color);
+            Switch_my_page_follow.setThumbColorRes(R.color.switch_thumb_color);
+
+            Switch_new_sscrap.setBackColorRes(R.color.switch_background_color);
+            Switch_my_scrap_favorite.setBackColorRes(R.color.switch_background_color);
+            Switch_my_page_follow.setBackColorRes(R.color.switch_background_color);
+
 
             childView = (TextView)view.findViewById(R.id.text_child);
 
@@ -282,6 +291,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if(checked){
                             Toast.makeText(context, "새 스크랩 알림 on", Toast.LENGTH_SHORT).show();
+
 
                             //공유 프래퍼런스의 값도 변경해준다.//
 
@@ -334,9 +344,17 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         } else {
             view = convertView;
 
-            Switch_new_sscrap = (Switch) view.findViewById(R.id.switch_alarm_newscrap);
-            Switch_my_scrap_favorite = (Switch) view.findViewById(R.id.switch_alarm_my_scrap_favorite);
-            Switch_my_page_follow = (Switch) view.findViewById(R.id.switch_alarm_my_page_follow);
+            Switch_new_sscrap = (SwitchButton) view.findViewById(R.id.switch_new_scrap);
+            Switch_my_scrap_favorite = (SwitchButton) view.findViewById(R.id.switch_like_my_scrap);
+            Switch_my_page_follow = (SwitchButton) view.findViewById(R.id.switch_follow_me);
+
+            Switch_new_sscrap.setThumbColorRes(R.color.switch_thumb_color);
+            Switch_my_scrap_favorite.setThumbColorRes(R.color.switch_thumb_color);
+            Switch_my_page_follow.setThumbColorRes(R.color.switch_thumb_color);
+
+            Switch_new_sscrap.setBackColorRes(R.color.switch_background_color);
+            Switch_my_scrap_favorite.setBackColorRes(R.color.switch_background_color);
+            Switch_my_page_follow.setBackColorRes(R.color.switch_background_color);
 
             childView = (TextView)view.findViewById(R.id.text_child);
 
