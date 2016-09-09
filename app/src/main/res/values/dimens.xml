@@ -149,6 +149,11 @@
     <dimen name="news_content_content_size">9sp</dimen>
 
 
+    <!--floating button dimen-->
+    <dimen name="btn_floating_margin_top">435dp</dimen>
+    <dimen name="btn_floating_margin_left">290dp</dimen>
+
+
     <!--keyword dimen-->
     <dimen name="keyword_width">221dp</dimen>
     <dimen name="keyword_height">48dp</dimen>
@@ -372,6 +377,8 @@
     <dimen name="drawer_child_margin_left">54dp</dimen>
     <dimen name="drawer_child_margin_bottom">15dp</dimen>
 
+    <dimen name="drawer_child_switch_margin_right">31dp</dimen>
+
 
     <!--create scrap/edit scrap dimen-->
     <dimen name="edit_scrap_title_margin_top">26dp</dimen>
@@ -537,7 +544,10 @@
     <dimen name="create_folder_btn_height">48dp</dimen>
     <dimen name="create_folder_btn_margin_top">2dp</dimen>
     <dimen name="create_folder_btn_margin_right">18dp</dimen>
-    <dimen name="create_folder_bnt_margin_bottom">2dp</dimen>
+    <dimen name="create_folder_btn_margin_bottom">2dp</dimen>
+
+    <dimen name="create_folder_switch_margin_top">18dp</dimen>
+    <dimen name="create_folder_switch_margin_right">30dp</dimen>
 
     <!--edit folder dimen-->
     <dimen name="edit_folder_img_width">100dp</dimen>
@@ -661,6 +671,14 @@
     <dimen name="empty_img_margin_top">104dp</dimen>
     <dimen name="empty_msg_margin_top">21dp</dimen>
     <dimen name="empty_msg_size">13sp</dimen>
+
+    <dimen name="empty_height_b">200dp</dimen>
+    <dimen name="empty_img_width_b">30dp</dimen>
+    <dimen name="empty_img_height_b">30dp</dimen>
+    <dimen name="empty_img_margin_top_b">10dp</dimen>
+    <dimen name="empty_img_margin_left_b">15dp</dimen>
+    <dimen name="empty_img_margin_right_b">15dp</dimen>
+    <dimen name="empty_img_margin_bottom_b">10dp</dimen>
 
 
 </resources>

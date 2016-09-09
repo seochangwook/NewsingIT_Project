@@ -1,42 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!--카드뷰로 감싸기(Metrial Design적용) -->
-    <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        card:cardBackgroundColor="@color/white_color"
-        card:cardCornerRadius="8dp"
-        card:cardElevation="4dp">
 
         <ImageView
             android:id="@+id/user_folder_imageview"
-            android:layout_width="@dimen/folder_user_img_width"
-            android:layout_height="@dimen/folder_user_img_height"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_width="@dimen/my_info_folder_width"
+            android:layout_height="@dimen/my_info_folder_height"
+            android:background="@color/my_info_folder_margin"
+            android:src="@mipmap/folder_default_image" />
 
         <TextView
             android:id="@+id/user_folder_name_textview"
-            android:layout_width="@dimen/folder_user_textview_width"
-            android:layout_height="@dimen/folder_user_textview_height"
-            android:layout_marginTop="@dimen/folder_user_textview_layout_margin_top"
+            android:layout_width="@dimen/my_info_folder_title_width"
+            android:layout_height="@dimen/my_info_folder_title_height"
+            android:layout_alignBottom="@+id/user_folder_imageview"
             android:background="@color/white_color"
             android:gravity="center"
             android:text="@string/folder_temp_name"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textColor="@color/my_info_folder_title"
+            android:textSize="@dimen/my_info_folder_title_size" />
 
         <Button
             android:id="@+id/user_folder_private_button"
-            android:layout_width="@dimen/folder_button_width"
-            android:layout_height="@dimen/folder_button_height"
+            android:layout_width="@dimen/my_info_lock_img_width"
+            android:layout_height="@dimen/my_info_lock_img_height"
             android:background="@mipmap/btn_smalllock" />
 
-    </android.support.v7.widget.CardView>
 </RelativeLayout>

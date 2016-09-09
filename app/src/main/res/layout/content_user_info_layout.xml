@@ -50,7 +50,7 @@
         android:id="@+id/scrapt_count_button"
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/sff_container"
+        android:layout_above="@+id/sff_text"
         android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
         android:layout_toRightOf="@+id/user_profile_imageview"
         android:background="@color/button_transparent_background"
@@ -64,7 +64,7 @@
         android:id="@+id/user_follower_button"
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/sff_container"
+        android:layout_above="@+id/sff_text"
         android:layout_marginLeft="@dimen/user_info_sff_margin_left"
         android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
         android:layout_toRightOf="@+id/scrapt_count_button"
@@ -78,7 +78,7 @@
         android:id="@+id/user_following_button"
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/sff_container"
+        android:layout_above="@+id/sff_text"
         android:layout_marginLeft="@dimen/user_info_sff_margin_left"
         android:layout_marginTop="@dimen/my_info_sff_num_margin_top"
         android:layout_toRightOf="@+id/user_follower_button"
@@ -89,6 +89,7 @@
         android:textSize="@dimen/my_info_sff_num_size" />
 
     <TextView
+        android:id="@+id/sff_text"
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/sff_container"
@@ -127,6 +128,7 @@
         android:textSize="@dimen/my_info_sff_text_size" />
 
     <TextView
+        android:id="@+id/user_info_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_dimen"
         android:layout_below="@+id/user_profile_my_introduce_textview"
@@ -136,7 +138,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/my_info_linearlayout_layout_margintop"
+        android:layout_below="@+id/user_info_line"
         android:orientation="vertical">
 
         <TextView
@@ -153,7 +155,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            app:frv_dividerHeight="0.5dp"
+            app:frv_dividerHorizontalHeight="@dimen/my_info_folder_margin_all"
+            app:frv_dividerVerticalHeight="@dimen/my_info_folder_margin_all"
             app:frv_layoutManager="grid"
             app:frv_layoutManagerOrientation="vertical" />
     </LinearLayout>

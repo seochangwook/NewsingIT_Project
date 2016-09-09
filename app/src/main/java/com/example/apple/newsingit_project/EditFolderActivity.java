@@ -24,11 +24,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.kyleduo.switchbutton.SwitchButton;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -59,7 +59,7 @@ public class EditFolderActivity extends AppCompatActivity {
     private static final int RC_CAMERA = 1;
 
     ImageButton image_select_button;
-    Switch private_select_switch;
+    SwitchButton private_select_switch;
     TextView nameView;
 
     /**
@@ -126,10 +126,13 @@ public class EditFolderActivity extends AppCompatActivity {
 
 
         image_select_button = (ImageButton) findViewById(R.id.img_btn_edit_folder_select_img);
-        private_select_switch = (Switch) findViewById(R.id.edit_folder_private_switch_button);
+        private_select_switch = (SwitchButton) findViewById(R.id.switch_private_folder_edit);
         deleteView = (TextView) findViewById(R.id.delete_folder);
         nameView = (TextView) findViewById(R.id.folder_edit_name_edittext);
         folder_imageview = (ImageView) findViewById(R.id.folder_edit_imageview);
+
+        private_select_switch.setBackColorRes(R.color.switch_background_color);
+        private_select_switch.setThumbColorRes(R.color.switch_thumb_color);
 
         setSupportActionBar(toolbar);
 

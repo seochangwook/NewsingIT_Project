@@ -122,6 +122,13 @@
 
     <color name="drawer_text">#FFFEFEFE</color>
 
+    <!--switch color-->
+
+    <color name="switch_background">#7D7D7D</color>
+    <color name="switch_background_off">#d6d5d5</color>
+    <color name="switch_thumb">#ffffff</color>
+    <color name="switch_thumb_off">#ececec</color>
+
 
     <!--edit scrap color-->
     <color name="edit_scrap_background">#ffffff</color>

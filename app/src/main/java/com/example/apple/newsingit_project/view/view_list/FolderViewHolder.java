@@ -61,7 +61,7 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
         if (folder_imageUrl.equals("default")) //이미지가 없는 경우//
         {
             Picasso.with(context)
-                    .load(R.mipmap.ic_image_default)
+                    .load(R.mipmap.folder_default_image)
                     .into(folder_imageview); //into로 보낼 위젯 선택.//
         } else {
             networkManager = NetworkManager.getInstance();

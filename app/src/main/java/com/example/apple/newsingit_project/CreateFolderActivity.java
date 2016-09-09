@@ -25,10 +25,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.kyleduo.switchbutton.SwitchButton;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -49,7 +49,7 @@ public class CreateFolderActivity extends AppCompatActivity {
     private static final int RC_CAMERA = 1;
 
     ImageButton image_select_button;
-    Switch private_select_switch;
+    SwitchButton private_select_switch;
 
     //설정관련 변수//
     ImageView select_image_thumbnail;
@@ -95,9 +95,12 @@ public class CreateFolderActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         image_select_button = (ImageButton) findViewById(R.id.image_select_button);
-        private_select_switch = (Switch) findViewById(R.id.private_switch_button);
+        private_select_switch = (SwitchButton) findViewById(R.id.switch_private_folder);
         select_image_thumbnail = (ImageView) findViewById(R.id.folder_imageview);
         folder_name_edittext = (EditText) findViewById(R.id.folder_name_edittext);
+
+        private_select_switch.setBackColorRes(R.color.switch_background_color);
+        private_select_switch.setThumbColorRes(R.color.switch_thumb_color);
 
         setSupportActionBar(toolbar);
 

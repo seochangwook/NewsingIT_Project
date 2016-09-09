@@ -10,7 +10,7 @@
             android:layout_width="@dimen/my_info_folder_width"
             android:layout_height="@dimen/my_info_folder_height"
             android:background="@color/my_info_folder_margin"
-            android:src="@mipmap/ic_image_default" />
+            android:src="@mipmap/folder_default_image" />
 
         <TextView
             android:id="@+id/folder_name_textview"
