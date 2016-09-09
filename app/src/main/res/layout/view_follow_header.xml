@@ -7,13 +7,12 @@
     <SearchView
         android:id="@+id/search_my_follow"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/follow_header_height"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/follow_header_margin_left"
         android:layout_marginRight="@dimen/follow_header_margin_right"
         android:layout_marginTop="@dimen/follow_header_margin_top"
-        android:background="@drawable/round"
+        android:background="@mipmap/searchbar_off"
         android:closeIcon="@mipmap/ic_x_cancel"
-        android:queryHint="검색"
         android:searchIcon="@mipmap/ic_search"
         android:textColor="@color/follow_header_search_query"
         android:textSize="@dimen/follow_header_search_size" />

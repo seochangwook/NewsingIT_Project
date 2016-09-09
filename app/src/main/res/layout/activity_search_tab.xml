@@ -26,24 +26,13 @@
                 android:id="@+id/search_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/round"
+                android:background="@mipmap/searchbar_off"
                 android:closeIcon="@mipmap/ic_x_cancel"
-                android:queryHint="검색"
                 android:searchIcon="@mipmap/ic_search"
-                android:textColor="@color/black_color" />
+                android:textColor="@color/black_color">
 
-            <!--<com.example.apple.newsingit_project.view.EditTextWithDeleteButton-->
-            <!--android:id="@+id/edit_text"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/round"-->
-            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-            <!--android:textColor="@color/black_color"-->
-            <!--android:textCursorDrawable="@null"-->
-            <!--custom:deleteButtonRes="@mipmap/ic_x_cancel"-->
-            <!--custom:hintText="검색">-->
+            </android.support.v7.widget.SearchView>
 
-            <!--</com.example.apple.newsingit_project.view.EditTextWithDeleteButton>-->
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout

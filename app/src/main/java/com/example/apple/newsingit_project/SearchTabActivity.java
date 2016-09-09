@@ -79,7 +79,23 @@ public class SearchTabActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        searchView.setQueryHint("검색어를 입력하세요");
+        //SearchVIew 검색 창//
+        //돋보기 모양의 검색 아이콘 클릭 시//
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //검색 창의 배경을 빈 배경으로 바꾼다.//
+                searchView.setBackgroundResource(R.mipmap.searchbar_on);
+            }
+        });
+
+        //x 아이콘 클릭 시//
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() { //검색 창의 배경을 힌트가 있는 배경으로 바꾼다.//
+                searchView.setBackgroundResource(R.mipmap.searchbar_off);
+                return false;
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

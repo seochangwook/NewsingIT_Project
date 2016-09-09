@@ -196,14 +196,23 @@ public class FollowerListActivity extends AppCompatActivity {
                 return false;
             }
         });
-//
-//        search_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-//                Log.d("input text", textView.getText().toString());
-//                return true;
-//            }
-//        });
+
+        //돋보기 모양의 검색 아이콘 클릭 시//
+        search_edit.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //검색 창의 배경을 빈 배경으로 바꾼다.//
+                search_edit.setBackgroundResource(R.mipmap.searchbar_on);
+            }
+        });
+
+        //x 아이콘 클릭 시//
+        search_edit.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() { //검색 창의 배경을 힌트가 있는 배경으로 바꾼다.//
+                search_edit.setBackgroundResource(R.mipmap.searchbar_off);
+                return false;
+            }
+        });
 
         mAdapter = new FollowerListAdapter(this);
 

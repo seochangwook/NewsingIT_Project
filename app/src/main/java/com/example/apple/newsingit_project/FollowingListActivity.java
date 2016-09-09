@@ -169,6 +169,8 @@ public class FollowingListActivity extends AppCompatActivity {
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.following_rv_list);
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
+
+        //SearchVIew 검색 창//
         searchView = (SearchView) headerView.findViewById(R.id.search_my_follow);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -181,6 +183,23 @@ public class FollowingListActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        //돋보기 모양의 검색 아이콘 클릭 시//
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { //검색 창의 배경을 빈 배경으로 바꾼다.//
+                searchView.setBackgroundResource(R.mipmap.searchbar_on);
+            }
+        });
+
+        //x 아이콘 클릭 시//
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() { //검색 창의 배경을 힌트가 있는 배경으로 바꾼다.//
+                searchView.setBackgroundResource(R.mipmap.searchbar_off);
                 return false;
             }
         });
