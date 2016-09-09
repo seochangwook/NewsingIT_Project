@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +18,7 @@ import com.example.apple.newsingit_project.data.json_data.scrapfolderlist.ScrapF
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.FolderGroupAdapter;
 import com.google.gson.Gson;
+import com.kyleduo.switchbutton.SwitchButton;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class ScrapContentEditDialog extends Activity {
     FolderGroupAdapter mAdapter;
 
     Button scrap_delete_button;
-    Switch scrap_private_switch;
+    SwitchButton scrap_private_switch;
     TextView scrap_info_text;
     String group_name;
     //String group_name[];
@@ -116,9 +116,11 @@ public class ScrapContentEditDialog extends Activity {
 
         expandablelistview = (ExpandableListView) findViewById(R.id.folder_expa_list);
         scrap_delete_button = (Button) findViewById(R.id.delete_scrap_content);
-        scrap_private_switch = (Switch) findViewById(R.id.private_set_switch);
+        scrap_private_switch = (SwitchButton) findViewById(R.id.switch_private_scrap);
         scrap_info_text = (TextView) findViewById(R.id.info_text_private);
 
+        scrap_private_switch.setBackColorRes(R.color.switch_background_color);
+        scrap_private_switch.setThumbColorRes(R.color.switch_thumb_color);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");

@@ -108,14 +108,16 @@
         android:textColor="@color/create_folder_text"
         android:textSize="@dimen/create_folder_text_size" />
 
-    <Switch
-        android:id="@+id/private_switch_button"
-        android:layout_width="@dimen/create_folder_btn_width"
-        android:layout_height="@dimen/create_folder_btn_height"
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/switch_private_folder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textview9"
-        android:layout_marginRight="@dimen/create_folder_btn_margin_right"
-        android:layout_marginTop="@dimen/create_folder_btn_margin_top" />
+        android:layout_marginRight="@dimen/create_folder_switch_margin_right"
+        android:layout_marginTop="@dimen/create_folder_switch_margin_top"
+        app:kswFadeBack="true" />
+
 
     <TextView
         android:layout_width="match_parent"
