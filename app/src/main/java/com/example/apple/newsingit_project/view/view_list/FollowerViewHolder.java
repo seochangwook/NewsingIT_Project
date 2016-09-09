@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 public class FollowerViewHolder  extends RecyclerView.ViewHolder {
 
     public FollowerData followerData;
-    public TextView nameView, introView;
+    public TextView nameView;
     public ImageButton btnFollower;
     public ImageView imgFollower;
 
@@ -26,8 +26,8 @@ public class FollowerViewHolder  extends RecyclerView.ViewHolder {
 
     public FollowerViewHolder(View itemView) {
         super(itemView);
+
         nameView = (TextView)itemView.findViewById(R.id.text_fer_name);
-        // introView = (TextView)itemView.findViewById(R.id.text_fer_intro);
         btnFollower = (ImageButton) itemView.findViewById(R.id.btn_follower);
         imgFollower = (ImageView)itemView.findViewById(R.id.img_follower);
     }

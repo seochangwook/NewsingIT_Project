@@ -10,7 +10,7 @@
         android:layout_height="@dimen/follower_img_width"
         android:layout_marginLeft="@dimen/follower_img_margin_left"
         android:layout_marginTop="@dimen/follower_img_margin_top"
-        android:src="@mipmap/profile_hambur" />
+        android:src="@mipmap/profile_image" />
 
     <TextView
         android:id="@+id/text_fer_name"

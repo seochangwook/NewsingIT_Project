@@ -130,6 +130,7 @@ public class FollowingListActivity extends AppCompatActivity {
 
                     for (int i = 0; i < size; i++) {
                         FollowingData newFollowingData = new FollowingData();
+
                         newFollowingData.setId("" + followingList.get(i).getId());
                         newFollowingData.setProfileUrl(followingList.get(i).getPf_url());
                         newFollowingData.setName(followingList.get(i).getName());
@@ -138,6 +139,7 @@ public class FollowingListActivity extends AppCompatActivity {
 
                         followingData.followingDataList.add(newFollowingData);
                     }
+
                     mAdapter.setFollowingData(followingData);
                 }
             });
