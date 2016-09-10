@@ -1,7 +1,5 @@
 # NewsingIT_Project
 
-* Push ex) [NewsingIT Project 2016/08/23 11:20]
-
 -----------------------------------------
 < Project status (Waterfall model) >
 
@@ -10,7 +8,7 @@
 * 요구 / 분석 : (완료)
 * 설계 / 구현 : (부분완료)
 * 테스팅 : (미흡)
-* 유지보수 : (진행하지 않음)
+
 -----------------------------------------
 
 < Android Using Library list (updating...) >
