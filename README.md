@@ -43,7 +43,7 @@
 * compile 'com.google.android.gms:play-services-gcm:9.4.0'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
-< Algorithm image >
+< Algorithm 도식도 >
 
 * AutoLogin
 
@@ -65,7 +65,7 @@
   <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/cloudmessage.png" width="650" height="350">
 </p>
 
-< Update Content >
+< Update Content (기능구현 / 설계 / 디자인 가이드 적용 부분) >
 
 * 플로팅 버튼 제거 - 임지수 (16/08/23 11:20)
 * 패키지 폴더 추가 - 서창욱 (16/08/23 11:47)
@@ -139,4 +139,6 @@
 * User 검색 후 Info정보 / 폴더 리스트 / 스크랩 리스트 real server test complete - 서창욱 (16/09/09 01:37)
 * Scrap Edit / Create시 Tag 중복 등록방지 적용 - 서창욱 (16/09/09 08:51)
 
+< Update Content (예외처리 / Clean Code / 테스팅 부분) >
 
+* 
