@@ -138,6 +138,7 @@
 * SearchUser간 int 범위를 초과한 값을 가지고 GSON Parsing issue -> gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING); 방법으로 String으로 캐스팅 해주는 Builder를 만들어 해결 - 서창욱 (16/09/09 01:37)
 * User 검색 후 Info정보 / 폴더 리스트 / 스크랩 리스트 real server test complete - 서창욱 (16/09/09 01:37)
 * Scrap Edit / Create시 Tag 중복 등록방지 적용 - 서창욱 (16/09/09 08:51)
+* Sharing기능 구현 및 테스트 완료 (<action android:name="android.intent.action.SEND" />을 등록하여 다른 앱과의 공유기능을 활성화 하고, 해당 앱이나 웹 페이지의 URL정보를 획득. ClipboardManager를 이용하여 복사 후 스크랩 작성 시 적용 -> 스크랩 정보 TextView에 android:autoLink="web"를 적용하여 해당 정보를 같이 볼 수 있음) - 서창욱 (16/09/11 10:41)
 
 < Update Content (예외처리 / Clean Code / 테스팅 부분) >
 
