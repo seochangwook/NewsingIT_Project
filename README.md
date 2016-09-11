@@ -1,8 +1,28 @@
 # NewsingIT_Project
 
-* Push ex) [NewsingIT Project 2016/08/23 11:20]
+-----------------------------------------
+
+< Project status (Waterfall model) >
+
+* 전체 진행률 : 70%
+* 프로젝트 기간 : 08/23 ~ 09/22 
+<p>
+</p>
+- 요구 / 분석 : (완료)
+- 설계 / 구현 : (부분완료)
+- 테스팅 : (미흡)
+- 유지보수 : (시행되지 않음)
+<p>
+</p>
+* 프로젝트 대표일정 (간트차트 생략 / 세부일정사항은 아래 목록 참조)
+
+1. 프로젝트 요구분석 및 명세서 작성 : 08/16 ~ 08/21
+2. 프로젝트 기능구현 및 설계, 디자인 가이드 적용(동작/통신 테스팅 포함) : 08/23 ~ 09/11
+3. 프로젝트 테스팅(전체 시나리오 점검) / 예외처리 / Clean Code작업 : 09/12 ~ 09/19
+4. 프로젝트 유지보수 / 디버깅 : 09/20 ~ 09/22
 
 -----------------------------------------
+
 < Android Using Library list (updating...) >
 
 * com.github.iwgang:familiarrecyclerview:1.3.0
@@ -23,7 +43,7 @@
 * compile 'com.google.android.gms:play-services-gcm:9.4.0'
 * (새로운 라이브러리 추가 시 계속 업데이트)
 
-< Algorithm image >
+< Algorithm 도식도 >
 
 * AutoLogin
 
@@ -45,7 +65,11 @@
   <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/cloudmessage.png" width="650" height="350">
 </p>
 
-< Update Content >
+<p align="left">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/FCM_algorithm.png" width="650" height="350">
+</p>
+
+< Update Content (기능구현 / 설계 / 디자인 가이드 적용 부분) >
 
 * 플로팅 버튼 제거 - 임지수 (16/08/23 11:20)
 * 패키지 폴더 추가 - 서창욱 (16/08/23 11:47)
@@ -118,5 +142,9 @@
 * SearchUser간 int 범위를 초과한 값을 가지고 GSON Parsing issue -> gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING); 방법으로 String으로 캐스팅 해주는 Builder를 만들어 해결 - 서창욱 (16/09/09 01:37)
 * User 검색 후 Info정보 / 폴더 리스트 / 스크랩 리스트 real server test complete - 서창욱 (16/09/09 01:37)
 * Scrap Edit / Create시 Tag 중복 등록방지 적용 - 서창욱 (16/09/09 08:51)
+* Sharing기능 구현 및 테스트 완료 (<action android:name="android.intent.action.SEND" />을 등록하여 다른 앱과의 공유기능을 활성화 하고, 해당 앱이나 웹 페이지의 URL정보를 획득. ClipboardManager를 이용하여 복사 후 스크랩 작성 시 적용 -> 스크랩 정보 TextView에 android:autoLink="web"를 적용하여 해당 정보를 같이 볼 수 있음) - 서창욱 (16/09/11 10:41)
+* 등록된 FCM id값을 가지고 서버와의 Dummy test 알람 테스트 완료 - 서창욱 (16/09/11 10:49)
 
+< Update Content (예외처리 / Clean Code / 테스팅 부분) >
 
+* 
