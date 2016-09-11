@@ -1,8 +1,10 @@
 package com.example.apple.newsingit_project;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,8 +19,6 @@ import com.example.apple.newsingit_project.data.view_data.FollowingData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.FollowingListAdapter;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.LongSerializationPolicy;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,15 +59,38 @@ public class FollowingListActivity extends AppCompatActivity {
 
             Log.d("json data", responseData);
 
-            //id가 long타입이므로 GSON을 수정해준다.//
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-
-            Gson gson = gsonBuilder.create();
+            Gson gson = new Gson();
 
             FollowingListRequest followingListRequest = gson.fromJson(responseData, FollowingListRequest.class);
 
-            setData(followingListRequest.getResults(), followingListRequest.getResults().length);
+            //검색에 대한 결과를 출력.//
+            if (followingListRequest.getResults().length == 0) //검색결과가 없는 경우//
+            {
+                if (this != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(FollowingListActivity.this);
+                            alertDialog.setTitle("Newsing Search")
+                                    .setMessage("검색결과가 존재하지 않습니다.")
+                                    .setCancelable(false)
+                                    .setPositiveButton("확인",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int i) {
+                                                    //yes
+
+                                                }
+                                            });
+
+                            AlertDialog alert = alertDialog.create();
+                            alert.show();
+                        }
+                    });
+                }
+            } else if (followingListRequest.getResults().length > 0) {
+                setData(followingListRequest.getResults(), followingListRequest.getResults().length);
+            }
         }
     };
 
@@ -85,6 +108,7 @@ public class FollowingListActivity extends AppCompatActivity {
                 .port(8080)
                 .addPathSegment("follows")
                 .addQueryParameter("direction", "to")
+                .addQueryParameter("word", "") //전체검색//
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "10");
 
@@ -97,28 +121,6 @@ public class FollowingListActivity extends AppCompatActivity {
 
         hidepDialog();
     }
-
-    private void searchFollowingNetworkData(String query) {
-        networkManager = NetworkManager.getInstance();
-
-        OkHttpClient client = networkManager.getClient();
-
-        HttpUrl.Builder builder = new HttpUrl.Builder();
-        builder.scheme("http")
-                .host(getResources().getString(R.string.real_server_domain))
-                .port(8080)
-                .addPathSegment("follows");
-        // 검색 query 전달 //
-
-        Request request = new Request.Builder()
-                .url(builder.build())
-                .tag(this)
-                .build();
-
-        client.newCall(request).enqueue(requestFollowingListCallback);
-
-    }
-
 
     private void setData(final FollowingListRequestResults[] results, final int size) {
         if (this != null) {
@@ -158,7 +160,7 @@ public class FollowingListActivity extends AppCompatActivity {
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -181,7 +183,7 @@ public class FollowingListActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                //   searchFollowingNetworkData(query);
+                search_following_list(query);
 
                 return false;
             }
@@ -244,9 +246,30 @@ public class FollowingListActivity extends AppCompatActivity {
             }
         });
 
-        getFollowingListNetworkData();
+        getFollowingListNetworkData(); //초기화면은 전체검색 화면//
+    }
 
-        //initDummyData();
+    public void search_following_list(String query) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
+                .addPathSegment("follows")
+                .addQueryParameter("direction", "to")
+                .addQueryParameter("word", query) //조건검색//
+                .addQueryParameter("page", "1")
+                .addQueryParameter("count", "10");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestFollowingListCallback);
     }
 
     private void hidepDialog() {
@@ -258,21 +281,4 @@ public class FollowingListActivity extends AppCompatActivity {
         if (!pDialog.isShowing())
             pDialog.show();
     }
-
-
-//
-//    private void initDummyData() {
-//
-//        String nameList[] = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
-//        String[] introList = {"저는 코딩이 취미입니다", "반갑습니다", "ㅇvㅇ", "^ㅇ^", "술x"
-//                ,"만두만두", "=v="};
-//        for (int i = 0; i < 7; i++) {
-//            FollowingData new_followingData = new FollowingData();
-//            new_followingData.name = nameList[i];
-//            new_followingData.aboutMe = introList[i];
-//            followingData.followingDataList.add(new_followingData);
-//        }
-//
-//        mAdapter.setFollowingData(followingData);
-//    }
 }

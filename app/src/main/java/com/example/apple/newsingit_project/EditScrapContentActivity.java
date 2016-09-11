@@ -83,7 +83,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     String scrap_content_str;
     String scrap_tags[];
     String scrap_id;
-    boolean scrap_isprivate;
+    boolean scrap_isprivate = false;
     String news_previewimage_Url;
     String news_preview_title_str;
     String news_preview_writetime_str;
@@ -97,6 +97,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     NetworkManager networkManager;
     private TagsEditText mTagsEditText; //태그를 지정할 수 있는 에디트 텍스트//
     private TagGroup mBeautyTagGroup; //태그를 나타낼 스타일 뷰//
+
     private Callback requesteditscrapcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -109,8 +110,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
-
-
         }
     };
 
@@ -144,7 +143,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         scarp_title_str = intent.getStringExtra(KEY_SCRAP_TITLE);
         scrap_content_str = intent.getStringExtra(KEY_SCRAP_CONTENT);
         scrap_id = intent.getStringExtra(SCRAP_ID);
-        scrap_isprivate = intent.getBooleanExtra(SCRAP_LOCK, false);
         scrap_tags = intent.getStringArrayExtra(KEY_SCRAP_TAGS);
 
         news_preview_title_str = intent.getStringExtra(NEWS_TITLE);
@@ -296,12 +294,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         String edit_scrap_content = appCompatEditText.getText().toString();
         String edit_scrap_locked = "0"; //기본 비공개라 설정.//
 
-        //저장될 정보 출력//
-        /*Log.d("scrap title", edit_scrap_title);
-        Log.d("scrap content", edit_scrap_content);
-        Log.d("scrap id", scrap_id);
-        Log.d("scrap lock", "" + scrap_isprivate);*/
-
         //새로 입력된 해시태그 처리//
         int array_size = tag_array.size();
 
@@ -326,11 +318,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
                 //Log.d("scrap tags", tag_data_str[i].toString());
             }
-        }
-
-        //기존 입력된 태그//
-        /*for (int i = 0; i < scrap_tags.length; i++) {
-            Log.d("scrap tags", scrap_tags[i]);
         }
 
         /** 네트워크 정보 초기화 **/
@@ -440,15 +427,11 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
         if (item_id == R.id.lock_scrap) {
             if (is_private == false) {
-                Toast.makeText(EditScrapContentActivity.this, "스크랩 잠금", Toast.LENGTH_SHORT).show();
-
                 item.setIcon(R.mipmap.ic_lock);
 
                 is_private = true;
                 scrap_isprivate = true;
             } else if (is_private == true) {
-                Toast.makeText(EditScrapContentActivity.this, "스크랩 해제", Toast.LENGTH_SHORT).show();
-
                 item.setIcon(R.mipmap.ic_lock_open);
 
                 is_private = false;
@@ -456,7 +439,10 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
             }
         } else if (item_id == R.id.create_scrap) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditScrapContentActivity.this);
-            alertDialog.setMessage("수정하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+            alertDialog.setTitle("Newsing Info")
+                    .setMessage("스크랩을 수정하시겠습니까?")
+                    .setCancelable(false)
+                    .setPositiveButton("수정",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -464,7 +450,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                             //네트워크로 데이터를 보낸다.//
                             EditScrap(scrap_id);
 
-                            Toast.makeText(EditScrapContentActivity.this, "수정 완료", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditScrapContentActivity.this, "스크랩 수정을 완료하였습니다", Toast.LENGTH_SHORT).show();
 
                             finish();
                         }

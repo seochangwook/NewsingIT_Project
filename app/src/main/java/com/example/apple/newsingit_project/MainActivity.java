@@ -39,6 +39,11 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class MainActivity extends AppCompatActivity {
     private static final String FCM_NOTIFY_VALUE = "FCM_NOTIFY_VALUE";
 
+    /**
+     * 초기 페이스북 디폴트 경로
+     **/
+    private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
+
     Toolbar toolbar; //툴바//
     BottomMenu bottommenu; //하단 네비게이션 메뉴 바//
     /**
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     String profile_name;
     String profile_imgUrl;
+    String key_default_img;
 
     NetworkManager networkManager;
 
@@ -134,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             } else //FCM일 경우//
             {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-                alertDialog.setTitle("NewsingIT")
+                alertDialog.setTitle("NewsingIT Alarm")
                         .setCancelable(false)
                         .setMessage("알람내역 확인은 로그인이 필요한 서비스 입니다. 로그인 화면으로 이동합니다.")
                         .setCancelable(false).setPositiveButton("확인",
@@ -156,11 +162,24 @@ public class MainActivity extends AppCompatActivity {
             }
         } else //공유 정보에 저장이 되어있다는 것은 로그인이 되었다는 증거//
         {
-            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+            //파싱.//
+            String parsing_imageurl = profile_imgUrl.substring(0, 26); //문자열 자르기//
 
-            picasso.load(profile_imgUrl)
-                    .transform(new CropCircleTransformation())
-                    .into(profile_imageview);
+            Log.d("json control", parsing_imageurl);
+
+            //페이스북 이미지는 일반적인 피카소로 적용//
+            if (parsing_imageurl.equals(DEFAULT_FACEBOOK_IMG_PATH)) {
+                Picasso.with(this)
+                        .load(profile_imgUrl)
+                        .transform(new CropCircleTransformation())
+                        .into(profile_imageview); //into로 보낼 위젯 선택.//
+            } else {
+                Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                picasso.load(profile_imgUrl)
+                        .transform(new CropCircleTransformation())
+                        .into(profile_imageview);
+            }
 
             profile_name_textview.setText(profile_name);
 
@@ -188,8 +207,6 @@ public class MainActivity extends AppCompatActivity {
                     content_edit.setText(sharedText);
                     content_edit.setEnabled(false);
 
-                    //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-
                     // AlertDialog에 레이아웃 추가
                     dialog.setView(layout);
                     dialog.show();
@@ -201,8 +218,6 @@ public class MainActivity extends AppCompatActivity {
         alarm_imagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "알림목록 화면으로 이동합니다.", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(MainActivity.this, AlarmListActivity.class);
 
                 startActivityForResult(intent, 100);
@@ -257,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(int position, int id, boolean triggeredOnRotation) {
                 // Do something when item is selected
                 if (position == 0) {
-                    Toast.makeText(MainActivity.this, "메인 페이지 이동", Toast.LENGTH_SHORT).show();
 
                     //프래그먼트 변경.replace로 변경//
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new MainNewsListFragment())
@@ -272,7 +286,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemReSelected(int position, int id) {
                 // Do something when item is re-selected
                 if (position == 1) {
-                    Toast.makeText(MainActivity.this, "나의 정보 페이지 이동", Toast.LENGTH_SHORT).show();
 
                     //프래그먼트 변경.//
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyInfoFragment())

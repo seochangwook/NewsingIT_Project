@@ -381,9 +381,33 @@ public class EditFolderActivity extends AppCompatActivity {
         int item_id = item.getItemId();
 
         if (item_id == R.id.folder_menu_edit) {
-            editFolderRequest(folder_id);
-            finish();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditFolderActivity.this);
+            alertDialog.setTitle("Newsing Info")
+                    .setMessage("폴더를 수정하시겠습니까?")
+                    .setCancelable(false)
+                    .setPositiveButton("수정",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //yes
+                                    //네트워크로 데이터를 보낸다.//
+                                    editFolderRequest(folder_id);
+
+                                    Toast.makeText(EditFolderActivity.this, "폴더 수정 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                                    finish();
+                                }
+                            }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //no
+                }
+            });
+
+            AlertDialog alert = alertDialog.create();
+            alert.show();
         }
+
         return super.onOptionsItemSelected(item);
     }
 

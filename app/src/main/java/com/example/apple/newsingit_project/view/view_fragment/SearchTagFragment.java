@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.UserScrapContentListActivity;
@@ -45,9 +44,9 @@ public class SearchTagFragment extends Fragment {
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final int LOAD_MORE_TAG = 6;
+    private static final String SEARCH_QUERY = "SEARCH_QUERY";
 
     String query;
-
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     FamiliarRecyclerView recyclerView;
@@ -156,13 +155,11 @@ public class SearchTagFragment extends Fragment {
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
-
         familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) view.findViewById(R.id.search_tag_rv_list);
         familiarRefreshRecyclerView.setId(android.R.id.list);
         familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(getActivity(), LOAD_MORE_TAG));
         familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
         familiarRefreshRecyclerView.setLoadMoreEnabled(true);
-
 
         /** 폴더 리스트뷰 Refresh 이벤트 등록 **/
         familiarRefreshRecyclerView.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
@@ -175,9 +172,6 @@ public class SearchTagFragment extends Fragment {
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
                         //mAdapter.setSearchTagData(searchTagData);
-
-
-
                     }
                 }, 1000);
             }
@@ -208,7 +202,6 @@ public class SearchTagFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
 
-
         mAdapter = new SearchTagAdapter(getActivity());
         recyclerView.setAdapter(mAdapter);
 
@@ -223,7 +216,6 @@ public class SearchTagFragment extends Fragment {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
 
                 String userSelect = searchTagData.searchTagDataList.get(position).getTag().toString();
-                Toast.makeText(getActivity(), "# " + userSelect, Toast.LENGTH_SHORT).show();
 
                 //선택한 태그를 가진 스크랩 목록 페이지로 이동//
                 Intent intent = new Intent(getActivity(), UserScrapContentListActivity.class);
@@ -241,7 +233,7 @@ public class SearchTagFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-        //  initDummyData(query); //더미//
+
         getSearchTagNetworkData(query); //네트워크//
 
         return view;
@@ -262,33 +254,4 @@ public class SearchTagFragment extends Fragment {
         if (!pDialog.isShowing())
             pDialog.show();
     }
-
-
-    private void initDummyData(String query) {
-
-        if (query.equals("사드")) {
-            String[] tagList = {"사드", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
-            int[] idList = {1, 2, 3, 4, 5};
-            for (int i = 0; i < 5; i++) {
-                SearchTagData new_searchTagData = new SearchTagData();
-                new_searchTagData.setTag(tagList[i]);
-                new_searchTagData.setId(idList[i]);
-
-                searchTagData.searchTagDataList.add(new_searchTagData);
-            }
-
-        } else {
-            String[] tagList = {"테스트", "사드 배치", "사드사드", "사드 반대", "사드 중국"};
-            int[] idList = {1, 2, 3, 4, 5};
-            for (int i = 0; i < 5; i++) {
-                SearchTagData new_searchTagData = new SearchTagData();
-                new_searchTagData.setTag(tagList[i]);
-                new_searchTagData.setId(idList[i]);
-
-                searchTagData.searchTagDataList.add(new_searchTagData);
-            }
-        }
-        mAdapter.setSearchTagData(searchTagData);
-    }
-
 }

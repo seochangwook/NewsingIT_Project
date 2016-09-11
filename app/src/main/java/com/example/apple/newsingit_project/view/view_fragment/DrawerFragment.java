@@ -89,6 +89,15 @@ public class DrawerFragment extends Fragment {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "로그아웃 하였습니다", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
     };
 
@@ -128,8 +137,6 @@ public class DrawerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_drawer, container, false);
         View drawerHeader = inflater.inflate(R.layout.view_drawer_header, container, false);
 
-        Log.d("json control", "open drawer");
-
         mAdapter = new DrawerAdapter(menuList, getActivity());
 
         expandableListView = (ExpandableListView)view.findViewById(R.id.expandableListView);
@@ -144,7 +151,7 @@ public class DrawerFragment extends Fragment {
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupposition) {
-                //Toast.makeText(getActivity(), "닫혀라 "+groupposition ,Toast.LENGTH_SHORT ).show();
+
             }
         });
 
@@ -152,9 +159,6 @@ public class DrawerFragment extends Fragment {
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupposition) {
-                //  Toast.makeText(getActivity(), "공지사항 화면 이동" + groupposition, Toast.LENGTH_SHORT).show();
-
-
                 //로그아웃 - 로그인 화면으로 이동//
                 if (groupposition == 0) {
                     //공유저장소 내용을 초기화.//
@@ -193,10 +197,6 @@ public class DrawerFragment extends Fragment {
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView listView, View view, int groupposition, int childposition, long id) {
-
-                String userSelectAlarm = menuList[groupposition].childViewList.get(childposition).name.toString();
-
-                Toast.makeText(getActivity(), "child click : " + userSelectAlarm + "/position" + childposition, Toast.LENGTH_SHORT).show();
 
                 return true;
             }

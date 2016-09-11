@@ -280,13 +280,11 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
         if (item_id == R.id.lock_scrap) {
             if (is_private == false) {
-                Toast.makeText(CreateScrapContentActivity.this, "스크랩 잠금", Toast.LENGTH_SHORT).show();
 
                 item.setIcon(R.mipmap.ic_lock);
 
                 is_private = true; //잠금상태.//
             } else if (is_private == true) {
-                Toast.makeText(CreateScrapContentActivity.this, "스크랩 해제", Toast.LENGTH_SHORT).show();
 
                 item.setIcon(R.mipmap.ic_lock_open);
 
@@ -294,16 +292,17 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
             }
         } else if (item_id == R.id.create_scrap)
         {
-            Toast.makeText(CreateScrapContentActivity.this, "생성 완료", Toast.LENGTH_SHORT).show();
 
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateScrapContentActivity.this);
-            alertDialog.setMessage("스크랩 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+            alertDialog.setMessage("스크랩 하시겠습니까?").setCancelable(false).setPositiveButton("생성",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //yes
                             //네트워크로 데이터를 보낸다.//
                             create_Scrap();
+
+                            Toast.makeText(CreateScrapContentActivity.this, "스크랩 생성을 완료하였습니다", Toast.LENGTH_SHORT).show();
 
                             finish();
                         }

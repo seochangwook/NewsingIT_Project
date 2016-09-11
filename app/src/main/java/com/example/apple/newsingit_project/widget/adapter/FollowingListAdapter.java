@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FollowingData;
@@ -68,7 +67,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 .addPathSegment("follows");
 
         RequestBody body = new FormBody.Builder()
-                .add("ofid", "" + userId)
+                .add("ofid", userId)
                 .build();
 
         Request request = new Request.Builder()
@@ -91,7 +90,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 .host(context.getResources().getString(R.string.real_server_domain))
                 .port(8080)
                 .addPathSegment("follows")
-                .addPathSegment("ofid" + userId);
+                .addPathSegment(userId);
 
         RequestBody body = new FormBody.Builder()
                 .build();
@@ -133,47 +132,62 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         if (followingData.followingDataList.size() > 0) {
             if (position < followingData.followingDataList.size()) {
                 final FollowingViewHolder followingViewHolder = (FollowingViewHolder) holder;
-                final int pos = position;
+
                 followingViewHolder.setFollowingData(followingData.followingDataList.get(position), context);
 
-                final boolean flag = followingData.followingDataList.get(pos).getFlag();
+                final int pos = position;
+                boolean flag = followingData.followingDataList.get(pos).getFlag();
 
-                if (flag) {//true이면 선택한 유저를 팔로우 한 상태//
+                Log.d("json control", "(팔로잉리스트)" + flag);
+
+                if (flag == true) {//true이면 선택한 유저를 팔로우 한 상태//
                     //팔로잉 한 상태에서는 팔로우 해제//
                     followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_following);
-//                    followingViewHolder.btnFollowing.setText("팔로우 해제");
-//                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_do));
-                } else {//false이면 선택한 유저를 팔로우 하지 않은 상태//
+                } else if (flag == false) {//false이면 선택한 유저를 팔로우 하지 않은 상태//
                     //팔로잉 안 한 상태에서 팔로우 생성//
                     followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_follow);
-//                    followingViewHolder.btnFollowing.setText("팔로우");
-//                    followingViewHolder.btnFollowing.setBackground(context.getResources().getDrawable(R.drawable.btn_follow_cancel));
                 }
 
                 followingViewHolder.btnFollowing.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         String userSelectId = followingData.followingDataList.get(pos).getId();
-                        Toast.makeText(context, "팔로잉 " + userSelectId, Toast.LENGTH_SHORT).show();
+                        boolean flag = followingData.followingDataList.get(pos).getFlag();
 
-                        if (flag) { //true이면 선택한 유저를 팔로우 한 상태//
+                        if (flag == true) //true이면 선택한 유저를 팔로우 한 상태//
+                        {
+                            Log.d("json control", "(팔로잉리스트)" + flag);
+
                             //팔로잉 한 상태에서는 팔로우 해제//
-                            deleteFollowing(userSelectId);
-                        } else { //false이면 선택한 유저를 팔로우 하지 않은 상태//
-                            //팔로잉 안 한 상태에서 팔로우 생성//
-                            setFollowing(userSelectId);
-                        }
+                            Log.d("json control", "(팔로잉리스트)팔로잉을 현재 한 상태이므로 팔로잉을 해제");
 
-                        //실제 네트워크 통신 전까지 안드로이드에서 값을 임시로 바꿔줌//
-                        followingData.followingDataList.get(pos).setFlag(!flag);
+                            deleteFollowing(userSelectId);
+
+                            followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_follow);
+
+                            notifyDataSetChanged();
+                        } else if (flag == false) //false이면 선택한 유저를 팔로우 하지 않은 상태//
+                        {
+                            Log.d("json control", "(팔로잉리스트)" + flag);
+
+                            //팔로잉 안 한 상태에서 팔로우 생성//
+                            Log.d("json control", "(팔로잉리스트)팔로잉을 현재 하지 않은 상태미으로 팔로잉을 생성");
+
+                            setFollowing(userSelectId);
+
+                            followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_following);
+
+                            notifyDataSetChanged();
+                        }
 
                         notifyDataSetChanged();
                     }
                 });
+
                 return;
             }
-            position -= followingData.followingDataList.size();
 
+            position -= followingData.followingDataList.size();
         }
         throw new IllegalArgumentException("invalid position");
     }

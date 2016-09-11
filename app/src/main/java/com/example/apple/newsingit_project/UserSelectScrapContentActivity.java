@@ -2,7 +2,6 @@ package com.example.apple.newsingit_project;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.selectscrapcontent.SelectScrapContentRequest;
 import com.example.apple.newsingit_project.data.json_data.selectscrapcontent.SelectScrapContentRequestResult;
@@ -50,6 +48,8 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     private static final String SCRAP_LOCK = "SCRAP_LOCK";
     private static final String SCRAP_ID = "SCRAP_ID";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+    private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
+    private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
 
     String is_me; //나에 대한 스크랩인지, 다르 사람의 스크랩인지 구분 플래그//
     int scrapId;
@@ -168,7 +168,6 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         news_write_date = (TextView) findViewById(R.id.text_scrap_date);
         news_imageview = (ImageView) findViewById(R.id.img_scrap_nc);
 
-
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
@@ -176,25 +175,19 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-        //textview에 scroll 추가//
-//        newsContentView = (TextView) findViewById(R.id.text_scrap_content);
-//        myContentView = (TextView) findViewById(R.id.text_scrap_my_content);
-//        newsContentView.setMovementMethod(new ScrollingMovementMethod());
-//        myContentView.setMovementMethod(new ScrollingMovementMethod());
-
         Intent intent = getIntent();
 
         scrapId = intent.getIntExtra(SCRAP_ID, 1); //스크랩의 상세 정보를 검색하기 위해서 id값을 전달받는다.//
-        scrap_isprivate = intent.getBooleanExtra(SCRAP_LOCK, false); //디폴트는 잠금해제 상태//
         is_me = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
 
+        //메뉴를 다르게 해주기 위해서 다른 사용자와 나의 경우를 구분//
         if (is_me.equals("1")) //1이면 다른 사용자의 스크랩 리스트//
         {
             Log.d("whowho : ", "other user");
@@ -202,24 +195,28 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             Log.d("whowho : ", "me");
         }
 
-        // set_Tag(); //태그 설정.//
+        //태그 선택 이벤트 처리//
+        mBeautyTagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
+            @Override
+            public void onTagClick(String select_tag) {
+                Log.d("json control", "click tag:" + select_tag);
+
+                //현재 스크랩 상세화면을 종료 후 검새조건 태그인 경우로 해서 스크랩 리스트로 이동//
+                Intent intent = new Intent(UserSelectScrapContentActivity.this, UserScrapContentListActivity.class);
+
+                //필요한 정보를 이동//
+                intent.putExtra(KEY_FOLDER_NAME, select_tag); //태그명을 전달.//
+                intent.putExtra(KEY_USER_IDENTIFY_FLAG, "1"); //검색은 다른 사용자의 내용들을 보는것이니 외부사용자로 간다.//
+                intent.putExtra(KEY_TAGSEARCH_FLAG, "TAG"); //태그로 검색한다는 플래그.//
+
+                startActivity(intent);
+
+                finish();
+            }
+        });
 
         getSelectScrapContentNetworkData(scrapId);
     }
-
-//    public void set_Tag() {
-//        /** 해시태그 설정 **/
-//        tags.add("서창욱");
-//        tags.add("임지수");
-//        tags.add("뉴스잉");
-//
-//        //해시태그 레이아웃에 추가//
-//        tag_layout_array.add("#" + tags.get(0).toString());
-//        tag_layout_array.add("#" + tags.get(1).toString());
-//        tag_layout_array.add("#" + tags.get(2).toString());
-//
-//        mBeautyTagGroup.setTags(tag_layout_array);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -239,7 +236,6 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         int item_id = item.getItemId();
 
         if (item_id == R.id.share_scrap) {
-            Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 공유", Toast.LENGTH_SHORT).show();
 
             String scrap_title = titleView.getText().toString();
             String scrap_content = contentView.getText().toString();
@@ -247,17 +243,12 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             Intent msg = new Intent(Intent.ACTION_SEND);
 
             msg.addCategory(Intent.CATEGORY_DEFAULT);
-
             msg.putExtra(Intent.EXTRA_SUBJECT, scrap_title);
-
             msg.putExtra(Intent.EXTRA_TEXT, scrap_content);
-
             msg.setType("text/plain");
 
             startActivity(Intent.createChooser(msg, "Newsing Share"));
-        } else if (item_id == R.id.setting_scrap)
-        {
-            Toast.makeText(UserSelectScrapContentActivity.this, "뉴스 스크랩 설정", Toast.LENGTH_SHORT).show();
+        } else if (item_id == R.id.setting_scrap) {
 
             //내가 스크랩한 정보//
             String scrap_name = titleView.getText().toString();
@@ -304,14 +295,12 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             intent.putExtra(KEY_SCRAP_CONTENT, scrap_content);
             intent.putExtra(KEY_SCRAP_TAGS, scrap_tag_array);
             intent.putExtra(SCRAP_ID, scrap_id);
-            intent.putExtra(SCRAP_LOCK, scrap_isprivate_val);
 
             startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 
     private void hidepDialog() {
         if (pDialog.isShowing())
@@ -321,40 +310,5 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     private void showpDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
-    }
-
-    /**
-     * @param name    패키지나 앱 이름
-     * @param subject 제목
-     * @param text    내용
-     * @return
-     */
-    private Intent getShareIntent(String name, String subject, String text) {
-        boolean found = false;
-
-        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-        intent.setType("text/plain");
-
-        // gets the list of intents that can be loaded.
-        List<ResolveInfo> resInfo = getPackageManager().queryIntentActivities(intent, 0);
-
-        if (resInfo == null)
-            return null;
-
-        for (ResolveInfo info : resInfo) {
-            if (info.activityInfo.packageName.toLowerCase().contains(name) ||
-                    info.activityInfo.name.toLowerCase().contains(name)) {
-                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                intent.putExtra(Intent.EXTRA_TEXT, text);
-                intent.setPackage(info.activityInfo.packageName);
-                found = true;
-                break;
-            }
-        }
-
-        if (found)
-            return intent;
-
-        return null;
     }
 }

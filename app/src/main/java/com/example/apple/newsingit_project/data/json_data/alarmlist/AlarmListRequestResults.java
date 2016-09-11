@@ -4,6 +4,7 @@ public class AlarmListRequestResults {
     private int data_pk;
     private String dtime;
     private String message;
+    private int type;
 
     public int getData_pk() {
         return this.data_pk;
@@ -27,5 +28,13 @@ public class AlarmListRequestResults {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getType() {
+        return this.type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

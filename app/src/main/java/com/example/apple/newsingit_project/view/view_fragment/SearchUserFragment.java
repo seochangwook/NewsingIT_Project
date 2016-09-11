@@ -21,8 +21,6 @@ import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.SearchUserAdapter;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.LongSerializationPolicy;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +46,7 @@ public class SearchUserFragment extends Fragment {
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
     private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
-
+    private static final String SEARCH_QUERY = "SEARCH_QUERY";
     private static final int LOAD_MORE_TAG = 4;
     String query;
 
@@ -77,11 +75,7 @@ public class SearchUserFragment extends Fragment {
             if (response.code() == 401) {
                 Log.d("json data", "ERROR 401");
             } else {
-                //id값이 long -> String//
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-
-                Gson gson = gsonBuilder.create();
+                Gson gson = new Gson();
 
                 SearchUserRequest searchUserListRequest = gson.fromJson(responseData, SearchUserRequest.class);
 
@@ -126,7 +120,6 @@ public class SearchUserFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
-                        //  mAdapter.setSearchUserData(searchUserData);
 
 
                     }
@@ -146,8 +139,6 @@ public class SearchUserFragment extends Fragment {
 
                         initSearchUserDataList();
                         get_User_search_Data(query);
-
-                        //   mAdapter.setSearchUserData(searchUserData);
 
                     }
                 }, 1000);
@@ -175,8 +166,6 @@ public class SearchUserFragment extends Fragment {
 
                 String userSelect = searchUserData.searchUserDataArrayList.get(position).getName().toString();
                 String flag_boolean = "" + searchUserData.searchUserDataArrayList.get(position).getFlag();
-
-                // Toast.makeText(getActivity(), "" + userSelect, Toast.LENGTH_SHORT).show();
 
                 //선택한 유저의 마이 페이지로 이동//
                 Intent intent = new Intent(getActivity(), UserInfoActivity.class);
@@ -250,14 +239,6 @@ public class SearchUserFragment extends Fragment {
 
                     searchUserRequestResultsList.addAll(Arrays.asList(user_list_data));
 
-                    /*for(int i=0; i<user_list_data_length; i++)
-                    {
-                        Log.d("data message", ""+searchUserRequestResultsList.get(i).getId());
-                        Log.d("data message", searchUserRequestResultsList.get(i).getAboutme());
-                        Log.d("data message", searchUserRequestResultsList.get(i).getName());
-                        Log.d("data message", searchUserRequestResultsList.get(i).getPf_url());
-                    }*/
-
                     //실제 값에 할당//
                     for (int i = 0; i < user_list_data_length; i++) {
                         SearchUserData new_searchUserData = new SearchUserData();
@@ -267,7 +248,6 @@ public class SearchUserFragment extends Fragment {
                         new_searchUserData.setAboutMe(searchUserRequestResultsList.get(i).getAboutme());
                         new_searchUserData.setFlag(searchUserRequestResultsList.get(i).getFlag());
                         new_searchUserData.set_User_imgUrl(searchUserRequestResultsList.get(i).getPf_url());
-                        //new_searchUserData.set_User_imgUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
 
                         searchUserData.searchUserDataArrayList.add(new_searchUserData);
                     }

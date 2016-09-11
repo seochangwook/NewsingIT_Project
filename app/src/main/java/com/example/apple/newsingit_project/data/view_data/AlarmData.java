@@ -7,55 +7,44 @@ import java.util.List;
  * Created by Tacademy on 2016-08-24.
  */
 public class AlarmData {
-    public String name;
-    public String content;
-    public String date;
-    public int data_pk;
-    public String acase;
-    //1 - 스크랩 좋아요
-    //2 - 나를 팔로우
-    //3 - 새 스크랩
+    public int alarm_message_type;
+    public String alarm_message;
+    public String alarm_date;
+    public int alarm_data;
+
 
 
     public List<AlarmData> alarmDataList = new ArrayList<>();
 
-    public String getContent() {
-        return this.content;
+    public String getAlarm_message() {
+        return this.alarm_message;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setAlarm_message(String alarm_message) {
+        this.alarm_message = alarm_message;
     }
 
-    public String getName(){
-        return this.name;
+    public String getAlarm_date() {
+        return this.alarm_date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAlarm_date(String alarm_date) {
+        this.alarm_date = alarm_date;
     }
 
-    public String getDate(){
-        return this.date;
+    public int get_alarm_message_type() {
+        return this.alarm_message_type;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void set_alarm_message_type(int alarm_message_type) {
+        this.alarm_message_type = alarm_message_type;
     }
 
-    public String getCase() {
-        return this.acase;
+    public int get_alarm_data() {
+        return this.alarm_data;
     }
 
-    public void setCase(String acase) {
-        this.acase = acase;
-    }
-
-    public int getData_pk() {
-        return this.data_pk;
-    }
-
-    public void setData_pk(int data_pk) {
-        this.data_pk = data_pk;
+    public void set_alarm_data(int alarm_data) {
+        this.alarm_data = alarm_data;
     }
 }

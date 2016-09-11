@@ -167,10 +167,14 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                             count--;
 
                             setFavoriteCancel(select_scrap_id);
+
                         } else { //좋아요 안 한 상태 -> 좋아요 할거야//
                             count++;
 
                             setFavoriteDo(select_scrap_id);
+
+                            //푸시알람//
+                            increease_like_pushalarm();
                         }
 
                         //실제 네트워크 통신 전까지 안드로이드에서 값을 임시로 바꿔줌//
@@ -247,4 +251,8 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
         client.newCall(request).enqueue(requestFavoriteCallback);
     }
 
+    public void increease_like_pushalarm() {
+        //푸시알람 설정//
+
+    }
 }

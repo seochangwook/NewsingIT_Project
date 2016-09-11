@@ -217,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.d("token fcm id : ", register_id);
 
                     //토큰을 받은 이 후 로그인을 진행한다.//
+                    //토큰을 받지 못하면 로그인 과정을 진행하지 않는다.//
                     loginFacebook();
                 }
             }
@@ -251,6 +252,7 @@ public class LoginActivity extends AppCompatActivity {
         // Add code to print out the key hash
         try {
             PackageInfo info = getPackageManager().getPackageInfo("com.example.apple.newsingit_project", PackageManager.GET_SIGNATURES);
+
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
@@ -286,8 +288,6 @@ public class LoginActivity extends AppCompatActivity {
                 //Access Token값을 가져온다.//
                 AccessToken accessToken = AccessToken.getCurrentAccessToken();
 
-                //getInstanceIdToken();
-
                 token = accessToken.getToken();
 
                 Log.d("token : ", token);
@@ -295,9 +295,7 @@ public class LoginActivity extends AppCompatActivity {
                 String user_id = accessToken.getUserId();
 
                 //해당 토큰값을 서버로 전송한다.//
-                LoginServer();
-
-                //Toast.makeText(LoginActivity.this, "Token : " + token + "/ user id : " + user_id, Toast.LENGTH_SHORT).show();
+                Facebook_LoginServer(); //페이스북 로그인//
 
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email,gender, birthday");
@@ -318,7 +316,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginManager.logInWithReadPermissions(LoginActivity.this, Arrays.asList("email")); //이메일 획득 권한//
     }
 
-    public void LoginServer() {
+    public void Facebook_LoginServer() {
         /** 네트워크 설정 **/
         /** Network 자원을 설정 **/
         manager = NetworkManager.getInstance(); //싱글톤 객체를 가져온다.//
@@ -332,15 +330,15 @@ public class LoginActivity extends AppCompatActivity {
 
         builder.scheme("https"); //인증서가 있어야 가능//
         builder.host(getResources().getString(R.string.real_server_domain));
-        builder.port(4433); //https인증은 포트가 4433이다.//
+        builder.port(4433); //https인증은 포트가 4433이다.(인증서 파일이 필요)//
         builder.addPathSegment("auth");
         builder.addPathSegment("facebook");
         builder.addPathSegment("token");
 
         /** RequestBody 설정 **/
         RequestBody body = new FormBody.Builder()
-                .add("access_token", token)
-                .add("registration_token", register_id)
+                .add("access_token", token) //페이스북 토큰//
+                .add("registration_token", register_id) //FCM토큰//
                 .build();
 
         /** Request 설정 **/

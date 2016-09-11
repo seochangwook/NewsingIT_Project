@@ -194,6 +194,7 @@
             android:layout_marginRight="@dimen/scrap_content_tag_margin_right"
             android:layout_marginTop="@dimen/scrap_content_tag_margin_top"
             android:layout_toRightOf="@+id/imageView2"
+            app:atg_dashBorderColor="#0000ff"
             app:atg_inputHint="태그를 등록해주세요" />
 
     </RelativeLayout>

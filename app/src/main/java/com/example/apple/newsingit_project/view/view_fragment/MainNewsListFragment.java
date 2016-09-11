@@ -202,8 +202,6 @@ public class MainNewsListFragment extends Fragment {
                     int news_id = newsContent.keyword_1_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_1_news_content.get(select_position).get_news_title();
 
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
@@ -228,8 +226,6 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_2_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_2_news_content.get(select_position).get_news_title();
-
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
@@ -256,8 +252,6 @@ public class MainNewsListFragment extends Fragment {
                     int news_id = newsContent.keyword_3_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_3_news_content.get(select_position).get_news_title();
 
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
@@ -282,8 +276,6 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_4_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_4_news_content.get(select_position).get_news_title();
-
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
@@ -310,8 +302,6 @@ public class MainNewsListFragment extends Fragment {
                     int news_id = newsContent.keyword_5_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_5_news_content.get(select_position).get_news_title();
 
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
@@ -336,8 +326,6 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_6_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_6_news_content.get(select_position).get_news_title();
-
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
@@ -364,8 +352,6 @@ public class MainNewsListFragment extends Fragment {
                     int news_id = newsContent.keyword_7_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_7_news_content.get(select_position).get_news_title();
 
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
@@ -390,8 +376,6 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_8_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_8_news_content.get(select_position).get_news_title();
-
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
@@ -418,8 +402,6 @@ public class MainNewsListFragment extends Fragment {
                     int news_id = newsContent.keyword_9_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_9_news_content.get(select_position).get_news_title();
 
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
@@ -444,8 +426,6 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_10_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_10_news_content.get(select_position).get_news_title();
-
-                    Toast.makeText(getActivity(), "click news id : " + news_id + "/news title : " + news_title, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
@@ -1398,418 +1378,6 @@ public class MainNewsListFragment extends Fragment {
 
         //초기화된 배열을 다시 리사이클뷰에 적용(실제 데이터의 관리는 어댑터에서 한다.)//
         newsAdapter.init_Data(keywordSection, newsContent);
-    }
-
-    private void initDummyData() {
-        showpDialog();
-
-        //데이터 할당.//
-        //해당 부분을 네트워크로 데이터를 가져온다.//
-        String keyword_data[] = {"keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6", "keyword7", "keyword8", "keyword9", "keyword10"};
-
-        //첫번째 키워드 데이터//
-        Keyword1SectionData new_keyword_section_1 = new Keyword1SectionData();
-
-        new_keyword_section_1.set_keyword_text(keyword_data[0]);
-
-        keywordSection.keyword1SectionDatas.add(new_keyword_section_1); //키워드 할당.//
-
-        Keyword1NewsContentData new_news1content_1 = new Keyword1NewsContentData();
-
-        new_news1content_1.set_news_content_id(1);
-        new_news1content_1.set_news_author("한국일보");
-        new_news1content_1.set_news_title("센서 시장이 활성화");
-        new_news1content_1.set_news_write_date("2016-08-27");
-        new_news1content_1.set_news_content("최근 iot가 성장세를 보이며 센서 시장이 늘고 있고 사람들 또한 구매를 많이 합니다.");
-        new_news1content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_1_news_content.add(new_news1content_1);
-
-        Keyword1NewsContentData new_news1content_2 = new Keyword1NewsContentData();
-
-        new_news1content_2.set_news_content_id(2);
-        new_news1content_2.set_news_author("조선일보");
-        new_news1content_2.set_news_title("삼성전자 새로운 센서 개발");
-        new_news1content_2.set_news_write_date("2016-08-27");
-        new_news1content_2.set_news_content("삼성전자가 최근 새로운 센서 개발에 들어가면서 점차 iot시장에서 영향력을 발휘하고 있습니다.");
-        new_news1content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_1_news_content.add(new_news1content_2);
-
-        Keyword1NewsContentData new_news1content_3 = new Keyword1NewsContentData();
-
-        new_news1content_3.set_news_content_id(3);
-        new_news1content_3.set_news_author("디지털통신");
-        new_news1content_3.set_news_title("IoT 학교에서도 열풍");
-        new_news1content_3.set_news_write_date("2016-08-27");
-        new_news1content_3.set_news_content("최근 인근 여러 초등학교에서 IoT교육이 열풍이 불고 있습니다. 아두이노를 활용한 창작의 재미도 느낄 수 있습니다.");
-        new_news1content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_1_news_content.add(new_news1content_3);
-
-        //두번째 키워드 데이터//
-        Keyword2SectionData new_keyword_section_2 = new Keyword2SectionData();
-
-        new_keyword_section_2.set_keyword_text(keyword_data[1]);
-
-        keywordSection.keyword2SectionDatas.add(new_keyword_section_2);
-
-        Keyword2NewsContentData new_news2content_1 = new Keyword2NewsContentData();
-
-        new_news2content_1.set_news_content_id(4);
-        new_news2content_1.set_news_author("동아일보");
-        new_news2content_1.set_news_title("SBC의 새로운 매커니즘");
-        new_news2content_1.set_news_write_date("2016-08-27");
-        new_news2content_1.set_news_content("라즈베리파이를 기반으로 여러 연구단체에서는 더 성능이 좋은 SBC로 개발할려고 노력하고 있습니다.");
-        new_news2content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_2_news_content.add(new_news2content_1);
-
-        Keyword2NewsContentData new_news2content_2 = new Keyword2NewsContentData();
-
-        new_news2content_2.set_news_content_id(5);
-        new_news2content_2.set_news_author("조선일보");
-        new_news2content_2.set_news_title("라즈베리파이 새로운 모델 출시");
-        new_news2content_2.set_news_write_date("2016-08-27");
-        new_news2content_2.set_news_content("최근 라즈베리파이에 새로운 모델이 나왔습니다.");
-        new_news2content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_2_news_content.add(new_news2content_2);
-
-        Keyword2NewsContentData new_news2content_3 = new Keyword2NewsContentData();
-
-        new_news2content_3.set_news_content_id(6);
-        new_news2content_3.set_news_author("디지털통신");
-        new_news2content_3.set_news_title("라즈베리파이 기반에서 C언어 코딩수업");
-        new_news2content_3.set_news_write_date("2016-08-27");
-        new_news2content_3.set_news_content("C언어를 이용한 라즈베리파이 기반에서 채팅 프로그램을 개발할 수 있습니다.");
-        new_news2content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_2_news_content.add(new_news2content_3);
-
-        //세번째 키워드 데이터//
-        Keyword3SectionData new_keyword_section_3 = new Keyword3SectionData();
-
-        new_keyword_section_3.set_keyword_text(keyword_data[2]);
-
-        keywordSection.keyword3SectionDatas.add(new_keyword_section_3);
-
-        Keyword3NewsContentData new_news3content_1 = new Keyword3NewsContentData();
-
-        new_news3content_1.set_news_content_id(7);
-        new_news3content_1.set_news_author("디지털타임");
-        new_news3content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news3content_1.set_news_write_date("2016-08-28");
-        new_news3content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news3content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_3_news_content.add(new_news3content_1);
-
-        Keyword3NewsContentData new_news3content_2 = new Keyword3NewsContentData();
-
-        new_news3content_2.set_news_content_id(8);
-        new_news3content_2.set_news_author("조선일보");
-        new_news3content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news3content_2.set_news_write_date("2016-08-27");
-        new_news3content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news3content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_3_news_content.add(new_news3content_2);
-
-        Keyword3NewsContentData new_news3content_3 = new Keyword3NewsContentData();
-
-        new_news3content_3.set_news_content_id(9);
-        new_news3content_3.set_news_author("동아일보");
-        new_news3content_3.set_news_title("Material Design에 대해서");
-        new_news3content_3.set_news_write_date("2016-08-27");
-        new_news3content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news3content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_3_news_content.add(new_news3content_3);
-
-        //네번째 키워드 데이터//
-        Keyword4SectionData new_keyword_section_4 = new Keyword4SectionData();
-
-        new_keyword_section_4.set_keyword_text(keyword_data[3]);
-
-        keywordSection.keyword4SectionDatas.add(new_keyword_section_4);
-
-        Keyword4NewsContentData new_news4content_1 = new Keyword4NewsContentData();
-
-        new_news4content_1.set_news_content_id(10);
-        new_news4content_1.set_news_author("디지털타임");
-        new_news4content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news4content_1.set_news_write_date("2016-08-28");
-        new_news4content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news4content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_4_news_content.add(new_news4content_1);
-
-        Keyword4NewsContentData new_news4content_2 = new Keyword4NewsContentData();
-
-        new_news4content_2.set_news_content_id(11);
-        new_news4content_2.set_news_author("조선일보");
-        new_news4content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news4content_2.set_news_write_date("2016-08-27");
-        new_news4content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news4content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_4_news_content.add(new_news4content_2);
-
-        Keyword4NewsContentData new_news4content_3 = new Keyword4NewsContentData();
-
-        new_news4content_3.set_news_content_id(12);
-        new_news4content_3.set_news_author("동아일보");
-        new_news4content_3.set_news_title("Material Design에 대해서");
-        new_news4content_3.set_news_write_date("2016-08-27");
-        new_news4content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news4content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_4_news_content.add(new_news4content_3);
-
-        //다섯번째 키워드 데이터//
-        Keyword5SectionData new_keyword_section_5 = new Keyword5SectionData();
-
-        new_keyword_section_5.set_keyword_text(keyword_data[4]);
-
-        keywordSection.keyword5SectionDatas.add(new_keyword_section_5);
-
-        Keyword5NewsContentData new_news5content_1 = new Keyword5NewsContentData();
-
-        new_news5content_1.set_news_content_id(13);
-        new_news5content_1.set_news_author("디지털타임");
-        new_news5content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news5content_1.set_news_write_date("2016-08-28");
-        new_news5content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news5content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_5_news_content.add(new_news5content_1);
-
-        Keyword5NewsContentData new_news5content_2 = new Keyword5NewsContentData();
-
-        new_news5content_2.set_news_content_id(14);
-        new_news5content_2.set_news_author("조선일보");
-        new_news5content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news5content_2.set_news_write_date("2016-08-27");
-        new_news5content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news5content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_5_news_content.add(new_news5content_2);
-
-        Keyword5NewsContentData new_news5content_3 = new Keyword5NewsContentData();
-
-        new_news5content_3.set_news_content_id(15);
-        new_news5content_3.set_news_author("동아일보");
-        new_news5content_3.set_news_title("Material Design에 대해서");
-        new_news5content_3.set_news_write_date("2016-08-27");
-        new_news5content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news5content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_5_news_content.add(new_news5content_3);
-
-        //여섯번째 키워드 데이터//
-        Keyword6SectionData new_keyword_section_6 = new Keyword6SectionData();
-
-        new_keyword_section_6.set_keyword_text(keyword_data[5]);
-
-        keywordSection.keyword6SectionDatas.add(new_keyword_section_6);
-
-        Keyword6NewsContentData new_news6content_1 = new Keyword6NewsContentData();
-
-        new_news6content_1.set_news_content_id(16);
-        new_news6content_1.set_news_author("디지털타임");
-        new_news6content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news6content_1.set_news_write_date("2016-08-28");
-        new_news6content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news6content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_6_news_content.add(new_news6content_1);
-
-        Keyword6NewsContentData new_news6content_2 = new Keyword6NewsContentData();
-
-        new_news6content_2.set_news_content_id(17);
-        new_news6content_2.set_news_author("조선일보");
-        new_news6content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news6content_2.set_news_write_date("2016-08-27");
-        new_news6content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news6content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_6_news_content.add(new_news6content_2);
-
-        Keyword6NewsContentData new_news6content_3 = new Keyword6NewsContentData();
-
-        new_news6content_3.set_news_content_id(18);
-        new_news6content_3.set_news_author("동아일보");
-        new_news6content_3.set_news_title("Material Design에 대해서");
-        new_news6content_3.set_news_write_date("2016-08-27");
-        new_news6content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news6content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_6_news_content.add(new_news6content_3);
-
-        //일곱번째 키워드 데이터//
-        Keyword7SectionData new_keyword_section_7 = new Keyword7SectionData();
-
-        new_keyword_section_7.set_keyword_text(keyword_data[6]);
-
-        keywordSection.keyword7SectionDatas.add(new_keyword_section_7);
-
-        Keyword7NewsContentData new_news7content_1 = new Keyword7NewsContentData();
-
-        new_news7content_1.set_news_content_id(19);
-        new_news7content_1.set_news_author("디지털타임");
-        new_news7content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news7content_1.set_news_write_date("2016-08-28");
-        new_news7content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news7content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_7_news_content.add(new_news7content_1);
-
-        Keyword7NewsContentData new_news7content_2 = new Keyword7NewsContentData();
-
-        new_news7content_2.set_news_content_id(20);
-        new_news7content_2.set_news_author("조선일보");
-        new_news7content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news7content_2.set_news_write_date("2016-08-27");
-        new_news7content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news7content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_7_news_content.add(new_news7content_2);
-
-        Keyword7NewsContentData new_news7content_3 = new Keyword7NewsContentData();
-
-        new_news7content_3.set_news_content_id(21);
-        new_news7content_3.set_news_author("동아일보");
-        new_news7content_3.set_news_title("Material Design에 대해서");
-        new_news7content_3.set_news_write_date("2016-08-27");
-        new_news7content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news7content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_7_news_content.add(new_news7content_3);
-
-        //여덟번째 키워드 데이터//
-        Keyword8SectionData new_keyword_section_8 = new Keyword8SectionData();
-
-        new_keyword_section_8.set_keyword_text(keyword_data[7]);
-
-        keywordSection.keyword8SectionDatas.add(new_keyword_section_8);
-
-        Keyword8NewsContentData new_news8content_1 = new Keyword8NewsContentData();
-
-        new_news8content_1.set_news_content_id(22);
-        new_news8content_1.set_news_author("디지털타임");
-        new_news8content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news8content_1.set_news_write_date("2016-08-28");
-        new_news8content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news8content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_8_news_content.add(new_news8content_1);
-
-        Keyword8NewsContentData new_news8content_2 = new Keyword8NewsContentData();
-
-        new_news8content_2.set_news_content_id(23);
-        new_news8content_2.set_news_author("조선일보");
-        new_news8content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news8content_2.set_news_write_date("2016-08-27");
-        new_news8content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news8content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_8_news_content.add(new_news8content_2);
-
-        Keyword8NewsContentData new_news8content_3 = new Keyword8NewsContentData();
-
-        new_news8content_3.set_news_content_id(24);
-        new_news8content_3.set_news_author("동아일보");
-        new_news8content_3.set_news_title("Material Design에 대해서");
-        new_news8content_3.set_news_write_date("2016-08-27");
-        new_news8content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news8content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_8_news_content.add(new_news8content_3);
-
-        //아홉번째 키워드 데이터//
-        Keyword9SectionData new_keyword_section_9 = new Keyword9SectionData();
-
-        new_keyword_section_9.set_keyword_text(keyword_data[8]);
-
-        keywordSection.keyword9SectionDatas.add(new_keyword_section_9);
-
-        Keyword9NewsContentData new_news9content_1 = new Keyword9NewsContentData();
-
-        new_news9content_1.set_news_content_id(25);
-        new_news9content_1.set_news_author("디지털타임");
-        new_news9content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news9content_1.set_news_write_date("2016-08-28");
-        new_news9content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news9content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_9_news_content.add(new_news9content_1);
-
-        Keyword9NewsContentData new_news9content_2 = new Keyword9NewsContentData();
-
-        new_news9content_2.set_news_content_id(26);
-        new_news9content_2.set_news_author("조선일보");
-        new_news9content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news9content_2.set_news_write_date("2016-08-27");
-        new_news9content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news9content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_9_news_content.add(new_news9content_2);
-
-        Keyword9NewsContentData new_news9content_3 = new Keyword9NewsContentData();
-
-        new_news9content_3.set_news_content_id(27);
-        new_news9content_3.set_news_author("동아일보");
-        new_news9content_3.set_news_title("Material Design에 대해서");
-        new_news9content_3.set_news_write_date("2016-08-27");
-        new_news9content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news9content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_9_news_content.add(new_news9content_3);
-
-        //열번째 키워드 데이터//
-        Keyword10SectionData new_keyword_section_10 = new Keyword10SectionData();
-
-        new_keyword_section_10.set_keyword_text(keyword_data[9]);
-
-        keywordSection.keywor10dSectionDatas.add(new_keyword_section_10);
-
-        Keyword10NewsContentData new_news10content_1 = new Keyword10NewsContentData();
-
-        new_news10content_1.set_news_content_id(28);
-        new_news10content_1.set_news_author("디지털타임");
-        new_news10content_1.set_news_title("안드로이드 새로운 버전 출시");
-        new_news10content_1.set_news_write_date("2016-08-28");
-        new_news10content_1.set_news_content("안드로이드 새로운 버전인 NUGA 출시");
-        new_news10content_1.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_10_news_content.add(new_news10content_1);
-
-        Keyword10NewsContentData new_news10content_2 = new Keyword10NewsContentData();
-
-        new_news10content_2.set_news_content_id(29);
-        new_news10content_2.set_news_author("조선일보");
-        new_news10content_2.set_news_title("우리도 앱을 만들어요!!");
-        new_news10content_2.set_news_write_date("2016-08-27");
-        new_news10content_2.set_news_content("최근 초등학교에선 앱인벤터를 이용한 안드로이드 앱을 개발하는 수업을 진행하고 있습니다.");
-        new_news10content_2.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_10_news_content.add(new_news10content_2);
-
-        Keyword10NewsContentData new_news10content_3 = new Keyword10NewsContentData();
-
-        new_news10content_3.set_news_content_id(30);
-        new_news10content_3.set_news_author("동아일보");
-        new_news10content_3.set_news_title("Material Design에 대해서");
-        new_news10content_3.set_news_write_date("2016-08-27");
-        new_news10content_3.set_news_content("최근 안드로이드 개발팀에서 내놓은 Material Design에 대한 소개책이 인기입니다.");
-        new_news10content_3.set_news_thumbnail_Url("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
-
-        newsContent.keyword_10_news_content.add(new_news10content_3);
-
-        newsAdapter.setNewsData(keywordSection, newsContent);
-
-        hidepDialog();
     }
 
     public void move_scrollaction(String select_keyword) {

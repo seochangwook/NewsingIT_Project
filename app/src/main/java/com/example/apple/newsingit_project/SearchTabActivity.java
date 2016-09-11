@@ -22,6 +22,7 @@ import com.example.apple.newsingit_project.view.view_fragment.SearchTagFragment;
 import com.example.apple.newsingit_project.view.view_fragment.SearchUserFragment;
 
 public class SearchTabActivity extends AppCompatActivity {
+    private static final String SEARCH_QUERY = "SEARCH_QUERY";
 
     Bundle bundle;
     SearchView searchView;
@@ -107,8 +108,8 @@ public class SearchTabActivity extends AppCompatActivity {
 
                 //검색어를 입력 후 검색 버튼을 눌렀을 때//
                 //검색어 전달//
-                bundle.putString("SEARCH_QUERY", "" + query);
-                //검색 결과 리스트 갱신//
+                bundle.putString(SEARCH_QUERY, "" + query);
+                //검색 결과 리스트 갱신(갱신 시 프래그먼트들이 재적제 되니 bundle이 다시 대입된다.)//
                 mSectionsPagerAdapter.notifyDataSetChanged();
 
                 return false;

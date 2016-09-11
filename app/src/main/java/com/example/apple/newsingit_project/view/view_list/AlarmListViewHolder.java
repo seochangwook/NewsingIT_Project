@@ -15,7 +15,7 @@ import com.example.apple.newsingit_project.data.view_data.AlarmData;
 public class AlarmListViewHolder extends RecyclerView.ViewHolder {
 
     AlarmData alarmData;
-    TextView nameView, contentView, dateView;
+    TextView contentView, dateView;
     ImageView profileView;
 
     public AlarmListViewHolder(View itemView) {
@@ -28,8 +28,8 @@ public class AlarmListViewHolder extends RecyclerView.ViewHolder {
 
     public void setAlarmData(AlarmData alarmData, Context context) {
         this.alarmData = alarmData;
-        //    nameView.setText(alarmData.getName());
-        contentView.setText(alarmData.getContent());
-        dateView.setText(alarmData.getDate());
+
+        contentView.setText(alarmData.getAlarm_message());
+        dateView.setText(alarmData.getAlarm_date());
     }
 }

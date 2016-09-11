@@ -9,7 +9,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.ScrapContentListRequestError;
 import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.ScrapContentListRequestErrorResults;
@@ -39,7 +38,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
-    private static final String SCRAP_LOCK = "SCRAP_LOCK";
     private static final String SCRAP_ID = "SCRAP_ID";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
 
@@ -49,7 +47,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     String is_user_my;
     String folder_id;
     String flag_tag = null;
-    boolean scrap_private;
 
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
@@ -76,6 +73,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             Gson gson = new Gson();
 
             ScrapContentListRequestError request = gson.fromJson(responseData, ScrapContentListRequestError.class);
+
             setData(request.getResults(), request.getResults().length);
         }
     };
@@ -217,12 +215,26 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                     public void run() {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
+                        /** Tag검색과 일반 카테고리 검색을 비교하여 업테이트 진행. **/
+
                         scrap_recyclerrefreshview.pullRefreshComplete();
                         scrap_recyclerView.removeHeaderView(headerview);
 
-                        init_scrap_content_data(); //우선적으로 데이터 초기화.//
+                        //위에서 새로고침은 page값 증가가 필요없다.//
+                        if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
+                        {
+                            Log.d("message", "tag load");
 
-                        getScrapContentListNetworkData(); //해당 페이지의 개수만큼 다시 로드//
+                            init_scrap_content_data(); //우선적으로 데이터 초기화.//
+
+                            getTagData(folder_id); //해당 페이지의 개수만큼 다시 로드//
+                        } else {
+                            Log.d("message", "scrap load");
+
+                            init_scrap_content_data(); //우선적으로 데이터 초기화.//
+
+                            getScrapContentListNetworkData(); //해당 페이지의 개수만큼 다시 로드//
+                        }
 
                     }
                 }, 1000);
@@ -307,11 +319,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         scrap_recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                String userSelect = userScrapContentData.userScrapContentDataList.get(position).getNcTitle().toString();
-                boolean scrap_isprivate = userScrapContentData.userScrapContentDataList.get(position).getLock();
-
-                Toast.makeText(UserScrapContentListActivity.this, "" + userSelect, Toast.LENGTH_SHORT).show();
-
                 //클릭 시 개별 스크랩 콘텐츠로 이동//
                 Intent intent = new Intent(UserScrapContentListActivity.this, UserSelectScrapContentActivity.class);
 
@@ -325,14 +332,12 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
                 //필요한 값을 정의한다.//
                 intent.putExtra(SCRAP_ID, userScrapContentData.userScrapContentDataList.get(position).getId());
-                intent.putExtra(SCRAP_LOCK, scrap_isprivate);
-
-                // intent.putExtra("SCRAP_AUTHOR", userScrapContentData.userScrapContentDataList.get(position).getNcAuthor());
 
                 startActivity(intent);
             }
         });
 
+        /** Tag검색과 일반 카테고리 리스트를 통한 검색경로를 구분 **/
         if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
         {
             Log.d("tag name", folder_name);
@@ -343,8 +348,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         {
             getScrapContentListNetworkData();
         }
-//
-//      initDummyData();
     }
 
     public void init_scrap_content_data() {
@@ -397,15 +400,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setNcTime(tagDetailListRequestResultsList.get(i).getNc_ntime());
                         newUserScrapCotentData.setLike(tagDetailListRequestResultsList.get(i).getFavorite_cnt());
                         newUserScrapCotentData.setLikeFlag(tagDetailListRequestResultsList.get(i).getFavorite());
-                        //newUserScrapCotentData.setLock(tagDetailListRequestResultsList.get(i).getLock());
                         newUserScrapCotentData.setId(tagDetailListRequestResultsList.get(i).getId());
-
-                        //태그 검색은 기본적으로 다른 사용자임을 가정//
-                        /*if (newUserScrapCotentData.getLock() == false) {
-                            userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
-                        } else if (newUserScrapCotentData.getLock() == true) {
-                            //다른 사람 개시물일 경우 잠금이 있을 시 보여주지 않는다.//
-                        }*/
 
                         userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
                     }
@@ -426,36 +421,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         if (!pDialog.isShowing())
             pDialog.show();
     }
-
-
-//    private void initDummyData() {
-//        String[] titleList = {"갤럭시 7", "iot", "소프트뱅크", "드론", "VR", "테슬라"};
-//
-//        String[] contentList = {"갤럭시 7 너무 사고 싶당 홍채인식과 물 속에서 터치 펜 기능이 가능하다 그런데 누가 물속에서 폰을 할까"
-//                , "iot 요즘 대세라는데... 사물 인터넷(Internet of Things, 약어로 IoT)은 각종 사물에 센서와 통신 기능을 내장하여 인터넷에 연결하는 기술을 의미한다. 여기서 사물이란 가전제품, 모바일 장비, 웨어러블 컴퓨터 등 다양한 임베디드 시스템이 된다. "
-//                , "소프트뱅크 주식회사(영어: SoftBank Corporation, 일본어: ソフトバンク株式会社)는 1981년 9월 3일 일본 도쿄에서 설립된 고속 인터넷, 전자 상거래, 파이낸스, 기술 관련 분야에서 활동하는 일본의 기업 겸임 일본의 이동통신사이다. 사장은 한국계 일본인인 손 마사요시(손정의)이다."
-//                , "무인 항공기(無人航空機, 영어: unmanned aerial vehicle, UAV) 또는 무인 항공기의 다른 이름으로 '벌이 윙윙거린다'는 것에서 \"드론\"(drone)이라고도 불리기도 한다. ta1 드론(영어: drone)은 조종사를 탑승하지 않고 지정된 임무를 수행할 수 있도록 제작한 비행체이다. 기체에 사람이 타지 않은 것으로 지상에는 원격 조종하는 조종사가 존재하고 있다는 점을 강조해 Uninhabited Aerial(Air) Vehicle의 약어로 지칭하는 경우도 있다."
-//                , "수많은 미디어 기업들이 가상 현실 시장에 접근하고 있는 가운데 디즈니도 가상 현실 세계에 첫 발을 디뎠다. 디즈니는 현지 시각으로 16일, 디즈니 영화 장면들을 가상 현실 플랫폼에서 볼 수 있는 디즈니 무비 VR(Disney Movie VR)을 공개했다."
-//                , "테슬라는 다음을 가리키는 말이다. 니콜라 테슬라는 미국의 과학자이다. SI 단위계 에서 테슬라는 자기장에 대한 유도단위이다. 엔비디아 테슬라는 엔비디아의 GPU이다. 테슬라 모터스"};
-//
-//        String[] dateList = {"16.08.29", "16.08.28", "16.08.27"
-//                , "16.08.26", "16.08.25", "16.08.24"};
-//        int[] likeList = {10, 10, 3, 4, 125, 23};
-//        boolean[] likeFlagList = {false, false, false, false, false, false};
-//
-//        for (int i = 0; i < 6; i++) {
-//            UserScrapContentData new_userScrapData = new UserScrapContentData();
-//            new_userScrapData.setTitle(titleList[i]);
-//            new_userScrapData.setNcTitle(contentList[i]);
-//            new_userScrapData.setNcTime(dateList[i]);
-//            new_userScrapData.setLike(likeList[i]);
-//            new_userScrapData.setLikeFlag(likeFlagList[i]);
-//
-//            userScrapContentData.userScrapContentDataList.add(new_userScrapData);
-//        }
-//        mAdapter.setUserScrapContentData(userScrapContentData, is_user_my); //구분 플래그를 같이 넣어준다.//
-//    }
-
 
     @Override
     protected void onResume() {

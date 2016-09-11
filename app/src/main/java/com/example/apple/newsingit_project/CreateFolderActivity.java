@@ -151,7 +151,6 @@ public class CreateFolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //팝업창을 띄운다.//
-                Toast.makeText(CreateFolderActivity.this, "이미지를 선택합니다.", Toast.LENGTH_SHORT).show();
 
                 image_select_popup.showAtLocation(findViewById(R.id.image_select_button), Gravity.CENTER, 0, 0);
             }
@@ -161,7 +160,6 @@ public class CreateFolderActivity extends AppCompatActivity {
         select_gallery_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreateFolderActivity.this, "갤러리에서 이미지 선택", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
@@ -175,7 +173,6 @@ public class CreateFolderActivity extends AppCompatActivity {
         camera_picture_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreateFolderActivity.this, "카메라 버튼", Toast.LENGTH_SHORT).show();
 
                 boolean is_camera_usable = checkCameraHardware(CreateFolderActivity.this); //현재 사용자가 카메라를 사용할 수 있으므로//
 
@@ -325,10 +322,31 @@ public class CreateFolderActivity extends AppCompatActivity {
 
         if (item_id == R.id.folder_menu_create) {
             //폴더를 생성한다.//
-            CreateFolder();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(CreateFolderActivity.this);
+            alertDialog.setMessage("폴더를 생성 하시겠습니까?").setCancelable(false).setPositiveButton("생성",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //yes
+                            //네트워크로 데이터를 보낸다.//
+                            CreateFolder();
 
-            finish();
+                            Toast.makeText(CreateFolderActivity.this, "폴더 생성을 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                            finish();
+                        }
+                    }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //no
+
+                }
+            });
+
+            AlertDialog alert = alertDialog.create();
+            alert.show();
         }
+
         return super.onOptionsItemSelected(item);
     }
 

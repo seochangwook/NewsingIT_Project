@@ -65,6 +65,7 @@ public class MyInfoFragment extends Fragment {
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+    private static final String KEY_IMG_DEFAULT_FLAG = "KEY_IMG_DEFAULT_FLAG";
 
     /**
      * Folder 정보 수정 시 필요한 정보
@@ -79,6 +80,11 @@ public class MyInfoFragment extends Fragment {
     private static final String KEY_MY_NAME = "KEY_USER_NAME";
     private static final String KEY_MY_ABOUTME = "KEY_USER_ABOUTME";
 
+    /**
+     * 초기 페이스북 디폴트 경로
+     **/
+    private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
+
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
     // TextView profile_name_textview;
@@ -88,6 +94,7 @@ public class MyInfoFragment extends Fragment {
     Button my_info_replace_button;
     TextView btnScrapCount;
     String name;
+    String key_default_img;
 
     //폴더 관련 변수.//
     ImageButton folder_add_button;
@@ -243,8 +250,6 @@ public class MyInfoFragment extends Fragment {
                 String select_folder_name = folderData.folder_list.get(position).get_folder_name();
                 String select_folder_id = "" + folderData.folder_list.get(position).get_folderid();
 
-                Toast.makeText(getActivity(), select_folder_name + "폴더로 이동", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(getActivity(), UserScrapContentListActivity.class);
 
                 intent.putExtra(KEY_FOLDER_NAME, select_folder_name);
@@ -287,7 +292,6 @@ public class MyInfoFragment extends Fragment {
         follower_count_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "팔로워 리스트 이동", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), FollowerListActivity.class);
 
@@ -298,7 +302,6 @@ public class MyInfoFragment extends Fragment {
         following_count_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "팔로잉 리스트 이동", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), FollowingListActivity.class);
 
@@ -309,11 +312,12 @@ public class MyInfoFragment extends Fragment {
         my_info_replace_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "내 정보 수정하기 화면으로 이동", Toast.LENGTH_SHORT).show();
 
                 // String my_name = profile_name_textview.getText().toString();
                 String my_aboutme = profile_my_introduce_textview.getText().toString();
                 String my_imgUrl = profileUrl;
+
+                //my_imgUrl="https://graph.facebook.com/v2.6/865056173626962/picture?type=large";
 
                 Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
 
@@ -321,6 +325,7 @@ public class MyInfoFragment extends Fragment {
                 intent.putExtra(KEY_MY_NAME, name);
                 intent.putExtra(KEY_MY_ABOUTME, my_aboutme);
                 intent.putExtra(KEY_MY_IMG, my_imgUrl);
+                intent.putExtra(KEY_IMG_DEFAULT_FLAG, key_default_img); //1이면 디폴트, 0이면 일반//
 
                 startActivity(intent);
             }
@@ -329,7 +334,6 @@ public class MyInfoFragment extends Fragment {
         folder_add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "폴더 추가", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), CreateFolderActivity.class);
 
@@ -408,7 +412,6 @@ public class MyInfoFragment extends Fragment {
 
                         new_folderdata.setFolder_private(myFolderListRequestResultsList.get(i).getLocked());
                         new_folderdata.set_folder_imageUrl(myFolderListRequestResultsList.get(i).getImg_url());
-                        //new_folderdata.set_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
                         new_folderdata.set_get_folder_name(myFolderListRequestResultsList.get(i).getName());
                         new_folderdata.set_folderid(myFolderListRequestResultsList.get(i).getId());
 
@@ -420,43 +423,6 @@ public class MyInfoFragment extends Fragment {
             });
         }
     }
-
-    /*public void setDummyFolderData() {
-        //첫번째 폴더//
-        FolderData new_folderdata_1 = new FolderData();
-
-        boolean folder_private_1 = true;
-
-        new_folderdata_1.setFolder_private(folder_private_1);
-        new_folderdata_1.set_get_folder_name("사회이슈");
-        new_folderdata_1.set_dummy_folder_image(R.mipmap.ic_launcher);
-
-        folderData.folder_list.add(new_folderdata_1);
-
-        //첫번째 폴더//
-        FolderData new_folderdata_2 = new FolderData();
-
-        boolean folder_private_2 = false;
-
-        new_folderdata_2.setFolder_private(folder_private_2);
-        new_folderdata_2.set_get_folder_name("IT/과학");
-        new_folderdata_2.set_dummy_folder_image(R.mipmap.ic_launcher);
-
-        folderData.folder_list.add(new_folderdata_2);
-
-        //첫번째 폴더//
-        FolderData new_folderdata_3 = new FolderData();
-
-        boolean folder_private_3 = true;
-
-        new_folderdata_3.setFolder_private(folder_private_3);
-        new_folderdata_3.set_get_folder_name("게임");
-        new_folderdata_3.set_dummy_folder_image(R.mipmap.ic_launcher);
-
-        folderData.folder_list.add(new_folderdata_3);
-
-        folderListAdapter.set_FolderDate(folderData); //설정.//
-    }*/
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -481,8 +447,6 @@ public class MyInfoFragment extends Fragment {
     }
 
     public void getUserInfoNetworkData() {
-        showpDialog();
-
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -501,8 +465,6 @@ public class MyInfoFragment extends Fragment {
                 .build();
 
         client.newCall(request).enqueue(requestMyInfoListCallback);
-
-        hidepDialog();
     }
 
     public void setData(final UserInfoRequestResult userInfoRequestResult) {
@@ -518,7 +480,6 @@ public class MyInfoFragment extends Fragment {
 
                     userInfoData.setName(userInfoRequestResult.getName());
                     userInfoData.setProfileUrl(userInfoRequestResult.getPf_url());
-                    //userInfoData.setProfileUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
                     userInfoData.setAboutMe(userInfoRequestResult.getAboutme());
                     userInfoData.setFollowerCount(userInfoRequestResult.getFollowers());
                     userInfoData.setFollwingCount(userInfoRequestResult.getFollowings());
@@ -541,12 +502,33 @@ public class MyInfoFragment extends Fragment {
                     following_count_button.setText("" + followingCount);
                     btnScrapCount.setText("" + scrapCount);
 
-                    //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
-                    Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+                    //이미지 분할 (기존 적용된 https와 다른 웹 사이트의 https의 충돌문제)//
+                    //pf_url을 가지고 파싱//
+                    //String profileUrl="https://graph.facebook.com/v2.6/865056173626962/picture?type=large";
+                    Log.d("json control", profileUrl);
 
-                    picasso.load(profileUrl)
-                            .transform(new CropCircleTransformation())
-                            .into(profile_imageview);
+                    String parsing_imageurl = profileUrl.substring(0, 26); //문자열 자르기//
+
+                    Log.d("json control", parsing_imageurl);
+
+                    //페이스북 이미지는 일반적인 피카소로 적용//
+                    if (parsing_imageurl.equals(DEFAULT_FACEBOOK_IMG_PATH)) {
+                        Picasso.with(getActivity())
+                                .load(profileUrl)
+                                .transform(new CropCircleTransformation())
+                                .into(profile_imageview); //into로 보낼 위젯 선택.//
+
+                        key_default_img = "1"; //디폴트 이미지이면 1//
+                    } else //현재 앱에서의 https이미지.//
+                    {
+                        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                        picasso.load(profileUrl)
+                                .transform(new CropCircleTransformation())
+                                .into(profile_imageview);
+
+                        key_default_img = "0"; //디폴트가 아니면 0//
+                    }
                 }
             });
         }

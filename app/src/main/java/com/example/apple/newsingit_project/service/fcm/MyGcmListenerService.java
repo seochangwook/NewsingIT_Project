@@ -36,6 +36,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
         // GCM으로 받은 메세지를 디바이스에 알려주는 sendNotification()을 호출한다.
         sendNotification(title, message);
+        set_alarm_badge();
     }
 
 
@@ -65,5 +66,18 @@ public class MyGcmListenerService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    public void set_alarm_badge() {
+        Log.d("json control", "notify receive");
+
+        Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+
+        //패키지 이름과 클래그 이름설정.//
+        intent.putExtra("bage_count", 1);
+        intent.putExtra("badge_count_package_name", getApplication().getPackageName());
+        intent.putExtra("badge_count_class_name", getApplication().getClass().getName());
+
+        getApplication().sendBroadcast(intent);
     }
 }

@@ -1,10 +1,12 @@
 package com.example.apple.newsingit_project;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -40,6 +42,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     private static final String KEY_MY_IMG = "KEY_USER_IMG";
     private static final String KEY_MY_NAME = "KEY_USER_NAME";
     private static final String KEY_MY_ABOUTME = "KEY_USER_ABOUTME";
+    private static final String KEY_IMG_DEFAULT_FLAG = "KEY_IMG_DEFAULT_FLAG";
 
     /**
      * startActivityForResult 요청값
@@ -61,7 +64,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     String my_name;
     String my_aboutme;
     String my_imgUrl;
-
+    String key_default_img;
     /**
      * Network관련 변수
      **/
@@ -91,8 +94,9 @@ public class EditMyInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_my_info_activity_layout);
 
+        networkManager = NetworkManager.getInstance();
+
         profile_fix_imageview = (ImageView) findViewById(R.id.my_profile_imageview);
-        //enroll_fix_button = (Button) findViewById(R.id.enroll_fix_button);
         my_name_fix_edit = (EditText) findViewById(R.id.my_name_fix_edittext);
         my_introduce_fix_edit = (EditText) findViewById(R.id.my_introduce_fix_edit);
         get_image_button = (ImageButton) findViewById(R.id.select_gallery_picture);
@@ -103,6 +107,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         my_name = intent.getStringExtra(KEY_MY_NAME);
         my_aboutme = intent.getStringExtra(KEY_MY_ABOUTME);
         my_imgUrl = intent.getStringExtra(KEY_MY_IMG);
+        key_default_img = intent.getStringExtra(KEY_IMG_DEFAULT_FLAG);
 
         my_name_fix_edit.setText(my_name);
         my_introduce_fix_edit.setText(my_aboutme);
@@ -112,13 +117,18 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //파카소 라이브러리를 이용하여 이미지 로딩//
-        networkManager = NetworkManager.getInstance();
+        if (key_default_img.equals("1")) {
+            Picasso.with(this)
+                    .load(my_imgUrl)
+                    .transform(new CropCircleTransformation())
+                    .into(profile_fix_imageview); //into로 보낼 위젯 선택.//
+        } else if (key_default_img.equals("0")) {
+            Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
 
-        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
-
-        picasso.load(my_imgUrl)
-                .transform(new CropCircleTransformation())
-                .into(profile_fix_imageview);
+            picasso.load(my_imgUrl)
+                    .transform(new CropCircleTransformation())
+                    .into(profile_fix_imageview);
+        }
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -132,16 +142,6 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-//        enroll_fix_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //수정작업//
-//                edit_user();
-//
-//                finish();
-//            }
-//        });
 
         get_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,10 +245,35 @@ public class EditMyInfoActivity extends AppCompatActivity {
         int item_id = item.getItemId();
 
         if (item_id == R.id.menu_edit_my_info) {
-            edit_user();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditMyInfoActivity.this);
+            alertDialog.setTitle("Newsing Info")
+                    .setMessage("나의 정보를 수정하시겠습니까?")
+                    .setCancelable(false)
+                    .setPositiveButton("수정",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //yes
+                                    //네트워크로 데이터를 보낸다.//
+                                    edit_user();
 
-            finish();
+                                    finish();
+
+                                    Toast.makeText(EditMyInfoActivity.this, "나의 정보 수을 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                                    finish();
+                                }
+                            }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //no
+                }
+            });
+
+            AlertDialog alert = alertDialog.create();
+            alert.show();
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

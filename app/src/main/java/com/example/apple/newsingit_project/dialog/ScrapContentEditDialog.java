@@ -158,7 +158,6 @@ public class ScrapContentEditDialog extends Activity {
         expandablelistview.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(ScrapContentEditDialog.this, "원하는 카테고리를 선택하세요", Toast.LENGTH_SHORT).show();
 
                 scrap_delete_button.setVisibility(View.GONE);
                 scrap_private_switch.setVisibility(View.GONE);
@@ -170,7 +169,6 @@ public class ScrapContentEditDialog extends Activity {
         expandablelistview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
-                Toast.makeText(ScrapContentEditDialog.this, "선택된 카테고리 : " + child_name[childPosition], Toast.LENGTH_SHORT).show();
 
                 int move_scrap_folder_id = scrap_folder_id[childPosition];
 
@@ -182,6 +180,8 @@ public class ScrapContentEditDialog extends Activity {
                 } else {
                     //카테고리 이동관련. 이동을 할려면 스크랩 id와 이동할 폴더의 id가 필요.//
                     Scrap_move(scrap_id, move_scrap_folder_id);
+
+                    Toast.makeText(ScrapContentEditDialog.this, "스크랩 이동을 완료하였습니다", Toast.LENGTH_SHORT).show();
                 }
 
                 expandableListView.collapseGroup(0);
@@ -194,7 +194,6 @@ public class ScrapContentEditDialog extends Activity {
         expandablelistview.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(ScrapContentEditDialog.this, "카테고리 목록 닫기", Toast.LENGTH_SHORT).show();
 
                 scrap_delete_button.setVisibility(View.VISIBLE);
                 scrap_private_switch.setVisibility(View.VISIBLE);
@@ -212,7 +211,7 @@ public class ScrapContentEditDialog extends Activity {
                 //  Log.d("scrap_id", scrapId);
                 deleteScrapData(scrapId);
 
-                Toast.makeText(ScrapContentEditDialog.this, "스크랩 삭제 완료", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScrapContentEditDialog.this, "스크랩 삭제를 완료하였습니다", Toast.LENGTH_SHORT).show();
 
                 finish();
             }
@@ -378,15 +377,6 @@ public class ScrapContentEditDialog extends Activity {
                     }
 
                     mAdapter.set_List_Data(group_name, child_name);
-
-//                     //Child를 설정//
-//                    for (int group_index = 0; group_index < group_name.length; group_index++) {
-//                        for (int child_index = 0; child_index < child_name.length; child_index++) {
-//                            String groupname = group_name[group_index];
-//                            String childname = child_name[child_index];
-//                            mAdapter.set_List_Data(groupname, childname);
-//                        }
-//                    }
                 }
             });
         }
@@ -401,24 +391,6 @@ public class ScrapContentEditDialog extends Activity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
-
-
-//
-//    public void set_ExpanList_Data() {
-//        //데이터 초기화.(네트워크로 부터 데이터를 로드한다.)//
-//        group_name = new String[]{"스크랩 폴더 이동"};
-//        child_name = new String[]{"사회이슈", "인물", "정치", "+ 폴더만들기"};
-//
-//        //이중for문으로 그룹 당 자식을 생성.//
-//        for (int group_index = 0; group_index < group_name.length; group_index++) {
-//            for (int child_index = 0; child_index < child_name.length; child_index++) {
-//                String groupname = group_name[group_index];
-//                String childname = child_name[child_index];
-//
-//                mAdapter.set_List_Data(groupname, childname);
-//            }
-//        }
-//    }
 
     private void deleteScrapData(String scrapId) {
         manager = NetworkManager.getInstance();

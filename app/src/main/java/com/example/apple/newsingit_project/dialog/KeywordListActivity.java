@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.json_data.keywordlist.KeywordListRequest;
@@ -97,8 +96,6 @@ public class KeywordListActivity extends Activity {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String userSelectKeyword = keywordData.keywordDataList.get(position).getKeyword().toString();
-
-                Toast.makeText(KeywordListActivity.this, "[" + userSelectKeyword + "]로 리스트 이동", Toast.LENGTH_SHORT).show();
 
                 Intent intent = getIntent();
 

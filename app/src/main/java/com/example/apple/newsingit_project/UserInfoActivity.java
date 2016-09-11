@@ -11,7 +11,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,29 +46,28 @@ import okhttp3.Response;
 
 public class UserInfoActivity extends AppCompatActivity {
     private static final String USER_ID = "USER_ID";
-    private static final String USER_NAME = "USER_NAME";
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
-    private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
 
-    boolean dummy_follow_state = false; //팔로우 하지 않음이 기본 설정.//
+    /**
+     * 초기 페이스북 디폴트 경로
+     **/
+    private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
+
+    boolean follow_state = false; //팔로우 하지 않음이 기본 설정.//
     //사용자 정보 뷰 관련 변수//
     ImageView user_profile_imageview;
-    TextView user_profile_name_textview;
     TextView user_profile_my_introduce_textview;
     TextView user_follower_count_button;
     TextView user_following_count_button;
     ImageButton user_following_button;
     TextView user_scrap_button;
-    Button follow_button;
 
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
 
-    String name;
     String get_user_id = null;
-    String get_user_name = null;
 
     /**
      * 네트워크 데이터
@@ -113,7 +111,10 @@ public class UserInfoActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserInfoActivity.this);
-                            alertDialog.setMessage("등록되지 않은 사용자 입니다").setCancelable(false).setPositiveButton("확인",
+                            alertDialog.setTitle("Newsing Search")
+                                    .setMessage("등록되지 않은 사용자 입니다")
+                                    .setCancelable(false)
+                                    .setPositiveButton("확인",
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -208,7 +209,6 @@ public class UserInfoActivity extends AppCompatActivity {
                             new_user_folderdata.setFolder_id(userFolderListRequestResultsList.get(i).getId());
                             new_user_folderdata.set_get_folder_name(userFolderListRequestResultsList.get(i).getName());
                             new_user_folderdata.set_get_folder_imageUrl(userFolderListRequestResultsList.get(i).getImg_url());
-                            //new_user_folderdata.set_get_folder_imageUrl("https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4");
                             new_user_folderdata.setFolder_private(userFolderListRequestResultsList.get(i).getLocked());
 
                             //기본적으로 서버에서 비공개 처리폴더에 대한 정보는 오지 않는다.//
@@ -229,7 +229,6 @@ public class UserInfoActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         user_profile_imageview = (ImageView) findViewById(R.id.user_profile_imageview);
-        //  user_profile_name_textview = (TextView) findViewById(R.id.user_profile_name_textview);
         user_profile_my_introduce_textview = (TextView) findViewById(R.id.user_profile_my_introduce_textview);
         user_follower_count_button = (TextView) findViewById(R.id.user_follower_button);
         user_following_count_button = (TextView) findViewById(R.id.user_following_button);
@@ -246,21 +245,7 @@ public class UserInfoActivity extends AppCompatActivity {
         //전달되는 값을 받아온다.//
         Intent intent = getIntent();
 
-        get_user_id = intent.getStringExtra(USER_ID);
-        get_user_name = intent.getStringExtra(USER_NAME);
-        follow_flag = intent.getStringExtra(USER_FOLLOW_FLAG);
-
-        if (follow_flag.equals("true")) //팔로잉 되있는 상태.//
-        {
-            user_following_button.setImageResource(R.mipmap.btn_following_600_72);
-        } else if (follow_flag.equals("false")) //팔로우가 되있지 않은 상태.//
-        {
-            user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
-        }
-
-        /** 타이틀과 이름 값 초기화 **/
-        setTitle(get_user_name);
-        //   user_profile_name_textview.setText(get_user_name);
+        get_user_id = intent.getStringExtra(USER_ID); //사용자의 id를 얻어온다.//
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -320,8 +305,6 @@ public class UserInfoActivity extends AppCompatActivity {
                         Log.i("EVENT :", "새로고침 완료");
 
                         user_folder_recyclerrefreshview.loadMoreComplete();
-
-
                     }
                 }, 1000);
             }
@@ -372,31 +355,30 @@ public class UserInfoActivity extends AppCompatActivity {
         user_following_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dummy_follow_state == false) {
+                if (follow_state == false) //현재 내가 해당 유저를 팔로잉하고 있지 않을경우//
+                {
                     user_following_button.setImageResource(R.mipmap.btn_following_600_72);
-                    //   user_following_button.setBackgroundColor(getResources().getColor(R.color.bottom_bar_unselected));
-                    //   user_following_button.setText("!팔로잉");
 
-                    dummy_follow_state = true;
+                    follow_state = true;
 
                     //팔로우 작업//
+                    Log.d("json control", "팔로잉을 현재 하지 않은 상태미으로 팔로잉을 생성");
+
                     set_user_follow(get_user_id);
 
-                } else if (dummy_follow_state == true) {
+                } else if (follow_state == true) //현재 내가 해당 유저를 팔로잉하고 있는 경우//
+                {
                     user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
-                    //user_following_button.setBackgroundColor(getResources().getColor(R.color.button_transparent_background));
-                    //ser_following_button.setText("+팔로우");
 
-                    dummy_follow_state = false;
+                    follow_state = false;
 
                     //팔로우 해제 작업//
+                    Log.d("json control", "팔로잉을 현재 한 상태이므로 팔로잉을 해제");
+
                     unset_user_follow(get_user_id);
                 }
             }
         });
-
-        //Dummy Data 설정//
-        //set_Dummy_Folder_Date();
 
         //유저 프로필 정보를 불러온다.//
         get_UserInfo_Data(get_user_id); //id값이 조건으로 필요하다.//
@@ -423,7 +405,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 .addPathSegment("follows");
 
         RequestBody body = new FormBody.Builder()
-                .add("ofid", "" + follow_user_id)
+                .add("ofid", follow_user_id)
                 .build();
 
         Request request = new Request.Builder()
@@ -445,7 +427,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 .host(getResources().getString(R.string.real_server_domain))
                 .port(8080)
                 .addPathSegment("follows")
-                .addQueryParameter("ofid", follow_user_id);
+                .addPathSegment(follow_user_id);
 
         RequestBody body = new FormBody.Builder()
                 .build();
@@ -524,21 +506,42 @@ public class UserInfoActivity extends AppCompatActivity {
                     following_count = "" + userInfoRequestResult.getFollowings();
                     follower_count = "" + userInfoRequestResult.getFollowers();
                     user_imgUrl = userInfoRequestResult.getPf_url();
-                    //user_imgUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
+                    follow_flag = "" + userInfoRequestResult.get_flag();
+                    follow_state = userInfoRequestResult.get_flag();
+                    user_name = userInfoRequestResult.getName();
 
-                    /*Log.d("user aboutMe", user_intro);
-                    Log.d("user scrap count", scrap_count);
-                    Log.d("user following", following_count);
-                    Log.d("user follower", follower_count);
-                    Log.d("user imgUrl", user_imgUrl);*/
+                    Log.d("json control", user_imgUrl);
 
-                    //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
-                    //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
-                    Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+                    String parsing_imageurl = user_imgUrl.substring(0, 26); //문자열 자르기//
 
-                    picasso.load(user_imgUrl)
-                            .transform(new CropCircleTransformation())
-                            .into(user_profile_imageview);
+                    Log.d("json control", parsing_imageurl);
+
+                    //페이스북 이미지는 일반적인 피카소로 적용//
+                    if (parsing_imageurl.equals(DEFAULT_FACEBOOK_IMG_PATH)) {
+                        Picasso.with(UserInfoActivity.this)
+                                .load(user_imgUrl)
+                                .transform(new CropCircleTransformation())
+                                .into(user_profile_imageview); //into로 보낼 위젯 선택.//
+                    } else {
+                        //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
+                        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                        picasso.load(user_imgUrl)
+                                .transform(new CropCircleTransformation())
+                                .into(user_profile_imageview);
+                    }
+
+                    //타이틀 설정.//
+                    /** 타이틀과 이름 값 초기화 **/
+                    setTitle(user_name);
+
+                    if (follow_flag.equals("true")) //팔로잉 되있는 상태.//
+                    {
+                        user_following_button.setImageResource(R.mipmap.btn_following_600_72);
+                    } else if (follow_flag.equals("false")) //팔로우가 되있지 않은 상태.//
+                    {
+                        user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
+                    }
 
                     user_profile_my_introduce_textview.setText(user_intro);
                     user_follower_count_button.setText(follower_count);
@@ -548,32 +551,6 @@ public class UserInfoActivity extends AppCompatActivity {
             });
         }
     }
-
-    /*public void set_Dummy_Folder_Date() {
-        //첫번째 폴더//
-        UserFolderData new_user_folderdata_1 = new UserFolderData();
-
-        boolean user_folder_private_1 = true;
-
-        new_user_folderdata_1.setFolder_private(user_folder_private_1);
-        new_user_folderdata_1.set_get_folder_name("사회이슈");
-        new_user_folderdata_1.set_dummy_folder_image(android.R.drawable.ic_menu_close_clear_cancel);
-
-        //user_folderData.user_folder_list.add(new_user_folderdata_1); //첫번째 폴더는 비공개이므로 생성 안함.//
-
-        //두번째 폴더//
-        UserFolderData new_user_folderdata_2 = new UserFolderData();
-
-        boolean user_folder_private_2 = false;
-
-        new_user_folderdata_2.setFolder_private(user_folder_private_2);
-        new_user_folderdata_2.set_get_folder_name("IT/과학");
-        new_user_folderdata_2.set_dummy_folder_image(R.mipmap.ic_launcher);
-
-        user_folderData.user_folder_list.add(new_user_folderdata_2);
-
-        user_folderListAdapter.set_UserFolderDate(user_folderData); //설정.//
-    }*/
 
     private void showpDialog() {
         if (!pDialog.isShowing())

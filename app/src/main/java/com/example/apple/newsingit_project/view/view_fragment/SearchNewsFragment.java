@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SelectNewsDetailActivity;
@@ -44,6 +43,7 @@ public class SearchNewsFragment extends Fragment {
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
     private static final int LOAD_MORE_TAG = 5;
+    private static final String SEARCH_QUERY = "SEARCH_QUERY";
 
     String query;
 
@@ -98,7 +98,7 @@ public class SearchNewsFragment extends Fragment {
                 .port(8080)
                 .addPathSegment("search")
                 .addQueryParameter("target", "1")
-                .addQueryParameter("word", "마")
+                .addQueryParameter("word", query)
                 .addQueryParameter("page", "1")
                 .addQueryParameter("count", "20");
 
@@ -145,7 +145,6 @@ public class SearchNewsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_news_layout, container, false);
 
-
         Bundle b = getArguments();
         query = b.getString("SEARCH_QUERY");
 
@@ -172,7 +171,7 @@ public class SearchNewsFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
-                        //   mAdapter.setSearchNewsData(searchNewsData);
+
                         Log.d("search", "pull refresh");
 
 
@@ -190,19 +189,16 @@ public class SearchNewsFragment extends Fragment {
                         Log.i("EVENT :", "새로고침 완료");
 
                         familiarRefreshRecyclerView.loadMoreComplete();
+
                         initSearchNewsDataList();
 
                         Log.d("search", "load more");
+
                         getSearchNewsNetworkData(query);
-
-
-                        //   mAdapter.setSearchNewsData(searchNewsData);
-
                     }
                 }, 1000);
             }
         });
-
 
         recyclerView = familiarRefreshRecyclerView.getFamiliarRecyclerView();
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -223,7 +219,6 @@ public class SearchNewsFragment extends Fragment {
 
                 String userSelect = searchNewsData.searchNewsDataArrayList.get(position).getTitle().toString();
                 int news_id = searchNewsData.searchNewsDataArrayList.get(position).getId();
-                Toast.makeText(getActivity(), "제목 " + userSelect, Toast.LENGTH_SHORT).show();
 
                 //선택한 뉴스 콘텐츠 페이지로 이동//
                 Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);

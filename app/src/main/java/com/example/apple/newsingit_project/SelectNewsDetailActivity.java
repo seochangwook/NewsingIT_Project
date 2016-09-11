@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequest;
 import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequestResult;
@@ -92,6 +91,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
      **/
     private FamiliarRefreshRecyclerView scrap_folder_recyclerrefreshview;
     private FamiliarRecyclerView scrap_folder_recyclerview;
+
     private Callback requestnewsdetailinfocallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) //접속 실패의 경우.//
@@ -230,8 +230,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 String folder_name = scrapfolderData.scrapfolderlist.get(position).get_scrap_folder_list_data();
                 String folder_id = "" + scrapfolderData.scrapfolderlist.get(position).get_scrap_folder_id();
 
-                Toast.makeText(SelectNewsDetailActivity.this, folder_name + " 폴더 선택", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(SelectNewsDetailActivity.this, CreateScrapContentActivity.class);
 
                 //필요한 정보를 넘겨준다.//
@@ -296,18 +294,9 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 bundle.putString("URL", news_link);
                 fragment.setArguments(bundle);
 
-                //TO DO//
-                //fragment를 덮어씌웠을 때//
-                //1. 버튼이 사라져야 함
-                //2. 메뉴가 바뀌어야 함(사라져야 함)
-                //3. 다시 back 했을 때 원상 복구 되어야 함
-                // btn.setVisibility(View.GONE);
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.news_container, fragment)
                         .addToBackStack(null)
                         .commit();
-
-                Toast.makeText(SelectNewsDetailActivity.this, "해당 뉴스 링크로 이동", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -418,7 +407,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     news_imageUrl = newsContentDetailRequestResult.getImg_url();
-                    //news_imageUrl = "https://my-project-1-1470720309181.appspot.com/displayimage?imageid=AMIfv95i7QqpWTmLDE7kqw3txJPVAXPWCNd3Mz4rfBlAZ8HVZHmvjqQGlFy5oz1pWgUpxnwnXOrebTBd7nHoTaVUngSzFilPTtbelOn1SwPuBMt_IgtFRKAt3b0oPblW0j542SFVZHCNbSkb4d9P9U221kumJhC_ZwCO85PXq5-oMdxl6Yn6-F4";
                     news_author = newsContentDetailRequestResult.getAuthor();
                     news_link = newsContentDetailRequestResult.getLink();
                     news_ntime = newsContentDetailRequestResult.getNtime();
@@ -437,35 +425,11 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         }
     }
 
-   /* public void set_Dummy_ScrapFolder_Date() {
-        //첫번째 폴더//
-        ScrapFolderListData new_folderdata_1 = new ScrapFolderListData();
-
-        new_folderdata_1.set_scrap_folder_list_data("사회이슈");
-
-        scrapfolderData.scrapfolderlist.add(new_folderdata_1);
-
-        //두번째 폴더//
-        ScrapFolderListData new_folderdata_2 = new ScrapFolderListData();
-
-        new_folderdata_2.set_scrap_folder_list_data("정치");
-
-        scrapfolderData.scrapfolderlist.add(new_folderdata_2);
-
-        //세번째 폴더//
-        ScrapFolderListData new_folderdata_3 = new ScrapFolderListData();
-
-        new_folderdata_3.set_scrap_folder_list_data("게임");
-
-        scrapfolderData.scrapfolderlist.add(new_folderdata_3);
-
-        scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
-    }*/
-
     @Override
     protected void onResume() {
         super.onResume();
         Log.d("message", "onresume");
+
         btn.setVisibility(View.VISIBLE);
 
     }
@@ -488,12 +452,9 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         int item_id = item.getItemId();
 
         if (item_id == R.id.scrap_news) {
-            Toast.makeText(SelectNewsDetailActivity.this, "뉴스 스크랩 하기", Toast.LENGTH_SHORT).show();
-
             scrap_folder_popup.showAtLocation(findViewById(R.id.scrap_news), Gravity.BOTTOM, 0, 0); //팝업창 띄우기//
         }
         if (item_id == R.id.share_news) {
-            Toast.makeText(SelectNewsDetailActivity.this, "뉴스 공유 하기", Toast.LENGTH_SHORT).show();
 
             String scrap_title = news_headline_title_textview.getText().toString();
             String scrap_content = news_content_textview.getText().toString();
@@ -501,11 +462,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             Intent msg = new Intent(Intent.ACTION_SEND);
 
             msg.addCategory(Intent.CATEGORY_DEFAULT);
-
             msg.putExtra(Intent.EXTRA_SUBJECT, scrap_title);
-
             msg.putExtra(Intent.EXTRA_TEXT, scrap_content);
-
             msg.setType("text/plain");
 
             startActivity(Intent.createChooser(msg, "Newsing Share"));

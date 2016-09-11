@@ -7,6 +7,7 @@ public class UserInfoRequestResult {
     private int scrapings;
     private String pf_url;
     private String aboutme;
+    private boolean flag;
 
     public int getFollowers() {
         return this.followers;
@@ -54,5 +55,15 @@ public class UserInfoRequestResult {
 
     public void setAboutme(String aboutme) {
         this.aboutme = aboutme;
+    }
+
+    public boolean get_flag()
+    {
+        return this.flag;
+    }
+
+    public void set_flag(boolean flag)
+    {
+        this.flag = flag;
     }
 }

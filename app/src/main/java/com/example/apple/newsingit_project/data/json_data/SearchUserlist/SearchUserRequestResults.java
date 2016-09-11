@@ -2,7 +2,7 @@ package com.example.apple.newsingit_project.data.json_data.searchuserlist;
 
 public class SearchUserRequestResults {
     private String name;
-    private long id;
+    private int id;
     private String pf_url;
     private String aboutme;
     private boolean flag;
@@ -23,11 +23,11 @@ public class SearchUserRequestResults {
         this.name = name;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

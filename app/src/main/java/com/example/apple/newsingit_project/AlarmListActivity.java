@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequest;
 import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequestResults;
@@ -29,6 +28,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class AlarmListActivity extends AppCompatActivity {
+    private static final String SCRAP_ID = "SCRAP_ID";
+    private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+    private static final String USER_ID = "USER_ID";
 
     AlarmListAdapter mAdapter;
     AlarmData alarmData;
@@ -36,7 +38,9 @@ public class AlarmListActivity extends AppCompatActivity {
      * Network 자원
      **/
     NetworkManager networkManager;
+
     private FamiliarRecyclerView recyclerview;
+
     private Callback requestalarmlistcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) //접속 실패의 경우.//
@@ -69,7 +73,7 @@ public class AlarmListActivity extends AppCompatActivity {
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -93,47 +97,53 @@ public class AlarmListActivity extends AppCompatActivity {
         recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
-                String userSelect = alarmData.alarmDataList.get(position).getName().toString();
-                String alarmCase = alarmData.alarmDataList.get(position).getCase().toString();
+                //필요한 데이터는 알람경우와 알람데이터이다.//
+                int alarm_type = alarmData.alarmDataList.get(position).get_alarm_message_type();
+                String alarm_data = "" + alarmData.alarmDataList.get(position).get_alarm_data();
 
-                if (alarmCase == "1") { //1 - 스크랩 좋아요
-                    //당신의 게시물을 좋아합니다 -> 나의 해당 스크랩으로 이동//
-                    Toast.makeText(AlarmListActivity.this, "나의 마이 페이지로 이동합니다", Toast.LENGTH_SHORT).show();
+                /** alarm data
+                 * type == 1 (팔로잉 새 스크랩) -> 해당 스크랩 화면으로 이동(is_me는 user)
+                 * - scrap_id
+                 * type == 2 (내 스크랩 좋아요) -> 해당 스크랩 화면으로 이동(is_me는 my)
+                 * - scrap_id
+                 * type == 4 (팔로우) -> 해당 유저의 마이 페이지로 이동
+                 * - user_id
+                 */
 
-                    Intent intent = new Intent(AlarmListActivity.this, MainActivity.class);
+                if (alarm_type == 1) {
+                    //1 - 팔로잉 새 스크랩 (해당 스크랩 화면으로 이동)//
+                    Intent intent = new Intent(AlarmListActivity.this, UserSelectScrapContentActivity.class);
 
-                    intent.putExtra("KEY_FRAGMENT_NUMBER", "1");
+                    //필요한 정보를 전달(스크랩 id, 현재 사용자 유무)
+                    intent.putExtra(KEY_USER_IDENTIFY_FLAG, "1"); //팔로잉의 새 스크랩은 다른 사람의 경우가 된다.//
+                    intent.putExtra(SCRAP_ID, alarm_data);
 
+                    Log.d("json control", "scrap id:" + alarm_data);
 
-                    setResult(RESULT_OK, intent);
+                    startActivity(intent);
+                } else if (alarm_type == 2) {
+                    //2 - 내 스크랩 좋아요(해당 스크랩 화면으로 이동)//
+                    Intent intent = new Intent(AlarmListActivity.this, UserSelectScrapContentActivity.class);
 
-                    finish();
-                } else if (alarmCase == "2") {   //2 - 나를 팔로우
-                    //당신을 팔로우 하였습니다 -> 나의 마이 페이지로 이동//
-                    Toast.makeText(AlarmListActivity.this, "나의 마이 페이지로 이동합니다", Toast.LENGTH_SHORT).show();
+                    //필요한 정보를 전달(스크랩 id, 현재 사용자 유무)
+                    intent.putExtra(KEY_USER_IDENTIFY_FLAG, "0"); //내 스크랩의 좋아요는 나의 경우가 된다.//
+                    intent.putExtra(SCRAP_ID, alarm_data);
 
-                    Intent intent = new Intent(AlarmListActivity.this, MainActivity.class);
+                    Log.d("json control", "scrap id:" + alarm_data);
 
-                    intent.putExtra("KEY_FRAGMENT_NUMBER", "1");
-
-                    setResult(RESULT_OK, intent);
-
-                    finish();
-
-                } else if (alarmCase == "3") {  //3 - 새 스크랩
-                    //xx가 새 스크랩을 하였습니다 -> 그 사람의 마이 페이지로 이동 or 그 사람의 새로운 스크랩으로 바로 이동//
+                    startActivity(intent);
+                } else if (alarm_type == 3) {
+                    //3 - 팔로우(그 사람의 마이페이지로 이동//
                     Intent intent = new Intent(AlarmListActivity.this, UserInfoActivity.class);
-                    //필요한 값을 전달한다.//
-                    intent.putExtra("USER_NAME", userSelect);
+
+                    intent.putExtra(USER_ID, alarm_data);
+
+                    Log.d("json control", "user id:" + alarm_data);
 
                     startActivity(intent);
                 }
-
-
             }
         });
-
-        //initDummyData();
 
         //네트워크로 부터 데이터를 얻어온다.//
         get_Alarm_Data();
@@ -182,36 +192,17 @@ public class AlarmListActivity extends AppCompatActivity {
                     for (int i = 0; i < alarm_request_result_size; i++) {
                         AlarmData new_alarmData = new AlarmData();
 
-                        new_alarmData.setContent(alarmListRequestResultsList.get(i).getMessage());
-                        new_alarmData.setDate(alarmListRequestResultsList.get(i).getDtime());
-                        new_alarmData.setData_pk(alarmListRequestResultsList.get(i).getData_pk());
+                        new_alarmData.setAlarm_date(alarmListRequestResultsList.get(i).getDtime());
+                        new_alarmData.set_alarm_message_type(alarmListRequestResultsList.get(i).getType());
+                        new_alarmData.setAlarm_message(alarmListRequestResultsList.get(i).getMessage());
+                        new_alarmData.set_alarm_data(alarmListRequestResultsList.get(i).getData_pk());
 
                         alarmData.alarmDataList.add(new_alarmData);
-
-                        mAdapter.setAlarmDataLIist(alarmData);
                     }
+
+                    mAdapter.setAlarmDataLIist(alarmData);
                 }
             });
         }
     }
-
-//    private void initDummyData() {
-//        String nameList[] = {"서창욱", "임지수", "정다솜", "이혜람", "신미은", "김예진", "이임수"};
-//        String contentList[] = {"님이 당신의 게시물을 좋아합니다", "님이 당신의 게시물을 좋아합니다", "님이 당신의 게시물을 좋아합니다"
-//                , "님이 당신의 게시물을 좋아합니다", "님이 당신을 팔로우 하였습니다", "님이 새 스크랩을 하였습니다"
-//                , "님이 당신의 게시물을 좋아합니다"};
-//        String dateList[] = {"1시간 전", "1시간 전", "2시간 전", "2시간 전", "4시간 전", "6시간 전", "9시간 전"};
-//        String acaseList[] = {"1", "1", "1", "1", "2", "3", "1"};
-//
-//        for (int i = 0; i < 7; i++) {
-//            AlarmData new_alarmData = new AlarmData();
-//            new_alarmData.name = nameList[i];
-//            new_alarmData.content = contentList[i];
-//            new_alarmData.date = dateList[i];
-//            new_alarmData.acase = acaseList[i];
-//
-//            alarmData.alarmDataList.add(new_alarmData);
-//        }
-//        mAdapter.setAlarmDataLIist(alarmData);
-//    }
 }
