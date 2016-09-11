@@ -65,6 +65,10 @@
   <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/cloudmessage.png" width="650" height="350">
 </p>
 
+<p align="left">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/cloudmessage.png" width="650" height="350">
+</p>
+
 < Update Content (기능구현 / 설계 / 디자인 가이드 적용 부분) >
 
 * 플로팅 버튼 제거 - 임지수 (16/08/23 11:20)
