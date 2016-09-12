@@ -337,6 +337,7 @@ public class MyInfoFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), CreateFolderActivity.class);
 
+
                 startActivity(intent);
 
                 folder_recyclerview.addHeaderView(header_info_view);
@@ -531,6 +532,7 @@ public class MyInfoFragment extends Fragment {
             });
         }
     }
+
 
     private void showpDialog() {
         if (!pDialog.isShowing())

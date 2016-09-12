@@ -48,6 +48,7 @@ public class CreateFolderActivity extends AppCompatActivity {
     private static final int RC_SINGLE_IMAGE = 2;
     private static final int RC_CAMERA = 1;
 
+
     ImageButton image_select_button;
     SwitchButton private_select_switch;
 

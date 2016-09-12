@@ -8,10 +8,11 @@
         android:id="@+id/text_notice_title"
         android:layout_width="@dimen/notice_title_width"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/notice_title_margin_bottom"
+
         android:layout_marginLeft="@dimen/notice_title_margin_left"
         android:layout_marginRight="@dimen/notice_title_margin_right"
         android:layout_marginTop="@dimen/notice_title_margin_top"
+        android:singleLine="true"
         android:text="title"
         android:textColor="@color/notice_title"
         android:textSize="@dimen/notice_title_size" />

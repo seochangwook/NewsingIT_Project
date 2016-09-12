@@ -35,12 +35,12 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class UserScrapContentListActivity extends AppCompatActivity {
+    public static final int USER_SCRAP_CONTENT_RESULT_OK = 40;
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final String SCRAP_ID = "SCRAP_ID";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
-
     static int page_count = 1;
 
     String folder_name;
@@ -301,6 +301,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                setResult(USER_SCRAP_CONTENT_RESULT_OK);
                 finish();
             }
         });

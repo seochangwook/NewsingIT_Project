@@ -29,11 +29,13 @@
 
     <TextView
         android:id="@+id/text_search_news_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_search_news_author"
         android:layout_marginLeft="@dimen/search_news_content_margin_left"
+        android:layout_marginRight="@dimen/search_news_content_margin_right"
         android:layout_marginTop="@dimen/search_news_content_margin_top"
+        android:singleLine="true"
         android:text="title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

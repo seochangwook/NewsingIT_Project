@@ -45,10 +45,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UserInfoActivity extends AppCompatActivity {
+    public static final int USER_INFO_REQUEST_CODE = 10;
     private static final String USER_ID = "USER_ID";
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
-
     /**
      * 초기 페이스북 디폴트 경로
      **/
@@ -328,7 +328,7 @@ public class UserInfoActivity extends AppCompatActivity {
                 intent.putExtra(KEY_FOLDER_ID, select_user_folder_id);
                 intent.putExtra("KEY_USER_IDENTIFY_FLAG", "1"); //다른 사용자일 경우 1 / 나일 경우 0//
 
-                startActivity(intent);
+                startActivityForResult(intent, USER_INFO_REQUEST_CODE);
             }
         });
 
@@ -549,6 +549,15 @@ public class UserInfoActivity extends AppCompatActivity {
                     user_scrap_button.setText(scrap_count);
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == USER_INFO_REQUEST_CODE && resultCode == UserScrapContentListActivity.USER_SCRAP_CONTENT_RESULT_OK) {
+            init_folder_list();
+            get_User_Folder_Data(get_user_id);
         }
     }
 

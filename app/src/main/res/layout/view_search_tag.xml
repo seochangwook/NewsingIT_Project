@@ -17,10 +17,11 @@
 
     <TextView
         android:id="@+id/text_search_tag"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/search_tag_title_margin_top"
         android:layout_toRightOf="@+id/search_tag_sharp"
+        android:singleLine="true"
         android:text="#태그"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/search_tag_title"

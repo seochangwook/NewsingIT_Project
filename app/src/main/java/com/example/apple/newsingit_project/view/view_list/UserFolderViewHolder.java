@@ -12,8 +12,6 @@ import com.example.apple.newsingit_project.data.view_data.UserFolderData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
-
 /**
  * Created by apple on 2016. 8. 25..
  */
@@ -59,7 +57,6 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
                 Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
 
                 picasso.load(folder_imgUrl)
-                        .transform(new CropCircleTransformation())
                         .into(user_folder_imageview);
             }
 
@@ -79,7 +76,6 @@ public class UserFolderViewHolder extends RecyclerView.ViewHolder {
                 Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
 
                 picasso.load(folder_imgUrl)
-                        .transform(new CropCircleTransformation())
                         .into(user_folder_imageview);
             }
         }

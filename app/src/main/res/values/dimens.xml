@@ -181,6 +181,10 @@
     <dimen name="notice_content_margin_bottom">36dp</dimen>
     <dimen name="notice_content_space">27sp</dimen>
 
+    <dimen name="notice_content_title_size">16sp</dimen>
+    <dimen name="notice_content_title_margin_top">36dp</dimen>
+    <dimen name="notice_content_title_margin_left">29dp</dimen>
+
     <!-- Alarm List dimen-->
     <dimen name="alarm_list_height">81dp</dimen>
 
@@ -309,6 +313,7 @@
 
     <dimen name="search_news_content_margin_top">10dp</dimen>
     <dimen name="search_news_content_margin_left">26dp</dimen>
+    <dimen name="search_news_content_margin_right">15dp</dimen>
     <dimen name="search_news_content_margin_botton">28dp</dimen>
     <dimen name="search_news_content_size">15sp</dimen>
 
