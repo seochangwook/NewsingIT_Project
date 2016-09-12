@@ -160,4 +160,8 @@
 < Update Content (예외처리 / Clean Code / 테스팅 부분) >
 
 * AlarmList 알람 간 id 문제 해결 - 서창욱 (16/09/12 14:06)
+* follow, follwing list 버튼 이미지 셋팅 (adapter에서 Handler 사용하여 ui thread 돌려서 해결) - 임지수 (16/09/12 14:48)
+* 검색 당겨서 새로고침 - 임지수 (16/09/12 17:57)
+* TEXT 잘려 나오는 뷰들 singleLine으로 수정, UserScrapContentListActivity 종료 후 UserInfoActivity의 folder list 갱신 - 임지수 (16/09/12 20:33)
 * MyInfoFragment 데이터 갱신 예외처리 - 서창욱 (16/09/12 20:52)
+
