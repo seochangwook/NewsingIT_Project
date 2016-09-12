@@ -89,6 +89,8 @@ public class FollowingListActivity extends AppCompatActivity {
                     });
                 }
             } else if (followingListRequest.getResults().length > 0) {
+                //초기화//
+
                 setData(followingListRequest.getResults(), followingListRequest.getResults().length);
             }
         }
