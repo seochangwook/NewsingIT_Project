@@ -155,7 +155,9 @@
 * 스크랩 상세보기에서 Tag클릭 시 해당 태그 스크랩 검색 - 서창욱 (16/09/12 02:45)
 * 현재 앱의 https인증서와 타 웹사이트(페이스북 등)의 https의 인증서 충돌문제 issue -> 디폴트 이미지 경로 지정 후 해당경로인지 파싱작업 - 서창욱 (16/09/12 02:45)
 * AlarmList 와 FCM 테스트 완료 - 서창욱 (16/09/12 02:45)
+* Alarm Receiver 간 Badge 생성(SharedPreference) - 서창욱 (16/09/12 20:51)
 
 < Update Content (예외처리 / Clean Code / 테스팅 부분) >
 
 * AlarmList 알람 간 id 문제 해결 - 서창욱 (16/09/12 14:06)
+* MyInfoFragment 데이터 갱신 예외처리 - 서창욱 (16/09/12 20:52)
