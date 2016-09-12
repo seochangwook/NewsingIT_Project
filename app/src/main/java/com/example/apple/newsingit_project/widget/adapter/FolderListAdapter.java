@@ -112,6 +112,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                     if (folder_private == true) { //잠금 해제//
                         Toast.makeText(context, "잠금모드 해제", Toast.LENGTH_SHORT).show();
+                        Log.d("position ", "" + position);
 
                         folderData.folder_list.get(position).setFolder_private(false);
 

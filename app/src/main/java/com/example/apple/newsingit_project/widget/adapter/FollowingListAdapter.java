@@ -1,7 +1,8 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
-import android.os.Handler;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,14 +30,15 @@ import okhttp3.Response;
  */
 public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    FollowingData followingData, searchList;
+    final boolean[] isOk = {false};
+    FollowingData followingData;
     Context context;
-
     NetworkManager networkManager;
     int pos;
     FollowingViewHolder followingViewHolder;
     boolean flag;
     private Callback requestSetFollowingCallback = new Callback() {
+
         @Override
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
@@ -46,19 +48,13 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String responseData = response.body().string();
-            Handler mainHandler = new Handler(context.getMainLooper());
 
             Log.d("json data", responseData);
 
             if (response.code() == 401) {
 
             } else if (response.code() == 200) {
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        setFollowingButton();
-                    }
-                });
+                isOk[0] = true;
             }
         }
     };
@@ -72,43 +68,22 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String responseData = response.body().string();
-            Handler mainHandler = new Handler(context.getMainLooper());
 
             Log.d("json data", responseData);
 
             if (response.code() == 401) {
 
             } else if (response.code() == 200) {
-                mainHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        setFollowButton();
-                    }
-                });
-            }
 
+            }
         }
     };
 
     public FollowingListAdapter(Context context) {
         this.context = context;
         followingData = new FollowingData();
-        searchList = new FollowingData();
-
     }
 
-    public void setFollowButton() {
-
-        followingData.followingDataList.get(pos).setFlag(!flag);
-        followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_follow);
-        notifyDataSetChanged();
-    }
-
-    public void setFollowingButton() {
-        followingData.followingDataList.get(pos).setFlag(!flag);
-        followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_following);
-        notifyDataSetChanged();
-    }
 
     private void setFollowing(String userId) {
         networkManager = NetworkManager.getInstance();
@@ -159,12 +134,20 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         client.newCall(request).enqueue(requestDeleteFollowingCallback);
     }
 
+
     public void setFollowingData(FollowingData followingData){
+
         if (this.followingData != followingData) {
             this.followingData = followingData;
-            searchList = followingData;
-            notifyDataSetChanged();
         }
+        notifyDataSetChanged();
+    }
+
+    public void initFollowingData(FollowingData followingData) {
+        if (this.followingData != followingData) {
+            this.followingData = followingData;
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -183,17 +166,15 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (followingData.followingDataList.size() > 0) {
             if (position < followingData.followingDataList.size()) {
                 followingViewHolder = (FollowingViewHolder) holder;
-
                 followingViewHolder.setFollowingData(followingData.followingDataList.get(position), context);
 
                 pos = position;
                 flag = followingData.followingDataList.get(pos).getFlag();
-
-                Log.d("json control", "(팔로잉리스트)" + flag);
+                Log.d("json position", "" + position);
 
                 if (flag == true) {//true이면 선택한 유저를 팔로우 한 상태//
                     //팔로잉 한 상태에서는 팔로우 해제//
@@ -206,34 +187,52 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 followingViewHolder.btnFollowing.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String userSelectId = followingData.followingDataList.get(pos).getId();
-                        boolean flag = followingData.followingDataList.get(pos).getFlag();
+                        final String userSelectId = followingData.followingDataList.get(position).getId();
+                        final boolean flag = followingData.followingDataList.get(position).getFlag();
+                        String name = followingData.followingDataList.get(position).getName();
 
                         if (flag == true) //true이면 선택한 유저를 팔로우 한 상태//
                         {
-                            Log.d("json control", "(팔로잉리스트)" + flag);
-
                             //팔로잉 한 상태에서는 팔로우 해제//
-                            Log.d("json control", "(팔로잉리스트)팔로잉을 현재 한 상태이므로 팔로잉을 해제");
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                            alertDialog.setMessage(name + " 님의 팔로우를 취소 하시겠어요?").setCancelable(false).setPositiveButton("팔로우 취소",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            //yes
+                                            deleteFollowing(userSelectId);
+                                            followingData.followingDataList.get(position).setFlag(!flag);
+                                            notifyDataSetChanged();
+                                        }
+                                    }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //no
 
-                            deleteFollowing(userSelectId);
+                                }
+                            });
+                            AlertDialog alert = alertDialog.create();
+                            alert.show();
 
                         } else if (flag == false) //false이면 선택한 유저를 팔로우 하지 않은 상태//
                         {
                             Log.d("json control", "(팔로잉리스트)" + flag);
-
                             //팔로잉 안 한 상태에서 팔로우 생성//
-                            Log.d("json control", "(팔로잉리스트)팔로잉을 현재 하지 않은 상태미으로 팔로잉을 생성");
+                            Log.d("json control", "(팔로잉리스트)팔로잉을 현재 하지 않은 상태이므로 팔로잉을 생성");
 
                             setFollowing(userSelectId);
+                            followingData.followingDataList.get(position).setFlag(!flag);
+                            notifyDataSetChanged();
+
                         }
+                        notifyDataSetChanged();
                     }
                 });
 
                 return;
             }
 
-            position -= followingData.followingDataList.size();
+            //position -= followingData.followingDataList.size();
         }
         throw new IllegalArgumentException("invalid position");
     }

@@ -187,6 +187,8 @@ public class FollowerListActivity extends AppCompatActivity {
         search_edit.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                initSearchFollowerList();
                 //검색어를 가지고 검색을 한다.//
                 search_follower_list(query);
 
@@ -242,6 +244,11 @@ public class FollowerListActivity extends AppCompatActivity {
         });
 
         getFollowingListNetworkData(); //초기 화면에 들어올 시는 전체 리스트를 검색.//
+    }
+
+    private void initSearchFollowerList() {
+        followerData.followerDataList.clear();
+        mAdapter.initFollowerData(followerData);
     }
 
     public void search_follower_list(String query) {

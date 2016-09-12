@@ -120,7 +120,8 @@ public class SearchUserFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
-
+                        initSearchUserDataList();
+                        get_User_search_Data(query);
 
                     }
                 }, 1000);

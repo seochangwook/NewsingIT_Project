@@ -172,7 +172,13 @@ public class SearchNewsFragment extends Fragment {
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
 
+                        initSearchNewsDataList();
+
                         Log.d("search", "pull refresh");
+
+                        getSearchNewsNetworkData(query);
+
+
 
 
                     }

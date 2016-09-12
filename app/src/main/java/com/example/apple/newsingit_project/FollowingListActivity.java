@@ -183,6 +183,8 @@ public class FollowingListActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                initSearchFollowingList();
+
                 search_following_list(query);
 
                 return false;
@@ -247,6 +249,11 @@ public class FollowingListActivity extends AppCompatActivity {
         });
 
         getFollowingListNetworkData(); //초기화면은 전체검색 화면//
+    }
+
+    private void initSearchFollowingList() {
+        followingData.followingDataList.clear();
+        mAdapter.initFollowingData(followingData);
     }
 
     public void search_following_list(String query) {

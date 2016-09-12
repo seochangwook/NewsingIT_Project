@@ -171,7 +171,10 @@ public class SearchTagFragment extends Fragment {
                         Log.i("EVENT :", "당겨서 새로고침 중...");
 
                         familiarRefreshRecyclerView.pullRefreshComplete();
-                        //mAdapter.setSearchTagData(searchTagData);
+
+                        initSearchTagDataList();
+
+                        getSearchTagNetworkData(query);
                     }
                 }, 1000);
             }
@@ -189,7 +192,6 @@ public class SearchTagFragment extends Fragment {
 
                         initSearchTagDataList();
 
-                        //  mAdapter.setSearchTagData(searchTagData);
                         getSearchTagNetworkData(query);
 
 
