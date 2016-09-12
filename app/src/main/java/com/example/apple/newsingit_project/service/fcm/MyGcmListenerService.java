@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.util.Log;
 import com.example.apple.newsingit_project.MainActivity;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SplashActivity;
+import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.google.android.gms.gcm.GcmListenerService;
 
 /**
@@ -23,10 +25,12 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String TAG = "MyGcmListenerService";
 
     /**
-     * Badge count 알람 수신마다 설정
+     * 공유 프래퍼런스 관련 변수
      **/
-    private static int badge_count = 0;
+    SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
+    SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
 
+    int badge_count;
     /**
      * @param from SenderID 값을 받아온다.
      * @param data Set형태로 GCM으로 받은 데이터 payload이다.
@@ -45,7 +49,6 @@ public class MyGcmListenerService extends GcmListenerService {
 
         set_alarm_badge(); //배지를 등록//
     }
-
 
     /**
      * 실제 디바에스에 GCM으로부터 받은 메세지를 알려주는 함수이다. 디바이스 Notification Center에 나타난다.
@@ -76,19 +79,24 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     public void set_alarm_badge() {
-        badge_count += 1;
-
         Log.d("json control", "notify receive");
 
         Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
 
+        //배지의 카운트를 공유저장소로부터 가져온다.//
+        badge_count = PropertyManager.getInstance().get_badge_number();
+        badge_count++; //0으로 되어있기에 1로 만들어준다.//
         //패키지 이름과 클래그 이름설정.//
+
         intent.putExtra("badge_count", badge_count);
 
         //문자열로 대입 가능//
         intent.putExtra("badge_count_package_name", getApplicationContext().getPackageName()); //패키지 이름//
         //배지의 적용은 맨 처음 띄우는 화면을 기준으로 한다.//
         intent.putExtra("badge_count_class_name", SplashActivity.class.getName()); //맨 처음 띄우는 화면 이름//
+
+        //변경된 값으로 다시 공유 저장소 값 초기화.//
+        PropertyManager.getInstance().setBadge_number(badge_count);
 
         sendBroadcast(intent);
     }

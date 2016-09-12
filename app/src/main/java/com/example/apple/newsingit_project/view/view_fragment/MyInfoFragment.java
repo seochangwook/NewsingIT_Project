@@ -447,7 +447,7 @@ public class MyInfoFragment extends Fragment {
 
             Intent intent = new Intent(getActivity(), SearchTabActivity.class);
 
-            startActivity(intent);
+            startActivityForResult(intent, RC_EDITMYINFO);
         }
 
         return super.onOptionsItemSelected(item);
