@@ -54,6 +54,11 @@ public class UserInfoActivity extends AppCompatActivity {
      **/
     private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
 
+    /**
+     * 네트워크 작업완료 응답을 위한 코드(갱신)
+     **/
+
+
     boolean follow_state = false; //팔로우 하지 않음이 기본 설정.//
     //사용자 정보 뷰 관련 변수//
     ImageView user_profile_imageview;
@@ -333,25 +338,6 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         /** 기타 기능 이벤트 처리 **/
-        user_follower_count_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserInfoActivity.this, FollowerListActivity.class);
-
-                //필요한 정보를 넘겨준다.//
-                startActivity(intent);
-            }
-        });
-
-        user_following_count_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(UserInfoActivity.this, FollowingListActivity.class);
-
-                startActivity(intent);
-            }
-        });
-
         user_following_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

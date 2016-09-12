@@ -10,6 +10,7 @@ import android.view.View;
 import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequest;
 import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.AlarmData;
+import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.AlarmListAdapter;
 import com.google.gson.Gson;
@@ -147,6 +148,18 @@ public class AlarmListActivity extends AppCompatActivity {
 
         //네트워크로 부터 데이터를 얻어온다.//
         get_Alarm_Data();
+
+        //배지 카운터 설정(기기별 호환문제)//
+        Intent i = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+
+        i.putExtra("badge_count", 0); //다시 배지카운터를 0으로 초기화.//
+        i.putExtra("badge_count_package_name", getApplicationContext().getPackageName());
+        i.putExtra("badge_count_class_name", SplashActivity.class.getName());
+
+        //변경된 값으로 다시 공유 저장소 값 초기화.//
+        PropertyManager.getInstance().setBadge_number(0);
+
+        sendBroadcast(i); //브로드캐스트를 이용.//
     }
 
     public void get_Alarm_Data() {

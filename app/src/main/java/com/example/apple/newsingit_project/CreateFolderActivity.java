@@ -86,6 +86,20 @@ public class CreateFolderActivity extends AppCompatActivity {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+
+            if (this != null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
+                        setResult(RESULT_OK);
+
+                        Toast.makeText(CreateFolderActivity.this, "폴더 생성을 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    }
+                });
+            }
         }
     };
 
@@ -331,10 +345,6 @@ public class CreateFolderActivity extends AppCompatActivity {
                             //yes
                             //네트워크로 데이터를 보낸다.//
                             CreateFolder();
-
-                            Toast.makeText(CreateFolderActivity.this, "폴더 생성을 완료하였습니다", Toast.LENGTH_SHORT).show();
-
-                            finish();
                         }
                     }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
                 @Override

@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.ScrapContentListRequestError;
 import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.ScrapContentListRequestErrorResults;
@@ -74,7 +75,18 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
             ScrapContentListRequestError request = gson.fromJson(responseData, ScrapContentListRequestError.class);
 
-            setData(request.getResults(), request.getResults().length);
+            if (request.getResults().length == 0) {
+                if (this != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(UserScrapContentListActivity.this, "스크랩 항목이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            } else {
+                setData(request.getResults(), request.getResults().length);
+            }
         }
     };
     private Callback requestSearchTagListCallback = new Callback() {
@@ -94,7 +106,21 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
             TagDetailListRequest tagDetailListRequest = gson.fromJson(responseData, TagDetailListRequest.class);
 
-            set_Taglist_Data(tagDetailListRequest.getResults(), tagDetailListRequest.getResults().length);
+            //page카운트 증가에 따른 정보 제공//
+            if (tagDetailListRequest.getResults().length == 0) {
+                if (this != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(UserScrapContentListActivity.this, "스크랩 항목이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+
+                            page_count -= 1; //다시 원래의 페이지카운트로 복귀//
+                        }
+                    });
+                }
+            } else {
+                set_Taglist_Data(tagDetailListRequest.getResults(), tagDetailListRequest.getResults().length);
+            }
         }
     };
 
@@ -252,19 +278,20 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         scrap_recyclerrefreshview.loadMoreComplete();
 
                         //아래에서 새로고침 시 현재 리스트에서 page count를 증가(페이지수는 1씩 증가)//
-                        //page_count += 1;
+                        page_count += 1;
 
                         if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
                         {
                             Log.d("message", "tag load");
 
-                            init_scrap_content_data(); //우선적으로 데이터 초기화.//
+                            //init_scrap_content_data(); //우선적으로 데이터 초기화.//
 
+                            //추가검색이기에 데이터를 초기화하지 않는다.//
                             getTagData(folder_id); //해당 페이지의 개수만큼 다시 로드//
                         } else {
                             Log.d("message", "scrap load");
 
-                            init_scrap_content_data(); //우선적으로 데이터 초기화.//
+                            //init_scrap_content_data(); //우선적으로 데이터 초기화.//
 
                             getScrapContentListNetworkData(); //해당 페이지의 개수만큼 다시 로드//
                         }

@@ -161,6 +161,9 @@ public class FollowerListActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //해당 화면을 나갈때 응답을 준다.//
+                setResult(RESULT_OK);
+
                 finish();
             }
         });

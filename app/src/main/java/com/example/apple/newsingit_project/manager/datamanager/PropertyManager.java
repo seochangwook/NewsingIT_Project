@@ -22,7 +22,9 @@ public class PropertyManager {
     //SNS, FCM등의 토큰//
     private static final String KEY_FACEBOOK_ID = "facebookid";
     private static final String KEY_FCM_REG_ID = "fcmtoken";
-
+    private static final String ALARM_BADGE_NUMBER = "alarm_badge_number";
+    //FCM알람관련 뱃지카운터.//
+    private static int badge_number = 0;
     //PropertyManger는 고유의 데이터이기에 싱글톤 디자인 패턴으로 설계//
     private static PropertyManager instance;
 
@@ -107,6 +109,15 @@ public class PropertyManager {
 
     public void set_registerid(String registerid) {
         mEdittor.putString(KEY_FCM_REG_ID, registerid);
+        mEdittor.commit();
+    }
+
+    public int get_badge_number() {
+        return mPrefs.getInt(ALARM_BADGE_NUMBER, badge_number);
+    }
+
+    public void setBadge_number(int badge_number) {
+        mEdittor.putInt(ALARM_BADGE_NUMBER, badge_number);
         mEdittor.commit();
     }
 }

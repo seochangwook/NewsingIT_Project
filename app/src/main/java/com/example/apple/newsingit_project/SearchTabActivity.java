@@ -41,6 +41,13 @@ public class SearchTabActivity extends AppCompatActivity {
     private ViewPager mViewPager;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        setResult(RESULT_OK);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_tab);
@@ -143,6 +150,8 @@ public class SearchTabActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.search_cancel) {
+            setResult(RESULT_OK);
+
             finish();
         }
 
