@@ -342,8 +342,37 @@ public class MainActivity extends AppCompatActivity {
         if (item_id == android.R.id.home) {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START);
+
+                Log.d("json control", "close drawer");
             } else {
                 drawerLayout.openDrawer(GravityCompat.START);
+
+                Log.d("json control", "open drawer");
+
+                profile_name = PropertyManager.getInstance().get_name();
+                profile_imgUrl = PropertyManager.getInstance().get_pf_Url();
+
+                if (!profile_imgUrl.isEmpty()) {
+                    String parsing_imageurl = profile_imgUrl.substring(0, 26); //문자열 자르기//
+
+                    Log.d("json control", parsing_imageurl);
+
+                    //페이스북 이미지는 일반적인 피카소로 적용//
+                    if (parsing_imageurl.equals(DEFAULT_FACEBOOK_IMG_PATH)) {
+                        Picasso.with(this)
+                                .load(profile_imgUrl)
+                                .transform(new CropCircleTransformation())
+                                .into(profile_imageview); //into로 보낼 위젯 선택.//
+                    } else {
+                        Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
+
+                        picasso.load(profile_imgUrl)
+                                .transform(new CropCircleTransformation())
+                                .into(profile_imageview);
+                    }
+                }
+
+                profile_name_textview.setText(profile_name);
             }
             return true;
         }

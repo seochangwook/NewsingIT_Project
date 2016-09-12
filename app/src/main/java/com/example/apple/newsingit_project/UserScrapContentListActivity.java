@@ -42,6 +42,12 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final String SCRAP_ID = "SCRAP_ID";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
+
+    /**
+     * 응답코드
+     **/
+    private static final int RC_SCRAPINFO = 100;
+
     static int page_count = 1;
 
     String folder_name;
@@ -362,7 +368,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
                 intent.putExtra(SCRAP_ID, "" + userScrapContentData.userScrapContentDataList.get(position).getId());
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_SCRAPINFO);
             }
         });
 
@@ -376,6 +382,31 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         } else //태그가 아닌 일반 폴더리스트에서 선택 후 온 경우//
         {
             getScrapContentListNetworkData();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RC_SCRAPINFO) {
+                //위에서 새로고침은 page값 증가가 필요없다.//
+                if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
+                {
+                    Log.d("message", "tag load");
+
+                    init_scrap_content_data(); //우선적으로 데이터 초기화.//
+
+                    getTagData(folder_id); //해당 페이지의 개수만큼 다시 로드//
+                } else {
+                    Log.d("message", "scrap load");
+
+                    init_scrap_content_data(); //우선적으로 데이터 초기화.//
+
+                    getScrapContentListNetworkData(); //해당 페이지의 개수만큼 다시 로드//
+                }
+            }
         }
     }
 
@@ -440,7 +471,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         }
     }
 
-
     private void hidepDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
@@ -449,11 +479,5 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private void showpDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //mAdapter.notifyDataSetChanged();
     }
 }

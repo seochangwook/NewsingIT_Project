@@ -53,6 +53,11 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
 
+    /**
+     * 응답코드 관련
+     **/
+    private static final int RC_EDITSCRAPINFO = 100;
+
     String is_me; //나에 대한 스크랩인지, 다른 사람의 스크랩인지 구분 플래그//
     String scrapId;
     boolean scrap_isprivate = false;
@@ -222,6 +227,8 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(RESULT_OK);
+
                 finish();
             }
         });
@@ -260,6 +267,19 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         });
 
         getSelectScrapContentNetworkData(scrapId);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RC_EDITSCRAPINFO) {
+                Log.d("json control:", "스크랩 정보 수정");
+
+                getSelectScrapContentNetworkData(scrapId);
+            }
+        }
     }
 
     @Override
@@ -340,7 +360,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             intent.putExtra(KEY_SCRAP_TAGS, scrap_tag_array);
             intent.putExtra(SCRAP_ID, scrap_id);
 
-            startActivity(intent);
+            startActivityForResult(intent, RC_EDITSCRAPINFO);
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,11 +1,13 @@
 package com.example.apple.newsingit_project.view.view_fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -161,26 +163,51 @@ public class DrawerFragment extends Fragment {
             public void onGroupExpand(int groupposition) {
                 //로그아웃 - 로그인 화면으로 이동//
                 if (groupposition == 0) {
-                    //공유저장소 내용을 초기화.//
-                    //프래퍼런스를 셋팅.//
-                    mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                    mEditor = mPrefs.edit();
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                    alertDialog.setTitle("Newsing Info")
+                            .setMessage("로그아웃 하시겠습니까?")
+                            .setCancelable(false)
+                            .setPositiveButton("로그아웃",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            //yes
+                                            //네트워크로 데이터를 보낸다.//
+                                            //공유저장소 내용을 초기화.//
+                                            //프래퍼런스를 셋팅.//
+                                            mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                                            mEditor = mPrefs.edit();
 
-                    PropertyManager.getInstance().set_facebookid("");
-                    PropertyManager.getInstance().set_name("");
-                    PropertyManager.getInstance().set_pf_Url("");
-                    PropertyManager.getInstance().set_nt_fs("");
-                    PropertyManager.getInstance().set_nt_f("");
-                    PropertyManager.getInstance().set_nt_s("");
+                                            PropertyManager.getInstance().set_facebookid("");
+                                            PropertyManager.getInstance().set_name("");
+                                            PropertyManager.getInstance().set_pf_Url("");
+                                            PropertyManager.getInstance().set_nt_fs("");
+                                            PropertyManager.getInstance().set_nt_f("");
+                                            PropertyManager.getInstance().set_nt_s("");
 
-                    getLogoutNetworkData(); //우리 앱 로그아웃
+                                            getLogoutNetworkData(); //우리 앱 로그아웃
 
-                    mLoginManager.logOut(); //페이스북 로그아웃
+                                            mLoginManager.logOut(); //페이스북 로그아웃
 
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }
+                                    }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //no
+                        }
+                    });
+
+                    AlertDialog alert = alertDialog.create();
+                    alert.show();
+                }
+
+                if (groupposition == 2) //마이페이지//
+                {
+                    Toast.makeText(getActivity(), "메인화면에 사람모양 아이콘을 클릭하세요", Toast.LENGTH_SHORT).show();
                 }
 
                 //공지사항 이동//
