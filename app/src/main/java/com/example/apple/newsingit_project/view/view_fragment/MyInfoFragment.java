@@ -346,8 +346,6 @@ public class MyInfoFragment extends Fragment {
 
         getUserInfoNetworkData();
 
-        //Dummy Data 설정//
-        //setDummyFolderData();
         getMyFolderData();
 
         //메뉴변경//

@@ -252,7 +252,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         scrap_recyclerrefreshview.loadMoreComplete();
 
                         //아래에서 새로고침 시 현재 리스트에서 page count를 증가(페이지수는 1씩 증가)//
-                        page_count += 1;
+                        //page_count += 1;
 
                         if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
                         {
@@ -330,8 +330,9 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                     intent.putExtra("KEY_USER_IDENTIFY_FLAG", "0");
                 }
 
-                //필요한 값을 정의한다.//
-                intent.putExtra(SCRAP_ID, userScrapContentData.userScrapContentDataList.get(position).getId());
+                Log.d("json control", "tag scrap id" + userScrapContentData.userScrapContentDataList.get(position).getId());
+
+                intent.putExtra(SCRAP_ID, "" + userScrapContentData.userScrapContentDataList.get(position).getId());
 
                 startActivity(intent);
             }

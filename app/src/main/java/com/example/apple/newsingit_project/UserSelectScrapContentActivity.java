@@ -1,8 +1,10 @@
 package com.example.apple.newsingit_project;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -51,8 +53,8 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
 
-    String is_me; //나에 대한 스크랩인지, 다르 사람의 스크랩인지 구분 플래그//
-    int scrapId;
+    String is_me; //나에 대한 스크랩인지, 다른 사람의 스크랩인지 구분 플래그//
+    String scrapId;
     boolean scrap_isprivate = false;
 
     /**
@@ -80,17 +82,59 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
             Log.d("json data", responseData);
 
-            Gson gson = new Gson();
+            if (is_me.equals("1")) //상대방 스크랩을 들어가는 경우 비공개 처리를 해준다.//
+            {
+                String response_parsing = responseData.substring(11, 21);
 
-            SelectScrapContentRequest scrapContentListRequest = gson.fromJson(responseData, SelectScrapContentRequest.class);
+                Log.d("json control", response_parsing);
 
-            setData(scrapContentListRequest.getResult());
+                if (response_parsing.equals("비공개 스크랩입니다")) {
+                    if (this != null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserSelectScrapContentActivity.this);
+                                alertDialog.setTitle("Newsing Info")
+                                        .setMessage("해당 스크랩은 비공개처리 입니다.")
+                                        .setCancelable(false)
+                                        .setPositiveButton("확인",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        //yes
+                                                        finish();
+                                                    }
+                                                });
+
+                                AlertDialog alert = alertDialog.create();
+                                alert.show();
+                            }
+                        });
+                    }
+                } else //사용자 스크랩이면서 비공개가 아닌 경우//
+                {
+                    Gson gson = new Gson();
+
+                    SelectScrapContentRequest scrapContentListRequest = gson.fromJson(responseData, SelectScrapContentRequest.class);
+
+                    setData(scrapContentListRequest.getResult());
+                }
+            } else if (is_me.equals("0"))//내 스크랩일때는 비공개처리를 해줄 필요 없다.//
+            {
+                Gson gson = new Gson();
+
+                SelectScrapContentRequest scrapContentListRequest = gson.fromJson(responseData, SelectScrapContentRequest.class);
+
+                setData(scrapContentListRequest.getResult());
+            }
         }
     };
 
-    private void getSelectScrapContentNetworkData(int id) {
-
+    private void getSelectScrapContentNetworkData(String id) {
         showpDialog();
+
+        Log.d("json control", "srap id:" + id);
+        Log.d("json control", is_me);
 
         networkManager = NetworkManager.getInstance();
 
@@ -184,7 +228,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        scrapId = intent.getIntExtra(SCRAP_ID, 1); //스크랩의 상세 정보를 검색하기 위해서 id값을 전달받는다.//
+        scrapId = intent.getStringExtra(SCRAP_ID); //스크랩의 상세 정보를 검색하기 위해서 id값을 전달받는다.//
         is_me = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
 
         //메뉴를 다르게 해주기 위해서 다른 사용자와 나의 경우를 구분//
