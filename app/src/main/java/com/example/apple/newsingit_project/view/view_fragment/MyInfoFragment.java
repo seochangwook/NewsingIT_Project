@@ -85,6 +85,15 @@ public class MyInfoFragment extends Fragment {
      **/
     private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
 
+    /**
+     * 네트워크 작업완료 응답을 위한 코드(갱신)
+     **/
+    private static final int RC_EDITMYINFO = 100;
+    private static final int RC_EDITFOLLOWER = 200;
+    private static final int RC_EDITFOLLOWING = 300;
+    private static final int RC_EDITFOLDERLIST = 400;
+    private static final int RC_EDITFOLDERINFO = 500;
+
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
     // TextView profile_name_textview;
@@ -277,7 +286,7 @@ public class MyInfoFragment extends Fragment {
                 intent.putExtra(KEY_FOLDER_IMG, folder_img);
                 intent.putExtra(KEY_FOLDER_LOCKED, folder_locked);
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_EDITFOLDERINFO);
 
                 folder_recyclerview.addHeaderView(header_info_view);
                 folder_recyclerview.smoothScrollToPosition(0);
@@ -295,7 +304,7 @@ public class MyInfoFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), FollowerListActivity.class);
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_EDITFOLLOWER);
             }
         });
 
@@ -305,7 +314,7 @@ public class MyInfoFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), FollowingListActivity.class);
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_EDITFOLLOWING);
             }
         });
 
@@ -327,7 +336,7 @@ public class MyInfoFragment extends Fragment {
                 intent.putExtra(KEY_MY_IMG, my_imgUrl);
                 intent.putExtra(KEY_IMG_DEFAULT_FLAG, key_default_img); //1이면 디폴트, 0이면 일반//
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_EDITMYINFO);
             }
         });
 
@@ -337,7 +346,7 @@ public class MyInfoFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), CreateFolderActivity.class);
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_EDITFOLDERLIST);
 
                 folder_recyclerview.addHeaderView(header_info_view);
                 folder_recyclerview.smoothScrollToPosition(0);
@@ -529,6 +538,41 @@ public class MyInfoFragment extends Fragment {
                     }
                 }
             });
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == RC_EDITMYINFO) //나의 정보에 대한 수정응답//
+            {
+                Log.d("json control", "나의 정보 갱신");
+
+                //갱신작업 진행//
+                getUserInfoNetworkData();
+            } else if (requestCode == RC_EDITFOLLOWER) {
+                Log.d("json control", "팔로워 정보 수 갱신");
+
+                getUserInfoNetworkData();
+            } else if (requestCode == RC_EDITFOLLOWING) {
+                Log.d("json control", "팔로잉 정보 수 갱신");
+
+                getUserInfoNetworkData();
+            } else if (requestCode == RC_EDITFOLDERLIST) {
+                Log.d("json control", "폴더 리스트 갱신");
+
+                init_folder_list(); //리스트 초기화는 이중적용을 막기 위해서 초기화를 먼저 해준다.//
+
+                getMyFolderData();
+            } else if (requestCode == RC_EDITFOLDERINFO) {
+                Log.d("json control", "폴더 정보 갱신");
+
+                init_folder_list(); //리스트 초기화는 이중적용을 막기 위해서 초기화를 먼저 해준다.//
+
+                getMyFolderData();
+            }
         }
     }
 

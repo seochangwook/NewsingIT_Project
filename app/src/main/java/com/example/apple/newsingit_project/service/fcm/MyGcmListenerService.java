@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.example.apple.newsingit_project.MainActivity;
 import com.example.apple.newsingit_project.R;
+import com.example.apple.newsingit_project.SplashActivity;
 import com.google.android.gms.gcm.GcmListenerService;
 
 /**
@@ -20,6 +21,11 @@ import com.google.android.gms.gcm.GcmListenerService;
 public class MyGcmListenerService extends GcmListenerService {
     private static final String FCM_NOTIFY_VALUE = "FCM_NOTIFY_VALUE";
     private static final String TAG = "MyGcmListenerService";
+
+    /**
+     * Badge count 알람 수신마다 설정
+     **/
+    private static int badge_count = 0;
 
     /**
      * @param from SenderID 값을 받아온다.
@@ -36,7 +42,8 @@ public class MyGcmListenerService extends GcmListenerService {
 
         // GCM으로 받은 메세지를 디바이스에 알려주는 sendNotification()을 호출한다.
         sendNotification(title, message);
-        set_alarm_badge();
+
+        set_alarm_badge(); //배지를 등록//
     }
 
 
@@ -69,15 +76,20 @@ public class MyGcmListenerService extends GcmListenerService {
     }
 
     public void set_alarm_badge() {
+        badge_count += 1;
+
         Log.d("json control", "notify receive");
 
         Intent intent = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
 
         //패키지 이름과 클래그 이름설정.//
-        intent.putExtra("bage_count", 1);
-        intent.putExtra("badge_count_package_name", getApplication().getPackageName());
-        intent.putExtra("badge_count_class_name", getApplication().getClass().getName());
+        intent.putExtra("badge_count", badge_count);
 
-        getApplication().sendBroadcast(intent);
+        //문자열로 대입 가능//
+        intent.putExtra("badge_count_package_name", getApplicationContext().getPackageName()); //패키지 이름//
+        //배지의 적용은 맨 처음 띄우는 화면을 기준으로 한다.//
+        intent.putExtra("badge_count_class_name", SplashActivity.class.getName()); //맨 처음 띄우는 화면 이름//
+
+        sendBroadcast(intent);
     }
 }

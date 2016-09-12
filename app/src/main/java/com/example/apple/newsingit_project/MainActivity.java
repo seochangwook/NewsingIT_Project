@@ -187,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
             String action = intent.getAction();
             String type = intent.getType();
 
+            int count = intent.getIntExtra("count", 0);
+
             // 인텐트 정보가 있는 경우 실행
             if (Intent.ACTION_SEND.equals(action) && type != null) {
                 if ("text/plain".equals(type)) {

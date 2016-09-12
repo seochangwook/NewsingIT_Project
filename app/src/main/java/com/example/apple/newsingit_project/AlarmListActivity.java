@@ -147,6 +147,15 @@ public class AlarmListActivity extends AppCompatActivity {
 
         //네트워크로 부터 데이터를 얻어온다.//
         get_Alarm_Data();
+
+        //배지 카운터 설정(기기별 호환문제)//
+        Intent i = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
+
+        i.putExtra("badge_count", 0); //다시 배지카운터를 0으로 초기화.//
+        i.putExtra("badge_count_package_name", getApplicationContext().getPackageName());
+        i.putExtra("badge_count_class_name", SplashActivity.class.getName());
+
+        sendBroadcast(i); //브로드캐스트를 이용.//
     }
 
     public void get_Alarm_Data() {

@@ -100,6 +100,20 @@ public class EditFolderActivity extends AppCompatActivity {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+
+            if (this != null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
+                        setResult(RESULT_OK);
+
+                        Toast.makeText(EditFolderActivity.this, "폴더 삭제를 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    }
+                });
+            }
         }
     };
 
@@ -115,6 +129,20 @@ public class EditFolderActivity extends AppCompatActivity {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+
+            if (this != null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
+                        setResult(RESULT_OK);
+
+                        Toast.makeText(EditFolderActivity.this, "폴더 수정을 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    }
+                });
+            }
         }
     };
 
@@ -207,15 +235,30 @@ public class EditFolderActivity extends AppCompatActivity {
         deleteView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(EditFolderActivity.this);
+                alertDialog.setTitle("Newsing Info")
+                        .setMessage("폴더를 정말 삭제하시겠습니까?")
+                        .setCancelable(false)
+                        .setPositiveButton("삭제",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        //yes
+                                        //네트워크로 데이터를 보낸다.//
+                                        String delete_folder_id = folder_id; //폴더를 삭제할려면 폴더의 id가 필요하다.//
 
-                Toast.makeText(EditFolderActivity.this, "폴더를 삭제합니다.", Toast.LENGTH_SHORT).show();
+                                        //삭제요청//
+                                        delete_folder(delete_folder_id);
+                                    }
+                                }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //no
+                    }
+                });
 
-                String delete_folder_id = folder_id; //폴더를 삭제할려면 폴더의 id가 필요하다.//
-
-                //삭제요청//
-                delete_folder(delete_folder_id);
-
-                finish();
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
         });
 
@@ -392,10 +435,6 @@ public class EditFolderActivity extends AppCompatActivity {
                                     //yes
                                     //네트워크로 데이터를 보낸다.//
                                     editFolderRequest(folder_id);
-
-                                    Toast.makeText(EditFolderActivity.this, "폴더 수정 완료하였습니다", Toast.LENGTH_SHORT).show();
-
-                                    finish();
                                 }
                             }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
                 @Override
