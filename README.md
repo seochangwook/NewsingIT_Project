@@ -1,4 +1,4 @@
-# NewsingIT_Project
+# NewsingIT Project
 
 -----------------------------------------
 
