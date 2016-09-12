@@ -164,4 +164,5 @@
 * 검색 당겨서 새로고침 - 임지수 (16/09/12 17:57)
 * TEXT 잘려 나오는 뷰들 singleLine으로 수정, UserScrapContentListActivity 종료 후 UserInfoActivity의 folder list 갱신 - 임지수 (16/09/12 20:33)
 * MyInfoFragment 데이터 갱신 예외처리 - 서창욱 (16/09/12 20:52)
+* UserScrapContentActivity / UserSelectScrapContnetActivity / DrawerFragment간 데이터 갱신작업 - 서창욱 (16/09/13 00:16)
 
