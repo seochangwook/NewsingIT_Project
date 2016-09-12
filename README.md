@@ -4,12 +4,12 @@
 
 < Project status (Waterfall model) >
 
-* 전체 진행률 : 70%
+* 전체 진행률 : 75%
 * 프로젝트 기간 : 08/23 ~ 09/22 
 <p>
 </p>
 - 요구 / 분석 : (완료)
-- 설계 / 구현 : (부분완료)
+- 설계 / 구현 : (완료)
 - 테스팅 : (미흡)
 - 유지보수 : (시행되지 않음)
 <p>
@@ -144,6 +144,11 @@
 * Scrap Edit / Create시 Tag 중복 등록방지 적용 - 서창욱 (16/09/09 08:51)
 * Sharing기능 구현 및 테스트 완료 (<action android:name="android.intent.action.SEND" />을 등록하여 다른 앱과의 공유기능을 활성화 하고, 해당 앱이나 웹 페이지의 URL정보를 획득. ClipboardManager를 이용하여 복사 후 스크랩 작성 시 적용 -> 스크랩 정보 TextView에 android:autoLink="web"를 적용하여 해당 정보를 같이 볼 수 있음) - 서창욱 (16/09/11 10:41)
 * 등록된 FCM id값을 가지고 서버와의 Dummy test 알람 테스트 완료 - 서창욱 (16/09/11 10:49)
+* auto id로 변경간 GSON 데이터 객체 수정 - 서창욱 (16/09/12 02:45)
+* Following / Follower 부분 bug fix 및 검색기능 추가 - 서창욱 (16/09/12 02:45)
+* 스크랩 상세보기에서 Tag클릭 시 해당 태그 스크랩 검색 - 서창욱 (16/09/12 02:45)
+* 현재 앱의 https인증서와 타 웹사이트(페이스북 등)의 https의 인증서 충돌문제 issue -> 디폴트 이미지 경로 지정 후 해당경로인지 파싱작업 - 서창욱 (16/09/12 02:45)
+* AlarmList 와 FCM 테스트 완료 - 서창욱 (16/09/12 02:45)
 
 < Update Content (예외처리 / Clean Code / 테스팅 부분) >
 
