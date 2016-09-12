@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,8 +33,11 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     Context context;
 
     NetworkManager networkManager;
-
+    FollowerViewHolder followerViewHolder;
+    int pos;
+    boolean flag;
     private Callback requestSetFollowingCallback = new Callback() {
+
         @Override
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
@@ -43,17 +47,68 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String responseData = response.body().string();
+            Handler mainHandler = new Handler(context.getMainLooper());
 
             Log.d("json data", responseData);
+            Log.d("json code", "" + response.code());
+
+            if (response.code() == 401) {
+
+            } else if (response.code() == 200) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setFollowingButton();
+                    }
+                });
+            }
 
         }
     };
+    private Callback requestDeleteFollowingCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
 
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+            Handler mainHandler = new Handler(context.getMainLooper());
+
+            Log.d("json data", responseData);
+            Log.d("json code", "" + response.code());
+
+            if (response.code() == 401) {
+
+            } else if (response.code() == 200) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setFollowButton();
+                    }
+                });
+            }
+        }
+    };
 
     public FollowerListAdapter(Context context) {
         this.context = context;
         followerData = new FollowerData();
 
+    }
+
+    public void setFollowButton() {
+        followerData.followerDataList.get(pos).setFlag(!flag);
+        followerViewHolder.btnFollower.setImageResource(R.mipmap.btn_follow);
+        notifyDataSetChanged();
+    }
+
+    public void setFollowingButton() {
+        followerData.followerDataList.get(pos).setFlag(!flag);
+        followerViewHolder.btnFollower.setImageResource(R.mipmap.btn_following);
+        notifyDataSetChanged();
     }
 
     private void setFollowing(String userId) {
@@ -78,7 +133,6 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .build();
 
         client.newCall(request).enqueue(requestSetFollowingCallback);
-
     }
 
     private void deleteFollowing(String userId) {
@@ -102,7 +156,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .delete(body)
                 .build();
 
-        client.newCall(request).enqueue(requestSetFollowingCallback);
+        client.newCall(request).enqueue(requestDeleteFollowingCallback);
     }
 
     public void setFollowerData(FollowerData followerData){
@@ -131,12 +185,12 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (followerData.followerDataList.size() > 0) {
             if (position < followerData.followerDataList.size()) {
-                final FollowerViewHolder followerViewHolder = (FollowerViewHolder) holder;
 
+                followerViewHolder = (FollowerViewHolder) holder;
                 followerViewHolder.setFollowerData(followerData.followerDataList.get(position), context);
 
-                final int pos = position;
-                boolean flag = followerData.followerDataList.get(pos).getFlag();
+                pos = position;
+                flag = followerData.followerDataList.get(pos).getFlag();
 
                 Log.d("json control", "(팔로워리스트)" + flag);
 
@@ -166,24 +220,15 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                             deleteFollowing(userSelectId);
 
-                            followerViewHolder.btnFollower.setImageResource(R.mipmap.btn_follow);
-
-                            notifyDataSetChanged();
                         } else if (flag == false) //현재 팔로잉이 되어있지 않은상태.//
                         {
                             Log.d("json control", "(팔로워리스트)" + flag);
 
                             //팔로잉 안 한 상태에서 팔로우 생성//
-                            Log.d("json control", "(팔로워리스트)팔로잉을 현재 하지 않은 상태미으로 팔로잉을 생성");
+                            Log.d("json control", "(팔로워리스트)팔로잉을 현재 하지 않은 상태이므로 팔로잉을 생성");
 
                             setFollowing(userSelectId);
-
-                            followerViewHolder.btnFollower.setImageResource(R.mipmap.btn_following);
-
-                            notifyDataSetChanged();
                         }
-
-                        notifyDataSetChanged();
                     }
                 });
 
