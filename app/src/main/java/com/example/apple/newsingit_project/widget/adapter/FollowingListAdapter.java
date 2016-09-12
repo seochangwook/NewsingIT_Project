@@ -1,6 +1,7 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,9 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     Context context;
 
     NetworkManager networkManager;
+    int pos;
+    FollowingViewHolder followingViewHolder;
+    boolean flag;
     private Callback requestSetFollowingCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -42,8 +46,46 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String responseData = response.body().string();
+            Handler mainHandler = new Handler(context.getMainLooper());
 
             Log.d("json data", responseData);
+
+            if (response.code() == 401) {
+
+            } else if (response.code() == 200) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setFollowingButton();
+                    }
+                });
+            }
+        }
+    };
+    private Callback requestDeleteFollowingCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+            Handler mainHandler = new Handler(context.getMainLooper());
+
+            Log.d("json data", responseData);
+
+            if (response.code() == 401) {
+
+            } else if (response.code() == 200) {
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setFollowButton();
+                    }
+                });
+            }
 
         }
     };
@@ -53,6 +95,19 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         followingData = new FollowingData();
         searchList = new FollowingData();
 
+    }
+
+    public void setFollowButton() {
+
+        followingData.followingDataList.get(pos).setFlag(!flag);
+        followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_follow);
+        notifyDataSetChanged();
+    }
+
+    public void setFollowingButton() {
+        followingData.followingDataList.get(pos).setFlag(!flag);
+        followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_following);
+        notifyDataSetChanged();
     }
 
     private void setFollowing(String userId) {
@@ -101,7 +156,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 .delete(body)
                 .build();
 
-        client.newCall(request).enqueue(requestSetFollowingCallback);
+        client.newCall(request).enqueue(requestDeleteFollowingCallback);
     }
 
     public void setFollowingData(FollowingData followingData){
@@ -131,12 +186,12 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (followingData.followingDataList.size() > 0) {
             if (position < followingData.followingDataList.size()) {
-                final FollowingViewHolder followingViewHolder = (FollowingViewHolder) holder;
+                followingViewHolder = (FollowingViewHolder) holder;
 
                 followingViewHolder.setFollowingData(followingData.followingDataList.get(position), context);
 
-                final int pos = position;
-                boolean flag = followingData.followingDataList.get(pos).getFlag();
+                pos = position;
+                flag = followingData.followingDataList.get(pos).getFlag();
 
                 Log.d("json control", "(팔로잉리스트)" + flag);
 
@@ -163,9 +218,6 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
 
                             deleteFollowing(userSelectId);
 
-                            followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_follow);
-
-                            notifyDataSetChanged();
                         } else if (flag == false) //false이면 선택한 유저를 팔로우 하지 않은 상태//
                         {
                             Log.d("json control", "(팔로잉리스트)" + flag);
@@ -174,13 +226,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                             Log.d("json control", "(팔로잉리스트)팔로잉을 현재 하지 않은 상태미으로 팔로잉을 생성");
 
                             setFollowing(userSelectId);
-
-                            followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_following);
-
-                            notifyDataSetChanged();
                         }
-
-                        notifyDataSetChanged();
                     }
                 });
 

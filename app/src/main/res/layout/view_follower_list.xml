@@ -51,16 +51,5 @@
         android:background="@android:color/transparent"
         android:src="@mipmap/btn_following" />
 
-    <!--<Button-->
-    <!--android:id="@+id/btn_follower"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentEnd="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_marginRight="20dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="@string/follower" />-->
-
 
 </RelativeLayout>

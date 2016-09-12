@@ -139,9 +139,15 @@
 * 마이페이지 수정화면,폴더 수정화면 디자인 가이드 적용 - 임지수 (16/09/07 19:44)
 * 구분선을 line 이미지로 적용 - 임지수 (16/09/07 20:51)
 * CreateScrap / EditScrap real server test complete (RequestBody를 FormBody형식으로 다중 바디구조로 적용) - 서창욱 (16/09/08 09:24)
+* my info/user info 디자인 가이드 적용 - 임지수(16/09/08 15:37)
+* 메인/키워드/공지사항 디자인 가이드 적용 - 임지수 (16/09/08 20:53)
 * SearchUser간 int 범위를 초과한 값을 가지고 GSON Parsing issue -> gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING); 방법으로 String으로 캐스팅 해주는 Builder를 만들어 해결 - 서창욱 (16/09/09 01:37)
 * User 검색 후 Info정보 / 폴더 리스트 / 스크랩 리스트 real server test complete - 서창욱 (16/09/09 01:37)
 * Scrap Edit / Create시 Tag 중복 등록방지 적용 - 서창욱 (16/09/09 08:51)
+* empty view 디자인 가이드 적용, drawer에 switch 라이브러리 적용 - 임지수 (16/09/09 14:57)
+* 카테고리 수정,삭제,스크랩 수정 다이얼로그에 switch 라이브러리 적용 - 임지수 (16/09/09 15:27)
+* searchView 클릭시 background 이미지 변동/로고 아이콘 적용 - 임지수 (16/09/09 17:01)
+* 공유 dialog 디자인 수정 - 임지수 (16/09/09 17:55)
 * Sharing기능 구현 및 테스트 완료 (<action android:name="android.intent.action.SEND" />을 등록하여 다른 앱과의 공유기능을 활성화 하고, 해당 앱이나 웹 페이지의 URL정보를 획득. ClipboardManager를 이용하여 복사 후 스크랩 작성 시 적용 -> 스크랩 정보 TextView에 android:autoLink="web"를 적용하여 해당 정보를 같이 볼 수 있음) - 서창욱 (16/09/11 10:41)
 * 등록된 FCM id값을 가지고 서버와의 Dummy test 알람 테스트 완료 - 서창욱 (16/09/11 10:49)
 * auto id로 변경간 GSON 데이터 객체 수정 - 서창욱 (16/09/12 02:45)
@@ -152,4 +158,4 @@
 
 < Update Content (예외처리 / Clean Code / 테스팅 부분) >
 
-* 
+* AlarmList 알람 간 id 문제 해결 - 서창욱 (16/09/12 14:06)
