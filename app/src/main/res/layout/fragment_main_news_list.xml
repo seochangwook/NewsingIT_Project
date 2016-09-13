@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/btn_floating_margin_left"
         android:layout_marginTop="@dimen/btn_floating_margin_top"
+        android:background="@color/button_transparent_background"
         android:src="@mipmap/btn_toparrow"
-        app:backgroundTint="@android:color/transparent"
         app:borderWidth="0dp"
         app:elevation="6dp"
         app:fabSize="mini" />

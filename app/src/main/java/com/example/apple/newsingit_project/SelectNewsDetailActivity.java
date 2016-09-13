@@ -146,6 +146,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_news_detail_activity_layout);
 
+        btn = (Button) findViewById(R.id.btn_go_detail);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         /** 팝업에서 사용되는 변수들 초기화 **/
@@ -202,7 +204,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
                         scrap_folder_recyclerrefreshview.pullRefreshComplete();
 
-                        scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
+                        //scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
 
                         init_scrap_folder_list();
 
@@ -263,7 +265,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 startActivityForResult(intent, RC_CREATEFOLDER);
 
                 scrap_folder_recyclerview.addHeaderView(headerview);
-                scrap_folder_recyclerview.smoothScrollToPosition(0);
             }
         });
 
@@ -288,30 +289,17 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
         news_headline_title_textview.setText(title);
 
-        btn = (Button) findViewById(R.id.btn_go_detail);
-        //  btn.setVisibility(View.VISIBLE);
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(news_link));
                 startActivity(intent);
-
-//                //웹뷰 띄우기//
-//                WebViewFragment fragment = new WebViewFragment();
-//
-//                Bundle bundle = new Bundle();
-//                bundle.putString("URL", news_link);
-//                fragment.setArguments(bundle);
-//
-//                getSupportFragmentManager().beginTransaction().replace(R.id.news_container, fragment)
-//                        .addToBackStack(null)
-//                        .commit();
             }
         });
 
         get_NewsDetail_info(news_id); //뉴스 세부정보//
-        get_ScrapFolder_Data(); //스크랩 폴더 리스트//
+
+        get_ScrapFolder_Data();
     }
 
     @Override
@@ -333,8 +321,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         scrapfolderData.scrapfolderlist.clear();
 
         scrapfolderListAdapter.init_data(scrapfolderData);
-
-        scrapfolderListAdapter.notifyDataSetChanged();
     }
 
     public void get_ScrapFolder_Data() {
