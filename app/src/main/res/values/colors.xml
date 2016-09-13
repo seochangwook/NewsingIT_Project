@@ -192,5 +192,7 @@
     <color name="my_info_folder_margin">#e3e2e2</color>
     <color name="my_info_folder_empty_msg">#7d7d7d</color>
 
+    <!--popup color-->
+    <color name="popup_text_color">#454444</color>
 
 </resources>
