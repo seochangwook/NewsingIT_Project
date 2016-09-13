@@ -30,7 +30,7 @@ import okhttp3.Response;
  */
 public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    final boolean[] isOk = {false};
+    //   final boolean[] isOk = {false};
     FollowingData followingData;
     Context context;
     NetworkManager networkManager;
@@ -54,7 +54,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
             if (response.code() == 401) {
 
             } else if (response.code() == 200) {
-                isOk[0] = true;
+                // isOk[0] = true;
             }
         }
     };

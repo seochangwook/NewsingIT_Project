@@ -100,7 +100,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                             public void run() {
                                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserSelectScrapContentActivity.this);
                                 alertDialog.setTitle("Newsing Info")
-                                        .setMessage("해당 스크랩은 비공개처리 입니다.")
+                                        .setMessage("사용자가 공개하지 않은 스크랩입니다.")
                                         .setCancelable(false)
                                         .setPositiveButton("확인",
                                                 new DialogInterface.OnClickListener() {

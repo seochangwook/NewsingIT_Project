@@ -193,11 +193,11 @@
     <dimen name="alarm_margin_right">28dp</dimen>
     <dimen name="alarm_margin_bottom">17dp</dimen>
 
-    <dimen name="alarm_message_size">13dp</dimen>
+    <dimen name="alarm_message_size">13sp</dimen>
     <dimen name="alarm_message_margin_top">27dp</dimen>
     <dimen name="alarm_message_margin_left">112dp</dimen>
 
-    <dimen name="alarm_time_size">11dp</dimen>
+    <dimen name="alarm_time_size">11sp</dimen>
     <dimen name="alarm_time_margin_top">40dp</dimen>
     <dimen name="alarm_time_margin_left">112dp</dimen>
 
@@ -668,6 +668,14 @@
     <dimen name="user_info_about_me_width">200dp</dimen>
     <dimen name="user_info_about_me_margin_top">15dp</dimen>
     <dimen name="user_info_about_me_margin_bottom">34dp</dimen>
+
+    <!--popup dimen-->
+    <dimen name="popup_btn_height">60dp</dimen>
+
+    <dimen name="popup_text_margin_top">20dp</dimen>
+    <dimen name="popup_text_margin_left">16dp</dimen>
+    <dimen name="popup_text_margin_right">16dp</dimen>
+    <dimen name="popup_text_size">16sp</dimen>
 
 
     <!--empty view dimen-->

@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/edit_scrap_background"
+    android:fillViewport="false"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.apple.newsingit_project.UserSelectScrapContentActivity"
@@ -164,7 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/edit_scrap_tag_img"
             android:layout_below="@+id/edit_scrap_line"
-            android:layout_marginBottom="@dimen/edit_scrap_tag_margin_bottom"
+
             android:layout_marginTop="@dimen/edit_scrap_tag_margin_top"
             android:layout_toRightOf="@+id/edit_scrap_tag_img"
             android:background="@null"
