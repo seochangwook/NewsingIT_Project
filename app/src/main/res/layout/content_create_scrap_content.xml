@@ -163,7 +163,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/create_scrap_tag_img"
             android:layout_below="@+id/create_scrap_line"
-            android:layout_marginBottom="@dimen/edit_scrap_tag_margin_bottom"
             android:layout_marginTop="@dimen/edit_scrap_tag_margin_top"
             android:layout_toRightOf="@+id/create_scrap_tag_img"
             android:background="@null"

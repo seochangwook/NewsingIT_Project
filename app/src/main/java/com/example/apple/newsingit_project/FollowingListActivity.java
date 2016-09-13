@@ -3,6 +3,7 @@ package com.example.apple.newsingit_project;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequest;
@@ -183,6 +185,12 @@ public class FollowingListActivity extends AppCompatActivity {
 
         //SearchVIew 검색 창//
         searchView = (SearchView) headerView.findViewById(R.id.search_my_follow);
+
+        int id = searchView.getContext()
+                .getResources()
+                .getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = (TextView) searchView.findViewById(id);
+        textView.setTextColor(Color.WHITE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

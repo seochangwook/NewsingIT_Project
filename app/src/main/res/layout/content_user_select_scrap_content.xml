@@ -62,7 +62,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/scrap_content_card_view"
             android:layout_width="@dimen/scrap_content_news_box_width"
-            android:layout_height="@dimen/scrap_content_news_box_height"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/line_one"
             android:layout_marginLeft="@dimen/scrap_content_news_box_margin_left"
             android:layout_marginRight="@dimen/scrap_content_news_box_margin_right"
@@ -126,7 +126,7 @@
                 <TextView
                     android:id="@+id/text_scrap_nccontent"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/scrap_content_news_box_content_height"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/img_scrap_nc"
                     android:layout_marginBottom="@dimen/scrap_content_news_box_content_margin_bottom"
                     android:layout_marginLeft="@dimen/scrap_content_news_box_content_margin_left"

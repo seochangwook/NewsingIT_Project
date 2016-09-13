@@ -3,6 +3,7 @@ package com.example.apple.newsingit_project;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerListRequest;
 import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerListRequestResults;
@@ -180,6 +182,13 @@ public class FollowerListActivity extends AppCompatActivity {
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null);
 
         search_edit = (SearchView) headerView.findViewById(R.id.search_my_follow);
+
+        //search view의 text color를 바꿔 줌//
+        int id = search_edit.getContext()
+                .getResources()
+                .getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = (TextView) search_edit.findViewById(id);
+        textView.setTextColor(Color.WHITE);
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_follower_emptyview, null);

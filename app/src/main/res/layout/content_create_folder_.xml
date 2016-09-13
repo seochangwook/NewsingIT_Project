@@ -19,8 +19,8 @@
         android:layout_marginLeft="@dimen/create_folder_img_margin_left"
         android:layout_marginTop="@dimen/create_folder_img_margin_top"
         card:cardBackgroundColor="@color/white_color"
-        card:cardCornerRadius="8dp"
-        card:cardElevation="4dp">
+        card:cardCornerRadius="3dp"
+        card:cardElevation="2dp">
 
         <ImageView
             android:id="@+id/folder_imageview"

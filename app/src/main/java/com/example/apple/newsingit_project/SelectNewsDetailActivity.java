@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,6 @@ import com.example.apple.newsingit_project.data.json_data.newsdetailscrapfolderl
 import com.example.apple.newsingit_project.data.view_data.ScrapFolderListData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
-import com.example.apple.newsingit_project.view.view_fragment.WebViewFragment;
 import com.example.apple.newsingit_project.widget.adapter.ScrapFolderListAdapter;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -287,16 +287,19 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //웹뷰 띄우기//
-                WebViewFragment fragment = new WebViewFragment();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(news_link));
+                startActivity(intent);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("URL", news_link);
-                fragment.setArguments(bundle);
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.news_container, fragment)
-                        .addToBackStack(null)
-                        .commit();
+//                //웹뷰 띄우기//
+//                WebViewFragment fragment = new WebViewFragment();
+//
+//                Bundle bundle = new Bundle();
+//                bundle.putString("URL", news_link);
+//                fragment.setArguments(bundle);
+//
+//                getSupportFragmentManager().beginTransaction().replace(R.id.news_container, fragment)
+//                        .addToBackStack(null)
+//                        .commit();
             }
         });
 
