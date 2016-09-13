@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -31,22 +32,22 @@ import okhttp3.Response;
  */
 public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String SCRAP_ID = "SCRAP_ID";
-
+    /**
+     * 응답코드
+     **/
+    private final static int RC_EDITSCRAPDIALOG = 100;
     UserScrapContentData userScrapContentData;
     Context context;
     String whoflag;
-
     /**
      * 팝업 관련 변수
      **/
     PopupWindow image_select_popup;
     View image_select_popup_view;
-
     /**
      * Network관련 변수
      **/
     NetworkManager networkManager;
-
     private Callback requestFavoriteCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -59,6 +60,8 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+
+
         }
     };
 
@@ -123,7 +126,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                         intent.putExtra(SCRAP_ID, "" + scrapId);
 
                         //필요한 정보를 전송.//
-                        context.startActivity(intent);
+                        ((Activity) context).startActivityForResult(intent, RC_EDITSCRAPDIALOG);
 
                     }
                 });
@@ -246,6 +249,21 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 .build();
 
         client.newCall(request).enqueue(requestFavoriteCallback);
+    }
+
+    //Adapter에서는 onActivityResult를 사용할 수 없으므로 Activity에서 콜백형식으로 이벤트를 받는다.//
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("MyAdapter", "onActivityResult");
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == RC_EDITSCRAPDIALOG) {
+                Log.d("json data", "스크랩 리스트 정보 수정 완료");
+
+                userScrapContentData = new UserScrapContentData();
+
+                notifyDataSetChanged();
+            }
+        }
     }
 
     public void increease_like_pushalarm() {

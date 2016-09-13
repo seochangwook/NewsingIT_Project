@@ -48,8 +48,8 @@ public class ScrapContentEditDialog extends Activity {
     Button scrap_delete_button;
     SwitchButton scrap_private_switch;
     TextView scrap_info_text;
+
     String group_name;
-    //String group_name[];
     String child_name[];
     int scrap_folder_id[];
     String scrap_id;
@@ -128,6 +128,8 @@ public class ScrapContentEditDialog extends Activity {
                         //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
                         Toast.makeText(ScrapContentEditDialog.this, "폴더 이동을 완료했습니다.", Toast.LENGTH_SHORT).show();
 
+                        setResult(RESULT_OK);
+
                         finish();
                     }
                 });
@@ -154,6 +156,8 @@ public class ScrapContentEditDialog extends Activity {
                     public void run() {
                         //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
                         Toast.makeText(ScrapContentEditDialog.this, "스크랩 삭제를 완료했습니다.", Toast.LENGTH_SHORT).show();
+
+                        setResult(RESULT_OK);
 
                         finish();
                     }

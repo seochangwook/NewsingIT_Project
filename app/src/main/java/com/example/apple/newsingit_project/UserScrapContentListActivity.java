@@ -390,6 +390,8 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        mAdapter.onActivityResult(requestCode, resultCode, data); //어댑터로 콜백//
+
         if (resultCode == RESULT_OK) {
             if (requestCode == RC_SCRAPINFO) {
                 //위에서 새로고침은 page값 증가가 필요없다.//
