@@ -11,18 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/popup_line"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_dimen"
-        android:layout_below="@+id/folder_expa_list"
-        android:background="@mipmap/line" />
+
 
     <Button
         android:id="@+id/delete_scrap_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/popup_btn_height"
-        android:layout_below="@+id/popup_line"
+        android:layout_below="@+id/folder_expa_list"
         android:background="@color/button_transparent_background"
         android:gravity="center|left"
         android:paddingLeft="@dimen/popup_text_margin_left"
@@ -31,7 +26,7 @@
         android:textSize="@dimen/popup_text_size" />
 
     <TextView
-        android:id="@+id/popup_line_two"
+        android:id="@+id/popup_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_dimen"
         android:layout_below="@+id/delete_scrap_content"
@@ -41,7 +36,7 @@
         android:id="@+id/info_text_private"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/popup_btn_height"
-        android:layout_below="@+id/popup_line_two"
+        android:layout_below="@+id/popup_line"
         android:layout_marginLeft="@dimen/popup_text_margin_left"
         android:gravity="center|left"
         android:text="비공개 설정"
@@ -53,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/popup_line_two"
+        android:layout_below="@+id/popup_line"
         android:layout_marginRight="@dimen/popup_text_margin_right"
         android:layout_marginTop="@dimen/popup_text_margin_top"
         app:kswFadeBack="true" />

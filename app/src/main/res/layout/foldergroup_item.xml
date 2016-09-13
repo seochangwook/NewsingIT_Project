@@ -22,4 +22,11 @@
         android:layout_marginRight="@dimen/popup_text_margin_right"
         android:src="@mipmap/ic_arrow_dropdown" />
 
+    <TextView
+        android:id="@+id/popup_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_dimen"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line" />
+
 </RelativeLayout>

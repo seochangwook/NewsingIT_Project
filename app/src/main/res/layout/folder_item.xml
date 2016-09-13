@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="@dimen/popup_child_height">
+
         <TextView
             android:id="@+id/child_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/popup_child_text_margin_left"
+            android:layout_marginRight="@dimen/popup_child_text_margin_right"
             android:text="*"
-            android:textColor="#000000"
-            android:textSize="25dp" />
-</LinearLayout>
+            android:textColor="@color/popup_text_color"
+            android:textSize="@dimen/popup_child_text_size" />
+
+        <TextView
+            android:id="@+id/popup_line_child"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_dimen"
+            android:layout_alignParentBottom="true"
+            android:background="@mipmap/line" />
+
+</RelativeLayout>

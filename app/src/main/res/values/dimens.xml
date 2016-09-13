@@ -677,6 +677,10 @@
     <dimen name="popup_text_margin_right">16dp</dimen>
     <dimen name="popup_text_size">16sp</dimen>
 
+    <dimen name="popup_child_height">40dp</dimen>
+    <dimen name="popup_child_text_margin_left">30dp</dimen>
+    <dimen name="popup_child_text_margin_right">16dp</dimen>
+    <dimen name="popup_child_text_size">13sp</dimen>
 
     <!--indicator dimen-->
     <dimen name="indicator_width">20dp</dimen>
