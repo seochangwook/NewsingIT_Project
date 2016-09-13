@@ -93,6 +93,7 @@ public class MyInfoFragment extends Fragment {
     private static final int RC_EDITFOLLOWING = 300;
     private static final int RC_EDITFOLDERLIST = 400;
     private static final int RC_EDITFOLDERINFO = 500;
+    private static final int RC_READSCRAP = 600;
 
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
@@ -265,7 +266,7 @@ public class MyInfoFragment extends Fragment {
                 intent.putExtra(KEY_FOLDER_ID, select_folder_id);
                 intent.putExtra(KEY_USER_IDENTIFY_FLAG, "0"); //0이면 나의 경우//
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_READSCRAP);
             }
         });
 
@@ -568,6 +569,14 @@ public class MyInfoFragment extends Fragment {
                 getMyFolderData();
             } else if (requestCode == RC_EDITFOLDERINFO) {
                 Log.d("json control", "폴더 정보 갱신");
+
+                init_folder_list(); //리스트 초기화는 이중적용을 막기 위해서 초기화를 먼저 해준다.//
+
+                getMyFolderData();
+            } else if (requestCode == RC_READSCRAP) {
+                Log.d("json control", "내 정보 / 폴더정보 수 갱신");
+
+                getUserInfoNetworkData();
 
                 init_folder_list(); //리스트 초기화는 이중적용을 막기 위해서 초기화를 먼저 해준다.//
 

@@ -22,7 +22,7 @@ import java.util.List;
 public class FolderGroupAdapter extends BaseExpandableListAdapter {
     Context context;
     //그룹에 대한 리스트 정의.//
-    List<FolderGroupItem> items = new ArrayList<>();
+    List<FolderGroupItem> items = new ArrayList<>(); //ExpandableListView는 ListView를 가지고 데이터를 셋팅//
 
     int last_childposition;
 
@@ -59,6 +59,12 @@ public class FolderGroupAdapter extends BaseExpandableListAdapter {
                 group.folder.add(child); //해당 그룹에 자식을 등록.//
             }
         }
+
+        notifyDataSetChanged();
+    }
+
+    public void set_List_Init(String groupName, String[] childName) {
+        items.clear(); //ExpandableList를 초기화//
 
         notifyDataSetChanged();
     }

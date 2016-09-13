@@ -60,6 +60,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         }
     };
+
     private Callback requestDeleteFollowingCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {

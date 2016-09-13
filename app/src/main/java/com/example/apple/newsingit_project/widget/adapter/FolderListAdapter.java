@@ -1,6 +1,9 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,6 +51,19 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+
+            if (this != null) {
+                ((Activity) context).runOnUiThread(new Runnable() //Adapter에서 runOnUiThread작업//
+                {
+                    @Override
+                    public void run() {
+                        //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
+                        Toast.makeText(context, "폴더 잠금 해제를 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                        notifyDataSetChanged(); //UI변경작업을 하는 스레드//
+                    }
+                });
+            }
         }
     };
 
@@ -111,20 +127,37 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 public void onClick(View view) {
 
                     if (folder_private == true) { //잠금 해제//
-                        Toast.makeText(context, "잠금모드 해제", Toast.LENGTH_SHORT).show();
-                        Log.d("position ", "" + position);
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                        alertDialog.setTitle("Newsing Info")
+                                .setMessage("폴더 잠금을 해제하시겠습니까?")
+                                .setCancelable(false)
+                                .setPositiveButton("해제",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                //yes
+                                                //네트워크로 데이터를 보낸다.//
+                                                Log.d("position ", "" + position);
 
-                        folderData.folder_list.get(position).setFolder_private(false);
+                                                folderData.folder_list.get(position).setFolder_private(false);
 
-                        //폴더변경에 필요한 정보(폴더id, 폴더 lock정보)를 얻는다.//
-                        int folder_id = folderData.folder_list.get(position).get_folderid();
-                        boolean folder_locked = folderData.folder_list.get(position).get_folder_private();
+                                                //폴더변경에 필요한 정보(폴더id, 폴더 lock정보)를 얻는다.//
+                                                int folder_id = folderData.folder_list.get(position).get_folderid();
+                                                boolean folder_locked = folderData.folder_list.get(position).get_folder_private();
 
-                        //인증해제 작업을 해준다.//
-                        set_folder_unlocked(folder_id, folder_locked);
+                                                //인증해제 작업을 해준다.//
+                                                set_folder_unlocked(folder_id, folder_locked);
+                                            }
+                                        }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //no
+                            }
+                        });
+
+                        AlertDialog alert = alertDialog.create();
+                        alert.show();
                     }
-
-                    notifyDataSetChanged();
                 }
             });
         }

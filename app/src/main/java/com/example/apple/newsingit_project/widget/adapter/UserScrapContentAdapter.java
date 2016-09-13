@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
@@ -122,8 +121,6 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                         //팝업창//
                         Intent intent = new Intent(context, ScrapContentEditDialog.class);
                         intent.putExtra(SCRAP_ID, "" + scrapId);
-
-                        Toast.makeText(context, "" + scrapId, Toast.LENGTH_SHORT).show();
 
                         //필요한 정보를 전송.//
                         context.startActivity(intent);

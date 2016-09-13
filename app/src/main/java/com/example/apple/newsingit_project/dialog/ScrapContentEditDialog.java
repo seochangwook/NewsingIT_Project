@@ -37,10 +37,14 @@ import okhttp3.Response;
 
 public class ScrapContentEditDialog extends Activity {
     private static final String SCRAP_ID = "SCRAP_ID";
-
+    /**
+     * 응답코드
+     **/
+    private static final int RC_CREATEFOLDER = 100;
     ExpandableListView expandablelistview;
     FolderGroupAdapter mAdapter;
-
+    Button create_folder_button;
+    View footerview;
     Button scrap_delete_button;
     SwitchButton scrap_private_switch;
     TextView scrap_info_text;
@@ -49,6 +53,7 @@ public class ScrapContentEditDialog extends Activity {
     String child_name[];
     int scrap_folder_id[];
     String scrap_id;
+    String locked;
     /**
      * Network 관련 변수
      **/
@@ -91,6 +96,15 @@ public class ScrapContentEditDialog extends Activity {
 
             Log.d("json data", response_data);
 
+            if (this != null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
+                        Toast.makeText(ScrapContentEditDialog.this, "스크랩 정보 수정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
     };
 
@@ -107,6 +121,17 @@ public class ScrapContentEditDialog extends Activity {
 
             Log.d("json data", response_data);
 
+            if (this != null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
+                        Toast.makeText(ScrapContentEditDialog.this, "폴더 이동을 완료했습니다.", Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    }
+                });
+            }
         }
     };
 
@@ -123,6 +148,17 @@ public class ScrapContentEditDialog extends Activity {
 
             Log.d("json data", response_data);
 
+            if (this != null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //응답메시지를 보내는 시기는 네트워크 작업이 모두 완료된 후이다.//
+                        Toast.makeText(ScrapContentEditDialog.this, "스크랩 삭제를 완료했습니다.", Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    }
+                });
+            }
         }
     };
 
@@ -146,10 +182,28 @@ public class ScrapContentEditDialog extends Activity {
         mAdapter = new FolderGroupAdapter(this);
         expandablelistview.setAdapter(mAdapter);
 
+        /** FooterView **/
+        footerview = getLayoutInflater().inflate(R.layout.expandable_footerview, null);
+
+        create_folder_button = (Button) footerview.findViewById(R.id.create_folder_button_dialog);
+
         //스크랩 id를 얻어온다.//
         Intent intent = getIntent();
 
         scrap_id = intent.getStringExtra(SCRAP_ID);
+
+        create_folder_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ScrapContentEditDialog.this, CreateFolderActivity.class);
+
+                expandablelistview.removeFooterView(footerview);
+
+                startActivityForResult(intent, RC_CREATEFOLDER);
+
+                expandablelistview.collapseGroup(0);
+            }
+        });
 
         //expandablelistview의 group indicator를 cusotom해주기 위해 기본 indicator를 제거한다//
         expandablelistview.setGroupIndicator(null);
@@ -162,6 +216,8 @@ public class ScrapContentEditDialog extends Activity {
                 scrap_delete_button.setVisibility(View.GONE);
                 scrap_private_switch.setVisibility(View.GONE);
                 scrap_info_text.setVisibility(View.GONE);
+
+                expandablelistview.addFooterView(footerview);
             }
         });
 
@@ -170,23 +226,12 @@ public class ScrapContentEditDialog extends Activity {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long id) {
 
-                int move_scrap_folder_id = scrap_folder_id[childPosition];
+                final int move_scrap_folder_id = scrap_folder_id[childPosition];
 
-                if (childPosition == child_name.length - 1) //마지막 자식
-                {
-                    Intent intent = new Intent(ScrapContentEditDialog.this, CreateFolderActivity.class);
-
-                    startActivity(intent);
-                } else {
-                    //카테고리 이동관련. 이동을 할려면 스크랩 id와 이동할 폴더의 id가 필요.//
-                    Scrap_move(scrap_id, move_scrap_folder_id);
-
-                    Toast.makeText(ScrapContentEditDialog.this, "스크랩 이동을 완료하였습니다", Toast.LENGTH_SHORT).show();
-                }
+                Scrap_move(scrap_id, move_scrap_folder_id);
 
                 expandableListView.collapseGroup(0);
 
-                //카테고리 선택.//
                 return true;
             }
         });
@@ -198,6 +243,8 @@ public class ScrapContentEditDialog extends Activity {
                 scrap_delete_button.setVisibility(View.VISIBLE);
                 scrap_private_switch.setVisibility(View.VISIBLE);
                 scrap_info_text.setVisibility(View.VISIBLE);
+
+                expandablelistview.removeFooterView(footerview);
             }
         });
 
@@ -205,15 +252,10 @@ public class ScrapContentEditDialog extends Activity {
         scrap_delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = getIntent();
-                String scrapId = intent.getStringExtra(SCRAP_ID);
-                //  Log.d("scrap_id", scrapId);
+                final String scrapId = intent.getStringExtra(SCRAP_ID);
+
                 deleteScrapData(scrapId);
-
-                Toast.makeText(ScrapContentEditDialog.this, "스크랩 삭제를 완료하였습니다", Toast.LENGTH_SHORT).show();
-
-                finish();
             }
         });
 
@@ -224,19 +266,48 @@ public class ScrapContentEditDialog extends Activity {
                 //스위치가 눌리지 않았을 때 (스크랩 공개 -> 비공개로 변환)//
                 if (is_check == true) {
                     //비공개("0") 전환작업//
-                    changed_scrap_locked("0");
+                    locked = "0";
+                    changed_scrap_locked(locked);
                 } else if (is_check == false) //(비공개 -> 공개)//
                 {
                     //공개("1") 전환 작업//
-                    changed_scrap_locked("1");
+                    locked = "1";
+                    changed_scrap_locked(locked);
                 }
             }
         });
 
-        //set_ExpanList_Data();
-
         /** 네트워크로 부터 데이터를 불러온다. **/
         get_Category_Data();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RC_CREATEFOLDER) {
+                Toast.makeText(ScrapContentEditDialog.this, "스크랩 이동을 완료하였습니다", Toast.LENGTH_SHORT).show();
+
+                //초기화//
+                init_scraplist();
+
+                get_Category_Data(); //데이터 새롭게 셋팅//
+
+                scrap_delete_button.setVisibility(View.VISIBLE);
+                scrap_private_switch.setVisibility(View.VISIBLE);
+                scrap_info_text.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    public void init_scraplist() {
+        child_name = new String[0];
+        scrap_folder_id = new int[0];
+
+        group_name = null;
+
+        mAdapter.set_List_Init(group_name, child_name);
     }
 
     public void changed_scrap_locked(String is_locked) {
@@ -356,22 +427,15 @@ public class ScrapContentEditDialog extends Activity {
 
                     scrapFolderListRequestResultsList.addAll(Arrays.asList(scrapFolderListRequestResults));
 
-                    //마지막 부분에 추가.//
-                    int array_last_size = scrap_folder_list_size + 1;
-
                     group_name = "스크랩 폴더 이동";
                     //  group_name = new String[]{"스크랩 폴더 이동"};
-                    child_name = new String[array_last_size]; //스크랩 사이즈의 개수로 배열을 할당.//
-                    scrap_folder_id = new int[array_last_size]; //스크랩 사이즈의 개수로 정수배열을 할당.//
+                    child_name = new String[scrap_folder_list_size]; //스크랩 사이즈의 개수로 배열을 할당.//
+                    scrap_folder_id = new int[scrap_folder_list_size]; //스크랩 사이즈의 개수로 정수배열을 할당.//
 
-                    for (int i = 0; i < array_last_size; i++) {
-                        if (i == array_last_size - 1) {
-                            child_name[i] = "+ 폴더만들기";
-                        } else {
-                            //id, name을 각각 배열에 저장//
-                            child_name[i] = scrapFolderListRequestResultsList.get(i).getName();
-                            scrap_folder_id[i] = scrapFolderListRequestResultsList.get(i).getId();
-                        }
+                    for (int i = 0; i < scrap_folder_list_size; i++) {
+                        //id, name을 각각 배열에 저장//
+                        child_name[i] = scrapFolderListRequestResultsList.get(i).getName();
+                        scrap_folder_id[i] = scrapFolderListRequestResultsList.get(i).getId();
 
                         Log.d("data", child_name[i]);
                     }

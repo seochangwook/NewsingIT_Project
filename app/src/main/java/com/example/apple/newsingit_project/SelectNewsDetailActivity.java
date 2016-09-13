@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequest;
 import com.example.apple.newsingit_project.data.json_data.newscontentdetail.NewsContentDetailRequestResult;
@@ -54,6 +55,11 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
     private static final String KEY_NEWS_WRITE_TIME = "KEY_NEWS_WRITE_TIME";
     private static final String KEY_NEWS_CONTENT = "KEY_NEWS_CONTENT";
     private static final String KEY_NEWS_IMGURL = "KEY_NEWS_IMGURL";
+
+    /**
+     * 응답코드
+     **/
+    private static final int RC_CREATEFOLDER = 100;
 
     Button btn;
     /**
@@ -199,6 +205,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                         scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
 
                         init_scrap_folder_list();
+
                         get_ScrapFolder_Data();
 
                         scrap_folder_recyclerview.removeHeaderView(headerview);
@@ -253,7 +260,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(SelectNewsDetailActivity.this, CreateFolderActivity.class);
 
-                startActivity(intent);
+                startActivityForResult(intent, RC_CREATEFOLDER);
 
                 scrap_folder_recyclerview.addHeaderView(headerview);
                 scrap_folder_recyclerview.smoothScrollToPosition(0);
@@ -303,11 +310,23 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             }
         });
 
-        //Dummy Data 설정//
-        //set_Dummy_ScrapFolder_Date();
-
         get_NewsDetail_info(news_id); //뉴스 세부정보//
         get_ScrapFolder_Data(); //스크랩 폴더 리스트//
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RC_CREATEFOLDER) {
+                Toast.makeText(SelectNewsDetailActivity.this, "폴더 추가를 완료하였습니다.", Toast.LENGTH_SHORT).show();
+
+                init_scrap_folder_list();
+
+                get_ScrapFolder_Data();
+            }
+        }
     }
 
     public void init_scrap_folder_list() {

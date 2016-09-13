@@ -325,7 +325,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         }
 
         /** Title명 설정 **/
-        setTitle(folder_name + " News");
+        setTitle(folder_name + " 폴더");
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -334,7 +334,8 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                setResult(USER_SCRAP_CONTENT_RESULT_OK);
+                setResult(RESULT_OK);
+
                 finish();
             }
         });
