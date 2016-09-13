@@ -44,9 +44,8 @@
                     android:layout_height="@dimen/my_info_btn_create_folder_height"
                     android:layout_below="@+id/scrap_folder_rv_list"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/my_info_btn_create_folder_margin_top"
-                    android:background="@mipmap/btn_foldermake"
-                    android:paddingRight="200dp" />
+                    android:layout_marginTop="16dp"
+                    android:background="@mipmap/btn_foldermake" />
 
                 <Button
                     android:id="@+id/create_scrap_folder_button"
