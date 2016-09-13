@@ -9,13 +9,9 @@ import java.util.List;
 public class SearchTagData {
     public int id;
     public String tag;
-    // public String count;
+    public String scrap_count;
 
     public List<SearchTagData> searchTagDataList = new ArrayList<>();
-
-    //   public void setCount(String count) {
-    //      this.count = count;
-    //  }
 
     public int getId() {
         return id;
@@ -23,14 +19,6 @@ public class SearchTagData {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public List<SearchTagData> getSearchTagDataList() {
-        return searchTagDataList;
-    }
-
-    public void setSearchTagDataList(List<SearchTagData> searchTagDataList) {
-        this.searchTagDataList = searchTagDataList;
     }
 
     public String getTag() {
@@ -41,7 +29,11 @@ public class SearchTagData {
         this.tag = tag;
     }
 
-    //  public String getCount(){
-    //      return this.count;
-    // }
+    public String getScrap_count() {
+        return this.scrap_count;
+    }
+
+    public void setScrap_count(String scrap_count) {
+        this.scrap_count = scrap_count;
+    }
 }

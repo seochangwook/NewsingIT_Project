@@ -19,12 +19,12 @@ public class SearchTagViewHolder extends RecyclerView.ViewHolder {
     public SearchTagViewHolder(View itemView) {
         super(itemView);
         tagView = (TextView) itemView.findViewById(R.id.text_search_tag);
-        //  countView = (TextView)itemView.findViewById(R.id.text_search_tag_count);
+        countView = (TextView) itemView.findViewById(R.id.text_search_tag_count);
     }
 
     public void setSearchTagData(SearchTagData searchTagData, Context context) {
         this.searchTagData = searchTagData;
         tagView.setText(searchTagData.getTag());
-        // countView.setText(searchTagData.getCount());
+        countView.setText(searchTagData.getScrap_count());
     }
 }

@@ -85,24 +85,24 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         public void onResponse(Call call, Response response) throws IOException {
             String responseData = response.body().string();
 
+            String condition_data = responseData.substring(10, 12); //널인지를 판단하기 위해서 파싱//
+
+            Log.d("json data:", condition_data.toString());
+
             Log.d("json data", responseData);
 
             if (is_me.equals("1")) //상대방 스크랩을 들어가는 경우 비공개 처리를 해준다.//
             {
                 //사용자 스크랩이면서 삭제된 경우가 존재할 수 있다.//
-                //if()
-                String response_parsing = responseData.substring(11, 21);
-
-                Log.d("json control", response_parsing);
-
-                if (response_parsing.equals("비공개 스크랩입니다")) {
+                if (condition_data.equals("{}")) //빈 배열임을 판단.//
+                {
                     if (this != null) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserSelectScrapContentActivity.this);
                                 alertDialog.setTitle("Newsing Info")
-                                        .setMessage("사용자가 공개하지 않은 스크랩입니다.")
+                                        .setMessage("해당 스크랩은 삭제되었습니다.")
                                         .setCancelable(false)
                                         .setPositiveButton("확인",
                                                 new DialogInterface.OnClickListener() {
@@ -118,21 +118,75 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                             }
                         });
                     }
-                } else //사용자 스크랩이면서 비공개가 아닌 경우//
-                {
+                } else {
+                    String response_parsing = responseData.substring(11, 21); //비공개인지 아닌지 판단.//
+
+                    Log.d("json control", response_parsing);
+
+                    if (response_parsing.equals("비공개 스크랩입니다")) {
+                        if (this != null) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserSelectScrapContentActivity.this);
+                                    alertDialog.setTitle("Newsing Info")
+                                            .setMessage("사용자가 공개하지 않은 스크랩입니다.")
+                                            .setCancelable(false)
+                                            .setPositiveButton("확인",
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                                            //yes
+                                                            finish();
+                                                        }
+                                                    });
+
+                                    AlertDialog alert = alertDialog.create();
+                                    alert.show();
+                                }
+                            });
+                        }
+                    } else //사용자 스크랩이면서 비공개가 아닌 경우//
+                    {
+                        Gson gson = new Gson();
+
+                        SelectScrapContentRequest scrapContentListRequest = gson.fromJson(responseData, SelectScrapContentRequest.class);
+
+                        setData(scrapContentListRequest.getResult());
+                    }
+                }
+            } else if (is_me.equals("0"))//내 스크랩일때는 비공개처리를 해줄 필요 없다.//
+            {
+                if (condition_data.equals("{}")) {
+                    if (this != null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserSelectScrapContentActivity.this);
+                                alertDialog.setTitle("Newsing Info")
+                                        .setMessage("해당 스크랩은 삭제되었습니다.")
+                                        .setCancelable(false)
+                                        .setPositiveButton("확인",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        //yes
+                                                        finish();
+                                                    }
+                                                });
+
+                                AlertDialog alert = alertDialog.create();
+                                alert.show();
+                            }
+                        });
+                    }
+                } else {
                     Gson gson = new Gson();
 
                     SelectScrapContentRequest scrapContentListRequest = gson.fromJson(responseData, SelectScrapContentRequest.class);
 
                     setData(scrapContentListRequest.getResult());
                 }
-            } else if (is_me.equals("0"))//내 스크랩일때는 비공개처리를 해줄 필요 없다.//
-            {
-                Gson gson = new Gson();
-
-                SelectScrapContentRequest scrapContentListRequest = gson.fromJson(responseData, SelectScrapContentRequest.class);
-
-                setData(scrapContentListRequest.getResult());
             }
         }
     };

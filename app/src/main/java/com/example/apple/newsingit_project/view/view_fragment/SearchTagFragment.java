@@ -127,8 +127,11 @@ public class SearchTagFragment extends Fragment {
 
                     for (int i = 0; i < size; i++) {
                         SearchTagData newSearchTagData = new SearchTagData();
+
                         newSearchTagData.setId(searchTagListRequestResults.get(i).getId());
                         newSearchTagData.setTag(searchTagListRequestResults.get(i).getTag());
+                        //newSearchTagData.setScrap_count(""+searchTagListRequestResults.get(i).getScrap_count());
+                        newSearchTagData.setScrap_count("1");
 
                         searchTagData.searchTagDataList.add(newSearchTagData);
                     }
