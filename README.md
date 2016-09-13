@@ -48,15 +48,15 @@
 * AutoLogin
 
 <p align="left">
-  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_1.png" width="650" height="350">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin1.png" width="650" height="350">
 </p>
 
 <p align="left">
-  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_2.png" width="650" height="350">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin2.png" width="650" height="350">
 </p>
 
 <p align="left">
-  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin_3.png" width="650" height="350">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/autologin3.png" width="650" height="350">
 </p>
 
 * FCM
@@ -165,4 +165,7 @@
 * TEXT 잘려 나오는 뷰들 singleLine으로 수정, UserScrapContentListActivity 종료 후 UserInfoActivity의 folder list 갱신 - 임지수 (16/09/12 20:33)
 * MyInfoFragment 데이터 갱신 예외처리 - 서창욱 (16/09/12 20:52)
 * UserScrapContentActivity / UserSelectScrapContnetActivity / DrawerFragment간 데이터 갱신작업 - 서창욱 (16/09/13 00:16)
+* UserScrapContentList에서 Adapter를 통한 RecyclerView정보 갱신작업(onActivityResult를 콜백으로 호출) - 서창욱 (16/09/13 21:35)
+* ScrapFolderActivity / ExpandabelListview 정보 갱신작업 - 서창욱 (16/09/13 21:35)
+* 사용자 스크랩 게시물 삭제에 따른 예외처리 - 서창욱 (16/09/13 21:35)
 
