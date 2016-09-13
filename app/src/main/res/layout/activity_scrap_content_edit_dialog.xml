@@ -15,7 +15,7 @@
         android:id="@+id/popup_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_dimen"
-        android:layout_marginTop="40dp"
+        android:layout_below="@+id/folder_expa_list"
         android:background="@mipmap/line" />
 
     <Button

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="@dimen/popup_btn_height">
 
     <Button
         android:id="@+id/create_folder_button_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button_transparent_background"
-        android:text="+폴더만들기" />
+        android:background="@android:color/transparent" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="@dimen/my_info_btn_create_folder_width"
+        android:layout_height="@dimen/my_info_btn_create_folder_height"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/btn_foldermake" />
+</RelativeLayout>
