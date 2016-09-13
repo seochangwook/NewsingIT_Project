@@ -135,10 +135,10 @@ public class SplashActivity extends AppCompatActivity {
         //우선적으로 Url을 만든다.//
         HttpUrl.Builder builder = new HttpUrl.Builder();
 
+        //호스트 주소로 판단//
         builder.scheme("http");
         builder.host(getResources().getString(R.string.real_server_domain));
         builder.port(8080);
-        builder.addPathSegment("newscontents");
 
         /** Request 설정 **/
         Request request = new Request.Builder()

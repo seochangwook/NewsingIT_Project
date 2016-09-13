@@ -89,6 +89,8 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
             if (is_me.equals("1")) //상대방 스크랩을 들어가는 경우 비공개 처리를 해준다.//
             {
+                //사용자 스크랩이면서 삭제된 경우가 존재할 수 있다.//
+                //if()
                 String response_parsing = responseData.substring(11, 21);
 
                 Log.d("json control", response_parsing);
