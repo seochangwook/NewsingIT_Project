@@ -14,8 +14,7 @@
         android:layout_marginBottom="@dimen/my_info_img_margin_bottom"
         android:layout_marginLeft="@dimen/my_info_img_margin_left"
         android:layout_marginRight="@dimen/my_info_img_margin_right"
-        android:layout_marginTop="@dimen/my_info_img_margin_top"
-        android:src="@mipmap/profile_hambur" />
+        android:layout_marginTop="@dimen/my_info_img_margin_top" />
 
     <TextView
         android:id="@+id/my_sff_container"
@@ -33,7 +32,6 @@
         android:layout_toRightOf="@+id/profile_imageview"
         android:background="@null"
         android:gravity="center_horizontal"
-        android:text="33"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
 
@@ -58,11 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/my_sff_text"
         android:layout_marginLeft="@dimen/my_info_sff_margin_left"
-
         android:layout_toRightOf="@+id/scrapt_count_button"
         android:background="@null"
         android:gravity="center_horizontal"
-        android:text="303"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
 
@@ -87,11 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/my_sff_text"
         android:layout_marginLeft="@dimen/my_info_sff_margin_left"
-
         android:layout_toRightOf="@+id/follower_button"
         android:background="@null"
         android:gravity="center_horizontal"
-        android:text="312"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
 
@@ -139,7 +133,6 @@
         android:layout_marginBottom="@dimen/my_info_about_me_margin_bottom"
         android:layout_marginTop="@dimen/my_info_about_me_margin_top"
         android:layout_toRightOf="@+id/profile_imageview"
-        android:text="안녕하세요!! 안드로이드 개발반 서창욱 입니다."
         android:textSize="@dimen/my_info_about_me_size" />
 
     <TextView

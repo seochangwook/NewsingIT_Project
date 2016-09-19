@@ -25,10 +25,6 @@
     <color name="bg_tag_default">#7cd167</color>
 
 
-    <!-- follow button color-->
-    <color name="follow_true">#b1b1ef</color>
-    <color name="follow_false">#FFFFFFFF</color>
-
 
     <!--keyword color-->
     <color name="keyword">#454444</color>
