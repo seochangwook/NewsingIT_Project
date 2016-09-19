@@ -72,7 +72,9 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     String nc_imageUrl = null; //후엔 디폴트 이미지 경로 저장.//
     NetworkManager networkManager;
     private TagGroup mBeautyTagGroup; //태그를 나타낼 스타일 뷰//
+
     private ProgressDialog pDialog;
+
 
     private Callback requestSelectScrapContentCallback = new Callback() {
         @Override
@@ -266,9 +268,6 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_scrap_beauty);
 
-        //태그 그룹 속성 설정//
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -330,7 +329,11 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             }
         });
 
+        showpDialog();
+
         getSelectScrapContentNetworkData(scrapId);
+
+        hidepDialog();
     }
 
     @Override

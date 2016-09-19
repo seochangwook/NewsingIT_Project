@@ -193,7 +193,6 @@ public class SearchNewsFragment extends Fragment {
 
                         initSearchNewsDataList();
 
-
                         getSearchNewsNetworkData(query);
 
                     }
@@ -211,7 +210,7 @@ public class SearchNewsFragment extends Fragment {
 
                         familiarRefreshRecyclerView.loadMoreComplete();
 
-                        pageCount += 1;
+                        pageCount += 1; //'더보기'의 기능을 구현하기 위해서 설정//
 
                         getSearchNewsNetworkData(query);
                     }

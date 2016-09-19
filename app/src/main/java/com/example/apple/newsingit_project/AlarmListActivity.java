@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,8 @@ public class AlarmListActivity extends AppCompatActivity {
 
     private FamiliarRecyclerView recyclerview;
 
+    private ProgressDialog pDialog;
+
     private Callback requestalarmlistcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) //접속 실패의 경우.//
@@ -81,6 +84,10 @@ public class AlarmListActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Please wait...");
+        pDialog.setCancelable(false);
 
         alarmData = new AlarmData();
 
@@ -146,8 +153,12 @@ public class AlarmListActivity extends AppCompatActivity {
             }
         });
 
+        showpDialog();
+
         //네트워크로 부터 데이터를 얻어온다.//
         get_Alarm_Data();
+
+        hidepDialog();
 
         //배지 카운터 설정(기기별 호환문제)//
         Intent i = new Intent("android.intent.action.BADGE_COUNT_UPDATE");
@@ -217,5 +228,15 @@ public class AlarmListActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 }
