@@ -15,8 +15,7 @@
         android:layout_height="@dimen/user_info_img_height"
         android:layout_marginLeft="@dimen/user_info_img_margin_left"
         android:layout_marginRight="@dimen/user_info_img_margin_right"
-        android:layout_marginTop="@dimen/user_info_img_margin_top"
-        android:src="@mipmap/profile_hambur" />
+        android:layout_marginTop="@dimen/user_info_img_margin_top" />
 
 
     <ImageButton
@@ -36,7 +35,6 @@
         android:layout_marginBottom="@dimen/user_info_about_me_margin_bottom"
         android:layout_marginTop="@dimen/user_info_about_me_margin_top"
         android:layout_toRightOf="@+id/user_profile_imageview"
-        android:text="안녕하세요!! 안드로이드 개발반 임지수 입니다."
         android:textSize="10dp" />
 
     <TextView
@@ -55,7 +53,6 @@
         android:layout_toRightOf="@+id/user_profile_imageview"
         android:background="@color/button_transparent_background"
         android:gravity="center"
-        android:text="10"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
 
@@ -69,7 +66,6 @@
         android:layout_toRightOf="@+id/scrapt_count_button"
         android:background="@color/button_transparent_background"
         android:gravity="center"
-        android:text="200"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
 
@@ -83,7 +79,6 @@
         android:layout_toRightOf="@+id/user_follower_button"
         android:background="@color/button_transparent_background"
         android:gravity="center"
-        android:text="1000"
         android:textColor="@color/my_info_sff_num"
         android:textSize="@dimen/my_info_sff_num_size" />
 
