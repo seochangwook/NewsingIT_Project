@@ -293,13 +293,33 @@ public class MainActivity extends AppCompatActivity {
                             .commit();
 
                     setTitle(getResources().getString(R.string.title_activity_main));
+                } else if (position == 1) {
+
+                    //프래그먼트 변경.//
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyInfoFragment())
+                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+
+                    //프래그먼트 변경 시 타이틀 변경.//
+                    /** 액티비티 타이클 설정 **/
+                    String my_name = PropertyManager.getInstance().get_name();
+
+                    setTitle(my_name);
                 }
             }
 
             @Override
             public void onItemReSelected(int position, int id) {
                 // Do something when item is re-selected
-                if (position == 1) {
+                if (position == 0) {
+
+                    //프래그먼트 변경.replace로 변경//
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, new MainNewsListFragment())
+                            .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .commit();
+
+                    setTitle(getResources().getString(R.string.title_activity_main));
+                } else if (position == 1) {
 
                     //프래그먼트 변경.//
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyInfoFragment())

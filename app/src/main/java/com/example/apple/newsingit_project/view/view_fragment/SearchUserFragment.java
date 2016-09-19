@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.UserInfoActivity;
@@ -46,8 +47,10 @@ public class SearchUserFragment extends Fragment {
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
     private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
-    private static final String SEARCH_QUERY = "SEARCH_QUERY";
     private static final int LOAD_MORE_TAG = 4;
+
+    static int pageCount = 1;
+
     String query;
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
@@ -79,7 +82,19 @@ public class SearchUserFragment extends Fragment {
 
                 SearchUserRequest searchUserListRequest = gson.fromJson(responseData, SearchUserRequest.class);
 
-                setData(searchUserListRequest.getResults(), searchUserListRequest.getResults().length);
+                if (searchUserListRequest.getResults().length == 0) {
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getActivity(), "불러올 정보가 없습니다", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                } else {
+                    setData(searchUserListRequest.getResults(), searchUserListRequest.getResults().length);
+                }
             }
         }
     };
@@ -94,6 +109,8 @@ public class SearchUserFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search_user_layout, container, false);
+
+        pageCount = 1;
 
         searchUserData = new SearchUserData();
 
@@ -138,7 +155,8 @@ public class SearchUserFragment extends Fragment {
 
                         familiarRefreshRecyclerView.loadMoreComplete();
 
-                        initSearchUserDataList();
+                        pageCount += 1;
+
                         get_User_search_Data(query);
 
                     }
@@ -215,7 +233,7 @@ public class SearchUserFragment extends Fragment {
         //전달할 파라미터 값을 생성//
         builder.addQueryParameter("target", "" + 2);
         builder.addQueryParameter("word", "" + query);
-        builder.addQueryParameter("page", "" + 1);
+        builder.addQueryParameter("page", "" + pageCount);
         builder.addQueryParameter("count", "" + 20);
 
         /** Request 설정 **/

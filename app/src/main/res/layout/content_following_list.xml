@@ -10,8 +10,7 @@
     tools:showIn="@layout/following_list_activity_layout">
 
 
-
-    <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+    <cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView
         android:id="@+id/following_rv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -72,6 +72,7 @@ public class UserInfoActivity extends AppCompatActivity {
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
 
+    String name;
     String get_user_id = null;
 
     /**
@@ -251,6 +252,7 @@ public class UserInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         get_user_id = intent.getStringExtra(USER_ID); //사용자의 id를 얻어온다.//
+        name = intent.getStringExtra("USER_NAME");
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -354,14 +356,33 @@ public class UserInfoActivity extends AppCompatActivity {
 
                 } else if (follow_state == true) //현재 내가 해당 유저를 팔로잉하고 있는 경우//
                 {
-                    user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
 
-                    follow_state = false;
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserInfoActivity.this);
+                    alertDialog.setMessage(name + " 님의 팔로우를 취소 하시겠어요?").setCancelable(false).setPositiveButton("팔로우 취소",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //yes
 
-                    //팔로우 해제 작업//
-                    Log.d("json control", "팔로잉을 현재 한 상태이므로 팔로잉을 해제");
+                                    user_following_button.setImageResource(R.mipmap.btn_follow_600_72);
 
-                    unset_user_follow(get_user_id);
+                                    follow_state = false;
+
+                                    //팔로우 해제 작업//
+                                    Log.d("json control", "팔로잉을 현재 한 상태이므로 팔로잉을 해제");
+
+                                    unset_user_follow(get_user_id);
+
+                                }
+                            }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //no
+
+                        }
+                    });
+                    AlertDialog alert = alertDialog.create();
+                    alert.show();
                 }
             }
         });

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.example.apple.newsingit_project.data.json_data.followinglist.Followin
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.FollowingData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FollowingListAdapter;
 import com.google.gson.Gson;
 
@@ -28,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
+import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -39,6 +42,8 @@ public class FollowingListActivity extends AppCompatActivity {
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
     private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
+    private static final int LOAD_MORE_TAG = 4;
+    static int pageCount = 1;
 
     FollowingListAdapter mAdapter;
     FollowingData followingData;
@@ -46,6 +51,8 @@ public class FollowingListActivity extends AppCompatActivity {
     SearchView searchView;
 
     NetworkManager networkManager;
+
+    FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     private FamiliarRecyclerView recyclerview;
     private ProgressDialog pDialog;
     private Callback requestFollowingListCallback = new Callback() {
@@ -113,8 +120,8 @@ public class FollowingListActivity extends AppCompatActivity {
                 .addPathSegment("follows")
                 .addQueryParameter("direction", "to")
                 .addQueryParameter("word", "") //전체검색//
-                .addQueryParameter("page", "1")
-                .addQueryParameter("count", "10");
+                .addQueryParameter("page", "" + pageCount)
+                .addQueryParameter("count", "20");
 
         Request request = new Request.Builder()
                 .url(builder.build())
@@ -173,13 +180,59 @@ public class FollowingListActivity extends AppCompatActivity {
             }
         });
 
+        pageCount = 1;
+
         followingData = new FollowingData();
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
-        recyclerview = (FamiliarRecyclerView) findViewById(R.id.following_rv_list);
+        familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) findViewById(R.id.following_rv_list);
+        familiarRefreshRecyclerView.setId(android.R.id.list);
+        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(this, LOAD_MORE_TAG));
+        familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
+        familiarRefreshRecyclerView.setLoadMoreEnabled(true);
+
+        familiarRefreshRecyclerView.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
+            @Override
+            public void onPullRefresh() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        familiarRefreshRecyclerView.pullRefreshComplete();
+
+                        initFollowingList();
+
+                        getFollowingListNetworkData();
+
+                    }
+                }, 1000);
+            }
+        });
+
+        familiarRefreshRecyclerView.setOnLoadMoreListener(new FamiliarRefreshRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "새로고침 완료");
+
+                        familiarRefreshRecyclerView.loadMoreComplete();
+
+                        pageCount += 1;
+
+                        getFollowingListNetworkData();
+                    }
+                }, 1000);
+
+            }
+        });
+
+        recyclerview = familiarRefreshRecyclerView.getFamiliarRecyclerView();
+        recyclerview.setItemAnimator(new DefaultItemAnimator());
+        recyclerview.setHasFixedSize(true);
 
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null, false);
 
@@ -195,7 +248,10 @@ public class FollowingListActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                initSearchFollowingList();
+
+                pageCount = 1;
+
+                initFollowingList();
 
                 search_following_list(query);
 
@@ -263,7 +319,7 @@ public class FollowingListActivity extends AppCompatActivity {
         getFollowingListNetworkData(); //초기화면은 전체검색 화면//
     }
 
-    private void initSearchFollowingList() {
+    private void initFollowingList() {
         followingData.followingDataList.clear();
         mAdapter.initFollowingData(followingData);
     }
@@ -280,8 +336,8 @@ public class FollowingListActivity extends AppCompatActivity {
                 .addPathSegment("follows")
                 .addQueryParameter("direction", "to")
                 .addQueryParameter("word", query) //조건검색//
-                .addQueryParameter("page", "1")
-                .addQueryParameter("count", "10");
+                .addQueryParameter("page", "" + pageCount)
+                .addQueryParameter("count", "20");
 
         Request request = new Request.Builder()
                 .url(builder.build())

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.UserScrapContentListActivity;
@@ -44,7 +45,8 @@ public class SearchTagFragment extends Fragment {
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final int LOAD_MORE_TAG = 6;
-    private static final String SEARCH_QUERY = "SEARCH_QUERY";
+
+    static int pageCount = 1;
 
     String query;
 
@@ -78,7 +80,18 @@ public class SearchTagFragment extends Fragment {
 
                 SearchTagListRequest searchTagListRequest = gson.fromJson(responseData, SearchTagListRequest.class);
 
-                setData(searchTagListRequest.getResults(), searchTagListRequest.getResults().length);
+                if (searchTagListRequest.getResults().length == 0) {
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getActivity(), "불러올 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } else {
+                    setData(searchTagListRequest.getResults(), searchTagListRequest.getResults().length);
+                }
             }
         }
     };
@@ -93,7 +106,7 @@ public class SearchTagFragment extends Fragment {
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
-
+        Log.d("pageCount", "" + pageCount);
         HttpUrl.Builder builder = new HttpUrl.Builder();
         builder.scheme("http")
                 .host(getResources().getString(R.string.real_server_domain))
@@ -101,10 +114,8 @@ public class SearchTagFragment extends Fragment {
                 .addPathSegment("search")
                 .addQueryParameter("target", "3")
                 .addQueryParameter("word", query)
-                .addQueryParameter("page", "1")
+                .addQueryParameter("page", "" + pageCount)
                 .addQueryParameter("count", "20");
-
-        //  Log.d("searchQuery",searchQuery);
 
         Request request = new Request.Builder()
                 .url(builder.build())
@@ -130,8 +141,7 @@ public class SearchTagFragment extends Fragment {
 
                         newSearchTagData.setId(searchTagListRequestResults.get(i).getId());
                         newSearchTagData.setTag(searchTagListRequestResults.get(i).getTag());
-                        //newSearchTagData.setScrap_count(""+searchTagListRequestResults.get(i).getScrap_count());
-                        newSearchTagData.setScrap_count("1");
+                        newSearchTagData.setScrap_count("" + searchTagListRequestResults.get(i).getScrap_count());
 
                         searchTagData.searchTagDataList.add(newSearchTagData);
                     }
@@ -150,6 +160,7 @@ public class SearchTagFragment extends Fragment {
 
         searchTagData = new SearchTagData();
 
+        pageCount = 1;
 
         Bundle b = getArguments();
         query = b.getString("SEARCH_QUERY");
@@ -193,7 +204,7 @@ public class SearchTagFragment extends Fragment {
 
                         familiarRefreshRecyclerView.loadMoreComplete();
 
-                        initSearchTagDataList();
+                        pageCount += 1;
 
                         getSearchTagNetworkData(query);
 

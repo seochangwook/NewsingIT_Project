@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SelectNewsDetailActivity;
@@ -43,7 +44,8 @@ public class SearchNewsFragment extends Fragment {
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
     private static final int LOAD_MORE_TAG = 5;
-    private static final String SEARCH_QUERY = "SEARCH_QUERY";
+
+    static int pageCount = 1;
 
     String query;
 
@@ -75,7 +77,18 @@ public class SearchNewsFragment extends Fragment {
 
                 SearchNewsListRequest searchNewsListRequest = gson.fromJson(responseData, SearchNewsListRequest.class);
 
-                setData(searchNewsListRequest.getResults(), searchNewsListRequest.getResults().length);
+                if (searchNewsListRequest.getResults().length == 0) {
+                    if (getActivity() != null) {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getActivity(), "불러올 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } else {
+                    setData(searchNewsListRequest.getResults(), searchNewsListRequest.getResults().length);
+                }
             }
         }
     };
@@ -88,6 +101,7 @@ public class SearchNewsFragment extends Fragment {
         showpDialog();
 
         Log.d("search", "network");
+        Log.d("pageCount", "" + pageCount);
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -99,7 +113,7 @@ public class SearchNewsFragment extends Fragment {
                 .addPathSegment("search")
                 .addQueryParameter("target", "1")
                 .addQueryParameter("word", query)
-                .addQueryParameter("page", "1")
+                .addQueryParameter("page", "" + pageCount)
                 .addQueryParameter("count", "20");
 
         Request request = new Request.Builder()
@@ -145,6 +159,11 @@ public class SearchNewsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_news_layout, container, false);
 
+        pageCount = 1;
+
+        Log.d("pageCount", "" + pageCount);
+
+
         Bundle b = getArguments();
         query = b.getString("SEARCH_QUERY");
 
@@ -174,12 +193,8 @@ public class SearchNewsFragment extends Fragment {
 
                         initSearchNewsDataList();
 
-                        Log.d("search", "pull refresh");
 
                         getSearchNewsNetworkData(query);
-
-
-
 
                     }
                 }, 1000);
@@ -196,9 +211,7 @@ public class SearchNewsFragment extends Fragment {
 
                         familiarRefreshRecyclerView.loadMoreComplete();
 
-                        initSearchNewsDataList();
-
-                        Log.d("search", "load more");
+                        pageCount += 1;
 
                         getSearchNewsNetworkData(query);
                     }

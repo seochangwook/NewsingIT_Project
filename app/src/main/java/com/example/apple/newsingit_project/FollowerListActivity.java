@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerL
 import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.FollowerData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
+import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FollowerListAdapter;
 import com.google.gson.Gson;
 
@@ -27,6 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
+import cn.iwgang.familiarrecyclerview.FamiliarRefreshRecyclerView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -38,11 +41,16 @@ public class FollowerListActivity extends AppCompatActivity {
     private static final String USER_ID = "USER_ID";
     private static final String USER_NAME = "USER_NAME";
     private static final String USER_FOLLOW_FLAG = "USER_FOLLOW_FLAG";
+    private static final int LOAD_MORE_TAG = 4;
+
+    static int pageCount = 1;
 
     FollowerListAdapter mAdapter;
     FollowerData followerData;
     SearchView search_edit;
     NetworkManager networkManager;
+
+    FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     private FamiliarRecyclerView recyclerview;
     private ProgressDialog pDialog;
 
@@ -94,7 +102,7 @@ public class FollowerListActivity extends AppCompatActivity {
         }
     };
 
-    private void getFollowingListNetworkData() {
+    private void getFollowerListNetworkData() {
 
         showpDialog();
 
@@ -109,8 +117,8 @@ public class FollowerListActivity extends AppCompatActivity {
                 .addPathSegment("follows")
                 .addQueryParameter("direction", "from")
                 .addQueryParameter("word", "") //전체검색//
-                .addQueryParameter("page", "1")
-                .addQueryParameter("count", "10");
+                .addQueryParameter("page", "" + pageCount)
+                .addQueryParameter("count", "20");
 
         Request request = new Request.Builder()
                 .url(builder.build())
@@ -170,13 +178,61 @@ public class FollowerListActivity extends AppCompatActivity {
             }
         });
 
+
+        pageCount = 1;
+
         followerData = new FollowerData();
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
-        recyclerview = (FamiliarRecyclerView) findViewById(R.id.follower_rv_list);
+        familiarRefreshRecyclerView = (FamiliarRefreshRecyclerView) findViewById(R.id.follower_rv_list);
+        familiarRefreshRecyclerView.setId(android.R.id.list);
+        familiarRefreshRecyclerView.setLoadMoreView(new LoadMoreView(this, LOAD_MORE_TAG));
+        familiarRefreshRecyclerView.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
+        familiarRefreshRecyclerView.setLoadMoreEnabled(true);
+
+        familiarRefreshRecyclerView.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
+            @Override
+            public void onPullRefresh() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        familiarRefreshRecyclerView.pullRefreshComplete();
+
+                        initFollowerList();
+
+                        getFollowerListNetworkData();
+
+                    }
+                }, 1000);
+            }
+        });
+
+        familiarRefreshRecyclerView.setOnLoadMoreListener(new FamiliarRefreshRecyclerView.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("EVENT :", "새로고침 완료");
+
+                        familiarRefreshRecyclerView.loadMoreComplete();
+
+                        pageCount += 1;
+
+                        getFollowerListNetworkData();
+                    }
+                }, 1000);
+
+            }
+        });
+
+
+        recyclerview = familiarRefreshRecyclerView.getFamiliarRecyclerView();
+        recyclerview.setItemAnimator(new DefaultItemAnimator());
+        recyclerview.setHasFixedSize(true);
 
         /** HeaderView 설정 **/
         View headerView = LayoutInflater.from(this).inflate(R.layout.view_follow_header, null);
@@ -200,7 +256,9 @@ public class FollowerListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                initSearchFollowerList();
+                pageCount = 1;
+
+                initFollowerList();
                 //검색어를 가지고 검색을 한다.//
                 search_follower_list(query);
 
@@ -255,10 +313,10 @@ public class FollowerListActivity extends AppCompatActivity {
             }
         });
 
-        getFollowingListNetworkData(); //초기 화면에 들어올 시는 전체 리스트를 검색.//
+        getFollowerListNetworkData(); //초기 화면에 들어올 시는 전체 리스트를 검색.//
     }
 
-    private void initSearchFollowerList() {
+    private void initFollowerList() {
         followerData.followerDataList.clear();
         mAdapter.initFollowerData(followerData);
     }
@@ -276,7 +334,7 @@ public class FollowerListActivity extends AppCompatActivity {
                 .addQueryParameter("direction", "from")
                 .addQueryParameter("word", query) //조건검색//
                 .addQueryParameter("page", "1")
-                .addQueryParameter("count", "10");
+                .addQueryParameter("count", "20");
 
         Request request = new Request.Builder()
                 .url(builder.build())
