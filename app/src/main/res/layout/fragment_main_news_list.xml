@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,15 +14,18 @@
         app:frv_layoutManager="linear"
         app:frv_layoutManagerOrientation="vertical" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/scroll_topup_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/btn_floating_margin_left"
-        android:layout_marginTop="@dimen/btn_floating_margin_top"
-        android:background="@color/button_transparent_background"
-        android:src="@mipmap/btn_toparrow"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
-        app:fabSize="mini" />
-</FrameLayout>
+    <ImageButton
+        android:id="@+id/btn_floating"
+        android:layout_width="@dimen/btn_floating_width"
+        android:layout_height="@dimen/btn_floating_height"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/btn_floating_margin_bottom"
+        android:layout_marginRight="@dimen/btn_floating_margin_right"
+        android:background="@drawable/bg_circle"
+        android:elevation="@dimen/btn_floating_elevation"
+        android:scaleType="fitXY"
+        android:src="@mipmap/btn_toparrow" />
+
+
+</RelativeLayout>

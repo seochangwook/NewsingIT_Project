@@ -107,12 +107,6 @@
     <dimen name="main_news_content_layout_margin_left">100dp</dimen>
     <dimen name="main_news_keyword_layout_margin_left">10dp</dimen>
 
-    <!-- Floating button dimen -->
-    <dimen name="floatingbutton_width">40dp</dimen>
-    <dimen name="floatingbutton_height">40dp</dimen>
-    <dimen name="floatingbutton_margin_left">290dp</dimen>
-    <dimen name="floatingbutton_margin_top">435dp</dimen>
-
 
     <!--line dimen-->
     <dimen name="line_dimen">2dp</dimen>
@@ -150,8 +144,11 @@
 
 
     <!--floating button dimen-->
-    <dimen name="btn_floating_margin_top">435dp</dimen>
-    <dimen name="btn_floating_margin_left">290dp</dimen>
+    <dimen name="btn_floating_width">48dp</dimen>
+    <dimen name="btn_floating_height">48dp</dimen>
+    <dimen name="btn_floating_margin_right">16dp</dimen>
+    <dimen name="btn_floating_margin_bottom">18dp</dimen>
+    <dimen name="btn_floating_elevation">4dp</dimen>
 
 
     <!--keyword dimen-->

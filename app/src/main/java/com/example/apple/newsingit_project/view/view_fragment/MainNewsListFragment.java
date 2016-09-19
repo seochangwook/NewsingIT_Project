@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.util.Log;
@@ -16,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
@@ -84,7 +84,7 @@ public class MainNewsListFragment extends Fragment {
     KeywordSection keywordSection;
     NewsAdapter newsAdapter;
 
-    FloatingActionButton topup_button;
+    ImageButton topup_button;
     float startYPosition = 0; //기본적으로 스크롤은 Y축을 기준으로 계산.//
     float endYPosition = 0;
     boolean firstDragFlag = true;
@@ -147,7 +147,7 @@ public class MainNewsListFragment extends Fragment {
         setHasOptionsMenu(true); //메뉴를 적용한다.//
 
         mainnews_recyclerrefreshview = (FamiliarRefreshRecyclerView) view.findViewById(R.id.main_rv_list);
-        topup_button = (FloatingActionButton) view.findViewById(R.id.scroll_topup_button);
+        topup_button = (ImageButton) view.findViewById(R.id.btn_floating);
 
         //처음 스크롤 버튼은 보이지 않게 한다.//
         topup_button.setVisibility(View.GONE);
