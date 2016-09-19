@@ -244,9 +244,15 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                     //이미지 설정//
                     nc_imageUrl = result.getNc_img_url();
 
-                    Picasso.with(UserSelectScrapContentActivity.this)
-                            .load(nc_imageUrl)
-                            .into(news_imageview);
+                    if (nc_imageUrl.equals("")) {
+                        Picasso.with(UserSelectScrapContentActivity.this)
+                                .load(R.mipmap.ic_image_default)
+                                .into(news_imageview);
+                    } else {
+                        Picasso.with(UserSelectScrapContentActivity.this)
+                                .load(nc_imageUrl)
+                                .into(news_imageview);
+                    }
                 }
             });
         }

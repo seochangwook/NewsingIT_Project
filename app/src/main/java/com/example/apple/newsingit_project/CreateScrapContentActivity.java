@@ -139,9 +139,15 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
         //위젯이 뿌려준다.//
         //이미지 설정.//
-        Picasso.with(CreateScrapContentActivity.this)
-                .load(news_preview_image_str)
-                .into(news_preview_image);
+        if (news_preview_image_str.equals("")) {
+            Picasso.with(CreateScrapContentActivity.this)
+                    .load(R.mipmap.ic_image_default)
+                    .into(news_preview_image);
+        } else {
+            Picasso.with(CreateScrapContentActivity.this)
+                    .load(news_preview_image_str)
+                    .into(news_preview_image);
+        }
 
         news_preview_title.setText(news_preview_title_str);
         news_preview_write_time.setText(news_preview_write_time_str);

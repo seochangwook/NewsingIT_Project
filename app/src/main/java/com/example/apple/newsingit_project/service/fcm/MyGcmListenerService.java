@@ -37,12 +37,13 @@ public class MyGcmListenerService extends GcmListenerService {
      */
     @Override
     public void onMessageReceived(String from, Bundle data) {
+        //해당 부분의 key값은 서버의 데이터 타입과 맞추어준다//
         String title = data.getString("title");
-        String message = data.getString("message");
+        String message = data.getString("body");
 
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Title: " + title);
-        Log.d(TAG, "Message: " + message);
+        Log.d(TAG, "Body: " + message);
 
         // GCM으로 받은 메세지를 디바이스에 알려주는 sendNotification()을 호출한다.
         sendNotification(title, message);

@@ -420,10 +420,17 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                     news_ntime = newsContentDetailRequestResult.getNtime();
                     news_content = newsContentDetailRequestResult.getContent();
 
-                    //이미지 설정.//
-                    Picasso.with(SelectNewsDetailActivity.this)
-                            .load(news_imageUrl)
-                            .into(news_content_imageview);
+                    //이미지가 없으면 "" //
+                    if (news_imageUrl.equals("")) {
+                        Picasso.with(SelectNewsDetailActivity.this)
+                                .load(R.mipmap.ic_image_default)
+                                .into(news_content_imageview);
+                    } else {
+                        //이미지 설정.//
+                        Picasso.with(SelectNewsDetailActivity.this)
+                                .load(news_imageUrl)
+                                .into(news_content_imageview);
+                    }
 
                     news_author_textview.setText(news_author);
                     news_content_textview.setText(news_content);

@@ -49,8 +49,14 @@ public class Keyword2NewsContentViewHolder extends RecyclerView.ViewHolder {
         //Glide 라이브러리를 이용하여 이미지 로딩//
         //Glide 라이브러리를 이용하여 이미지 로딩//
 
-        Glide.with(context)
-                .load(thumbnailUrl_str)
-                .into(news_thumbnailUrl_imageview);
+        if (thumbnailUrl_str.equals("")) {
+            Glide.with(context)
+                    .load(R.mipmap.ic_image_default)
+                    .into(news_thumbnailUrl_imageview);
+        } else {
+            Glide.with(context)
+                    .load(thumbnailUrl_str)
+                    .into(news_thumbnailUrl_imageview);
+        }
     }
 }
