@@ -215,7 +215,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
                     String str_data_array[] = original_tag_str.split(",");
 
                     for (int i = 0; i < str_data_array.length; i++) {
-                        tag_layout_array.add("#" + str_data_array[i].trim());
+                        tag_layout_array.add(str_data_array[i].trim());
                     }
 
                     for (int i = 0; i < tag_layout_array.size(); i++) {
@@ -249,7 +249,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     /**
      * 태그 입력 이벤트 리스너
      **/
-
     public void onTagsChanged(Collection<String> tags) {
         String input_tag = Arrays.toString(tags.toArray());
 
@@ -265,7 +264,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     public void onEditingFinished() {
         Log.d(TAG, "OnEditing finished");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

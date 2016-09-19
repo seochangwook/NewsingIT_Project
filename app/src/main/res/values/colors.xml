@@ -195,4 +195,12 @@
     <!--popup color-->
     <color name="popup_text_color">#454444</color>
 
+    <!-- TagLayout Color -->
+    <!-- View TagLayout -->
+    <color name="view_tag_borderColor">#0d47a1</color>
+    <color name="view_tag_textcolor">#0d47a1</color>
+    <!-- Edit/Create TagLayout -->
+    <color name="edit_create_tag_borderColor">#8b8a8a</color>
+    <color name="edit_create_tag_textcolor">#8b8a8a</color>
+
 </resources>

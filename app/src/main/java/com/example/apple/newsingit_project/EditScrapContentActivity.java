@@ -177,7 +177,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
         for (int i = 0; i < scrap_tags.length; i++) {
             tag_array.add(i, scrap_tags[i].toString());
-            tag_layout_array.add("#" + scrap_tags[i].toString());
+            tag_layout_array.add(scrap_tags[i].toString());
         }
 
         scrap_title_textview.setText(scarp_title_str);
@@ -258,7 +258,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                     String str_data_array[] = original_tag_str.split(",");
 
                     for (int i = 0; i < str_data_array.length; i++) {
-                        tag_layout_array.add("#" + str_data_array[i].trim());
+                        tag_layout_array.add(str_data_array[i].trim());
                     }
 
                     for (int i = 0; i < tag_layout_array.size(); i++) {
@@ -287,6 +287,20 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                 return false; //false로 해야지 이벤트가 먹질 않는다.//
             }
         });
+    }
+
+    public int Search_Tag_position(String search_tag) {
+        int position = 0;
+
+        for (int i = 0; i < tag_array.size(); i++) {
+            if (search_tag.equals(tag_array.get(i).toString())) {
+                break;
+            }
+
+            position++;
+        }
+
+        return position;
     }
 
     /**

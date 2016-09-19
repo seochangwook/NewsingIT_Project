@@ -236,7 +236,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
                     for (int i = 0; i < result.getTags().length; i++) {
                         tags.add(tagList.get(i));
-                        tag_layout_array.add("#" + tags.get(i).toString());
+                        tag_layout_array.add(tags.get(i).toString());
                     }
 
                     mBeautyTagGroup.setTags(tag_layout_array);
@@ -259,6 +259,9 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         setContentView(R.layout.user_select_scrap_content_activity_layout);
 
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_scrap_beauty);
+
+        //태그 그룹 속성 설정//
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -331,6 +334,10 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == RC_EDITSCRAPINFO) {
                 Log.d("json control:", "스크랩 정보 수정");
+
+                //태그리스트에 있는 정보 초기화 필요//
+                tag_layout_array.clear();
+                tags.clear();
 
                 getSelectScrapContentNetworkData(scrapId);
             }

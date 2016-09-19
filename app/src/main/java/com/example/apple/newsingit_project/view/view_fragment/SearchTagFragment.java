@@ -207,8 +207,6 @@ public class SearchTagFragment extends Fragment {
                         pageCount += 1;
 
                         getSearchTagNetworkData(query);
-
-
                     }
                 }, 1000);
             }
