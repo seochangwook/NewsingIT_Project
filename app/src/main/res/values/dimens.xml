@@ -289,8 +289,8 @@
     <dimen name="scrap_content_tag_img_margin_top">16dp</dimen>
     <dimen name="scrap_content_tag_img_margin_left">23dp</dimen>
 
-    <dimen name="scrap_content_tag_margin_top">16dp</dimen>
-    <dimen name="scrap_content_tag_margin_right">18dp</dimen>
+    <dimen name="scrap_content_tag_margin_top">13dp</dimen>
+    <dimen name="scrap_content_tag_margin_right">10dp</dimen>
 
     <dimen name="scrap_content_like_size">11sp</dimen>
     <dimen name="scrap_content_like_margin_right">33dp</dimen>
