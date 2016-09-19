@@ -35,6 +35,7 @@ public class Keyword1NewsContentViewHolder extends RecyclerView.ViewHolder {
     public void set_NewsContent(Keyword1NewsContentData newsContentData, Context context) {
         this.newsContentData = newsContentData;
 
+
         //데이터값을 받아서 UI적인 처리//
         news_title_textview.setText(newsContentData.get_news_title());
         news_write_date_textview.setText(newsContentData.get_news_write_date());

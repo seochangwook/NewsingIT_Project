@@ -289,6 +289,20 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         });
     }
 
+    public int Search_Tag_position(String search_tag) {
+        int position = 0;
+
+        for (int i = 0; i < tag_array.size(); i++) {
+            if (search_tag.equals(tag_array.get(i).toString())) {
+                break;
+            }
+
+            position++;
+        }
+
+        return position;
+    }
+
     /**
      * 태그 입력 이벤트 리스너
      **/

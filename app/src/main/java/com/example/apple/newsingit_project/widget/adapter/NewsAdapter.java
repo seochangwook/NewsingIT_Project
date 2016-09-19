@@ -33,6 +33,7 @@ import com.example.apple.newsingit_project.view.view_list.Keyword8NewsContentVie
 import com.example.apple.newsingit_project.view.view_list.Keyword8SectionViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword9NewsContentViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword9SectionViewHolder;
+import com.example.apple.newsingit_project.view.view_list.NewsContentEmptyViewHolder;
 import com.example.apple.newsingit_project.view.view_list.NewsSectionEndViewHolder;
 import com.example.apple.newsingit_project.view.view_list.TwitterStartViewHolder;
 import com.example.apple.newsingit_project.view.view_list.TwitterViewHolder;
@@ -63,6 +64,17 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_NEWSCONTENT_8_CATEGORY = 207;
     private static final int VIEW_TYPE_NEWSCONTENT_9_CATEGORY = 208;
     private static final int VIEW_TYPE_NEWSCONTENT_10_CATEGORY = 209;
+
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_1_CATEGORY = 301;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_2_CATEGORY = 302;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_3_CATEGORY = 303;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_4_CATEGORY = 304;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_5_CATEGORY = 305;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_6_CATEGORY = 306;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_7_CATEGORY = 307;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_8_CATEGORY = 308;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_9_CATEGORY = 309;
+    private static final int VIEW_TYPE_NEWSCONTENTEMPTY_10_CATEGORY = 310;
 
     private static final int VIEW_TYPE_NEWSSECTIONEND = 300;
     private static final int VIEW_TYPE_START_TWITTER = 500;
@@ -134,7 +146,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             //섹션이 출력된 후 뉴스정보가 출력.//
             if (position < newsContent.keyword_1_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_1_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_1_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_1_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_1_CATEGORY;
+                }
             }
 
             //다시 position을 0으로 초기화 하기 위해서 해당 배열의 사이즈만큼 뺀다.//
@@ -168,7 +187,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_2_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_2_CATEGORY;
+                String empty_value = newsContent.keyword_2_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_2_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_2_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_2_news_content.size();
@@ -201,7 +226,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_3_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_3_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_3_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_3_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_3_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_3_news_content.size();
@@ -234,7 +266,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_4_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_4_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_4_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_4_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_4_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_4_news_content.size();
@@ -267,7 +306,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_5_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_5_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_5_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_5_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_5_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_5_news_content.size();
@@ -300,7 +346,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_6_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_6_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_6_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_6_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_6_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_6_news_content.size();
@@ -333,7 +386,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_7_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_7_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_7_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_7_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_7_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_7_news_content.size();
@@ -366,7 +426,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_8_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_8_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_8_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_8_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_8_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_8_news_content.size();
@@ -399,7 +466,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_9_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_9_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_9_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_9_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_9_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_9_news_content.size();
@@ -432,7 +506,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_10_news_content.size()) {
-                return VIEW_TYPE_NEWSCONTENT_10_CATEGORY;
+                //뉴스정보가 없는걸 판단하기 위해서 설정//
+                String empty_value = newsContent.keyword_10_news_content.get(position).get_news_title();
+
+                if (empty_value.equals("정보 없음")) {
+                    return VIEW_TYPE_NEWSCONTENTEMPTY_10_CATEGORY;
+                } else {
+                    return VIEW_TYPE_NEWSCONTENT_10_CATEGORY;
+                }
             }
 
             position -= newsContent.keyword_10_news_content.size();
@@ -830,6 +911,86 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 break;
             }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_1_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_2_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_3_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_4_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_5_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_6_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_7_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_8_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_9_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
+
+            case VIEW_TYPE_NEWSCONTENTEMPTY_10_CATEGORY: {
+                View view = inflater.inflate(R.layout.newscontent_emptyview, parent, false);
+
+                viewholder = new NewsContentEmptyViewHolder(view);
+
+                break;
+            }
         }
 
         return viewholder;
@@ -856,15 +1017,23 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
 
             position--;
-          
+
 
             if (position < newsContent.keyword_1_news_content.size()) {
-                Keyword1NewsContentViewHolder keyword1NewsContentViewHolder = (Keyword1NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_1_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword1NewsContentViewHolder.set_NewsContent(newsContent.keyword_1_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword1NewsContentViewHolder keyword1NewsContentViewHolder = (Keyword1NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword1NewsContentViewHolder.set_NewsContent(newsContent.keyword_1_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//
@@ -917,12 +1086,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_2_news_content.size()) {
-                Keyword2NewsContentViewHolder keyword2NewsContentViewHolder = (Keyword2NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_2_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword2NewsContentViewHolder.set_NewsContent(newsContent.keyword_2_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword2NewsContentViewHolder keyword2NewsContentViewHolder = (Keyword2NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword2NewsContentViewHolder.set_NewsContent(newsContent.keyword_2_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//
@@ -968,12 +1145,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_3_news_content.size()) {
-                Keyword3NewsContentViewHolder keyword3NewsContentViewHolder = (Keyword3NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_3_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword3NewsContentViewHolder.set_NewsContent(newsContent.keyword_3_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword3NewsContentViewHolder keyword3NewsContentViewHolder = (Keyword3NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword3NewsContentViewHolder.set_NewsContent(newsContent.keyword_3_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//
@@ -1019,12 +1204,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_4_news_content.size()) {
-                Keyword4NewsContentViewHolder keyword4NewsContentViewHolder = (Keyword4NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_4_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword4NewsContentViewHolder.set_NewsContent(newsContent.keyword_4_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword4NewsContentViewHolder keyword4NewsContentViewHolder = (Keyword4NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword4NewsContentViewHolder.set_NewsContent(newsContent.keyword_4_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//
@@ -1070,12 +1263,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_5_news_content.size()) {
-                Keyword5NewsContentViewHolder keyword5NewsContentViewHolder = (Keyword5NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_5_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword5NewsContentViewHolder.set_NewsContent(newsContent.keyword_5_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword5NewsContentViewHolder keyword5NewsContentViewHolder = (Keyword5NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword5NewsContentViewHolder.set_NewsContent(newsContent.keyword_5_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//
@@ -1121,10 +1322,18 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_6_news_content.size()) {
-                Keyword6NewsContentViewHolder keyword6NewsContentViewHolder = (Keyword6NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_6_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword6NewsContentViewHolder.set_NewsContent(newsContent.keyword_6_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
+
+                    return;
+                } else {
+                    Keyword6NewsContentViewHolder keyword6NewsContentViewHolder = (Keyword6NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword6NewsContentViewHolder.set_NewsContent(newsContent.keyword_6_news_content.get(position), context);
+                }
 
                 return;
             }
@@ -1172,10 +1381,18 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_7_news_content.size()) {
-                Keyword7NewsContentViewHolder keyword7NewsContentViewHolder = (Keyword7NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_7_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword7NewsContentViewHolder.set_NewsContent(newsContent.keyword_7_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
+
+                    return;
+                } else {
+                    Keyword7NewsContentViewHolder keyword7NewsContentViewHolder = (Keyword7NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword7NewsContentViewHolder.set_NewsContent(newsContent.keyword_7_news_content.get(position), context);
+                }
 
                 return;
             }
@@ -1223,12 +1440,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_8_news_content.size()) {
-                Keyword8NewsContentViewHolder keyword8NewsContentViewHolder = (Keyword8NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_8_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword8NewsContentViewHolder.set_NewsContent(newsContent.keyword_8_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword8NewsContentViewHolder keyword8NewsContentViewHolder = (Keyword8NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword8NewsContentViewHolder.set_NewsContent(newsContent.keyword_8_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//
@@ -1274,12 +1499,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_9_news_content.size()) {
-                Keyword9NewsContentViewHolder keyword9NewsContentViewHolder = (Keyword9NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_9_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword9NewsContentViewHolder.set_NewsContent(newsContent.keyword_9_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword9NewsContentViewHolder keyword9NewsContentViewHolder = (Keyword9NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword9NewsContentViewHolder.set_NewsContent(newsContent.keyword_9_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//
@@ -1325,12 +1558,20 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             position--;
 
             if (position < newsContent.keyword_10_news_content.size()) {
-                Keyword10NewsContentViewHolder keyword10NewsContentViewHolder = (Keyword10NewsContentViewHolder) holder;
+                String empty_value = newsContent.keyword_10_news_content.get(position).get_news_title();
 
-                //뉴스데이터 배열에 있는 정보를 이용.//
-                keyword10NewsContentViewHolder.set_NewsContent(newsContent.keyword_10_news_content.get(position), context);
+                if (empty_value.equals("정보 없음")) {
+                    NewsContentEmptyViewHolder newsContentEmptyViewHolder = (NewsContentEmptyViewHolder) holder;
 
-                return;
+                    return;
+                } else {
+                    Keyword10NewsContentViewHolder keyword10NewsContentViewHolder = (Keyword10NewsContentViewHolder) holder;
+
+                    //뉴스데이터 배열에 있는 정보를 이용.//
+                    keyword10NewsContentViewHolder.set_NewsContent(newsContent.keyword_10_news_content.get(position), context);
+
+                    return;
+                }
             }
 
             //다시 0을 위해서 포지션값 초기화.//

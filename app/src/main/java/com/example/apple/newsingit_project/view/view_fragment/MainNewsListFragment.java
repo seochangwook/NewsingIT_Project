@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SearchTabActivity;
 import com.example.apple.newsingit_project.SelectNewsDetailActivity;
+import com.example.apple.newsingit_project.data.json_data.mainnewslist.MainNewsListRequest;
 import com.example.apple.newsingit_project.data.json_data.mainnewslist.MainNewsListRequestResults;
 import com.example.apple.newsingit_project.data.json_data.mainnewslist.MainNewsListRequestResultsNewscontens;
 import com.example.apple.newsingit_project.data.view_data.Keyword10NewsContentData;
@@ -125,9 +126,9 @@ public class MainNewsListFragment extends Fragment {
             } else {
                 Gson gson = new Gson();
 
-                //MainNewsListRequest mainNewsListRequest = gson.fromJson(response_data, MainNewsListRequest.class);
+                MainNewsListRequest mainNewsListRequest = gson.fromJson(response_data, MainNewsListRequest.class);
 
-                //setData(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
+                setData(mainNewsListRequest.getResults(), mainNewsListRequest.getResults().length);
             }
         }
     };

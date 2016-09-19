@@ -249,7 +249,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     /**
      * 태그 입력 이벤트 리스너
      **/
-
     public void onTagsChanged(Collection<String> tags) {
         String input_tag = Arrays.toString(tags.toArray());
 
@@ -265,11 +264,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     public void onEditingFinished() {
         Log.d(TAG, "OnEditing finished");
     }
-
-    /**
-     * 태그 제거 관련 이벤트 처리
-     **/
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
