@@ -169,4 +169,4 @@
 * ScrapFolderActivity / ExpandabelListview 정보 갱신작업 - 서창욱 (16/09/13 21:35)
 * 사용자 스크랩 게시물 삭제에 따른 예외처리 - 서창욱 (16/09/13 21:35)
 * TagLayout부분 TextColor / BorderColor부분 수정 - 서창욱 (16/09/19 10:29)
-
+* TagSearch 간 Scrap count 값 적용 - 서창욱 (16/09/19 10:29)
