@@ -985,6 +985,7 @@ public class MainNewsListFragment extends Fragment {
                                     String contents = news_content[content_size].getContents();
                                     String ntime = news_content[content_size].getNtime();
 
+
                                     //배열에 저장//
                                     Keyword6NewsContentData new_news6content_1 = new Keyword6NewsContentData();
 

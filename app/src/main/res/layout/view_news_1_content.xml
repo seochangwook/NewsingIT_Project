@@ -13,7 +13,7 @@
         android:layout_marginLeft="@dimen/news_content_img_margin_left"
         android:layout_marginRight="@dimen/news_content_img_margin_right"
         android:background="@color/news_content_img_margin"
-        android:src="@mipmap/ic_image_default" />
+        android:src="@mipmap/ic_image_default"/>
 
     <TextView
         android:id="@+id/news_author_textview"

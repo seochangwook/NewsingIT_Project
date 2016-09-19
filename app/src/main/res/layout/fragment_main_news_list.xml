@@ -22,7 +22,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/btn_floating_margin_bottom"
         android:layout_marginRight="@dimen/btn_floating_margin_right"
-        android:background="@drawable/bg_circle"
+        android:background="@android:color/transparent"
         android:elevation="@dimen/btn_floating_elevation"
         android:scaleType="fitXY"
         android:src="@mipmap/btn_toparrow" />
