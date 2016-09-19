@@ -189,7 +189,7 @@
 
         <me.gujun.android.taggroup.TagGroup
             android:id="@+id/tag_group_beauty"
-            style="@style/TagGroup.Beauty_Red"
+            style="@style/TagGroup"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_below="@+id/tagsEditText"
@@ -197,6 +197,8 @@
             android:layout_marginRight="@dimen/edit_scrap_tag_view_margin_right"
             android:layout_marginTop="@dimen/edit_scrap_tag_view_margin_top"
             android:scrollbars="vertical"
-            app:atg_inputHint="태그를 등록해주세요" />
+            app:atg_borderColor="@color/edit_create_tag_borderColor"
+            app:atg_inputHint="태그를 등록해주세요"
+            app:atg_textColor="@color/edit_create_tag_textcolor" />
     </RelativeLayout>
 </ScrollView>

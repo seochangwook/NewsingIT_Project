@@ -215,7 +215,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
                     String str_data_array[] = original_tag_str.split(",");
 
                     for (int i = 0; i < str_data_array.length; i++) {
-                        tag_layout_array.add("#" + str_data_array[i].trim());
+                        tag_layout_array.add(str_data_array[i].trim());
                     }
 
                     for (int i = 0; i < tag_layout_array.size(); i++) {
@@ -265,6 +265,10 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     public void onEditingFinished() {
         Log.d(TAG, "OnEditing finished");
     }
+
+    /**
+     * 태그 제거 관련 이벤트 처리
+     **/
 
 
     @Override

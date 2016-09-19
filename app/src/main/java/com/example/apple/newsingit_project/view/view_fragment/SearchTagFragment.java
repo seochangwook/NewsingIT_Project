@@ -130,8 +130,7 @@ public class SearchTagFragment extends Fragment {
 
                         newSearchTagData.setId(searchTagListRequestResults.get(i).getId());
                         newSearchTagData.setTag(searchTagListRequestResults.get(i).getTag());
-                        //newSearchTagData.setScrap_count(""+searchTagListRequestResults.get(i).getScrap_count());
-                        newSearchTagData.setScrap_count("1");
+                        newSearchTagData.setScrap_count("" + searchTagListRequestResults.get(i).getScrap_count());
 
                         searchTagData.searchTagDataList.add(newSearchTagData);
                     }
@@ -196,8 +195,6 @@ public class SearchTagFragment extends Fragment {
                         initSearchTagDataList();
 
                         getSearchTagNetworkData(query);
-
-
                     }
                 }, 1000);
             }
