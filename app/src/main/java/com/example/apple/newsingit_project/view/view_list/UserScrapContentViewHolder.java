@@ -67,8 +67,14 @@ public class UserScrapContentViewHolder extends RecyclerView.ViewHolder {
             //이미지를 로드.//
             Picasso picasso = networkManager.getPicasso(); //피카소의 자원을 불러온다.//
 
-            picasso.load(news_image_url)
-                    .into(scrap_news_imageview);
+            if (news_image_url.equals("")) {
+                Picasso.with(context)
+                        .load(R.mipmap.ic_image_default)
+                        .into(scrap_news_imageview);
+            } else {
+                picasso.load(news_image_url)
+                        .into(scrap_news_imageview);
+            }
         }
     }
 }

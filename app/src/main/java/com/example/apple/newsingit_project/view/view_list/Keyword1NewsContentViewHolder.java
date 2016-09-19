@@ -48,8 +48,14 @@ public class Keyword1NewsContentViewHolder extends RecyclerView.ViewHolder {
         /** 사용자 프로필 이미지 설정 **/
         //사용자 프로필 이미지 설정.(후엔 이 부분의 Url값을 전달받아 처리)//
         //Glide 라이브러리를 이용하여 이미지 로딩//
-        Glide.with(context)
-                .load(thumbnailUrl_str)
-                .into(news_thumbnailUrl_imageview);
+        if (thumbnailUrl_str.equals("")) {
+            Glide.with(context)
+                    .load(R.mipmap.ic_image_default)
+                    .into(news_thumbnailUrl_imageview);
+        } else {
+            Glide.with(context)
+                    .load(thumbnailUrl_str)
+                    .into(news_thumbnailUrl_imageview);
+        }
     }
 }

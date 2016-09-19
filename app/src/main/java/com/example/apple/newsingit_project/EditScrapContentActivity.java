@@ -171,9 +171,15 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         news_preview_content.setText(news_preview_content_str);
         news_preview_write_time.setText(news_preview_writetime_str);
 
-        Picasso.with(EditScrapContentActivity.this)
-                .load(news_previewimage_Url)
-                .into(news_preview_image);
+        if (news_previewimage_Url.equals("")) {
+            Picasso.with(EditScrapContentActivity.this)
+                    .load(R.mipmap.ic_image_default)
+                    .into(news_preview_image);
+        } else {
+            Picasso.with(EditScrapContentActivity.this)
+                    .load(news_previewimage_Url)
+                    .into(news_preview_image);
+        }
 
         for (int i = 0; i < scrap_tags.length; i++) {
             tag_array.add(i, scrap_tags[i].toString());
