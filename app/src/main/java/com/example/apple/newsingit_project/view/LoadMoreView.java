@@ -71,7 +71,7 @@ public class LoadMoreView extends FrameLayout implements IFamiliarLoadMore {
         mPbLoad.setVisibility(GONE);
 
         if (flag == 1) {
-            mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
+            //    mTvLoadText.setText(getResources().getString(R.string.load_more_normal_main));
         } else if (flag == 2) {
             mTvLoadText.setText(getResources().getString(R.string.load_more_normal_scrap));
         } else if (flag == 3) {

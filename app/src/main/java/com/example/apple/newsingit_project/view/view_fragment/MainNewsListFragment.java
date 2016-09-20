@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SearchTabActivity;
@@ -1465,8 +1464,6 @@ public class MainNewsListFragment extends Fragment {
         }
 
         if (item_id == R.id.search_menu_item) {
-            Toast.makeText(getActivity(), "검색 화면으로 이동", Toast.LENGTH_SHORT).show();
-
             Intent intent = new Intent(getActivity(), SearchTabActivity.class);
 
             startActivity(intent);

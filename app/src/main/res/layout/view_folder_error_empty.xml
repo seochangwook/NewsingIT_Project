@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/empty_img_scrap"
+        android:id="@+id/empty_img_folder_error"
         android:layout_width="match_parent"
         android:layout_height="@dimen/empty_img_height"
         android:layout_marginTop="@dimen/empty_img_margin_top"
@@ -13,14 +12,13 @@
         android:src="@mipmap/ic_folder_x" />
 
     <TextView
-        android:id="@+id/empty_msg_scrap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/empty_img_scrap"
+        android:layout_below="@+id/empty_img_folder_error"
         android:layout_marginTop="@dimen/empty_msg_margin_top"
         android:gravity="center"
-        android:text="스크랩 항목이 존재하지 않습니다"
-        android:textColor="@color/my_info_folder_empty_msg"
-        android:textSize="@dimen/empty_msg_size" />
-
+        android:text="네트워크 연결을 다시 확인해주세요"
+        android:textColor="@color/red_color"
+        android:textSize="@dimen/empty_msg_size"
+        android:textStyle="bold" />
 </RelativeLayout>

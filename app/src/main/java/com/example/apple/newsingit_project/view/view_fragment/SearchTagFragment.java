@@ -44,9 +44,12 @@ public class SearchTagFragment extends Fragment {
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
+    private static final String KEY_TAG_ID = "KEY_TAG_ID";
     private static final int LOAD_MORE_TAG = 6;
 
     static int pageCount = 1;
+    static boolean emptyViewFlag = true;
+
 
     String query;
 
@@ -65,6 +68,7 @@ public class SearchTagFragment extends Fragment {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -75,6 +79,7 @@ public class SearchTagFragment extends Fragment {
 
             if (response.code() == 401) {
                 Log.d("json data", "ERROR 401");
+                emptyViewFlag = false;
             } else {
                 Gson gson = new Gson();
 
@@ -93,6 +98,8 @@ public class SearchTagFragment extends Fragment {
                     setData(searchTagListRequest.getResults(), searchTagListRequest.getResults().length);
                 }
             }
+
+            emptyViewFlag = true;
         }
     };
 
@@ -220,9 +227,15 @@ public class SearchTagFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         /** EmptyView 설정 **/
-        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_searchtag_emptyview, null);
+        View emptyView;
 
-        recyclerView.setEmptyView(emptyview, true);
+        if (emptyViewFlag) {
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_search_empty, null);
+            recyclerView.setEmptyView(emptyView, true);
+        } else { //네트워크 오류
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_searchtag_emptyview, null);
+            recyclerView.setEmptyView(emptyView, true);
+        }
         recyclerView.setEmptyViewKeepShowHeadOrFooter(true);
 
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
@@ -234,6 +247,7 @@ public class SearchTagFragment extends Fragment {
                 //선택한 태그를 가진 스크랩 목록 페이지로 이동//
                 Intent intent = new Intent(getActivity(), UserScrapContentListActivity.class);
 
+                intent.putExtra(KEY_TAG_ID, "" + searchTagData.searchTagDataList.get(position).getId());
                 intent.putExtra(KEY_FOLDER_NAME, userSelect); //태그명을 전달.//
                 intent.putExtra(KEY_USER_IDENTIFY_FLAG, "1"); //검색은 다른 사용자의 내용들을 보는것이니 외부사용자로 간다.//
                 intent.putExtra(KEY_TAGSEARCH_FLAG, "TAG"); //태그로 검색한다는 플래그.//
@@ -247,8 +261,9 @@ public class SearchTagFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-
-        getSearchTagNetworkData(query); //네트워크//
+        if (query.length() > 0) {
+            getSearchTagNetworkData(query); //네트워크//
+        }
 
         return view;
     }

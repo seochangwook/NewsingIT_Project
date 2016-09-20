@@ -74,7 +74,7 @@
 
     <string name="title_activity_select_news_detail">키워드</string>
     <string name="title_activity_user_select_scrap_content">스크랩 폴더 이름</string>
-    <string name="title_activity_edit_scrap_content">EditScrapContentActivity</string>
+    <string name="title_activity_edit_scrap_content">스크랩 수정</string>
 
     <!-- Menu string -->
     <string name="cancel_menu_title">취소</string>
