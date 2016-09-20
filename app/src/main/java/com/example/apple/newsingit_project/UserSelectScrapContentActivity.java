@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.apple.newsingit_project.data.json_data.selectscrapcontent.SelectScrapContentRequest;
 import com.example.apple.newsingit_project.data.json_data.selectscrapcontent.SelectScrapContentRequestResult;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -63,12 +64,14 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     String folderName;
     boolean scrap_isprivate = false;
 
+    FontManager fontManager;
+
     /**
      * 해시태그 관련 변수
      **/
     List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
     List<String> tags = new ArrayList<>();
-    TextView titleView, ncTitleView, ncContentView, contentView, authorView, likeView, news_write_date;
+    TextView titleView, ncTitleView, ncContentView, contentView, authorView, likeView, ncDateView;
     ImageView news_imageview;
     String nc_imageUrl = null; //후엔 디폴트 이미지 경로 저장.//
     NetworkManager networkManager;
@@ -234,7 +237,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                     ncContentView.setText(result.getNc_contents());
                     contentView.setText(result.getContent());
                     likeView.setText("" + result.getFavorite_cnt());
-                    news_write_date.setText(result.getNc_ntime());
+                    ncDateView.setText(result.getNc_ntime());
                     authorView.setText(result.getNc_author());
 
                     for (int i = 0; i < result.getTags().length; i++) {
@@ -267,6 +270,8 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_select_scrap_content_activity_layout);
 
+        fontManager = new FontManager(UserSelectScrapContentActivity.this);
+
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_scrap_beauty);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -278,8 +283,18 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         contentView = (TextView) findViewById(R.id.text_scrap_my_content);
         authorView = (TextView) findViewById(R.id.text_scrap_press);
         likeView = (TextView) findViewById(R.id.text_scrap_like_cnt);
-        news_write_date = (TextView) findViewById(R.id.text_scrap_date);
+        ncDateView = (TextView) findViewById(R.id.text_scrap_date);
         news_imageview = (ImageView) findViewById(R.id.img_scrap_nc);
+
+        titleView.setTypeface(fontManager.getTypefaceBoldInstance());
+        contentView.setTypeface(fontManager.getTypefaceBoldInstance());
+
+        ncTitleView.setTypeface(fontManager.getTypefaceBoldInstance());
+        authorView.setTypeface(fontManager.getTypefaceRegularInstance());
+        ncDateView.setTypeface(fontManager.getTypefaceRegularInstance());
+        ncContentView.setTypeface(fontManager.getTypefaceMediumInstance());
+        likeView.setTypeface(fontManager.getTypefaceMediumInstance());
+
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
@@ -410,7 +425,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             String previce_newstitle = ncTitleView.getText().toString();
             String preview_newsimage = nc_imageUrl;
             String preview_news_author = authorView.getText().toString();
-            String preview_news_write_date = news_write_date.getText().toString();
+            String preview_news_write_date = ncDateView.getText().toString();
             String preview_news_content = ncContentView.getText().toString();
 
             Log.d("scrap name", scrap_name);

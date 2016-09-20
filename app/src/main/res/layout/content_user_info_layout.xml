@@ -96,6 +96,7 @@
         android:textSize="@dimen/my_info_sff_text_size" />
 
     <TextView
+        android:id="@+id/sff_follower"
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/sff_container"
@@ -109,12 +110,12 @@
         android:textSize="@dimen/my_info_sff_text_size" />
 
     <TextView
+        android:id="@+id/sff_following"
         android:layout_width="@dimen/user_info_sff_width"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/sff_container"
         android:layout_marginBottom="@dimen/my_info_sff_text_margin_bottom"
         android:layout_marginLeft="@dimen/user_info_sff_margin_left"
-
         android:layout_toRightOf="@+id/user_follower_button"
         android:gravity="center"
         android:text="@string/following_textview"

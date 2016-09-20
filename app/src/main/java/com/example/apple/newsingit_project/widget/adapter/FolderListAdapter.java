@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FolderData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_list.FolderViewHolder;
 
@@ -34,6 +35,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     //폴더 데이터 클래스 선언.//
     FolderData folderData;
     Context context;
+    FontManager fontManager;
 
     /**
      * Network 관련 변수
@@ -70,7 +72,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     //생성자로 데이터 클래스 할당과 프래그먼트 자원 초기화.//
     public FolderListAdapter(Context context) {
         this.context = context;
-
+        fontManager = new FontManager(context);
         folderData = new FolderData();
     }
 
@@ -121,6 +123,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             } else { //잠금 설정//
                 folderViewHolder.folder_private_button.setVisibility(View.GONE);
             }
+            folderViewHolder.folder_name_textview.setTypeface(fontManager.getTypefaceMediumInstance());
 
             folderViewHolder.folder_private_button.setOnClickListener(new View.OnClickListener() {
                 @Override

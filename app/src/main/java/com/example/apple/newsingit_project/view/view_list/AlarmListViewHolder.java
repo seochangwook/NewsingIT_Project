@@ -14,8 +14,8 @@ import com.example.apple.newsingit_project.data.view_data.AlarmData;
  */
 public class AlarmListViewHolder extends RecyclerView.ViewHolder {
 
+    public TextView contentView, dateView;
     AlarmData alarmData;
-    TextView contentView, dateView;
     ImageView profileView;
 
     public AlarmListViewHolder(View itemView) {

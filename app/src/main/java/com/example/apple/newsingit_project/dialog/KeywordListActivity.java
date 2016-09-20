@@ -35,6 +35,7 @@ public class KeywordListActivity extends Activity {
 
     KeywordListAdapter mAdapter;
     KeywordData keywordData;
+
     /**
      * Network 관련 변수
      **/
@@ -107,22 +108,8 @@ public class KeywordListActivity extends Activity {
             }
         });
 
-        //initDummyData();
         get_Keyword_Data();
     }
-
-    /*private void initDummyData()
-    {
-        String keywordDummyList[] = {"갤럭시 7", "iot", "소프트뱅크", "드론", "VR", "테슬라", "핀테크", "안드로이드", "라즈베리파이", "아이폰 7"};
-
-        for (int i = 0; i < 10; i++) {
-            KeywordData new_keywordData = new KeywordData();
-            new_keywordData.keyword = keywordDummyList[i];
-            keywordData.keywordDataList.add(new_keywordData);
-        }
-
-        mAdapter.setKeywordDataList(keywordData);
-    }*/
 
     public void get_Keyword_Data() {
         //네트워크로 부터 데이터를 가져온다.//

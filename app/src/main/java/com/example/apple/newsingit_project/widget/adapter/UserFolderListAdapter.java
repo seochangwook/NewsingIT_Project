@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.view.view_list.UserFolderViewHolder;
 
 /**
@@ -17,11 +18,12 @@ public class UserFolderListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     //폴더 데이터 클래스 선언.//
     UserFolderData userfolderData;
     Context context;
+    FontManager fontManager;
 
     //생성자로 데이터 클래스 할당과 프래그먼트 자원 초기화.//
     public UserFolderListAdapter(Context context) {
         this.context = context;
-
+        fontManager = new FontManager(context);
         userfolderData = new UserFolderData();
     }
 
@@ -62,9 +64,10 @@ public class UserFolderListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position < userfolderData.user_folder_list.size()) {
-            final UserFolderViewHolder user_folderViewHolder = (UserFolderViewHolder) holder;
+            final UserFolderViewHolder userFolderViewHolder = (UserFolderViewHolder) holder;
 
-            user_folderViewHolder.set_UserFolder(userfolderData.user_folder_list.get(position), context);
+            userFolderViewHolder.set_UserFolder(userfolderData.user_folder_list.get(position), context);
+            userFolderViewHolder.user_folder_name_textview.setTypeface(fontManager.getTypefaceMediumInstance());
         }
     }
 
