@@ -55,6 +55,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
     private static final String KEY_NEWS_WRITE_TIME = "KEY_NEWS_WRITE_TIME";
     private static final String KEY_NEWS_CONTENT = "KEY_NEWS_CONTENT";
     private static final String KEY_NEWS_IMGURL = "KEY_NEWS_IMGURL";
+    private static final String NEWS_KEYWORD = "NEWS_KEYWORD";
+    private static final String FLAG = "FLAG";
 
     /**
      * 응답코드
@@ -88,6 +90,9 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
     String news_author;
     String news_ntime;
     String news_content;
+
+    String keyword = "";
+    String flag = "";
     /**
      * 네트워크 관련 변수
      **/
@@ -204,8 +209,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
                         scrap_folder_recyclerrefreshview.pullRefreshComplete();
 
-                        //scrapfolderListAdapter.set_ScrapFolderList(scrapfolderData); //설정.//
-
                         init_scrap_folder_list();
 
                         get_ScrapFolder_Data();
@@ -286,6 +289,17 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
         title = intent.getStringExtra(NEWS_TITLE);
         news_id = intent.getStringExtra(NEWS_ID);
+        flag = intent.getStringExtra(FLAG);
+
+        if (flag.equals("1")) //정상경로로 접근//
+        {
+            keyword = intent.getStringExtra(NEWS_KEYWORD);
+
+            setTitle(keyword);
+        } else if (flag.equals("0")) //0이면 검색경로로 들어온 경우//
+        {
+            setTitle("뉴스검색");
+        }
 
         news_headline_title_textview.setText(title);
 

@@ -77,6 +77,9 @@ public class MainNewsListFragment extends Fragment {
     private static final String KEY_KEYWORD = "KEY_KEYWORD";
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
+    private static final String NEWS_KEYWORD = "NEWS_KEYWORD";
+    private static final String FLAG = "FLAG";
+
     /**
      * RecyclerView의 데이터와 어댑터 관련 변수
      **/
@@ -201,12 +204,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_1_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_1_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword1SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -226,12 +232,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_2_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_2_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword2SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -251,12 +260,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_3_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_3_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword3SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -276,12 +288,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_4_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_4_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword4SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -301,12 +316,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_5_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_5_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword5SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -326,12 +344,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_6_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_6_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword6SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -351,12 +372,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_7_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_7_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword7SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -376,12 +400,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_8_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_8_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword8SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -401,12 +428,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_9_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_9_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keyword9SectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -426,12 +456,15 @@ public class MainNewsListFragment extends Fragment {
 
                     int news_id = newsContent.keyword_10_news_content.get(select_position).get_news_content_id();
                     String news_title = newsContent.keyword_10_news_content.get(select_position).get_news_title();
+                    String keyword = keywordSection.keywor10dSectionDatas.get(0).get_keyword_text();
 
                     Intent intent = new Intent(getActivity(), SelectNewsDetailActivity.class);
 
                     //선택된 뉴스의 검색을 위해서 id값을 넘긴다.//
                     intent.putExtra(NEWS_TITLE, news_title);
                     intent.putExtra(NEWS_ID, "" + news_id);
+                    intent.putExtra(NEWS_KEYWORD, keyword);
+                    intent.putExtra(FLAG, "1"); //1이면 정상적인 경로로 온것.//
 
                     startActivity(intent);
                 }
@@ -1372,42 +1405,42 @@ public class MainNewsListFragment extends Fragment {
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword3SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 3과 같다면 이동할 인덱스는 14//
-            move_position_index = 14;
+            move_position_index = 15;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword4SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 4과 같다면 이동할 인덱스는 21//
-            move_position_index = 21;
+            move_position_index = 22;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword5SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 5과 같다면 이동할 인덱스는 28//
-            move_position_index = 28;
+            move_position_index = 29;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword6SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 6과 같다면 이동할 인덱스는 35//
-            move_position_index = 35;
+            move_position_index = 36;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword7SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 7과 같다면 이동할 인덱스는 14//
-            move_position_index = 42;
+            move_position_index = 43;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword8SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 8과 같다면 이동할 인덱스는 14//
-            move_position_index = 49;
+            move_position_index = 50;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword9SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 9과 같다면 이동할 인덱스는 14//
-            move_position_index = 56;
+            move_position_index = 57;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keywor10dSectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 10과 같다면 이동할 인덱스는 14//
-            move_position_index = 63;
+            move_position_index = 64;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         }

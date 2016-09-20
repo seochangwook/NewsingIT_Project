@@ -44,6 +44,7 @@ public class SearchNewsFragment extends Fragment {
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
     private static final int LOAD_MORE_TAG = 5;
+    private static final String FLAG = "FLAG";
 
     static int pageCount = 1;
 
@@ -163,7 +164,6 @@ public class SearchNewsFragment extends Fragment {
 
         Log.d("pageCount", "" + pageCount);
 
-
         Bundle b = getArguments();
         query = b.getString("SEARCH_QUERY");
 
@@ -243,6 +243,7 @@ public class SearchNewsFragment extends Fragment {
 
                 intent.putExtra(NEWS_TITLE, userSelect);
                 intent.putExtra(NEWS_ID, "" + news_id);
+                intent.putExtra(FLAG, "0");
 
                 startActivity(intent);
 
