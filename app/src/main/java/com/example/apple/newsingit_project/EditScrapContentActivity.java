@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
@@ -60,6 +61,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
 
     TextInputLayout textInputLayout;
     AppCompatEditText appCompatEditText;
+    FontManager fontManager;
 
     ImageButton tag_edit_button; //태그 등록버튼.//
     List<String> tag_array = new ArrayList<>(); //태그배열(원본 에디터에서 가져온 데이터)//
@@ -67,15 +69,15 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     /**
      * Preview관련 위젯
      **/
-    ImageView news_preview_image;
-    TextView news_preview_title;
-    TextView news_preview_write_time;
-    TextView news_preview_content;
-    TextView news_preview_author;
+    ImageView newsPreviewImage;
+    TextView newsPreviewTitle;
+    TextView newsPreviewWriteTime;
+    TextView newsPreviewContent;
+    TextView newsPreviewAuthor;
     /**
      * 위젯 관련
      **/
-    EditText scrap_title_textview;
+    EditText scrapTitleTextview;
     /**
      * 전달받아서 쓰일 변수 관련
      **/
@@ -134,18 +136,30 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         setContentView(R.layout.edit_scrap_content_activity_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        fontManager = new FontManager(EditScrapContentActivity.this);
+
         tag_edit_button = (ImageButton) findViewById(R.id.btn_tag_create);
         mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_beauty);
         appCompatEditText = (AppCompatEditText) findViewById(R.id.text_layout_edittext_edit_scrap);
-        scrap_title_textview = (EditText) findViewById(R.id.editText4);
+        scrapTitleTextview = (EditText) findViewById(R.id.editText4);
 
         /** Preview **/
-        news_preview_image = (ImageView) findViewById(R.id.news_preview_image);
-        news_preview_title = (TextView) findViewById(R.id.news_preview_title);
-        news_preview_write_time = (TextView) findViewById(R.id.news_preview_write_time);
-        news_preview_content = (TextView) findViewById(R.id.news_preview_content);
-        news_preview_author = (TextView) findViewById(R.id.news_preview_author);
+        newsPreviewImage = (ImageView) findViewById(R.id.news_preview_image);
+        newsPreviewTitle = (TextView) findViewById(R.id.news_preview_title);
+        newsPreviewWriteTime = (TextView) findViewById(R.id.news_preview_write_time);
+        newsPreviewContent = (TextView) findViewById(R.id.news_preview_content);
+        newsPreviewAuthor = (TextView) findViewById(R.id.news_preview_author);
+
+        scrapTitleTextview.setTypeface(fontManager.getTypefaceMediumInstance());
+        appCompatEditText.setTypeface(fontManager.getTypefaceRegularInstance());
+        mTagsEditText.setTypeface(fontManager.getTypefaceRegularInstance());
+
+        newsPreviewAuthor.setTypeface(fontManager.getTypefaceMediumInstance());
+        newsPreviewWriteTime.setTypeface(fontManager.getTypefaceMediumInstance());
+        newsPreviewTitle.setTypeface(fontManager.getTypefaceMediumInstance());
+        newsPreviewContent.setTypeface(fontManager.getTypefaceMediumInstance());
+
 
         setSupportActionBar(toolbar);
 
@@ -166,19 +180,19 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         news_previewimage_Url = intent.getStringExtra(KEY_NEWS_IMGURL);
 
         /** 이전정보를 설정 **/
-        news_preview_title.setText(news_preview_title_str);
-        news_preview_author.setText(news_preview_author_str);
-        news_preview_content.setText(news_preview_content_str);
-        news_preview_write_time.setText(news_preview_writetime_str);
+        newsPreviewTitle.setText(news_preview_title_str);
+        newsPreviewAuthor.setText(news_preview_author_str);
+        newsPreviewContent.setText(news_preview_content_str);
+        newsPreviewWriteTime.setText(news_preview_writetime_str);
 
         if (news_previewimage_Url.equals("")) {
             Picasso.with(EditScrapContentActivity.this)
                     .load(R.mipmap.ic_image_default)
-                    .into(news_preview_image);
+                    .into(newsPreviewImage);
         } else {
             Picasso.with(EditScrapContentActivity.this)
                     .load(news_previewimage_Url)
-                    .into(news_preview_image);
+                    .into(newsPreviewImage);
         }
 
         for (int i = 0; i < scrap_tags.length; i++) {
@@ -186,7 +200,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
             tag_layout_array.add(scrap_tags[i].toString());
         }
 
-        scrap_title_textview.setText(scarp_title_str);
+        scrapTitleTextview.setText(scarp_title_str);
         appCompatEditText.setText(scrap_content_str);
         is_private = scrap_isprivate;
 
@@ -324,7 +338,7 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     //스크랩 수정//
     public void EditScrap(String scrap_id) {
         //저장할 정보들을 모두 불러온다.//
-        String edit_scrap_title = scrap_title_textview.getText().toString();
+        String edit_scrap_title = scrapTitleTextview.getText().toString();
         String edit_scrap_content = appCompatEditText.getText().toString();
         String edit_scrap_locked = "0"; //기본 비공개라 설정.//
 

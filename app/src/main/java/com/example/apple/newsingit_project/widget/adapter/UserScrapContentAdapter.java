@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
 import com.example.apple.newsingit_project.dialog.ScrapContentEditDialog;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_list.UserScrapContentViewHolder;
 
@@ -39,6 +40,9 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
     UserScrapContentData userScrapContentData;
     Context context;
     String whoflag;
+
+    FontManager fontManager;
+
     /**
      * 팝업 관련 변수
      **/
@@ -65,6 +69,7 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     public UserScrapContentAdapter(Context context) {
         this.context = context;
+        fontManager = new FontManager(context);
         userScrapContentData = new UserScrapContentData();
     }
 

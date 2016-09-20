@@ -13,6 +13,7 @@ import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.TwitterLinkActivity;
 import com.example.apple.newsingit_project.data.view_data.KeywordSection;
 import com.example.apple.newsingit_project.data.view_data.NewsContent;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.view.view_list.Keyword10NewsContentViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword10SectionViewHolder;
 import com.example.apple.newsingit_project.view.view_list.Keyword1NewsContentViewHolder;
@@ -97,6 +98,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     NewsContent newsContent;
     KeywordSection keywordSection;
 
+    FontManager fontManager;
+
     /**
      * Twitter 관련 변수
      **/
@@ -106,6 +109,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public NewsAdapter(Context context)
     {
         this.context = context;
+        fontManager = new FontManager(context);
     }
 
     //데이터의 변경 유무를 확인하는 메소드. 데이터의 관리는 어댑터에서 한다.//
@@ -1009,6 +1013,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 //키워드 배열에 있는 값을 이용.//
                 keyword1SectionViewHolder.set_KeywordSection(keywordSection.keyword1SectionDatas.get(position));
 
+                keyword1SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
                 //  Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
 
                 //  keyword1SectionViewHolder.keywordsection_textview.setTypeface(face);
@@ -1031,6 +1036,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword1NewsContentViewHolder.set_NewsContent(newsContent.keyword_1_news_content.get(position), context);
+
+                    keyword1NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword1NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword1NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword1NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }
@@ -1075,10 +1085,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword2SectionViewHolder.set_KeywordSection(keywordSection.keyword2SectionDatas.get(position));
-
-                //  Typeface face = Typeface.createFromAsset(context.getAssets(), "fonts/NotoSansCJKkr-Bold.otf");
-
-                //   keyword2SectionViewHolder.keywordsection_textview.setTypeface(face);
+                keyword2SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
 
                 return;
             }
@@ -1097,6 +1104,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword2NewsContentViewHolder.set_NewsContent(newsContent.keyword_2_news_content.get(position), context);
+
+                    keyword2NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword2NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword2NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword2NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }
@@ -1138,6 +1150,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword3SectionViewHolder.set_KeywordSection(keywordSection.keyword3SectionDatas.get(position));
+                keyword3SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
 
                 return;
             }
@@ -1156,6 +1169,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword3NewsContentViewHolder.set_NewsContent(newsContent.keyword_3_news_content.get(position), context);
+
+                    keyword3NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword3NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword3NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword3NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }
@@ -1197,7 +1215,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword4SectionViewHolder.set_KeywordSection(keywordSection.keyword4SectionDatas.get(position));
-
+                keyword4SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
                 return;
             }
 
@@ -1215,6 +1233,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword4NewsContentViewHolder.set_NewsContent(newsContent.keyword_4_news_content.get(position), context);
+
+                    keyword4NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword4NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword4NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword4NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }
@@ -1256,7 +1279,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword5SectionViewHolder.set_KeywordSection(keywordSection.keyword5SectionDatas.get(position));
-
+                keyword5SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
                 return;
             }
 
@@ -1274,6 +1297,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword5NewsContentViewHolder.set_NewsContent(newsContent.keyword_5_news_content.get(position), context);
+
+                    keyword5NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword5NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword5NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword5NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }
@@ -1315,6 +1343,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword6SectionViewHolder.set_KeywordSection(keywordSection.keyword6SectionDatas.get(position));
+                keyword6SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
 
                 return;
             }
@@ -1333,6 +1362,12 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword6NewsContentViewHolder.set_NewsContent(newsContent.keyword_6_news_content.get(position), context);
+
+                    keyword6NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword6NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword6NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword6NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+
                 }
 
                 return;
@@ -1374,6 +1409,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword7SectionViewHolder.set_KeywordSection(keywordSection.keyword7SectionDatas.get(position));
+                keyword7SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
 
                 return;
             }
@@ -1392,6 +1428,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword7NewsContentViewHolder.set_NewsContent(newsContent.keyword_7_news_content.get(position), context);
+
+                    keyword7NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword7NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword7NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword7NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
                 }
 
                 return;
@@ -1433,6 +1474,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword8SectionViewHolder.set_KeywordSection(keywordSection.keyword8SectionDatas.get(position));
+                keyword8SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
 
                 return;
             }
@@ -1451,6 +1493,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword8NewsContentViewHolder.set_NewsContent(newsContent.keyword_8_news_content.get(position), context);
+
+                    keyword8NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword8NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword8NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword8NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }
@@ -1492,6 +1539,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword9SectionViewHolder.set_KeywordSection(keywordSection.keyword9SectionDatas.get(position));
+                keyword9SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
 
                 return;
             }
@@ -1510,6 +1558,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword9NewsContentViewHolder.set_NewsContent(newsContent.keyword_9_news_content.get(position), context);
+
+                    keyword9NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword9NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword9NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword9NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }
@@ -1551,7 +1604,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                 //키워드 배열에 있는 값을 이용.//
                 keyword10SectionViewHolder.set_KeywordSection(keywordSection.keywor10dSectionDatas.get(position));
-
+                keyword10SectionViewHolder.keywordsection_textview.setTypeface(fontManager.getTypefaceBoldInstance());
                 return;
             }
 
@@ -1569,6 +1622,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     //뉴스데이터 배열에 있는 정보를 이용.//
                     keyword10NewsContentViewHolder.set_NewsContent(newsContent.keyword_10_news_content.get(position), context);
+
+                    keyword10NewsContentViewHolder.news_title_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    keyword10NewsContentViewHolder.news_author_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword10NewsContentViewHolder.news_write_date_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+                    keyword10NewsContentViewHolder.news_content_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
                     return;
                 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.AlarmData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.view.view_list.AlarmListViewHolder;
 
 /**
@@ -17,10 +18,12 @@ public class AlarmListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     AlarmData alarmData;
     Context context;
+    FontManager fontManager;
 
     public AlarmListAdapter(Context context) {
         this.context = context;
         alarmData = new AlarmData();
+        fontManager = new FontManager(context);
     }
 
 
@@ -53,6 +56,9 @@ public class AlarmListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (position < alarmData.alarmDataList.size()) {
                 AlarmListViewHolder alarmListViewHolder = (AlarmListViewHolder) holder;
                 alarmListViewHolder.setAlarmData(alarmData.alarmDataList.get(position), context);
+                alarmListViewHolder.contentView.setTypeface(fontManager.getTypefaceRegularInstance());
+                alarmListViewHolder.dateView.setTypeface(fontManager.getTypefaceRegularInstance());
+
                 return;
             }
             position -= alarmData.alarmDataList.size();
@@ -61,5 +67,4 @@ public class AlarmListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         throw new IllegalArgumentException("invalid position");
 
     }
-
 }

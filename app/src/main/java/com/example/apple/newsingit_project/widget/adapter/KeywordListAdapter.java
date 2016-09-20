@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.KeywordData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.view.view_list.KeywordViewHolder;
 
 /**
@@ -17,10 +18,12 @@ public class KeywordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     KeywordData keywordData;
     Context context;
+    FontManager fontManager;
 
     public KeywordListAdapter(Context context) {
         this.context = context;
         keywordData = new KeywordData();
+        fontManager = new FontManager(context);
     }
 
     public void setKeywordDataList(KeywordData keywordData) {
@@ -51,6 +54,8 @@ public class KeywordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             if (position < keywordData.keywordDataList.size()) {
                 KeywordViewHolder keywordViewHolder = (KeywordViewHolder) holder;
                 keywordViewHolder.setKeywordData(keywordData.keywordDataList.get(position));
+                keywordViewHolder.keywordView.setTypeface(fontManager.getTypefaceMediumInstance());
+
                 return;
             }
             position -= keywordData.keywordDataList.size();

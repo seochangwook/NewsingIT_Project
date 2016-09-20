@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
@@ -55,21 +56,24 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     private static final String KEY_NEWS_CONTENT = "KEY_NEWS_CONTENT";
     private static final String KEY_NEWS_IMGURL = "KEY_NEWS_IMGURL";
     private static Boolean is_private = false; //기본적으로 비활성화 상태로 구성//
-    EditText scrap_title_edittext;
+
+    EditText scrapTitleEdittext;
     TextInputLayout textInputLayout;
     AppCompatEditText appCompatEditText;
-    ImageButton tag_enroll_button; //태그 등록버튼.//
+    ImageButton tagEnrollButton; //태그 등록버튼.//
     List<String> tag_array = new ArrayList<>(); //태그배열(원본 에디터에서 가져온 데이터)//
     List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
+
+    FontManager fontManager;
 
     /**
      * Preview관련 위젯
      **/
-    ImageView news_preview_image;
-    TextView news_preview_title;
-    TextView news_preview_write_time;
-    TextView news_preview_content;
-    TextView news_preview_author;
+    ImageView newsPreviewImage;
+    TextView newsPreviewTitle;
+    TextView newsPreviewWriteTime;
+    TextView newsPreviewContent;
+    TextView newsPreviewAuthor;
 
     /**
      * 스크랩 생성 관련 필요 변수
@@ -82,7 +86,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     String news_preview_content_str;
     String news_preview_author_str;
 
-    String str_data_array[];
+
     String tag_data_str[];
     String str_data_sample_tag_array[];
     NetworkManager networkManager;
@@ -111,17 +115,28 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_scrap_content_activity_layout);
 
-        tag_enroll_button = (ImageButton) findViewById(R.id.btn_tag_create);
+        fontManager = new FontManager(CreateScrapContentActivity.this);
+
+        tagEnrollButton = (ImageButton) findViewById(R.id.btn_tag_create);
         mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
         mBeautyTagGroup = (TagGroup) findViewById(R.id.tag_group_beauty);
-        scrap_title_edittext = (EditText) findViewById(R.id.editText4);
+        scrapTitleEdittext = (EditText) findViewById(R.id.editText4);
         appCompatEditText = (TextInputEditText) findViewById(R.id.text_layout_edittext_create_scrap);
 
-        news_preview_image = (ImageView) findViewById(R.id.news_preview_image);
-        news_preview_title = (TextView) findViewById(R.id.news_preview_title);
-        news_preview_write_time = (TextView) findViewById(R.id.news_preview_write_time);
-        news_preview_content = (TextView) findViewById(R.id.news_preview_content);
-        news_preview_author = (TextView) findViewById(R.id.news_preview_author);
+        newsPreviewImage = (ImageView) findViewById(R.id.news_preview_image);
+        newsPreviewTitle = (TextView) findViewById(R.id.news_preview_title);
+        newsPreviewWriteTime = (TextView) findViewById(R.id.news_preview_write_time);
+        newsPreviewContent = (TextView) findViewById(R.id.news_preview_content);
+        newsPreviewAuthor = (TextView) findViewById(R.id.news_preview_author);
+
+        scrapTitleEdittext.setTypeface(fontManager.getTypefaceMediumInstance());
+        appCompatEditText.setTypeface(fontManager.getTypefaceRegularInstance());
+        mTagsEditText.setTypeface(fontManager.getTypefaceRegularInstance());
+
+        newsPreviewAuthor.setTypeface(fontManager.getTypefaceMediumInstance());
+        newsPreviewWriteTime.setTypeface(fontManager.getTypefaceMediumInstance());
+        newsPreviewTitle.setTypeface(fontManager.getTypefaceMediumInstance());
+        newsPreviewContent.setTypeface(fontManager.getTypefaceMediumInstance());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -142,17 +157,17 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         if (news_preview_image_str.equals("")) {
             Picasso.with(CreateScrapContentActivity.this)
                     .load(R.mipmap.ic_image_default)
-                    .into(news_preview_image);
+                    .into(newsPreviewImage);
         } else {
             Picasso.with(CreateScrapContentActivity.this)
                     .load(news_preview_image_str)
-                    .into(news_preview_image);
+                    .into(newsPreviewImage);
         }
 
-        news_preview_title.setText(news_preview_title_str);
-        news_preview_write_time.setText(news_preview_write_time_str);
-        news_preview_content.setText(news_preview_content_str);
-        news_preview_author.setText(news_preview_author_str);
+        newsPreviewTitle.setText(news_preview_title_str);
+        newsPreviewWriteTime.setText(news_preview_write_time_str);
+        newsPreviewContent.setText(news_preview_content_str);
+        newsPreviewAuthor.setText(news_preview_author_str);
 
         /** 해시테그 설정 **/
         mTagsEditText.setHint("태그를 등록해보세요.");
@@ -199,7 +214,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         textInputLayout.setErrorEnabled(true);
         textInputLayout.setCounterMaxLength(1000);
 
-        tag_enroll_button.setOnClickListener(new View.OnClickListener() {
+        tagEnrollButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mBeautyTagGroup.setVisibility(View.VISIBLE);
@@ -327,7 +342,7 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
 
     public void create_Scrap() {
         //저장에 필요한 변수들을 뽑는다//
-        String scrap_title = scrap_title_edittext.getText().toString();
+        String scrap_title = scrapTitleEdittext.getText().toString();
         String scrap_content = appCompatEditText.getText().toString();
         String scrap_locked = "0";
 

@@ -37,6 +37,7 @@ import com.example.apple.newsingit_project.data.json_data.myinfo.UserInfoRequest
 import com.example.apple.newsingit_project.data.view_data.FolderData;
 import com.example.apple.newsingit_project.data.view_data.UserInfoData;
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FolderListAdapter;
@@ -91,7 +92,10 @@ public class MyInfoFragment extends Fragment {
     private static final int RC_EDITFOLDERLIST = 400;
     private static final int RC_EDITFOLDERINFO = 500;
     private static final int RC_READSCRAP = 600;
+
     static boolean emptyViewFlag = true;
+    FontManager fontManager;
+
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
     // TextView profile_name_textview;
@@ -102,6 +106,8 @@ public class MyInfoFragment extends Fragment {
     TextView btnScrapCount;
     String name;
     String key_default_img;
+
+    TextView sffTextView, sffFollowingView, sffFollowerView;
 
     //폴더 관련 변수.//
     ImageButton folder_add_button;
@@ -175,6 +181,8 @@ public class MyInfoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_info, container, false);
 
+        fontManager = new FontManager(getActivity());
+
         profile_imageview = (ImageView) view.findViewById(R.id.profile_imageview);
         profile_my_introduce_textview = (TextView) view.findViewById(R.id.profile_my_introduce_textview);
         follower_count_button = (TextView) view.findViewById(R.id.follower_button);
@@ -183,6 +191,14 @@ public class MyInfoFragment extends Fragment {
         folder_add_button = (ImageButton) view.findViewById(R.id.category_add_button);
         btnScrapCount = (TextView) view.findViewById(R.id.scrapt_count_button);
         folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) view.findViewById(R.id.folder_rv_list);
+
+        sffTextView = (TextView) view.findViewById(R.id.my_sff_text);
+        sffFollowerView = (TextView) view.findViewById(R.id.my_sff_follower);
+        sffFollowingView = (TextView) view.findViewById(R.id.my_sff_following);
+
+        sffTextView.setTypeface(fontManager.getTypefaceMediumInstance());
+        sffFollowerView.setTypeface(fontManager.getTypefaceMediumInstance());
+        sffFollowingView.setTypeface(fontManager.getTypefaceMediumInstance());
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
@@ -300,8 +316,6 @@ public class MyInfoFragment extends Fragment {
                 folder_recyclerview.addHeaderView(header_info_view);
                 folder_recyclerview.smoothScrollToPosition(0);
 
-                //Toast.makeText(getActivity(), folder_name + "폴더 제거" + "" + position, Toast.LENGTH_SHORT).show();
-
                 return true;
             }
         });
@@ -331,11 +345,8 @@ public class MyInfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                // String my_name = profile_name_textview.getText().toString();
                 String my_aboutme = profile_my_introduce_textview.getText().toString();
                 String my_imgUrl = profileUrl;
-
-                //my_imgUrl="https://graph.facebook.com/v2.6/865056173626962/picture?type=large";
 
                 Intent intent = new Intent(getActivity(), EditMyInfoActivity.class);
 
@@ -512,11 +523,16 @@ public class MyInfoFragment extends Fragment {
                     followingCount = userInfoData.getFollwingCount();
                     scrapCount = userInfoData.getScrapCount();
 
-                    //profile_name_textview.setText(name);
                     profile_my_introduce_textview.setText(aboutMe);
                     follower_count_button.setText("" + followerCount);
                     following_count_button.setText("" + followingCount);
                     btnScrapCount.setText("" + scrapCount);
+
+                    profile_my_introduce_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+                    follower_count_button.setTypeface(fontManager.getTypefaceBoldInstance());
+                    following_count_button.setTypeface(fontManager.getTypefaceBoldInstance());
+                    btnScrapCount.setTypeface(fontManager.getTypefaceBoldInstance());
+
 
                     //이미지 분할 (기존 적용된 https와 다른 웹 사이트의 https의 충돌문제)//
                     //pf_url을 가지고 파싱//

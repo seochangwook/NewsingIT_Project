@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.kyleduo.switchbutton.SwitchButton;
 
@@ -40,6 +41,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
     SwitchButton Switch_my_page_follow;
 
     Context context;
+    FontManager fontManager;
 
     /**
      * Network관련 변수
@@ -140,6 +142,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
     public DrawerAdapter(DrawerGroup[] items, Context context) {
         this.items = items;
         this.context = context;
+        fontManager = new FontManager(context);
     }
 
     @Override
@@ -209,6 +212,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
 
         }
         groupView.setText(items[groupPosition].name);
+        groupView.setTypeface(fontManager.getTypefaceMediumInstance());
 
         //group indicator를 custom한다//
         if(expanded){ //group이 펼쳐졌을 때 indicator 이미지//
@@ -424,6 +428,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
         }
 
         childView.setText(items[groupPosition].childViewList.get(childPosition).name);
+        childView.setTypeface(fontManager.getTypefaceMediumInstance());
 
         return view;
     }

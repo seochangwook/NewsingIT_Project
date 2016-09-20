@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_fragment.MainNewsListFragment;
 import com.example.apple.newsingit_project.view.view_fragment.MyInfoFragment;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView profile_imageview;
     TextView profile_name_textview;
 
+    FontManager fontManager;
+
     /**
      * Shraed 저장소 관련 변수
      **/
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.drawer_activity);
+
+        fontManager = new FontManager(MainActivity.this);
 
         setTitle(getResources().getString(R.string.title_activity_main));
 
@@ -182,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             profile_name_textview.setText(profile_name);
+            profile_name_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+
 
             Intent intent = getIntent();
             String action = intent.getAction();

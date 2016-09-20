@@ -64,6 +64,7 @@
 
 
     <TextView
+        android:id="@+id/my_sff_follower"
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/my_sff_container"
@@ -91,6 +92,7 @@
 
 
     <TextView
+        android:id="@+id/my_sff_following"
         android:layout_width="@dimen/my_info_sff_width"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/my_sff_container"

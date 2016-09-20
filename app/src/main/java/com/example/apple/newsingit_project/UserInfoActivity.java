@@ -21,6 +21,7 @@ import com.example.apple.newsingit_project.data.json_data.userfolderlist.UserFol
 import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequest;
 import com.example.apple.newsingit_project.data.json_data.userinfo.UserInfoRequestResult;
 import com.example.apple.newsingit_project.data.view_data.UserFolderData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.UserFolderListAdapter;
@@ -65,8 +66,12 @@ public class UserInfoActivity extends AppCompatActivity {
     TextView user_profile_my_introduce_textview;
     TextView user_follower_count_button;
     TextView user_following_count_button;
+    TextView sffTextView, sffFollowerView, sffFollowingView;
     ImageButton user_following_button;
     TextView user_scrap_button;
+
+    FontManager fontManager;
+
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
@@ -239,6 +244,8 @@ public class UserInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info_layout);
 
+        fontManager = new FontManager(UserInfoActivity.this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         user_profile_imageview = (ImageView) findViewById(R.id.user_profile_imageview);
         user_profile_my_introduce_textview = (TextView) findViewById(R.id.user_profile_my_introduce_textview);
@@ -246,6 +253,19 @@ public class UserInfoActivity extends AppCompatActivity {
         user_following_count_button = (TextView) findViewById(R.id.user_following_button);
         user_following_button = (ImageButton) findViewById(R.id.user_follow_button);
         user_scrap_button = (TextView) findViewById(R.id.scrapt_count_button);
+
+        sffFollowerView = (TextView) findViewById(R.id.sff_follower);
+        sffFollowingView = (TextView) findViewById(R.id.sff_following);
+        sffTextView = (TextView) findViewById(R.id.sff_text);
+
+        user_scrap_button.setTypeface(fontManager.getTypefaceBoldInstance());
+        user_follower_count_button.setTypeface(fontManager.getTypefaceBoldInstance());
+        user_following_count_button.setTypeface(fontManager.getTypefaceBoldInstance());
+        user_profile_my_introduce_textview.setTypeface(fontManager.getTypefaceMediumInstance());
+
+        sffTextView.setTypeface(fontManager.getTypefaceMediumInstance());
+        sffFollowingView.setTypeface(fontManager.getTypefaceMediumInstance());
+        sffFollowerView.setTypeface(fontManager.getTypefaceMediumInstance());
 
         user_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.user_folder_rv_list);
         setSupportActionBar(toolbar);

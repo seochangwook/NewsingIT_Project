@@ -11,8 +11,8 @@ import com.example.apple.newsingit_project.data.view_data.KeywordData;
  * Created by Tacademy on 2016-08-23.
  */
 public class KeywordViewHolder extends RecyclerView.ViewHolder {
+    public TextView keywordView;
     KeywordData keywordData;
-    TextView keywordView;
 
     public KeywordViewHolder(View itemView) {
         super(itemView);
