@@ -29,9 +29,11 @@ import java.util.List;
 import me.gujun.android.taggroup.TagGroup;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class UserSelectScrapContentActivity extends AppCompatActivity {
@@ -63,6 +65,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     String scrapId;
     String folderName;
     boolean scrap_isprivate = false;
+    boolean is_favorite = false; //처음엔 안눌렀다는 가정//
 
     FontManager fontManager;
 
@@ -74,6 +77,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     TextView titleView, ncTitleView, ncContentView, contentView, authorView, likeView, ncDateView;
     ImageView news_imageview;
     String nc_imageUrl = null; //후엔 디폴트 이미지 경로 저장.//
+    ImageView img_scrap_like;
     NetworkManager networkManager;
     private TagGroup mBeautyTagGroup; //태그를 나타낼 스타일 뷰//
 
@@ -196,6 +200,20 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             }
         }
     };
+    private Callback requestFavoriteCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+        }
+    };
 
     private void getSelectScrapContentNetworkData(String id) {
         showpDialog();
@@ -239,13 +257,14 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                     likeView.setText("" + result.getFavorite_cnt());
                     ncDateView.setText(result.getNc_ntime());
                     authorView.setText(result.getNc_author());
+                    is_favorite = result.getFavorite();
 
                     for (int i = 0; i < result.getTags().length; i++) {
                         tags.add(tagList.get(i));
                         tag_layout_array.add(tags.get(i).toString());
                     }
 
-                    mBeautyTagGroup.setTags(tag_layout_array);
+                    mBeautyTagGroup.setTags(tag_layout_array); //태그 설정//
 
                     //이미지 설정//
                     nc_imageUrl = result.getNc_img_url();
@@ -258,6 +277,26 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                         Picasso.with(UserSelectScrapContentActivity.this)
                                 .load(nc_imageUrl)
                                 .into(news_imageview);
+                    }
+
+                    //favorite유무에 따라 하트의 이미지를 판단.//
+                    //다른 사람의 경우 내가 선택을 하고 안하고를 처리하는게 필요//
+                    if (is_me.equals("1")) {
+                        if (is_favorite == true) {  //좋아요//
+                            img_scrap_like.setImageResource(R.mipmap.favorite_on);
+                        } else if (is_favorite == false) { //좋아요 취소//
+                            img_scrap_like.setImageResource(R.mipmap.favorite_off);
+                        }
+                    } else if (is_me.equals("0")) //나에 대한 처리는 개수에 따라서 색갈만 판단해주면 된다.//
+                    {
+                        //좋아요 수에 따른 하트 초기화//
+                        int favorite_count = Integer.parseInt(likeView.getText().toString());
+
+                        if (favorite_count == 0) {
+                            img_scrap_like.setImageResource(R.mipmap.favorite_off);
+                        } else if (favorite_count > 0) {
+                            img_scrap_like.setImageResource(R.mipmap.favorite_on);
+                        }
                     }
                 }
             });
@@ -321,6 +360,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
         setTitle(folderName);
 
+
         //메뉴를 다르게 해주기 위해서 다른 사용자와 나의 경우를 구분//
         if (is_me.equals("1")) //1이면 다른 사용자의 스크랩 리스트//
         {
@@ -328,6 +368,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         } else if (is_me.equals("0")) {
             Log.d("whowho : ", "me");
         }
+
 
         //태그 선택 이벤트 처리//
         mBeautyTagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
@@ -346,6 +387,42 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                 startActivity(intent);
 
                 finish();
+            }
+        });
+
+        //좋아요 클릭//
+        img_scrap_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (is_me.equals("1"))  //상대방일때만 버튼클릭 처리//
+                {
+                    if (is_favorite == true) {  //좋아요되어있으니 취소//
+                        img_scrap_like.setImageResource(R.mipmap.favorite_off);
+                        is_favorite = false;
+
+                        int count = Integer.parseInt(likeView.getText().toString());
+
+                        count--;
+
+                        likeView.setText("" + count);
+
+                        //서버로 좋아요 취소에 대한 데이터 전송//
+                        setFavoriteCancel(scrapId);
+
+                    } else if (is_favorite == false) { //좋아요 취소이니 좋아요를 한다.//
+                        img_scrap_like.setImageResource(R.mipmap.favorite_on);
+                        is_favorite = true;
+
+                        int count = Integer.parseInt(likeView.getText().toString());
+
+                        count++;
+
+                        likeView.setText("" + count);
+
+                        //서버로 좋아요 설정에 대한 데이터 전송//
+                        setFavoriteDo(scrapId);
+                    }
+                }
             }
         });
 
@@ -455,6 +532,59 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setFavoriteCancel(String select_scrap_id) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host(this.getResources().getString(R.string.real_server_domain))
+                .port(8080)
+                .addPathSegment("scraps")
+                .addPathSegment(select_scrap_id)
+                .addPathSegment("favorites")
+                .addPathSegment("me");
+
+        RequestBody body = new FormBody.Builder()
+                .build();
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .delete(body)
+                .build();
+
+        client.newCall(request).enqueue(requestFavoriteCallback);
+    }
+
+    private void setFavoriteDo(String select_scrap_id) {
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host(this.getResources().getString(R.string.real_server_domain))
+                .port(8080)
+                .addPathSegment("scraps")
+                .addPathSegment(select_scrap_id)
+                .addPathSegment("favorites");
+
+        //POST방식으로 구성하게 되면 RequestBody가 필요(데이터 전달 시)//
+        RequestBody body = new FormBody.Builder()
+                .build(); //데이터가 없으니 그냥 build로 설정.//
+
+        //최종적으로 Request 구성//
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .post(body)
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestFavoriteCallback);
     }
 
     private void hidepDialog() {

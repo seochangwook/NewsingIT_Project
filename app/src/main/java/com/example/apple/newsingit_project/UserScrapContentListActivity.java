@@ -184,7 +184,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setNcAuthor(scrapContentList.get(i).getNc_author());
                         newUserScrapCotentData.setNcTime(scrapContentList.get(i).getNc_ntime());
                         newUserScrapCotentData.setLike(scrapContentList.get(i).getFavorite_cnt());
-                        newUserScrapCotentData.setLikeFlag(scrapContentList.get(i).getFavorite());
                         newUserScrapCotentData.setLock(scrapContentList.get(i).getLock()); //락 설정을 위해서 필요//
                         newUserScrapCotentData.setId(scrapContentList.get(i).getId());
 
@@ -477,7 +476,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setNcAuthor(tagDetailListRequestResultsList.get(i).getNc_author());
                         newUserScrapCotentData.setNcTime(tagDetailListRequestResultsList.get(i).getNc_ntime());
                         newUserScrapCotentData.setLike(tagDetailListRequestResultsList.get(i).getFavorite_cnt());
-                        newUserScrapCotentData.setLikeFlag(tagDetailListRequestResultsList.get(i).getFavorite());
                         newUserScrapCotentData.setId(tagDetailListRequestResultsList.get(i).getId());
 
                         userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);

@@ -10,6 +10,7 @@ public class SelectScrapContentRequestResult {
     private String nc_link;
     private String content;
     private int favorite_cnt;
+    //private boolean favorite;
     private String[] tags;
     private String nc_ntime;
     private String nc_author;
@@ -118,4 +119,12 @@ public class SelectScrapContentRequestResult {
     public void setDtime(String dtime) {
         this.dtime = dtime;
     }
+
+    /*public boolean getFavorite() {
+        return this.favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }*/
 }
