@@ -23,6 +23,7 @@ import com.example.apple.newsingit_project.view.view_fragment.SearchUserFragment
 
 public class SearchTabActivity extends AppCompatActivity {
     private static final String SEARCH_QUERY = "SEARCH_QUERY";
+    private static final String TAB_FLAG = "TAB_FLAG"; //탭을 구분지어주기 위한 플래그//
 
     Bundle bundle;
     SearchView searchView;
@@ -121,18 +122,24 @@ public class SearchTabActivity extends AppCompatActivity {
                             Toast.makeText(SearchTabActivity.this, "검색어를 두 글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
                         } else {
                             bundle.putString(SEARCH_QUERY, "" + query);
-                            mSectionsPagerAdapter.notifyDataSetChanged();
+                            bundle.putString(TAB_FLAG, "NEWS_TAB");
+
+                            mSectionsPagerAdapter.notifyDataSetChanged(); //현재 탭의 상태를 갱신(뷰페이저의 데이터 갱신)//
                         }
                     } else if (currentItem == 1) { //사용자 검색
                         if (query.length() < 2) {
                             Toast.makeText(SearchTabActivity.this, "검색어를 두 글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
                         } else {
                             bundle.putString(SEARCH_QUERY, "" + query);
+                            bundle.putString(TAB_FLAG, "USER_TAB");
+
                             mSectionsPagerAdapter.notifyDataSetChanged();
                         }
                     } else if (currentItem == 2) { //태그 검색
                         //검색어 전달//
                         bundle.putString(SEARCH_QUERY, "" + query);
+                        bundle.putString(TAB_FLAG, "TAG_TAB");
+
                         //검색 결과 리스트 갱신(갱신 시 프래그먼트들이 재적제 되니 bundle이 다시 대입된다.)//
                         mSectionsPagerAdapter.notifyDataSetChanged();
                     }

@@ -1,5 +1,6 @@
 package com.example.apple.newsingit_project.widget.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -37,6 +38,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     int pos;
     FollowingViewHolder followingViewHolder;
     boolean flag;
+    private OnFollowingButtonClick mOnFollowingButtonClick;
     private Callback requestSetFollowingCallback = new Callback() {
 
         @Override
@@ -55,6 +57,16 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
 
             } else if (response.code() == 200) {
                 // isOk[0] = true;
+                if (context != null) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mOnFollowingButtonClick != null) {
+                                mOnFollowingButtonClick.onFollowingButtonClick();
+                            }
+                        }
+                    });
+                }
             }
         }
     };
@@ -74,16 +86,25 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
             if (response.code() == 401) {
 
             } else if (response.code() == 200) {
-
+                if (context != null) {
+                    ((Activity) context).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mOnFollowingButtonClick != null) {
+                                mOnFollowingButtonClick.onFollowingButtonClick();
+                            }
+                        }
+                    });
+                }
             }
         }
     };
+
 
     public FollowingListAdapter(Context context) {
         this.context = context;
         followingData = new FollowingData();
     }
-
 
     private void setFollowing(String userId) {
         networkManager = NetworkManager.getInstance();
@@ -134,7 +155,6 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         client.newCall(request).enqueue(requestDeleteFollowingCallback);
     }
 
-
     public void setFollowingData(FollowingData followingData){
 
         if (this.followingData != followingData) {
@@ -146,6 +166,8 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     public void initFollowingData(FollowingData followingData) {
         if (this.followingData != followingData) {
             this.followingData = followingData;
+
+            notifyDataSetChanged();
         }
         notifyDataSetChanged();
     }
@@ -179,6 +201,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                 if (flag == true) {//true이면 선택한 유저를 팔로우 한 상태//
                     //팔로잉 한 상태에서는 팔로우 해제//
                     followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_following);
+
                 } else if (flag == false) {//false이면 선택한 유저를 팔로우 하지 않은 상태//
                     //팔로잉 안 한 상태에서 팔로우 생성//
                     followingViewHolder.btnFollowing.setImageResource(R.mipmap.btn_follow);
@@ -237,5 +260,12 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         throw new IllegalArgumentException("invalid position");
     }
 
+    public void setOnFollowingButtonClick(OnFollowingButtonClick onFollowingButtonClick) {
+        this.mOnFollowingButtonClick = onFollowingButtonClick;
+    }
 
+    //리스트 갱신을 위한 옵저버 패턴을 적용.//
+    public interface OnFollowingButtonClick {
+        void onFollowingButtonClick();
+    }
 }

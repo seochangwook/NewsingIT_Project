@@ -507,16 +507,6 @@ public class MainNewsListFragment extends Fragment {
 
                         mainnews_recyclerrefreshview.loadMoreComplete();
 
-                        showpDialog();
-
-                        //기존 데이터를 전부 지운다.//
-                        Data_Init();
-
-                        //데이터를 다시 초기화//
-                        get_MainNewsData();
-
-                        hidepDialog();
-
                     }
                 }, 1000);
             }

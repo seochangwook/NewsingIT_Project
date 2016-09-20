@@ -183,6 +183,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 {
                     //팔로잉 한 상태에서는 팔로우 해제//
                     followerViewHolder.btnFollower.setImageResource(R.mipmap.btn_following);
+
                 } else if (flag == false) //false이면 선택한 유저를 팔로우 하지 않은 상태//
                 {
                     //팔로잉 안 한 상태에서 팔로우 생성//

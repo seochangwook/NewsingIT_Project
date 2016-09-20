@@ -14,8 +14,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.apple.newsingit_project.data.json_data.searchtaglist.SearchTagListRequest;
+import com.example.apple.newsingit_project.data.json_data.searchtaglist.SearchTagListRequestResults;
 import com.example.apple.newsingit_project.data.json_data.selectscrapcontent.SelectScrapContentRequest;
 import com.example.apple.newsingit_project.data.json_data.selectscrapcontent.SelectScrapContentRequestResult;
+import com.example.apple.newsingit_project.data.view_data.SearchTagData;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -54,18 +57,18 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
+    private static final String KEY_TAG_ID = "KEY_TAG_ID";
 
     /**
      * 응답코드 관련
      **/
     private static final int RC_EDITSCRAPINFO = 100;
-
+    static int pageCount = 1;
     String is_me; //나에 대한 스크랩인지, 다른 사람의 스크랩인지 구분 플래그//
     String scrapId;
     String folderName;
     boolean scrap_isprivate = false;
     boolean is_favorite = false; //처음엔 안눌렀다는 가정//
-
     /**
      * 해시태그 관련 변수
      **/
@@ -211,6 +214,55 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             Log.d("json data", responseData);
         }
     };
+    private Callback requestSearchTagListCallback = new Callback() {
+        @Override
+        public void onFailure(Call call, IOException e) {
+            //네트워크 자체에서의 에러상황.//
+            Log.d("ERROR Message : ", e.getMessage());
+        }
+
+        @Override
+        public void onResponse(Call call, Response response) throws IOException {
+            String responseData = response.body().string();
+
+            Log.d("json data", responseData);
+
+            if (response.code() == 401) {
+                Log.d("json data", "ERROR 401");
+            } else {
+                Gson gson = new Gson();
+
+                SearchTagListRequest searchTagListRequest = gson.fromJson(responseData, SearchTagListRequest.class);
+
+                if (searchTagListRequest.getResults().length == 0) {
+                    if (this != null) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserSelectScrapContentActivity.this);
+                                alertDialog
+                                        .setTitle("Newsing Info")
+                                        .setMessage("태그 검색결과가 존재하지 않습니다.")
+                                        .setCancelable(false)
+                                        .setPositiveButton("확인",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                                        //yes
+                                                    }
+                                                });
+
+                                AlertDialog alert = alertDialog.create();
+                                alert.show();
+                            }
+                        });
+                    }
+                } else {
+                    setTagData(searchTagListRequest.getResults(), searchTagListRequest.getResults().length);
+                }
+            }
+        }
+    };
 
     private void getSelectScrapContentNetworkData(String id) {
         showpDialog();
@@ -300,7 +352,6 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -319,6 +370,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         likeView = (TextView) findViewById(R.id.text_scrap_like_cnt);
         news_write_date = (TextView) findViewById(R.id.text_scrap_date);
         news_imageview = (ImageView) findViewById(R.id.img_scrap_nc);
+        img_scrap_like = (ImageView) findViewById(R.id.img_scrap_like);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
@@ -361,7 +413,9 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             public void onTagClick(String select_tag) {
                 Log.d("json control", "click tag:" + select_tag);
 
-                //현재 스크랩 상세화면을 종료 후 검새조건 태그인 경우로 해서 스크랩 리스트로 이동//
+                //태그 검색(target == 3)//
+                getSearchTagNetworkData(select_tag);
+                /*//현재 스크랩 상세화면을 종료 후 검새조건 태그인 경우로 해서 스크랩 리스트로 이동//
                 Intent intent = new Intent(UserSelectScrapContentActivity.this, UserScrapContentListActivity.class);
 
                 //필요한 정보를 이동//
@@ -371,7 +425,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
                 startActivity(intent);
 
-                finish();
+                finish();*/
             }
         });
 
@@ -517,6 +571,68 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getSearchTagNetworkData(String query) {
+        showpDialog();
+
+        networkManager = NetworkManager.getInstance();
+
+        OkHttpClient client = networkManager.getClient();
+        Log.d("pageCount", "" + pageCount);
+        HttpUrl.Builder builder = new HttpUrl.Builder();
+        builder.scheme("http")
+                .host(getResources().getString(R.string.real_server_domain))
+                .port(8080)
+                .addPathSegment("search")
+                .addQueryParameter("target", "3")
+                .addQueryParameter("word", query)
+                .addQueryParameter("page", "" + pageCount)
+                .addQueryParameter("count", "20");
+
+        Request request = new Request.Builder()
+                .url(builder.build())
+                .tag(this)
+                .build();
+
+        client.newCall(request).enqueue(requestSearchTagListCallback);
+
+        hidepDialog();
+    }
+
+    private void setTagData(final SearchTagListRequestResults[] results, final int size) {
+        if (this != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    List<SearchTagListRequestResults> searchTagListRequestResults = new ArrayList<>();
+                    searchTagListRequestResults.addAll(Arrays.asList(results));
+
+                    //첫번째 검색되는 걸로 결과를 얻는다.//
+                    for (int i = 0; i < size; i++) {
+                        SearchTagData newSearchTagData = new SearchTagData();
+
+                        newSearchTagData.setId(searchTagListRequestResults.get(i).getId());
+                        newSearchTagData.setTag(searchTagListRequestResults.get(i).getTag());
+                        newSearchTagData.setScrap_count("" + searchTagListRequestResults.get(i).getScrap_count());
+
+                        String tag_id = "" + newSearchTagData.getId();
+                        String tag_name = newSearchTagData.getTag();
+
+                        Intent intent = new Intent(UserSelectScrapContentActivity.this, UserScrapContentListActivity.class);
+
+                        intent.putExtra(KEY_FOLDER_NAME, tag_name);
+                        intent.putExtra(KEY_USER_IDENTIFY_FLAG, "1"); //검색은 다른 사용자의 내용들을 보는것이니 외부사용자로 간다.//
+                        intent.putExtra(KEY_TAGSEARCH_FLAG, "TAG");
+                        intent.putExtra(KEY_TAG_ID, tag_id);
+
+                        startActivity(intent);
+
+                        break;
+                    }
+                }
+            });
+        }
     }
 
     private void setFavoriteCancel(String select_scrap_id) {
