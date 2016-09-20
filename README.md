@@ -172,7 +172,7 @@
 * TagSearch 간 Scrap count 값 적용 - 서창욱 (16/09/19 10:29)
 * 뉴스기사 개수에 따른 동적 리스트 구조 예외처리 - 서창욱 (16/09/19 15:12)
 * FCM getMesage fix(서버와의 key값 동기화 필요) / Default Image적용 - 서창욱 (16/09/19 16:38)
-* 좋아요 관련 수정 / Title 수정
+* 좋아요 Click 위치관련 수정(ScrapContentList -> SelectScrapContent) / Title 수정 - 서창욱 (16/09/20 15:51)
 
 
 < Refectoring (유지보수, 디버깅) >
