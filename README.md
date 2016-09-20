@@ -72,7 +72,7 @@
 * Observer Pattern Concept
 
 <p align="left">
-  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/FCM_algorithm.png" width="650" height="350">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/observer_image.png" width="650" height="350">
 </p>
 
 < Update Content (기능구현 / 설계 / 디자인 가이드 적용 부분) >
