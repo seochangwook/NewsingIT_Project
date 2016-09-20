@@ -60,6 +60,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
     String is_me; //나에 대한 스크랩인지, 다른 사람의 스크랩인지 구분 플래그//
     String scrapId;
+    String folderName;
     boolean scrap_isprivate = false;
 
     /**
@@ -298,8 +299,12 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+
+        folderName = intent.getStringExtra(KEY_FOLDER_NAME);
         scrapId = intent.getStringExtra(SCRAP_ID); //스크랩의 상세 정보를 검색하기 위해서 id값을 전달받는다.//
         is_me = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
+
+        setTitle(folderName);
 
         //메뉴를 다르게 해주기 위해서 다른 사용자와 나의 경우를 구분//
         if (is_me.equals("1")) //1이면 다른 사용자의 스크랩 리스트//

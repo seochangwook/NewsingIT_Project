@@ -46,6 +46,7 @@ public class SearchNewsFragment extends Fragment {
     private static final int LOAD_MORE_TAG = 5;
 
     static int pageCount = 1;
+    static boolean emptyViewFlag = true;
 
     String query;
 
@@ -62,6 +63,7 @@ public class SearchNewsFragment extends Fragment {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -72,6 +74,8 @@ public class SearchNewsFragment extends Fragment {
 
             if (response.code() == 401) {
                 Log.d("json data", "ERROR 401");
+                emptyViewFlag = false;
+
             } else {
                 Gson gson = new Gson();
 
@@ -83,12 +87,16 @@ public class SearchNewsFragment extends Fragment {
                             @Override
                             public void run() {
                                 Toast.makeText(getActivity(), "불러올 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+
                             }
                         });
                     }
                 } else {
                     setData(searchNewsListRequest.getResults(), searchNewsListRequest.getResults().length);
+
                 }
+
+                emptyViewFlag = true;
             }
         }
     };
@@ -100,8 +108,6 @@ public class SearchNewsFragment extends Fragment {
     private void getSearchNewsNetworkData(String query) {
         showpDialog();
 
-        Log.d("search", "network");
-        Log.d("pageCount", "" + pageCount);
         networkManager = NetworkManager.getInstance();
 
         OkHttpClient client = networkManager.getClient();
@@ -160,9 +166,6 @@ public class SearchNewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_news_layout, container, false);
 
         pageCount = 1;
-
-        Log.d("pageCount", "" + pageCount);
-
 
         Bundle b = getArguments();
         query = b.getString("SEARCH_QUERY");
@@ -226,10 +229,18 @@ public class SearchNewsFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         /** EmptyView 설정 **/
-        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_search_news_emptyview, null);
-        recyclerView.setEmptyView(emptyview, true);
-        recyclerView.setEmptyViewKeepShowHeadOrFooter(true);
+        View emptyView;
 
+
+        //검색 결과가 없을 때 & 처음 검색창 실행 시 그리고 네트워크 오류 시 empty view 구분
+        if (emptyViewFlag) {
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_search_empty, null);
+            recyclerView.setEmptyView(emptyView, true);
+        } else { //false - 네트워크 오류
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_search_news_emptyview, null);
+            recyclerView.setEmptyView(emptyView, true);
+        }
+        recyclerView.setEmptyViewKeepShowHeadOrFooter(true);
 
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
@@ -253,8 +264,9 @@ public class SearchNewsFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-
-        getSearchNewsNetworkData(query); //네트워크//
+        if (query.length() >= 2) {
+            getSearchNewsNetworkData(query); //네트워크//
+        }
 
         return view;
     }

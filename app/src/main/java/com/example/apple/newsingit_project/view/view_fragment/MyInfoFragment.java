@@ -72,19 +72,16 @@ public class MyInfoFragment extends Fragment {
      **/
     private static final String KEY_FOLDER_IMG = "KEY_FOLDER_IMG";
     private static final String KEY_FOLDER_LOCKED = "KEY_FOLDER_LOCKED";
-
     /**
      * 나의 정보 수정 시 필요한 정보
      **/
     private static final String KEY_MY_IMG = "KEY_USER_IMG";
     private static final String KEY_MY_NAME = "KEY_USER_NAME";
     private static final String KEY_MY_ABOUTME = "KEY_USER_ABOUTME";
-
     /**
      * 초기 페이스북 디폴트 경로
      **/
     private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
-
     /**
      * 네트워크 작업완료 응답을 위한 코드(갱신)
      **/
@@ -94,7 +91,7 @@ public class MyInfoFragment extends Fragment {
     private static final int RC_EDITFOLDERLIST = 400;
     private static final int RC_EDITFOLDERINFO = 500;
     private static final int RC_READSCRAP = 600;
-
+    static boolean emptyViewFlag = true;
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
     // TextView profile_name_textview;
@@ -125,6 +122,7 @@ public class MyInfoFragment extends Fragment {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -138,6 +136,7 @@ public class MyInfoFragment extends Fragment {
             UserInfoRequest userInfoRequest = gson.fromJson(response_data, UserInfoRequest.class);
 
             setData(userInfoRequest.getResult());
+            emptyViewFlag = true;
         }
     };
     private Callback requestmyfolderlistcallback = new Callback() {
@@ -146,6 +145,7 @@ public class MyInfoFragment extends Fragment {
         {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -159,6 +159,8 @@ public class MyInfoFragment extends Fragment {
             MyFolderListRequest myFolderListRequest = gson.fromJson(response_data, MyFolderListRequest.class);
 
             set_Folder_Data(myFolderListRequest.getResults(), myFolderListRequest.getResults().length);
+
+            emptyViewFlag = true;
         }
     };
 
@@ -174,7 +176,6 @@ public class MyInfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_info, container, false);
 
         profile_imageview = (ImageView) view.findViewById(R.id.profile_imageview);
-        //profile_name_textview = (TextView) view.findViewById(R.id.profile_name_textview);
         profile_my_introduce_textview = (TextView) view.findViewById(R.id.profile_my_introduce_textview);
         follower_count_button = (TextView) view.findViewById(R.id.follower_button);
         following_count_button = (TextView) view.findViewById(R.id.following_button);
@@ -197,8 +198,15 @@ public class MyInfoFragment extends Fragment {
         folder_recyclerview.setHasFixedSize(true);
 
         /** EmptyView 화면 설정. **/
-        View my_empty_list_view = getActivity().getLayoutInflater().inflate(R.layout.my_rv_list_emptyview, null, false);
-        folder_recyclerview.setEmptyView(my_empty_list_view);
+        View emptyView;
+
+        if (emptyViewFlag) {//폴더가 없는 일반적인 경우
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.my_rv_list_emptyview, null, false);
+            folder_recyclerview.setEmptyView(emptyView);
+        } else { //네트워크 오류 시
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_folder_error_empty, null, false);
+            folder_recyclerview.setEmptyView(emptyView);
+        }
         folder_recyclerview.setEmptyViewKeepShowHeadOrFooter(true);
 
         /** HeaderView 화면 설정 **/

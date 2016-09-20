@@ -42,6 +42,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final String SCRAP_ID = "SCRAP_ID";
     private static final String KEY_TAGSEARCH_FLAG = "KEY_TAGSEARCH_FLAG";
+    private static final String KEY_TAG_ID = "KEY_TAG_ID";
 
     /**
      * 응답코드
@@ -49,17 +50,19 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     private static final int RC_SCRAPINFO = 100;
 
     static int page_count = 1;
+    static boolean emptyViewFlag = true;
 
     String folder_name;
     String is_user_my;
     String folder_id;
     String flag_tag = null;
+    String tagId;
 
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
     NetworkManager networkManager;
     View headerview;
-    View emptyview;
+    View emptyView;
     private FamiliarRefreshRecyclerView scrap_recyclerrefreshview;
     private FamiliarRecyclerView scrap_recyclerView;
     private ProgressDialog pDialog;
@@ -69,6 +72,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -93,6 +97,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             } else {
                 setData(request.getResults(), request.getResults().length);
             }
+            emptyViewFlag = true;
         }
     };
     private Callback requestSearchTagListCallback = new Callback() {
@@ -100,6 +105,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -127,6 +133,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             } else {
                 set_Taglist_Data(tagDetailListRequest.getResults(), tagDetailListRequest.getResults().length);
             }
+            emptyViewFlag = true;
         }
     };
 
@@ -219,6 +226,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         folder_name = intent.getStringExtra(KEY_FOLDER_NAME);
         is_user_my = intent.getStringExtra(KEY_USER_IDENTIFY_FLAG);
         flag_tag = intent.getStringExtra(KEY_TAGSEARCH_FLAG); //태그로 검색 시 이 부분에 값이 "TAG"로 할당//
+        tagId = intent.getStringExtra(KEY_TAG_ID);
 
         page_count = 1;
 
@@ -232,8 +240,14 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         scrap_recyclerView.setHasFixedSize(true);
 
         /** Header, Empty 설정 **/
-        emptyview = getLayoutInflater().inflate(R.layout.view_scraplist_emptyview, null);
-        scrap_recyclerView.setEmptyView(emptyview, true);
+        if (emptyViewFlag) {
+            emptyView = getLayoutInflater().inflate(R.layout.view_scraplist_emptyview, null);
+            scrap_recyclerView.setEmptyView(emptyView, true);
+
+        } else { //네트워크 오류
+            emptyView = getLayoutInflater().inflate(R.layout.view_scraplist_error_empty, null);
+            scrap_recyclerView.setEmptyView(emptyView, true);
+        }
 
         headerview = getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
         scrap_recyclerView.addHeaderView(headerview);
@@ -259,7 +273,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
                             init_scrap_content_data(); //우선적으로 데이터 초기화.//
 
-                            getTagData(folder_id); //해당 페이지의 개수만큼 다시 로드//
+                            getTagData(tagId); //해당 페이지의 개수만큼 다시 로드//
                         } else {
                             Log.d("message", "scrap load");
 
@@ -293,7 +307,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                             //init_scrap_content_data(); //우선적으로 데이터 초기화.//
 
                             //추가검색이기에 데이터를 초기화하지 않는다.//
-                            getTagData(folder_id); //해당 페이지의 개수만큼 다시 로드//
+                            getTagData(tagId); //해당 페이지의 개수만큼 다시 로드//
                         } else {
                             Log.d("message", "scrap load");
 
@@ -325,7 +339,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         }
 
         /** Title명 설정 **/
-        setTitle(folder_name + " 폴더");
+        setTitle(folder_name);
 
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -368,6 +382,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                 Log.d("json control", "tag scrap id" + userScrapContentData.userScrapContentDataList.get(position).getId());
 
                 intent.putExtra(SCRAP_ID, "" + userScrapContentData.userScrapContentDataList.get(position).getId());
+                intent.putExtra(KEY_FOLDER_NAME, folder_name);
 
                 startActivityForResult(intent, RC_SCRAPINFO);
             }
@@ -379,7 +394,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             Log.d("tag name", folder_name);
 
             //태그이름으로 세부검색 후 리스트 목록//
-            getTagData(folder_id);
+            getTagData(tagId);
         } else //태그가 아닌 일반 폴더리스트에서 선택 후 온 경우//
         {
             getScrapContentListNetworkData();
@@ -401,7 +416,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
                     init_scrap_content_data(); //우선적으로 데이터 초기화.//
 
-                    getTagData(folder_id); //해당 페이지의 개수만큼 다시 로드//
+                    getTagData(tagId); //해당 페이지의 개수만큼 다시 로드//
                 } else {
                     Log.d("message", "scrap load");
 
@@ -419,7 +434,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         mAdapter.init_ScrapContent_Data(userScrapContentData, is_user_my);
     }
 
-    public void getTagData(String folder_name) {
+    public void getTagData(String tagId) {
         /** 네트워크 설정 **/
         networkManager = NetworkManager.getInstance();
 
@@ -431,7 +446,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                 .port(8080)
                 .addPathSegment("search")
                 .addQueryParameter("target", "4") //4는 태그상세 검색//
-                .addQueryParameter("word", folder_name) //word는 검색단어(태그 상세검색 시 필요)//
+                .addQueryParameter("word", tagId) //word는 검색단어(태그 상세검색 시 필요)//
                 //page값은 스와이프 유무에 따라 동적으로 변화된다.//
                 .addQueryParameter("page", "" + page_count)
                 .addQueryParameter("count", "20"); //count는 20개로 고정.//

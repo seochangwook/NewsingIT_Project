@@ -50,6 +50,7 @@ public class SearchUserFragment extends Fragment {
     private static final int LOAD_MORE_TAG = 4;
 
     static int pageCount = 1;
+    static boolean emptyViewFlag = true;
 
     String query;
 
@@ -67,6 +68,7 @@ public class SearchUserFragment extends Fragment {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -77,6 +79,7 @@ public class SearchUserFragment extends Fragment {
 
             if (response.code() == 401) {
                 Log.d("json data", "ERROR 401");
+                emptyViewFlag = false;
             } else {
                 Gson gson = new Gson();
 
@@ -95,6 +98,7 @@ public class SearchUserFragment extends Fragment {
                 } else {
                     setData(searchUserListRequest.getResults(), searchUserListRequest.getResults().length);
                 }
+                emptyViewFlag = true;
             }
         }
     };
@@ -174,17 +178,23 @@ public class SearchUserFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         /** EmptyView 설정 **/
-        View emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_search_emptyuser, null);
+        View emptyView;
 
-        recyclerView.setEmptyView(emptyview, true);
+        if (emptyViewFlag) {
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_search_empty, null);
+            recyclerView.setEmptyView(emptyView, true);
+        } else {
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_search_emptyuser, null);
+            recyclerView.setEmptyView(emptyView, true);
+        }
         recyclerView.setEmptyViewKeepShowHeadOrFooter(true);
 
         recyclerView.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
 
-                String userSelect = searchUserData.searchUserDataArrayList.get(position).getName().toString();
-                String flag_boolean = "" + searchUserData.searchUserDataArrayList.get(position).getFlag();
+//                String userSelect = searchUserData.searchUserDataArrayList.get(position).getName().toString();
+//                String flag_boolean = "" + searchUserData.searchUserDataArrayList.get(position).getFlag();
 
                 //선택한 유저의 마이 페이지로 이동//
                 Intent intent = new Intent(getActivity(), UserInfoActivity.class);
@@ -201,10 +211,10 @@ public class SearchUserFragment extends Fragment {
         if (query == null) {
             query = "";
         }
-        // initDummyData(query); //더미//
-
-        /** 데이터 셋팅 **/
-        get_User_search_Data(query);
+        if (query.length() >= 2) {
+            /** 데이터 셋팅 **/
+            get_User_search_Data(query);
+        }
 
         return view;
     }

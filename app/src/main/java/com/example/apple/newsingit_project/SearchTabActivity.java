@@ -78,12 +78,6 @@ public class SearchTabActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 //뷰 페이저의 페이지가 전환 될 시점에 검색어를 초기화 해줌//
                 searchView.setQuery("", true); //뒤에 boolean 값은 정확한 의미를 잘 모르겠음..//
-
-                //내가 검색한 탭 외에 다른 탭은 검색 결과 초기화 필요//
-//                if(mViewPager.getCurrentItem() != currentItem){
-//                    bundle.putString(SEARCH_QUERY, "이제곧추석이다와우"); //임시로 검색 결과가 나오지 않는 query 넣어둠//
-//                  //  mSectionsPagerAdapter.notifyDataSetChanged();
-//                }
             }
 
             @Override
@@ -117,31 +111,31 @@ public class SearchTabActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                //서치뷰의 값을 가지고 유효검사//
-                currentItem = mViewPager.getCurrentItem();
-                if (currentItem == 0) {
-                    //  Toast.makeText(SearchTabActivity.this, "뉴스", Toast.LENGTH_SHORT).show();
-                    if (query.length() < 2) {
-                        Toast.makeText(SearchTabActivity.this, "검색어를 두 글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
-                    } else {
+                if (query == null) {
+                    Toast.makeText(SearchTabActivity.this, "검색어를 입력해 주세요!", Toast.LENGTH_SHORT).show();
+                } else {
+                    //서치뷰의 값을 가지고 유효검사//
+                    currentItem = mViewPager.getCurrentItem();
+                    if (currentItem == 0) { //뉴스 검색
+                        if (query.length() < 2) {
+                            Toast.makeText(SearchTabActivity.this, "검색어를 두 글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            bundle.putString(SEARCH_QUERY, "" + query);
+                            mSectionsPagerAdapter.notifyDataSetChanged();
+                        }
+                    } else if (currentItem == 1) { //사용자 검색
+                        if (query.length() < 2) {
+                            Toast.makeText(SearchTabActivity.this, "검색어를 두 글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            bundle.putString(SEARCH_QUERY, "" + query);
+                            mSectionsPagerAdapter.notifyDataSetChanged();
+                        }
+                    } else if (currentItem == 2) { //태그 검색
+                        //검색어 전달//
                         bundle.putString(SEARCH_QUERY, "" + query);
+                        //검색 결과 리스트 갱신(갱신 시 프래그먼트들이 재적제 되니 bundle이 다시 대입된다.)//
                         mSectionsPagerAdapter.notifyDataSetChanged();
                     }
-                } else if (currentItem == 1) {
-                    //    Toast.makeText(SearchTabActivity.this, "사용자", Toast.LENGTH_SHORT).show();
-                    if (query.length() < 2) {
-                        Toast.makeText(SearchTabActivity.this, "검색어를 두 글자 이상 입력해 주세요!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        bundle.putString(SEARCH_QUERY, "" + query);
-                        mSectionsPagerAdapter.notifyDataSetChanged();
-                    }
-                } else if (currentItem == 2) {
-                    //  Toast.makeText(SearchTabActivity.this, "태그", Toast.LENGTH_SHORT).show();
-                    //검색어 전달//
-                    bundle.putString(SEARCH_QUERY, "" + query);
-                    //검색 결과 리스트 갱신(갱신 시 프래그먼트들이 재적제 되니 bundle이 다시 대입된다.)//
-                    mSectionsPagerAdapter.notifyDataSetChanged();
                 }
 
                 return false;

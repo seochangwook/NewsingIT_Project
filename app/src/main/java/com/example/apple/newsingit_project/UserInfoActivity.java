@@ -53,7 +53,7 @@ public class UserInfoActivity extends AppCompatActivity {
      * 초기 페이스북 디폴트 경로
      **/
     private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
-
+    static boolean emptyViewFlag = true;
     /**
      * 네트워크 작업완료 응답을 위한 코드(갱신)
      **/
@@ -67,14 +67,11 @@ public class UserInfoActivity extends AppCompatActivity {
     TextView user_following_count_button;
     ImageButton user_following_button;
     TextView user_scrap_button;
-
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
-
     String name;
     String get_user_id = null;
-
     /**
      * 네트워크 데이터
      **/
@@ -100,7 +97,7 @@ public class UserInfoActivity extends AppCompatActivity {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
 
-
+            emptyViewFlag = false;
         }
 
         @Override
@@ -133,12 +130,14 @@ public class UserInfoActivity extends AppCompatActivity {
                         }
                     });
                 }
+                emptyViewFlag = false;
             } else {
                 Gson gson = new Gson();
 
                 UserInfoRequest userInfoRequest = gson.fromJson(response_data, UserInfoRequest.class);
 
                 set_UserInfo_Data(userInfoRequest.getResult());
+                emptyViewFlag = true;
             }
         }
     };
@@ -148,6 +147,7 @@ public class UserInfoActivity extends AppCompatActivity {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -161,6 +161,8 @@ public class UserInfoActivity extends AppCompatActivity {
             UserFolderListRequest userFolderListRequest = gson.fromJson(responseData, UserFolderListRequest.class);
 
             set_User_Folder_Data(userFolderListRequest.getResults(), userFolderListRequest.getResults().length);
+
+            emptyViewFlag = true;
         }
     };
     private Callback requestSetFollowingCallback = new Callback() {
@@ -168,6 +170,8 @@ public class UserInfoActivity extends AppCompatActivity {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+
+            emptyViewFlag = false;
         }
 
         @Override
@@ -175,7 +179,7 @@ public class UserInfoActivity extends AppCompatActivity {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
-
+            emptyViewFlag = true;
         }
     };
     private Callback requestUnSetFollowingCallback = new Callback() {
@@ -183,6 +187,7 @@ public class UserInfoActivity extends AppCompatActivity {
         public void onFailure(Call call, IOException e) {
             //네트워크 자체에서의 에러상황.//
             Log.d("ERROR Message : ", e.getMessage());
+            emptyViewFlag = false;
         }
 
         @Override
@@ -190,6 +195,7 @@ public class UserInfoActivity extends AppCompatActivity {
             String responseData = response.body().string();
 
             Log.d("json data", responseData);
+            emptyViewFlag = true;
 
         }
     };
@@ -274,8 +280,17 @@ public class UserInfoActivity extends AppCompatActivity {
         user_folder_recyclerview.setHasFixedSize(true);
 
         /** EmptyView 화면 설정. **/
-        View user_empty_list_view = getLayoutInflater().inflate(R.layout.user_rv_list_empty_view, null, false);
-        user_folder_recyclerview.setEmptyView(user_empty_list_view);
+        View emptyView;
+
+        if (emptyViewFlag) {
+            emptyView = getLayoutInflater().inflate(R.layout.user_rv_list_empty_view, null, false);
+            user_folder_recyclerview.setEmptyView(emptyView);
+        } else { //네트워크 에러//
+            emptyView = getLayoutInflater().inflate(R.layout.view_folder_error_empty, null, false);
+            user_folder_recyclerview.setEmptyView(emptyView);
+        }
+
+
         user_folder_recyclerview.setEmptyViewKeepShowHeadOrFooter(true);
 
         /** 폴더 데이터 클래스 초기화 및 어댑터 초기화 **/
