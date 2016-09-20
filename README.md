@@ -4,7 +4,7 @@
 
 < Project status (Waterfall model) >
 
-* 전체 진행률 : 85%
+* 전체 진행률 : 90%
 * 프로젝트 기간 : 08/23 ~ 09/22 
 <p>
 </p>
