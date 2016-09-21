@@ -56,12 +56,11 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     private static final String KEY_SCRAP_CONTENT = "KEY_SCRAP_CONTENT";
     private static final String KEY_SCRAP_TITLE = "KEY_SCRAP_TITLE";
     private static final String SCRAP_ID = "SCRAP_ID";
+    static boolean is_touch_tag_input = false;
     private static Boolean is_private = false; //기본적으로 비활성화 상태로 구성//
-
     TextInputLayout textInputLayout;
     AppCompatEditText appCompatEditText;
     FontManager fontManager;
-
     ImageButton tag_edit_button; //태그 등록버튼.//
     List<String> tag_array = new ArrayList<>(); //태그배열(원본 에디터에서 가져온 데이터)//
     List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
@@ -134,6 +133,8 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_scrap_content_activity_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        is_touch_tag_input = false;
 
         fontManager = new FontManager(EditScrapContentActivity.this);
 
@@ -300,6 +301,13 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         mTagsEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (is_touch_tag_input == false) {
+                    Toast.makeText(EditScrapContentActivity.this, "태그를 추가입력 후 엔터키를 이용하여 등록하세요. 등록을 모두 완료하였으면 " +
+                            "등록버튼을 눌러 최종등록 하세요", Toast.LENGTH_LONG).show();
+                }
+
+                is_touch_tag_input = true;
+
                 mBeautyTagGroup.setVisibility(View.GONE);
 
                 return false; //false로 해야지 이벤트가 먹질 않는다.//
