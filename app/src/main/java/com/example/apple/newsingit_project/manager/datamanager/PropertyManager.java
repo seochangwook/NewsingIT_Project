@@ -23,6 +23,7 @@ public class PropertyManager {
     private static final String KEY_FACEBOOK_ID = "facebookid";
     private static final String KEY_FCM_REG_ID = "fcmtoken";
     private static final String ALARM_BADGE_NUMBER = "alarm_badge_number";
+
     //FCM알람관련 뱃지카운터.//
     private static int badge_number = 0;
     //PropertyManger는 고유의 데이터이기에 싱글톤 디자인 패턴으로 설계//

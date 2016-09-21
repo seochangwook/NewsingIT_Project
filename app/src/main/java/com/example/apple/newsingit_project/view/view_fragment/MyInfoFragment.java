@@ -277,8 +277,6 @@ public class MyInfoFragment extends Fragment {
                         init_folder_list();
                         getMyFolderData();
 
-                        folder_recyclerview.removeHeaderView(header_info_view);
-
                     }
                 }, 1000);
             }
@@ -339,7 +337,6 @@ public class MyInfoFragment extends Fragment {
 
                 startActivityForResult(intent, RC_EDITFOLDERINFO);
 
-                folder_recyclerview.addHeaderView(header_info_view);
                 folder_recyclerview.smoothScrollToPosition(0);
 
                 return true;
@@ -394,7 +391,6 @@ public class MyInfoFragment extends Fragment {
 
                 startActivityForResult(intent, RC_EDITFOLDERLIST);
 
-                folder_recyclerview.addHeaderView(header_info_view);
                 folder_recyclerview.smoothScrollToPosition(0);
             }
         });
