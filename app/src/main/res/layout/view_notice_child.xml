@@ -4,24 +4,11 @@
     android:layout_height="wrap_content"
     android:background="@color/notice_child">
 
-    <TextView
-        android:id="@+id/text_notice_content_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/notice_content_title_margin_left"
-        android:layout_marginRight="@dimen/notice_content_margin_right"
-        android:layout_marginTop="@dimen/notice_content_title_margin_top"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/notice_content"
-        android:textSize="@dimen/notice_content_title_size"
-        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/text_notice_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_notice_content_title"
         android:layout_marginBottom="@dimen/notice_content_margin_bottom"
         android:layout_marginLeft="@dimen/notice_content_margin_left"
         android:layout_marginRight="@dimen/notice_content_margin_right"

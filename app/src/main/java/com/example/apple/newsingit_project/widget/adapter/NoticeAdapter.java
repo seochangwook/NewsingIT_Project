@@ -113,22 +113,17 @@ public class NoticeAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean expanded, View convertView, ViewGroup parent) {
         View view;
-        TextView childView, childTitleView;
+        TextView childView;
 
         if(convertView == null){
             view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.view_notice_child, parent, false);
             childView = (TextView)view.findViewById(R.id.text_notice_content);
-            childTitleView = (TextView) view.findViewById(R.id.text_notice_content_title);
-        }else{
+        } else {
             view = convertView;
             childView = (TextView)view.findViewById(R.id.text_notice_content);
-            childTitleView = (TextView) view.findViewById(R.id.text_notice_content_title);
         }
         childView.setText(items.get(groupPosition).childList.get(childPosition).name);
-        childTitleView.setText(items.get(groupPosition).title);
-
         childView.setTypeface(fontManager.getTypefaceRegularInstance());
-        childTitleView.setTypeface(fontManager.getTypefaceRegularInstance());
 
         return view;
     }

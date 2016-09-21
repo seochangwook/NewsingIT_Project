@@ -91,10 +91,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar); //툴바 생성.//
         setupBottomMenu(); //하단 메뉴 네비게이션 버튼 생성.//
 
-        toolBarTitle = new TextView(this);
-        toolBarTitle.setText("키워드 뉴스");
-        toolBarTitle.setTypeface(fontManager.getTypefaceBoldInstance());
-        getSupportActionBar().setCustomView(toolBarTitle);
 
         /** DrawableLayout 설정 **/
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -133,9 +129,6 @@ public class MainActivity extends AppCompatActivity {
                     EditText content_edit = (EditText) layout.findViewById(R.id.toolEvent_popup_input);
                     content_edit.setText(sharedText);
                     content_edit.setEnabled(false);
-
-                    // Input 소프트 키보드 보이기
-                    //dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
                     // AlertDialog에 레이아웃 추가
                     dialog.setView(layout);
