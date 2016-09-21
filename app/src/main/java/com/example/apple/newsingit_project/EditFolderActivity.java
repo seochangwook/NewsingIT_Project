@@ -80,7 +80,6 @@ public class EditFolderActivity extends AppCompatActivity {
 
     File uploadFile = null; //이미지도 하나의 파일이기에 파일로 만든다.//
     String path = null;
-    ImageView select_image_thumbnail;
     ImageView folder_imageview;
 
     /**
@@ -279,8 +278,6 @@ public class EditFolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //팝업창을 띄운다.//
-                Toast.makeText(EditFolderActivity.this, "이미지를 선택합니다.", Toast.LENGTH_SHORT).show();
-
                 image_select_popup.showAtLocation(findViewById(R.id.img_btn_edit_folder_select_img), Gravity.CENTER, 0, 0);
             }
         });
@@ -289,8 +286,6 @@ public class EditFolderActivity extends AppCompatActivity {
         select_gallery_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EditFolderActivity.this, "갤러리에서 이미지 선택", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, RC_SINGLE_IMAGE);
@@ -303,8 +298,6 @@ public class EditFolderActivity extends AppCompatActivity {
         camera_picture_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EditFolderActivity.this, "카메라 버튼", Toast.LENGTH_SHORT).show();
-
                 boolean is_camera_usable = checkCameraHardware(EditFolderActivity.this); //현재 사용자가 카메라를 사용할 수 있으므로//
 
                 if (is_camera_usable == true) {

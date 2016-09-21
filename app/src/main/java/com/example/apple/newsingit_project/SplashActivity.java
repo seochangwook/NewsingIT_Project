@@ -105,7 +105,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mLoginManager = LoginManager.getInstance(); //로그인 매니저 등록//
 
-        Auto_Login();
+        Auto_Login(); //자동로그인//
     }
 
     public void Auto_Login() {
@@ -182,13 +182,13 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         } else  //로그인도 되어 있고 공유 프래퍼런스에 저장도 된 경우//
         {
-            Log.d("profile", name);
-            Log.d("profile", facebookid);
-            Log.d("profile", fcm_id);
-            Log.d("profile", pf_Url);
-            Log.d("profile", nt_fs);
-            Log.d("profile", nt_f);
-            Log.d("profile", nt_s);
+            Log.d("json profile", name);
+            Log.d("json profile", facebookid);
+            Log.d("json profile", fcm_id);
+            Log.d("json profile", pf_Url);
+            Log.d("json profile", nt_fs);
+            Log.d("json profile", nt_f);
+            Log.d("json profile", nt_s);
 
             //메인 화면으로 이동//
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);

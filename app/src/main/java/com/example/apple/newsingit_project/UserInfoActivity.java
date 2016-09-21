@@ -70,8 +70,6 @@ public class UserInfoActivity extends AppCompatActivity {
     ImageButton user_following_button;
     TextView user_scrap_button;
 
-    FontManager fontManager;
-
     //사용자 폴더 관련 변수.//
     UserFolderData user_folderData; //폴더 데이터 클래스//
     UserFolderListAdapter user_folderListAdapter; //폴더 어댑태 클래스//
@@ -91,6 +89,8 @@ public class UserInfoActivity extends AppCompatActivity {
      * 네트워크 관련 변수
      **/
     NetworkManager networkManager;
+
+    FontManager fontManager;
     //리사이클뷰 관련 변수.//
     private FamiliarRefreshRecyclerView user_folder_recyclerrefreshview;
     private FamiliarRecyclerView user_folder_recyclerview;
@@ -304,9 +304,17 @@ public class UserInfoActivity extends AppCompatActivity {
 
         if (emptyViewFlag) {
             emptyView = getLayoutInflater().inflate(R.layout.user_rv_list_empty_view, null, false);
+            /** EmptyView 위젯 **/
+            TextView empty_textview = (TextView) emptyView.findViewById(R.id.empty_msg_user);
+            empty_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+
             user_folder_recyclerview.setEmptyView(emptyView);
         } else { //네트워크 에러//
             emptyView = getLayoutInflater().inflate(R.layout.view_network_error_empty, null, false);
+
+            TextView error_textview = (TextView) emptyView.findViewById(R.id.error_msg_text);
+            error_textview.setTypeface(fontManager.getTypefaceRegularInstance());
+
             user_folder_recyclerview.setEmptyView(emptyView);
         }
 

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerListRequest;
 import com.example.apple.newsingit_project.data.json_data.followerlist.FollowerListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.FollowerData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FollowerListAdapter;
@@ -51,9 +52,9 @@ public class FollowerListActivity extends AppCompatActivity {
     NetworkManager networkManager;
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
+    FontManager fontManager;
     private FamiliarRecyclerView recyclerview;
     private ProgressDialog pDialog;
-
     private Callback requestFollowerListCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -165,6 +166,8 @@ public class FollowerListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        fontManager = new FontManager(this);
+
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -248,6 +251,10 @@ public class FollowerListActivity extends AppCompatActivity {
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_follower_emptyview, null);
+
+        /** EmptyView 위젯 **/
+        TextView empty_textview = (TextView) emptyview.findViewById(R.id.empty_msg_follower);
+        empty_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
         recyclerview.setEmptyView(emptyview, true);
         recyclerview.addHeaderView(headerView, true);

@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 하단 네비게이션 메뉴 이벤트 처리
+     * 하단 네비게이션 메뉴 이벤트 처리(onItemSelected, onItemReSelected을 서로 맞추어준다.)
      **/
     private void setupBottomMenuClickListener() {
         bottommenu.setBottomMenuClickListener(new BottomMenu.BottomMenuClickListener() {
@@ -434,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog create_inputDialog_notlogin(final String content_text) {
         AlertDialog dialogBox = new AlertDialog.Builder(this)
                 .setTitle("Newsing Share")
-                .setMessage("해당 주소값을 복사해서 스크랩 시 붙여넣기 하세요!!(확인버튼을 누를 시 클립보드에 저장됩니다.)")
+                .setMessage("아래 주소값을 복사해서 스크랩 시 붙여넣기 하세요!!(확인버튼을 누를 시 클립보드에 저장됩니다.)")
                 .setCancelable(false)
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -459,12 +459,12 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog create_inputDialog_login(final String content_text) {
         AlertDialog dialogBox = new AlertDialog.Builder(this)
                 .setTitle("Newsing Share")
-                .setMessage("해당 주소값을 복사해서 스크랩 시 붙여넣기 하세요!!(확인버튼을 누를 시 클립보드에 저장됩니다.)")
+                .setMessage("아래 주소값을 복사해서 스크랩 시 붙여넣기 하세요!!(확인버튼을 누를 시 클립보드에 저장됩니다.)")
                 .setCancelable(false)
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // 예 버튼 눌렀을때 액션 구현
-                        Toast.makeText(MainActivity.this, "스크랩 화면으로 이동하세요!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "원하는 기사를 스크랩 해주세요!!", Toast.LENGTH_SHORT).show();
 
                         //클립보드에 저장.//
                         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);

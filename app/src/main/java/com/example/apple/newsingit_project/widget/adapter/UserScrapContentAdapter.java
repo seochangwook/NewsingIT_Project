@@ -8,25 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
 import com.example.apple.newsingit_project.dialog.ScrapContentEditDialog;
 import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
-import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_list.UserScrapContentViewHolder;
-
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.HttpUrl;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Created by Tacademy on 2016-08-25.
@@ -42,30 +29,6 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
     String whoflag;
 
     FontManager fontManager;
-
-    /**
-     * 팝업 관련 변수
-     **/
-    PopupWindow image_select_popup;
-    View image_select_popup_view;
-    /**
-     * Network관련 변수
-     **/
-    NetworkManager networkManager;
-    private Callback requestFavoriteCallback = new Callback() {
-        @Override
-        public void onFailure(Call call, IOException e) {
-            //네트워크 자체에서의 에러상황.//
-            Log.d("ERROR Message : ", e.getMessage());
-        }
-
-        @Override
-        public void onResponse(Call call, Response response) throws IOException {
-            String responseData = response.body().string();
-
-            Log.d("json data", responseData);
-        }
-    };
 
     public UserScrapContentAdapter(Context context) {
         this.context = context;
@@ -178,63 +141,6 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
         throw new IllegalArgumentException("invalid position");
     }
 
-    /**
-     * 좋아요의 경우에 따라 이벤트 처리
-     **/
-    private void setFavoriteCancel(String select_scrap_id) {
-        networkManager = NetworkManager.getInstance();
-
-        OkHttpClient client = networkManager.getClient();
-
-        HttpUrl.Builder builder = new HttpUrl.Builder();
-        builder.scheme("http")
-                .host(context.getResources().getString(R.string.real_server_domain))
-                .port(8080)
-                .addPathSegment("scraps")
-                .addPathSegment(select_scrap_id)
-                .addPathSegment("favorites")
-                .addPathSegment("me");
-
-        RequestBody body = new FormBody.Builder()
-                .build();
-
-        Request request = new Request.Builder()
-                .url(builder.build())
-                .tag(context)
-                .delete(body)
-                .build();
-
-        client.newCall(request).enqueue(requestFavoriteCallback);
-
-    }
-
-    private void setFavoriteDo(String select_scrap_id) {
-        networkManager = NetworkManager.getInstance();
-
-        OkHttpClient client = networkManager.getClient();
-
-        HttpUrl.Builder builder = new HttpUrl.Builder();
-        builder.scheme("http")
-                .host(context.getResources().getString(R.string.real_server_domain))
-                .port(8080)
-                .addPathSegment("scraps")
-                .addPathSegment(select_scrap_id)
-                .addPathSegment("favorites");
-
-        //POST방식으로 구성하게 되면 RequestBody가 필요(데이터 전달 시)//
-        RequestBody body = new FormBody.Builder()
-                .build(); //데이터가 없으니 그냥 build로 설정.//
-
-        //최종적으로 Request 구성//
-        Request request = new Request.Builder()
-                .url(builder.build())
-                .post(body)
-                .tag(this)
-                .build();
-
-        client.newCall(request).enqueue(requestFavoriteCallback);
-    }
-
     //Adapter에서는 onActivityResult를 사용할 수 없으므로 Activity에서 콜백형식으로 이벤트를 받는다.//
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("MyAdapter", "onActivityResult");
@@ -248,10 +154,5 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                 notifyDataSetChanged();
             }
         }
-    }
-
-    public void increease_like_pushalarm() {
-        //푸시알람 설정//
-
     }
 }

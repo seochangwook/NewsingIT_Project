@@ -19,19 +19,8 @@
         android:layout_below="@+id/empty_img_alarm"
         android:layout_marginTop="@dimen/empty_msg_margin_top"
         android:gravity="center"
-        android:text="알림정보를 불러올 수 없습니다"
+        android:text="알림정보가 존재하지 않습니다"
         android:textColor="@color/my_info_folder_empty_msg"
         android:textSize="@dimen/empty_msg_size" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/empty_msg_alarm"
-        android:layout_marginTop="@dimen/empty_msg_margin_top"
-        android:gravity="center"
-        android:text="네트워크 연결을 다시 확인해주세요"
-        android:textColor="@color/red_color"
-        android:textSize="@dimen/empty_msg_size"
-        android:textStyle="bold" />
 
 </RelativeLayout>

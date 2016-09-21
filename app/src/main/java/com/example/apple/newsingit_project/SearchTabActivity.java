@@ -159,7 +159,6 @@ public class SearchTabActivity extends AppCompatActivity {
             }
         });
 
-
         setTitle(""); //타이틀 자리에 에디트 텍스트가 올 것이니 타이틀은 생략.//
     }
 

@@ -612,6 +612,7 @@
     <dimen name="empty_img_margin_left_b">15dp</dimen>
     <dimen name="empty_img_margin_right_b">15dp</dimen>
     <dimen name="empty_img_margin_bottom_b">10dp</dimen>
+    <dimen name="empty_textview">8dp</dimen>
 
 
 </resources>

@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.json_data.keywordlist.KeywordListRequest;
 import com.example.apple.newsingit_project.data.json_data.keywordlist.KeywordListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.KeywordData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.KeywordListAdapter;
 import com.google.gson.Gson;
@@ -40,6 +42,7 @@ public class KeywordListActivity extends Activity {
      * Network 관련 변수
      **/
     NetworkManager manager;
+    FontManager fontManager;
     private FamiliarRecyclerView recyclerview;
     private ProgressDialog pDialog;
     private Callback requestkeywordlistcallback = new Callback() {
@@ -77,11 +80,17 @@ public class KeywordListActivity extends Activity {
         setContentView(R.layout.keyword_list_activity_layout);
 
         keywordData = new KeywordData();
+        fontManager = new FontManager(this);
 
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.rv_list);
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_keywordlist_emptyview, null);
+
+        /** EmptyView 위젯 **/
+        TextView emptyview_text = (TextView) emptyview.findViewById(R.id.empty_keyword_text);
+
+        emptyview_text.setTypeface(fontManager.getTypefaceRegularInstance());
 
         recyclerview.setEmptyView(emptyview, true);
 

@@ -13,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.LoginActivity;
@@ -68,12 +66,6 @@ public class DrawerFragment extends Fragment {
     LoginManager mLoginManager;
 
     /**
-     * profile 정보
-     **/
-    ImageView profile_image;
-    ImageButton alarm_imagebutton;
-
-    /**
      * Shraed 저장소 관련 변수
      **/
     SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
@@ -96,6 +88,25 @@ public class DrawerFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //공유저장소 내용을 초기화.//
+                        //프래퍼런스를 셋팅.//
+                        mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                        mEditor = mPrefs.edit();
+
+                        PropertyManager.getInstance().set_facebookid("");
+                        PropertyManager.getInstance().set_name("");
+                        PropertyManager.getInstance().set_pf_Url("");
+                        PropertyManager.getInstance().set_nt_fs("");
+                        PropertyManager.getInstance().set_nt_f("");
+                        PropertyManager.getInstance().set_nt_s("");
+
+                        mLoginManager.logOut(); //페이스북 로그아웃
+
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
                         Toast.makeText(getActivity(), "로그아웃 하였습니다", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -173,26 +184,7 @@ public class DrawerFragment extends Fragment {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             //yes
                                             //네트워크로 데이터를 보낸다.//
-                                            //공유저장소 내용을 초기화.//
-                                            //프래퍼런스를 셋팅.//
-                                            mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                                            mEditor = mPrefs.edit();
-
-                                            PropertyManager.getInstance().set_facebookid("");
-                                            PropertyManager.getInstance().set_name("");
-                                            PropertyManager.getInstance().set_pf_Url("");
-                                            PropertyManager.getInstance().set_nt_fs("");
-                                            PropertyManager.getInstance().set_nt_f("");
-                                            PropertyManager.getInstance().set_nt_s("");
-
                                             getLogoutNetworkData(); //우리 앱 로그아웃
-
-                                            mLoginManager.logOut(); //페이스북 로그아웃
-
-                                            Intent intent = new Intent(getActivity(), LoginActivity.class);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(intent);
                                         }
                                     }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
                         @Override

@@ -63,6 +63,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
     NetworkManager networkManager;
+
     View emptyView;
     /**
      * EmptyView 관련
