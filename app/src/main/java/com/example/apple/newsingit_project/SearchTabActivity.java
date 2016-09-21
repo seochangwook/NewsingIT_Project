@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.view.view_fragment.SearchNewsFragment;
 import com.example.apple.newsingit_project.view.view_fragment.SearchTagFragment;
 import com.example.apple.newsingit_project.view.view_fragment.SearchUserFragment;
@@ -25,6 +26,7 @@ public class SearchTabActivity extends AppCompatActivity {
     private static final String SEARCH_QUERY = "SEARCH_QUERY";
     private static final String TAB_FLAG = "TAB_FLAG"; //탭을 구분지어주기 위한 플래그//
 
+    FontManager fontManager;
     Bundle bundle;
     SearchView searchView;
 
@@ -58,6 +60,7 @@ public class SearchTabActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        fontManager = new FontManager(SearchTabActivity.this);
         searchView = (SearchView) findViewById(R.id.search_tab);
 
         bundle = new Bundle();
@@ -226,11 +229,8 @@ public class SearchTabActivity extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        //  private Bundle bundle ;
-
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-            //     this.bundle = bundle;
         }
 
         @Override
@@ -277,6 +277,7 @@ public class SearchTabActivity extends AppCompatActivity {
             // Show 3 total pages.
             return 3;
         }
+
 
         @Override
         public CharSequence getPageTitle(int position) {

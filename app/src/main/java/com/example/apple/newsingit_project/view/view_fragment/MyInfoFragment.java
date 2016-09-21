@@ -95,6 +95,7 @@ public class MyInfoFragment extends Fragment {
 
     static boolean emptyViewFlag = true;
     FontManager fontManager;
+    TextView emptyTextView;
 
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
@@ -233,6 +234,9 @@ public class MyInfoFragment extends Fragment {
 
         if (emptyViewFlag) {//폴더가 없는 일반적인 경우
             emptyView = getActivity().getLayoutInflater().inflate(R.layout.my_rv_list_emptyview, null, false);
+
+            emptyTextView = (TextView) emptyView.findViewById(R.id.empty_msg);
+            emptyTextView.setTypeface(fontManager.getTypefaceRegularInstance());
 
             btnCreateFolder = (ImageButton) emptyView.findViewById(R.id.empty_img);
 
