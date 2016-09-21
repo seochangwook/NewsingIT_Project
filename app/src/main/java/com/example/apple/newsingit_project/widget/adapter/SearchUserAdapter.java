@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.SearchUserData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.view.view_list.SearchUserViewHolder;
 
 /**
@@ -17,29 +18,25 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     SearchUserData searchUserData;
     Context context;
+    FontManager fontManager;
 
     public SearchUserAdapter(Context context) {
         this.context = context;
+        fontManager = new FontManager(context);
         searchUserData = new SearchUserData();
     }
 
     public void setSearchUserData(SearchUserData searchUserData) {
         if (this.searchUserData != searchUserData) {
             this.searchUserData = searchUserData;
-
-            notifyDataSetChanged();
         }
-
         notifyDataSetChanged();
     }
 
     public void initSearchUserData(SearchUserData searchUserData) {
         if (this.searchUserData != searchUserData) {
             this.searchUserData = searchUserData;
-
-            notifyDataSetChanged();
         }
-
         notifyDataSetChanged();
     }
 
@@ -65,6 +62,9 @@ public class SearchUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (searchUserData.searchUserDataArrayList.size() > position) {
                 SearchUserViewHolder searchUserViewHolder = (SearchUserViewHolder) holder;
                 searchUserViewHolder.setSearchUserData(searchUserData.searchUserDataArrayList.get(position), context);
+
+                searchUserViewHolder.nameView.setTypeface(fontManager.getTypefaceMediumInstance());
+                searchUserViewHolder.introView.setTypeface(fontManager.getTypefaceRegularInstance());
 
                 return;
             }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FollowerData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_list.FollowerViewHolder;
 
@@ -32,6 +33,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     FollowerData followerData;
     Context context;
+    FontManager fontManager;
 
     NetworkManager networkManager;
     FollowerViewHolder followerViewHolder;
@@ -86,7 +88,7 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public FollowerListAdapter(Context context) {
         this.context = context;
         followerData = new FollowerData();
-
+        fontManager = new FontManager(context);
     }
 
     private void setFollowing(String userId) {
@@ -174,7 +176,6 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 followerViewHolder = (FollowerViewHolder) holder;
                 followerViewHolder.setFollowerData(followerData.followerDataList.get(position), context);
 
-                //pos = position;
                 flag = followerData.followerDataList.get(position).getFlag();
 
                 Log.d("json control", "(팔로워리스트)" + flag);
@@ -238,10 +239,10 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 });
 
+                followerViewHolder.nameView.setTypeface(fontManager.getTypefaceBoldInstance());
+
                 return;
             }
-
-            // position -= followerData.followerDataList.size();
 
         }
         throw new IllegalArgumentException("invalid position");

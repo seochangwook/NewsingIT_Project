@@ -25,8 +25,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.squareup.picasso.Picasso;
@@ -55,6 +57,10 @@ public class CreateFolderActivity extends AppCompatActivity {
     //설정관련 변수//
     ImageView select_image_thumbnail;
     EditText folder_name_edittext;
+
+    TextView folderNameView, folderImageView, folderPrivateView;
+    FontManager fontManager;
+
     boolean is_private;
     /**
      * PopupWindow 화면관련
@@ -62,8 +68,7 @@ public class CreateFolderActivity extends AppCompatActivity {
     PopupWindow image_select_popup;
     View image_select_popup_view;
 
-    Button select_gallery_button;
-    Button camera_picture_button;
+    Button select_gallery_button, camera_picture_button;
 
     /**
      * Network관련 변수
@@ -108,6 +113,8 @@ public class CreateFolderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_folder_activity_layout);
 
+        fontManager = new FontManager(CreateFolderActivity.this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         image_select_button = (ImageButton) findViewById(R.id.image_select_button);
         private_select_switch = (SwitchButton) findViewById(R.id.switch_private_folder);
@@ -116,6 +123,15 @@ public class CreateFolderActivity extends AppCompatActivity {
 
         private_select_switch.setBackColorRes(R.color.switch_background_color);
         private_select_switch.setThumbColorRes(R.color.switch_thumb_color);
+
+        folderNameView = (TextView) findViewById(R.id.textView7);
+        folderImageView = (TextView) findViewById(R.id.textview8);
+        folderPrivateView = (TextView) findViewById(R.id.textview10);
+
+        folderNameView.setTypeface(fontManager.getTypefaceMediumInstance());
+        folderImageView.setTypeface(fontManager.getTypefaceMediumInstance());
+        folderPrivateView.setTypeface(fontManager.getTypefaceMediumInstance());
+        folder_name_edittext.setTypeface(fontManager.getTypefaceRegularInstance());
 
         setSupportActionBar(toolbar);
 
