@@ -28,7 +28,7 @@ public class SearchTabActivity extends AppCompatActivity {
     Bundle bundle;
     SearchView searchView;
 
-    int currentItem, oldItem;
+    int currentItem;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -69,6 +69,8 @@ public class SearchTabActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+
+
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -153,7 +155,6 @@ public class SearchTabActivity extends AppCompatActivity {
                 return false;
             }
         });
-
 
 
         setTitle(""); //타이틀 자리에 에디트 텍스트가 올 것이니 타이틀은 생략.//

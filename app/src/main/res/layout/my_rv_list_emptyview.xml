@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/empty_img"
         android:layout_width="match_parent"
         android:layout_height="@dimen/empty_img_height"
         android:layout_marginTop="@dimen/empty_img_margin_top"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:src="@mipmap/ic_folder_plus" />
 

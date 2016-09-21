@@ -120,4 +120,6 @@ public class PropertyManager {
         mEdittor.putInt(ALARM_BADGE_NUMBER, badge_number);
         mEdittor.commit();
     }
+
+
 }

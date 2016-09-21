@@ -306,7 +306,7 @@ public class UserInfoActivity extends AppCompatActivity {
             emptyView = getLayoutInflater().inflate(R.layout.user_rv_list_empty_view, null, false);
             user_folder_recyclerview.setEmptyView(emptyView);
         } else { //네트워크 에러//
-            emptyView = getLayoutInflater().inflate(R.layout.view_folder_error_empty, null, false);
+            emptyView = getLayoutInflater().inflate(R.layout.view_network_error_empty, null, false);
             user_folder_recyclerview.setEmptyView(emptyView);
         }
 
