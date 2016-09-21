@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton alarm_imagebutton;
     ImageView profile_imageview;
     TextView profile_name_textview;
+    TextView toolBarTitle;
 
     FontManager fontManager;
 
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.drawer_activity);
 
         fontManager = new FontManager(MainActivity.this);
+
 
         setTitle(getResources().getString(R.string.title_activity_main));
 
@@ -89,10 +91,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar); //툴바 생성.//
         setupBottomMenu(); //하단 메뉴 네비게이션 버튼 생성.//
 
+        toolBarTitle = new TextView(this);
+        toolBarTitle.setText("키워드 뉴스");
+        toolBarTitle.setTypeface(fontManager.getTypefaceBoldInstance());
+        getSupportActionBar().setCustomView(toolBarTitle);
+
         /** DrawableLayout 설정 **/
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.sample_drawable_image_2);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_menu);
 
         profile_name = PropertyManager.getInstance().get_name();
         profile_imgUrl = PropertyManager.getInstance().get_pf_Url();
@@ -291,7 +298,10 @@ public class MainActivity extends AppCompatActivity {
                             .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .commit();
 
+                    //SpannableString title = new SpannableString(getResources().getString(R.string.title_activity_main));
+
                     setTitle(getResources().getString(R.string.title_activity_main));
+
                 } else if (position == 1) {
 
                     //프래그먼트 변경.//
@@ -316,6 +326,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, new MainNewsListFragment())
                             .setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                             .commit();
+
 
                     setTitle(getResources().getString(R.string.title_activity_main));
                 } else if (position == 1) {
@@ -342,8 +353,8 @@ public class MainActivity extends AppCompatActivity {
         //메뉴에 들어갈 아이템 리스트 정의.//
         ArrayList<BottomMenu.BottomMenuItem> items = new ArrayList<>();
 
-        BottomMenu.BottomMenuItem mainnews_list_option = new BottomMenu.BottomMenuItem(R.id.bottom_menu_mainactivity, R.mipmap.ic_top_news_on, R.color.bottom_bar_unselected, R.color.bottom_bar_selected);
-        BottomMenu.BottomMenuItem my_info_option = new BottomMenu.BottomMenuItem(R.id.bottom_bar_my_info, R.mipmap.sample_menu_image, R.color.bottom_bar_unselected, R.color.bottom_bar_selected);
+        BottomMenu.BottomMenuItem mainnews_list_option = new BottomMenu.BottomMenuItem(R.id.bottom_menu_mainactivity, R.mipmap.btn_top_news_on, R.color.bottom_bar_unselected, R.color.bottom_bar_selected);
+        BottomMenu.BottomMenuItem my_info_option = new BottomMenu.BottomMenuItem(R.id.bottom_bar_my_info, R.mipmap.btn_top_my_on, R.color.bottom_bar_unselected, R.color.bottom_bar_selected);
 
         items.add(mainnews_list_option);
         items.add(my_info_option);

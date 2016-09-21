@@ -336,9 +336,9 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                     //다른 사람의 경우 내가 선택을 하고 안하고를 처리하는게 필요//
                     if (is_me.equals("1")) {
                         if (is_favorite == true) {  //좋아요//
-                            img_scrap_like.setImageResource(R.mipmap.favorite_on);
+                            img_scrap_like.setImageResource(R.mipmap.btn_heart_fill);
                         } else if (is_favorite == false) { //좋아요 취소//
-                            img_scrap_like.setImageResource(R.mipmap.favorite_off);
+                            img_scrap_like.setImageResource(R.mipmap.btn_heart_stroke);
                         }
                     } else if (is_me.equals("0")) //나에 대한 처리는 개수에 따라서 색갈만 판단해주면 된다.//
                     {
@@ -346,9 +346,9 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                         int favorite_count = Integer.parseInt(likeView.getText().toString());
 
                         if (favorite_count == 0) {
-                            img_scrap_like.setImageResource(R.mipmap.favorite_off);
+                            img_scrap_like.setImageResource(R.mipmap.btn_heart_stroke);
                         } else if (favorite_count > 0) {
-                            img_scrap_like.setImageResource(R.mipmap.favorite_on);
+                            img_scrap_like.setImageResource(R.mipmap.btn_heart_fill);
                         }
                     }
                 }
@@ -452,7 +452,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                 if (is_me.equals("1"))  //상대방일때만 버튼클릭 처리//
                 {
                     if (is_favorite == true) {  //좋아요되어있으니 취소//
-                        img_scrap_like.setImageResource(R.mipmap.favorite_off);
+                        img_scrap_like.setImageResource(R.mipmap.btn_heart_stroke);
                         is_favorite = false;
 
                         int count = Integer.parseInt(likeView.getText().toString());
@@ -465,7 +465,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                         setFavoriteCancel(scrapId);
 
                     } else if (is_favorite == false) { //좋아요 취소이니 좋아요를 한다.//
-                        img_scrap_like.setImageResource(R.mipmap.favorite_on);
+                        img_scrap_like.setImageResource(R.mipmap.btn_heart_fill);
                         is_favorite = true;
 
                         int count = Integer.parseInt(likeView.getText().toString());

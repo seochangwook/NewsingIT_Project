@@ -19,9 +19,6 @@ import com.twitter.sdk.android.tweetui.TweetTimelineListAdapter;
 import io.fabric.sdk.android.Fabric;
 
 public class TwitterLinkActivity extends Activity {
-    //공개키와 비밀키//
-    private static final String TWITTER_KEY = "WKUT4AupkcyiAUHVVAM5xrIvE";
-    private static final String TWITTER_SECRET = "yR9fxY13cGOJyG0vPMAu6a8HdDNOcU9FPczPncLm6OwyxdsPkM";
 
     //트위터 검색 변수.//
     public String searchValue = null;
@@ -33,7 +30,7 @@ public class TwitterLinkActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(getResources().getString(R.string.twitter_key), getResources().getString(R.string.twitter_secret));
 
         if (!Fabric.isInitialized()) {
             Fabric.with(this, new Twitter(authConfig));

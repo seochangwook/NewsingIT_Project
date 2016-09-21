@@ -143,10 +143,10 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                     if (favorite_count == 0) //그 해당사람의 좋아요가 아무도 누르지 않았을 경우//
                     {
-                        uvh.likeButton.setImageResource(R.mipmap.favorite_off); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+                        uvh.likeButton.setImageResource(R.mipmap.btn_heart_stroke); //내 스크랩 좋아요는 항상 같은 이미지 사용//
                     } else if (favorite_count > 0) //해당 사람의 좋아요가 1개이상일 경우//
                     {
-                        uvh.likeButton.setImageResource(R.mipmap.favorite_on); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+                        uvh.likeButton.setImageResource(R.mipmap.btn_heart_fill); //내 스크랩 좋아요는 항상 같은 이미지 사용//
                     }
 
                 } else {
@@ -157,9 +157,9 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     int favorite_count = Integer.parseInt("" + uvh.likeView.getText());
 
                     if (favorite_count == 0) {
-                        uvh.likeButton.setImageResource(R.mipmap.favorite_off); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+                        uvh.likeButton.setImageResource(R.mipmap.btn_heart_stroke); //내 스크랩 좋아요는 항상 같은 이미지 사용//
                     } else if (favorite_count > 0) {
-                        uvh.likeButton.setImageResource(R.mipmap.favorite_on); //내 스크랩 좋아요는 항상 같은 이미지 사용//
+                        uvh.likeButton.setImageResource(R.mipmap.btn_heart_fill); //내 스크랩 좋아요는 항상 같은 이미지 사용//
                     }
                 }
 

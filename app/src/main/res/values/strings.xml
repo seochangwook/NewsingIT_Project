@@ -85,11 +85,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_twitter_fragment">blank fragment(각 키워드의 트위터 메시지 정보)</string>
     <string name="title_activity_screap_edit_dialog">ScreapEditDialog</string>
-    <string name="title_activity_twitter_test">TwitterTestActivity</string>
+    <string name="title_activity_twitter_test">TwitterActivity</string>
 
     <!-- facebook -->
     <string name="facebook_app_id">294467057584893</string>
     <string name="title_activity_edit">EditActivity</string>
+
+    <!--twitter-->
+    <string name="twitter_key">WKUT4AupkcyiAUHVVAM5xrIvE</string>
+    <string name="twitter_secret">yR9fxY13cGOJyG0vPMAu6a8HdDNOcU9FPczPncLm6OwyxdsPkM</string>
 
     <!-- FCM Server API Key / Sender ID -->
     <string name="server_apikey">AIzaSyCLHs9K2Fp5WLGhRz7lIH5Q3rgaRjzHzfs</string>

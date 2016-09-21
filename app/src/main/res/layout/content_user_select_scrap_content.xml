@@ -121,7 +121,7 @@
                     android:layout_marginLeft="@dimen/scrap_content_news_box_img_margin_left"
                     android:layout_marginRight="@dimen/scrap_content_news_box_img_margin_right"
                     android:layout_marginTop="@dimen/scrap_content_news_box_img_margin_top"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@mipmap/ic_image_default" />
 
                 <TextView
                     android:id="@+id/text_scrap_nccontent"

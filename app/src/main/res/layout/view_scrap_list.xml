@@ -11,7 +11,7 @@
         android:layout_height="@dimen/scrap_list_img_width"
         android:layout_marginBottom="@dimen/scrap_list_img_margin_bottom"
         android:layout_marginTop="@dimen/scrap_list_img_margin_top"
-        android:src="@android:drawable/sym_def_app_icon" />
+        android:src="@mipmap/ic_image_default" />
 
     <TextView
         android:id="@+id/text_scrap_list_title"
@@ -35,7 +35,7 @@
         android:layout_marginTop="@dimen/scrap_list_setting_margin_top"
         android:background="@color/button_transparent_background"
         android:singleLine="true"
-        android:src="@mipmap/ic_more_scrap" />
+        android:src="@mipmap/btn_scralist_more" />
 
     <TextView
         android:id="@+id/text_scrap_list_nctitle"
@@ -84,7 +84,7 @@
         android:layout_marginTop="@dimen/scrap_list_like_img_margin_top"
         android:layout_toLeftOf="@+id/text_scrap_list_like"
         android:background="@color/button_transparent_background"
-        android:src="@mipmap/favorite_off" />
+        android:src="@mipmap/btn_heart_stroke" />
 
     <TextView
         android:id="@+id/text_scrap_list_author"
