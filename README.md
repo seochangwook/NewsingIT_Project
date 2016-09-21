@@ -187,6 +187,7 @@
 * 경량화 폰트 적용 (싱글톤 패턴, 디자인 가이드 파일 1) - 임지수 (16/09/20 19:37)
 * SearchUserFragment / SearchNewsFragment / SearchTagFragment간 Flag를 주어 이중검색 방지 - 서창욱 (16/09/20 22:02)
 * FollowingList 정보갱신(Observer Pattern 적용) - 서창욱 (16/09/20 22:02)
+* 전체적인 UI 구조 점검 / Clean code 작업 - 서창욱, 임지수 (16/09/21 16:34)
 
 
 < Refectoring (유지보수, 디버깅) >

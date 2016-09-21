@@ -186,6 +186,7 @@ public class FollowingListActivity extends AppCompatActivity {
 
         fontManager = new FontManager(FollowingListActivity.this);
         followingData = new FollowingData();
+        fontManager = new FontManager(this);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
