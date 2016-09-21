@@ -53,17 +53,15 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     private static final String KEY_NEWS_WRITE_TIME = "KEY_NEWS_WRITE_TIME";
     private static final String KEY_NEWS_CONTENT = "KEY_NEWS_CONTENT";
     private static final String KEY_NEWS_IMGURL = "KEY_NEWS_IMGURL";
+    static boolean is_touch_tag_input = false;
     private static Boolean is_private = false; //기본적으로 비활성화 상태로 구성//
-
     EditText scrapTitleEdittext;
     TextInputLayout textInputLayout;
     AppCompatEditText appCompatEditText;
     ImageButton tagEnrollButton; //태그 등록버튼.//
     List<String> tag_array = new ArrayList<>(); //태그배열(원본 에디터에서 가져온 데이터)//
     List<String> tag_layout_array = new ArrayList<>(); //태그 레이아웃//
-
     FontManager fontManager;
-
     /**
      * Preview관련 위젯
      **/
@@ -72,7 +70,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     TextView newsPreviewWriteTime;
     TextView newsPreviewContent;
     TextView newsPreviewAuthor;
-
     /**
      * 스크랩 생성 관련 필요 변수
      **/
@@ -83,8 +80,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
     String news_preview_write_time_str;
     String news_preview_content_str;
     String news_preview_author_str;
-
-
     String tag_data_str[];
     String str_data_sample_tag_array[];
     NetworkManager networkManager;
@@ -114,6 +109,8 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         setContentView(R.layout.create_scrap_content_activity_layout);
 
         fontManager = new FontManager(CreateScrapContentActivity.this);
+
+        is_touch_tag_input = false;
 
         tagEnrollButton = (ImageButton) findViewById(R.id.btn_tag_create);
         mTagsEditText = (TagsEditText) findViewById(R.id.tagsEditText);
@@ -258,6 +255,13 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
         mTagsEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (is_touch_tag_input == false) {
+                    Toast.makeText(CreateScrapContentActivity.this, "태그를 입력 후 엔터키를 이용하여 등록하세요. 등록을 모두 완료하였으면 " +
+                            "등록버튼을 눌러 최종등록 하세요", Toast.LENGTH_LONG).show();
+                }
+
+                is_touch_tag_input = true;
+
                 mBeautyTagGroup.setVisibility(View.GONE);
 
                 return false; //false로 해야지 이벤트가 먹질 않는다.//
