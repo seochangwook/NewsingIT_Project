@@ -49,7 +49,6 @@ public class FollowerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String responseData = response.body().string();
-            //  Handler mainHandler = new Handler(context.getMainLooper());
 
             Log.d("json data", responseData);
             Log.d("json code", "" + response.code());

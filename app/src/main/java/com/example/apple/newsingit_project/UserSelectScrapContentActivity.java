@@ -43,9 +43,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     /**
      * 전달변수
      **/
-    private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";
-    private static final String KEY_FOLDER_ID = "KEY_FOLDER_ID";
     private static final String KEY_NEWS_AUTHOR = "KEY_NEWS_AUTHOR";
     private static final String KEY_NEWS_WRITE_TIME = "KEY_NEWS_WRITE_TIME";
     private static final String KEY_NEWS_CONTENT = "KEY_NEWS_CONTENT";
@@ -53,7 +51,6 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     private static final String KEY_SCRAP_TAGS = "KEY_TAGS";
     private static final String KEY_SCRAP_CONTENT = "KEY_SCRAP_CONTENT";
     private static final String KEY_SCRAP_TITLE = "KEY_SCRAP_TITLE";
-    private static final String SCRAP_LOCK = "SCRAP_LOCK";
     private static final String SCRAP_ID = "SCRAP_ID";
     private static final String KEY_USER_IDENTIFY_FLAG = "KEY_USER_IDENTIFY_FLAG";
     private static final String KEY_FOLDER_NAME = "KEY_FOLDER_NAME";
@@ -431,17 +428,6 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
                 //태그 검색(target == 3)//
                 getSearchTagNetworkData(select_tag);
-                /*//현재 스크랩 상세화면을 종료 후 검새조건 태그인 경우로 해서 스크랩 리스트로 이동//
-                Intent intent = new Intent(UserSelectScrapContentActivity.this, UserScrapContentListActivity.class);
-
-                //필요한 정보를 이동//
-                intent.putExtra(KEY_FOLDER_NAME, select_tag); //태그명을 전달.//
-                intent.putExtra(KEY_USER_IDENTIFY_FLAG, "1"); //검색은 다른 사용자의 내용들을 보는것이니 외부사용자로 간다.//
-                intent.putExtra(KEY_TAGSEARCH_FLAG, "TAG"); //태그로 검색한다는 플래그.//
-
-                startActivity(intent);
-
-                finish();*/
             }
         });
 

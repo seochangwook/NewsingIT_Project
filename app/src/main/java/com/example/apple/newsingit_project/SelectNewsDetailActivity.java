@@ -201,11 +201,13 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         scrapfolderData = new ScrapFolderListData();
         scrapfolderListAdapter = new ScrapFolderListAdapter(this);
 
-        /** 폴더 리스트 헤더뷰 **/
-        final View headerview = getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
-
         /** 폴더 리스트 EmptyView **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_scrapfolder_emptyview, null);
+
+        /** EmptyView 위젯 **/
+        TextView empty_msg_text = (TextView) emptyview.findViewById(R.id.empty_msg);
+        empty_msg_text.setTypeface(fontManager.getTypefaceRegularInstance());
+
         scrap_folder_recyclerview.setEmptyView(emptyview, true);
 
         /** 폴더 리스트뷰 Refresh 이벤트 등록 **/
@@ -222,8 +224,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                         init_scrap_folder_list();
 
                         get_ScrapFolder_Data();
-
-                        scrap_folder_recyclerview.removeHeaderView(headerview);
                     }
                 }, 1000);
             }
@@ -276,8 +276,6 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(SelectNewsDetailActivity.this, CreateFolderActivity.class);
 
                 startActivityForResult(intent, RC_CREATEFOLDER);
-
-                scrap_folder_recyclerview.addHeaderView(headerview);
             }
         });
 

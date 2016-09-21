@@ -182,7 +182,6 @@ public class CreateFolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //팝업창을 띄운다.//
-
                 image_select_popup.showAtLocation(findViewById(R.id.image_select_button), Gravity.CENTER, 0, 0);
             }
         });
@@ -191,7 +190,6 @@ public class CreateFolderActivity extends AppCompatActivity {
         select_gallery_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, RC_SINGLE_IMAGE);
@@ -246,7 +244,7 @@ public class CreateFolderActivity extends AppCompatActivity {
                 Cursor c = getContentResolver().query(fileUri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
                 if (c.moveToNext()) {
                     path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
-                    Log.i("Single", "path : " + path);
+                    Log.i("json control:", "path : " + path);
 
                     uploadFile = new File(path);
 

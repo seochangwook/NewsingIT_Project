@@ -55,7 +55,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
     private static final String KEY_SCRAP_TAGS = "KEY_TAGS";
     private static final String KEY_SCRAP_CONTENT = "KEY_SCRAP_CONTENT";
     private static final String KEY_SCRAP_TITLE = "KEY_SCRAP_TITLE";
-    private static final String SCRAP_LOCK = "SCRAP_LOCK";
     private static final String SCRAP_ID = "SCRAP_ID";
     private static Boolean is_private = false; //기본적으로 비활성화 상태로 구성//
 
@@ -287,7 +286,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
                     }
 
                     //만들어진 태그값을 전용 레이아웃에 구성//
-                    //mTagGroup.setTags(str_data_array);
                     mBeautyTagGroup.setTags(tag_layout_array);
 
                     //초기화.//
@@ -363,8 +361,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
             //새로 추가된 태그//
             for (int i = 0; i < str_data_sample_tag_array.length; i++) {
                 tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
-
-                //Log.d("scrap tags", tag_data_str[i].toString());
             }
         }
 
@@ -402,7 +398,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
             for (int i = 0; i < str_data_sample_tag_array.length; i++) {
                 tag_data_str[i] = str_data_sample_tag_array[i].trim().toString();
 
-                //Log.d("scrap tags", tag_data_str[i].toString());
                 formBuilder.add("tags", tag_data_str[i].toString()); //true//
             }
         }
@@ -410,8 +405,6 @@ public class EditScrapContentActivity extends AppCompatActivity implements TagsE
         if (scrap_tags.length > 0) {
             //새로 추가된 태그//
             for (int i = 0; i < scrap_tags.length; i++) {
-                //Log.d("scrap tags", scrap_tags[i]);
-
                 //기존에 있는지 비교.(기존에 있는 것을 사용자가 입력을 해도 반영되지 않는다.)//
                 boolean is_duplicate_check = Tag_duplicate_check(scrap_tags[i].toString());
 

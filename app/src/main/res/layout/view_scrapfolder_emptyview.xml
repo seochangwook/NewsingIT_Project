@@ -16,24 +16,15 @@
         android:src="@mipmap/ic_folder_x" />
 
     <TextView
+        android:id="@+id/empty_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/empty_img_folder"
+        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/empty_img_folder"
         android:gravity="center"
-        android:text="폴더 정보를 불러올 수 없습니다"
+        android:text="등록된 폴더 정보가 존재하지 않습니다"
         android:textColor="@color/my_info_folder_empty_msg"
         android:textSize="@dimen/empty_msg_size" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/empty_img_folder"
-        android:layout_marginRight="@dimen/empty_img_margin_right_b"
-        android:layout_toRightOf="@+id/empty_img_folder"
-        android:text="네트워크 연결을 다시 확인해주세요"
-        android:textColor="@color/red_color"
-        android:textSize="@dimen/empty_msg_size"
-        android:textStyle="bold" />
 
 </RelativeLayout>

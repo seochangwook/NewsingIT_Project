@@ -12,6 +12,7 @@
         android:src="@mipmap/ic_folder_x" />
 
     <TextView
+        android:id="@+id/error_msg_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/empty_img_folder_error"

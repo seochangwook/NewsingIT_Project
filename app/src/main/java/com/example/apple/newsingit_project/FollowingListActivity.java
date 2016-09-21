@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequest;
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.FollowingData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.FollowingListAdapter;
@@ -53,6 +54,7 @@ public class FollowingListActivity extends AppCompatActivity {
     NetworkManager networkManager;
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
+    FontManager fontManager;
     private FamiliarRecyclerView recyclerview;
     private ProgressDialog pDialog;
     private Callback requestFollowingListCallback = new Callback() {
@@ -284,6 +286,10 @@ public class FollowingListActivity extends AppCompatActivity {
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_following_emptyview, null);
+
+        /** EmptyView 위젯 **/
+        TextView empty_textview = (TextView) emptyview.findViewById(R.id.empty_msg_following);
+        empty_textview.setTypeface(fontManager.getTypefaceRegularInstance());
 
         recyclerview.setEmptyView(emptyview, true);
 

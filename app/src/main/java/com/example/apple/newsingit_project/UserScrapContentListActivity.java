@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.ScrapContentListRequestError;
@@ -16,6 +17,7 @@ import com.example.apple.newsingit_project.data.json_data.scrapcontentlist.Scrap
 import com.example.apple.newsingit_project.data.json_data.tagdetaillist.TagDetailListRequest;
 import com.example.apple.newsingit_project.data.json_data.tagdetaillist.TagDetailListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.UserScrapContentData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.UserScrapContentAdapter;
@@ -61,12 +63,19 @@ public class UserScrapContentListActivity extends AppCompatActivity {
     UserScrapContentData userScrapContentData;
     UserScrapContentAdapter mAdapter;
     NetworkManager networkManager;
-    View headerview;
+
     View emptyView;
+    /**
+     * EmptyView 관련
+     **/
+    TextView empty_scrap_message;
+    /**
+     * FontManager 설정
+     **/
+    FontManager fontManager;
     private FamiliarRefreshRecyclerView scrap_recyclerrefreshview;
     private FamiliarRecyclerView scrap_recyclerView;
     private ProgressDialog pDialog;
-
     private Callback requestUserScrapContetnListCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -214,6 +223,14 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         scrap_recyclerrefreshview = (FamiliarRefreshRecyclerView) findViewById(R.id.scrap_list_rv_list);
 
+        emptyView = getLayoutInflater().inflate(R.layout.view_scraplist_emptyview, null);
+
+        fontManager = new FontManager(this);
+
+        /** EmptyView에 속성 **/
+        empty_scrap_message = (TextView) emptyView.findViewById(R.id.empty_msg_scrap);
+        empty_scrap_message.setTypeface(fontManager.getTypefaceRegularInstance());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -240,16 +257,12 @@ public class UserScrapContentListActivity extends AppCompatActivity {
 
         /** Header, Empty 설정 **/
         if (emptyViewFlag) {
-            emptyView = getLayoutInflater().inflate(R.layout.view_scraplist_emptyview, null);
             scrap_recyclerView.setEmptyView(emptyView, true);
 
         } else { //네트워크 오류
             emptyView = getLayoutInflater().inflate(R.layout.view_scraplist_error_empty, null);
             scrap_recyclerView.setEmptyView(emptyView, true);
         }
-
-        headerview = getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
-        scrap_recyclerView.addHeaderView(headerview);
 
         /** Swape event **/
         scrap_recyclerrefreshview.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
@@ -263,7 +276,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         /** Tag검색과 일반 카테고리 검색을 비교하여 업테이트 진행. **/
 
                         scrap_recyclerrefreshview.pullRefreshComplete();
-                        scrap_recyclerView.removeHeaderView(headerview);
 
                         //위에서 새로고침은 page값 증가가 필요없다.//
                         if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//

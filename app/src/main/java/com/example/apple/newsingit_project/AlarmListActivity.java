@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequest;
 import com.example.apple.newsingit_project.data.json_data.alarmlist.AlarmListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.AlarmData;
 import com.example.apple.newsingit_project.manager.datamanager.PropertyManager;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.widget.adapter.AlarmListAdapter;
 import com.google.gson.Gson;
@@ -40,11 +42,9 @@ public class AlarmListActivity extends AppCompatActivity {
      * Network 자원
      **/
     NetworkManager networkManager;
-
+    FontManager fontManager;
     private FamiliarRecyclerView recyclerview;
-
     private ProgressDialog pDialog;
-
     private Callback requestalarmlistcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) //접속 실패의 경우.//
@@ -90,11 +90,16 @@ public class AlarmListActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
 
         alarmData = new AlarmData();
+        fontManager = new FontManager(this);
 
         recyclerview = (FamiliarRecyclerView) findViewById(R.id.alarm_rv_list);
 
         /** EmptyView 설정 **/
         View emptyview = getLayoutInflater().inflate(R.layout.view_alarmlist_emptyview, null);
+
+        /** EmptyView 위젯 **/
+        TextView emptyview_text = (TextView) emptyview.findViewById(R.id.empty_msg_alarm);
+        emptyview_text.setTypeface(fontManager.getTypefaceRegularInstance());
 
         recyclerview.setEmptyView(emptyview, true);
 

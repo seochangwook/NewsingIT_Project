@@ -50,7 +50,6 @@ public class EditMyInfoActivity extends AppCompatActivity {
      * startActivityForResult 요청값
      **/
     private static final int RC_SINGLE_IMAGE = 2;
-    private static final int RC_CAMERA = 1;
     /**
      * 필요한 위젯 정의
      **/
@@ -167,8 +166,6 @@ public class EditMyInfoActivity extends AppCompatActivity {
         get_image_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(EditMyInfoActivity.this, "갤러리에서 이미지 선택", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 startActivityForResult(intent, RC_SINGLE_IMAGE);
@@ -240,7 +237,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 Cursor c = getContentResolver().query(fileUri, new String[]{MediaStore.Images.Media.DATA}, null, null, null);
                 if (c.moveToNext()) {
                     path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
-                    Log.i("Single", "path : " + path);
+                    Log.i("json control:", "path : " + path);
 
                     uploadFile = new File(path);
 

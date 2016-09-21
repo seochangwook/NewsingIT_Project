@@ -45,8 +45,6 @@ import okhttp3.Response;
 
 public class CreateScrapContentActivity extends AppCompatActivity implements TagsEditText.TagsEditListener {
 
-    private static final int RC_SINGLE_IMAGE = 2;
-
     private static final String TAG = "json control";
     private static final String NEWS_ID = "NEWS_ID";
     private static final String NEWS_TITLE = "NEWS_TITLE";

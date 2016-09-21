@@ -68,6 +68,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             Log.d("json data", responseData);
         }
     };
+
     private Callback requestnewscrapalarmoffcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -82,6 +83,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             Log.d("json data", responseData);
         }
     };
+
     private Callback requestmyscrapalarmoncallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -96,6 +98,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             Log.d("json data", responseData);
         }
     };
+
     private Callback requestmyscrapalarmoffcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -110,6 +113,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             Log.d("json data", responseData);
         }
     };
+
     private Callback requestmypagefollowoncallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -124,6 +128,7 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
             Log.d("json data", responseData);
         }
     };
+
     private Callback requestmypagefollowoffcallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {

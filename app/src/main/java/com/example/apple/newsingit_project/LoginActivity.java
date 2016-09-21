@@ -59,12 +59,13 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
 
     Button facebook_login_button; //로그인 버튼 커스텀//
-
+    Button twitter_login_button;
+    Button google_login_button;
     /**
      * Facebook 관련 변수
      **/
     LoginManager mLoginManager;
-    //AccessTokenTracker tracker;
+
     String token;
     String id, name;
     /** 공공저장소 관련 **/
@@ -140,6 +141,8 @@ public class LoginActivity extends AppCompatActivity {
         registBroadcastReceiver();
 
         facebook_login_button = (Button) findViewById(R.id.btn_test);
+        twitter_login_button = (Button) findViewById(R.id.btn_twitter_login);
+        google_login_button = (Button) findViewById(R.id.btn_google_login);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -153,10 +156,23 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isLogin()) {
-                    //     logoutFacebook();
                 } else {
                     getInstanceIdToken(); //FCM ID값 획득//
                 }
+            }
+        });
+
+        twitter_login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "현재 트위터 로그인은 지원하지 않습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        google_login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "현재 구글 로그인은 지원하지 않습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 

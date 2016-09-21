@@ -180,9 +180,6 @@ public class MyInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_info, container, false);
-        /** HeaderView 화면 설정 **/
-        final View header_info_view = getActivity().getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
-
 
         /** 공유 저장소 초기화 **/
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -247,7 +244,6 @@ public class MyInfoFragment extends Fragment {
 
                     startActivityForResult(intent, RC_EDITFOLDERLIST);
 
-                    folder_recyclerview.addHeaderView(header_info_view);
                     folder_recyclerview.smoothScrollToPosition(0);
 
                 }

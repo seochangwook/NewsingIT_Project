@@ -4,7 +4,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,13 +23,8 @@ public class MyGcmListenerService extends GcmListenerService {
     private static final String FCM_NOTIFY_VALUE = "FCM_NOTIFY_VALUE";
     private static final String TAG = "json control";
 
-    /**
-     * 공유 프래퍼런스 관련 변수
-     **/
-    SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
-    SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
-
     int badge_count;
+
     /**
      * @param from SenderID 값을 받아온다.
      * @param data Set형태로 GCM으로 받은 데이터 payload이다.
