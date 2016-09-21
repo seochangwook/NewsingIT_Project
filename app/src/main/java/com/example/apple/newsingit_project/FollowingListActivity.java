@@ -184,6 +184,7 @@ public class FollowingListActivity extends AppCompatActivity {
 
         pageCount = 1;
 
+        fontManager = new FontManager(FollowingListActivity.this);
         followingData = new FollowingData();
         fontManager = new FontManager(this);
 
