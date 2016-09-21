@@ -337,9 +337,6 @@ public class UserScrapContentListActivity extends AppCompatActivity {
             Log.d("who? : ", "me");
         }
 
-        /** Title명 설정 **/
-        setTitle(folder_name);
-
         //back 버튼 추가//
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -390,12 +387,18 @@ public class UserScrapContentListActivity extends AppCompatActivity {
         /** Tag검색과 일반 카테고리 리스트를 통한 검색경로를 구분 **/
         if (flag_tag.equals("TAG")) //태그일 경우 스크랩 검색 조건이 다르므로 설정.//
         {
-            Log.d("tag name", folder_name);
+            /** Title명 설정 **/
+            setTitle(folder_name);
+
+            //Log.d("tag name", folder_name);
 
             //태그이름으로 세부검색 후 리스트 목록//
             getTagData(tagId);
         } else //태그가 아닌 일반 폴더리스트에서 선택 후 온 경우//
         {
+            /** Title명 설정 **/
+            setTitle(folder_name);
+
             getScrapContentListNetworkData();
         }
     }

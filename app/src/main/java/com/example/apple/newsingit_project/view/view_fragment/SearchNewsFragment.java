@@ -2,16 +2,17 @@ package com.example.apple.newsingit_project.view.view_fragment;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SelectNewsDetailActivity;
@@ -45,11 +46,14 @@ public class SearchNewsFragment extends Fragment {
     private static final String NEWS_TITLE = "NEWS_TITLE";
     private static final int LOAD_MORE_TAG = 5;
     private static final String FLAG = "FLAG";
+    private static final String TAB_FLAG = "TAB_FLAG"; //탭을 구분지어주기 위한 플래그//
+    private static final String SEARCH_QUERY = "SEARCH_QUERY";
 
     static int pageCount = 1;
     static boolean emptyViewFlag = true;
 
     String query;
+    String tab_flag;
 
     FamiliarRefreshRecyclerView familiarRefreshRecyclerView;
     FamiliarRecyclerView recyclerView;
@@ -78,26 +82,42 @@ public class SearchNewsFragment extends Fragment {
                 emptyViewFlag = false;
 
             } else {
-                Gson gson = new Gson();
+                if (tab_flag.equals("NEWS_TAB")) {
+                    Gson gson = new Gson();
 
-                SearchNewsListRequest searchNewsListRequest = gson.fromJson(responseData, SearchNewsListRequest.class);
+                    SearchNewsListRequest searchNewsListRequest = gson.fromJson(responseData, SearchNewsListRequest.class);
 
-                if (searchNewsListRequest.getResults().length == 0) {
-                    if (getActivity() != null) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getActivity(), "불러올 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                    if (searchNewsListRequest.getResults().length == 0) {
+                        if (getActivity() != null) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                                    alertDialog
+                                            .setTitle("Newsing Info")
+                                            .setMessage("뉴스 검색결과가 존재하지 않습니다.")
+                                            .setCancelable(false)
+                                            .setPositiveButton("확인",
+                                                    new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                                            //yes
+                                                        }
+                                                    });
 
-                            }
-                        });
+                                    AlertDialog alert = alertDialog.create();
+                                    alert.show();
+                                }
+                            });
+                        }
+                    } else {
+                        setData(searchNewsListRequest.getResults(), searchNewsListRequest.getResults().length);
+
+                        Log.d("json control:", "SearchNewsTab");
                     }
-                } else {
-                    setData(searchNewsListRequest.getResults(), searchNewsListRequest.getResults().length);
 
+                    emptyViewFlag = true;
                 }
-
-                emptyViewFlag = true;
             }
         }
     };
@@ -171,7 +191,9 @@ public class SearchNewsFragment extends Fragment {
         Log.d("pageCount", "" + pageCount);
 
         Bundle b = getArguments();
-        query = b.getString("SEARCH_QUERY");
+        //값을 전달받는다.//
+        query = b.getString(SEARCH_QUERY);
+        tab_flag = b.getString(TAB_FLAG);
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");

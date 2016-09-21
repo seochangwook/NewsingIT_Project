@@ -4,13 +4,13 @@
 
 < Project status (Waterfall model) >
 
-* 전체 진행률 : 85%
+* 전체 진행률 : 90%
 * 프로젝트 기간 : 08/23 ~ 09/22 
 <p>
 </p>
 - 요구 / 분석 : (완료)
 - 설계 / 구현 : (완료)
-- 테스팅 : (부분완료)
+- 테스팅 : (마무리 작업)
 - 유지보수 : (진행 중)
 <p>
 </p>
@@ -67,6 +67,12 @@
 
 <p align="left">
   <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/FCM_algorithm.png" width="650" height="350">
+</p>
+
+* Observer Pattern Concept
+
+<p align="left">
+  <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/observer_image.png" width="650" height="350">
 </p>
 
 < Update Content (기능구현 / 설계 / 디자인 가이드 적용 부분) >
@@ -168,11 +174,20 @@
 * UserScrapContentList에서 Adapter를 통한 RecyclerView정보 갱신작업(onActivityResult를 콜백으로 호출) - 서창욱 (16/09/13 21:35)
 * ScrapFolderActivity / ExpandabelListview 정보 갱신작업 - 서창욱 (16/09/13 21:35)
 * 사용자 스크랩 게시물 삭제에 따른 예외처리 - 서창욱 (16/09/13 21:35)
+* 스크랩 상세 화면 tag 뷰 위치 수정 - 임지수 (16/9/19 10:07) 
 * TagLayout부분 TextColor / BorderColor부분 수정 - 서창욱 (16/09/19 10:29)
+* 스크랩 상세 화면 뉴스 내용 maxLine 값 설정 - 임지수 (16/09/19 10:30)
 * TagSearch 간 Scrap count 값 적용 - 서창욱 (16/09/19 10:29)
+* 검색 load more/ follow 목록 새로고침 적용/ user info 화면에서 follow 해제 시 alert 띄움 - 임지수 (16/09/19 14:02)
+* top up 버튼 floating button -> image button - 임지수 (16/09/19 15:10)
 * 뉴스기사 개수에 따른 동적 리스트 구조 예외처리 - 서창욱 (16/09/19 15:12)
 * FCM getMesage fix(서버와의 key값 동기화 필요) / Default Image적용 - 서창욱 (16/09/19 16:38)
+* 뷰에 미리 보이는 필요없는 내용 삭제 - 임지수 (16/09/19 17:59)
+* 사용자 화면/검색/폴더/스크랩 리스트 상황에 따른 empty view 추가, 태그 -> id로 검색 - 임지수 (16/09/20 15:31)
 * 좋아요 Click 위치관련 수정(ScrapContentList -> SelectScrapContent) / Title 수정 - 서창욱 (16/09/20 15:51)
+* 경량화 폰트 적용 (싱글톤 패턴, 디자인 가이드 파일 1) - 임지수 (16/09/20 19:37)
+* SearchUserFragment / SearchNewsFragment / SearchTagFragment간 Flag를 주어 이중검색 방지 - 서창욱 (16/09/20 22:02)
+* FollowingList 정보갱신(Observer Pattern 적용) - 서창욱 (16/09/20 22:02)
 
 
 < Refectoring (유지보수, 디버깅) >

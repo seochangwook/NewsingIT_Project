@@ -291,9 +291,22 @@ public class FollowingListActivity extends AppCompatActivity {
 
         mAdapter = new FollowingListAdapter(this);
 
-
         recyclerview.setAdapter(mAdapter);
 
+        //옵저버 패턴으로 어댑터의 정보를 액티비티에서 받는다.//
+        mAdapter.setOnFollowingButtonClick(new FollowingListAdapter.OnFollowingButtonClick() {
+            @Override
+            public void onFollowingButtonClick() {
+                Log.d("json control:", "observer call");
+
+                //어댑터에서 데이터 변경작업이 있을 시 다시 팔로잉 리스트를 초기화한다.//
+                initFollowingList();
+
+                getFollowingListNetworkData(); //초기화면은 전체검색 화면//
+
+                Log.d("json control:", "following list update");
+            }
+        });
 
         //리사이클러 뷰 각 항목 클릭//
         recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
