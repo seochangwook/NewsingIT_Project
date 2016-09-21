@@ -23,7 +23,7 @@
 
 -----------------------------------------
 
-< Android Using Library list (updating...) >
+< Android Using Library list >
 
 * com.github.iwgang:familiarrecyclerview:1.3.0
 * com.yqritc:recyclerview-flexibledivider:1.4.0
@@ -41,7 +41,6 @@
 * compile 'com.android.support:multidex:1.0.1'
 * compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
 * compile 'com.google.android.gms:play-services-gcm:9.4.0'
-* (새로운 라이브러리 추가 시 계속 업데이트)
 
 < Algorithm 도식도 >
 
