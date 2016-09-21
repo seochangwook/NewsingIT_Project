@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
 
     String profile_name;
     String profile_imgUrl;
-    String key_default_img;
 
     NetworkManager networkManager;
 
