@@ -179,9 +179,6 @@ public class MainNewsListFragment extends Fragment {
         emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_mainnews_empty_layout, null);
         mainnews_recyclerview.setEmptyView(emptyview, true);
 
-        fix_headerview = getActivity().getLayoutInflater().inflate(R.layout.view_mainnews_refreshheader, null);
-        mainnews_recyclerview.addHeaderView(fix_headerview);
-
         /** 뉴스 리스트 선택 이벤트 설정(개수가 고정되어 있기에 직접할당,일반적으로는 동적할당) **/
         mainnews_recyclerview.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override

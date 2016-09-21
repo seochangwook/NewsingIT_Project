@@ -260,12 +260,16 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
         throw new IllegalArgumentException("invalid position");
     }
 
+    /**
+     * Observe Pattern 적용
+     **/
     public void setOnFollowingButtonClick(OnFollowingButtonClick onFollowingButtonClick) {
         this.mOnFollowingButtonClick = onFollowingButtonClick;
     }
 
     //리스트 갱신을 위한 옵저버 패턴을 적용.//
-    public interface OnFollowingButtonClick {
+    public interface OnFollowingButtonClick
+    {
         void onFollowingButtonClick();
     }
 }

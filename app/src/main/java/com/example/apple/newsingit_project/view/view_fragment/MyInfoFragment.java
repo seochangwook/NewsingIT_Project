@@ -225,9 +225,6 @@ public class MyInfoFragment extends Fragment {
         }
         folder_recyclerview.setEmptyViewKeepShowHeadOrFooter(true);
 
-        /** HeaderView 화면 설정 **/
-        final View header_info_view = getActivity().getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
-
         /** 폴더 데이터 클래스 초기화 및 어댑터 초기화 **/
         folderData = new FolderData();
         folderListAdapter = new FolderListAdapter(getActivity());
@@ -250,8 +247,6 @@ public class MyInfoFragment extends Fragment {
 
                         init_folder_list();
                         getMyFolderData();
-
-                        folder_recyclerview.removeHeaderView(header_info_view);
 
                     }
                 }, 1000);
@@ -313,7 +308,6 @@ public class MyInfoFragment extends Fragment {
 
                 startActivityForResult(intent, RC_EDITFOLDERINFO);
 
-                folder_recyclerview.addHeaderView(header_info_view);
                 folder_recyclerview.smoothScrollToPosition(0);
 
                 return true;
@@ -368,7 +362,6 @@ public class MyInfoFragment extends Fragment {
 
                 startActivityForResult(intent, RC_EDITFOLDERLIST);
 
-                folder_recyclerview.addHeaderView(header_info_view);
                 folder_recyclerview.smoothScrollToPosition(0);
             }
         });

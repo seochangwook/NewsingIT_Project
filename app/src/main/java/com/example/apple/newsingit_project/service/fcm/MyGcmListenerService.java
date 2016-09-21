@@ -22,7 +22,7 @@ import com.google.android.gms.gcm.GcmListenerService;
  */
 public class MyGcmListenerService extends GcmListenerService {
     private static final String FCM_NOTIFY_VALUE = "FCM_NOTIFY_VALUE";
-    private static final String TAG = "MyGcmListenerService";
+    private static final String TAG = "json control";
 
     /**
      * 공유 프래퍼런스 관련 변수
@@ -40,13 +40,14 @@ public class MyGcmListenerService extends GcmListenerService {
         //해당 부분의 key값은 서버의 데이터 타입과 맞추어준다//
         String title = data.getString("title");
         String message = data.getString("body");
+        String data_pk = data.getString("data_pk");
 
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Title: " + title);
-        Log.d(TAG, "Body: " + message);
+        Log.d(TAG, "json title: " + title);
+        Log.d(TAG, "json Message: " + message);
+        Log.d(TAG, "json Data: " + data_pk);
 
         // GCM으로 받은 메세지를 디바이스에 알려주는 sendNotification()을 호출한다.
-        sendNotification(title, message);
+        sendNotification(title, message, data_pk);
 
         set_alarm_badge(); //배지를 등록//
     }
@@ -57,8 +58,9 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param title
      * @param message
      */
-    private void sendNotification(String title, String message) {
+    private void sendNotification(String title, String message, String data_pk) {
         Intent intent = new Intent(this, MainActivity.class);
+
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
