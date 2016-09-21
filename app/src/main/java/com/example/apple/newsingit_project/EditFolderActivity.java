@@ -498,7 +498,7 @@ public class EditFolderActivity extends AppCompatActivity {
 
     private boolean checkCameraHardware(Context context) {
         // this device has a camera
-// no camera on this device
+        // no camera on this device
         return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 }

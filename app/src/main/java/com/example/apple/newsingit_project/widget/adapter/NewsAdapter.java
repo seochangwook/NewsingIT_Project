@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.TwitterLinkActivity;
@@ -568,8 +567,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(0);
                     }
                 });
@@ -587,8 +584,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(1);
                     }
                 });
@@ -606,8 +601,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(2);
                     }
                 });
@@ -625,8 +618,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(3);
                     }
                 });
@@ -644,8 +635,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(4);
                     }
                 });
@@ -663,8 +652,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(5);
                     }
                 });
@@ -682,8 +669,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(6);
                     }
                 });
@@ -701,8 +686,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(7);
                     }
                 });
@@ -720,8 +703,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(8);
                     }
                 });
@@ -739,8 +720,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 twitter_link_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "트위터 링크로 이동", Toast.LENGTH_SHORT).show();
-
                         init_twitter_data(9);
                     }
                 });

@@ -240,7 +240,6 @@ public class CreateScrapContentActivity extends AppCompatActivity implements Tag
                     }
 
                     //만들어진 태그값을 전용 레이아웃에 구성//
-                    //mTagGroup.setTags(str_data_array);
                     mBeautyTagGroup.setTags(tag_layout_array);
 
                     //초기화.//

@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
         fontManager = new FontManager(MainActivity.this);
 
-
         setTitle(getResources().getString(R.string.title_activity_main));
 
         if (savedInstanceState == null) {
@@ -224,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 100);
             }
         });
+
 
         backPressCloseHandler = new BackPressCloseHandler(this);
     }
@@ -429,8 +429,6 @@ public class MainActivity extends AppCompatActivity {
 
                 //프래그먼트 변경 시 타이틀 변경.//
                 setTitle(getResources().getString(R.string.title_fragment_myinfo));
-
-                //bottommenu.
             }
         }
     }
