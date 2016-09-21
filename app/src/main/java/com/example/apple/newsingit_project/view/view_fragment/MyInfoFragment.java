@@ -452,6 +452,12 @@ public class MyInfoFragment extends Fragment {
 
                     myFolderListRequestResultsList.addAll(Arrays.asList(myFolderListRequestResults));
 
+                    if (my_folder_list_size > 0) {
+                        folder_add_button.setVisibility(View.VISIBLE);
+                    } else {
+                        folder_add_button.setVisibility(View.GONE);
+                    }
+
                     for (int i = 0; i < my_folder_list_size; i++) {
                         FolderData new_folderdata = new FolderData();
 
@@ -462,11 +468,7 @@ public class MyInfoFragment extends Fragment {
 
                         folderData.folder_list.add(new_folderdata);
                     }
-                    if (my_folder_list_size > 0) {
-                        folder_add_button.setVisibility(View.VISIBLE);
-                    } else {
-                        folder_add_button.setVisibility(View.GONE);
-                    }
+
 
                     folderListAdapter.set_FolderDate(folderData);
                 }

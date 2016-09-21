@@ -12,8 +12,7 @@
         android:layout_marginBottom="@dimen/news_content_img_margin_bottom"
         android:layout_marginLeft="@dimen/news_content_img_margin_left"
         android:layout_marginRight="@dimen/news_content_img_margin_right"
-        android:background="@color/news_content_img_margin"
-        android:src="@mipmap/ic_image_default" />
+        android:src="@mipmap/logo_48" />
 
     <TextView
         android:id="@+id/news_8_author_textview"
