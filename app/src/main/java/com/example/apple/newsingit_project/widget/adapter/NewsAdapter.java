@@ -1722,7 +1722,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1733,7 +1733,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1744,7 +1744,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1755,7 +1755,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1766,7 +1766,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1777,7 +1777,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1788,7 +1788,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1799,7 +1799,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1810,7 +1810,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
@@ -1821,7 +1821,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Intent intent = new Intent(context, TwitterLinkActivity.class);
 
-            intent.putExtra("KEY_KEYWORD", "#" + keyword);
+            intent.putExtra("KEY_KEYWORD", keyword);
 
             context.startActivity(intent);
         }
