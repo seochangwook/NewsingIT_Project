@@ -46,7 +46,7 @@
         android:background="@mipmap/line" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/countTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/text_search_tag_count"

@@ -43,26 +43,5 @@
         android:layout_alignParentBottom="true"
         android:background="@mipmap/line" />
 
-    <!--<Button-->
-    <!--android:id="@+id/btn_following"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentEnd="true"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_marginRight="20dp"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="@string/following" />-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-    <!--android:text="Small Text"-->
-    <!--android:id="@+id/text_fing_intro"-->
-    <!--android:layout_below="@+id/text_fing_name"-->
-    <!--android:layout_alignLeft="@+id/text_fing_name"-->
-    <!--android:layout_alignStart="@+id/text_fing_name"-->
-    <!--android:layout_marginTop="10dp" />-->
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.SearchTagData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.view.view_list.SearchTagViewHolder;
 
 /**
@@ -17,10 +18,12 @@ public class SearchTagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     SearchTagData searchTagData;
     Context context;
+    FontManager fontManager;
 
     public SearchTagAdapter(Context context) {
         this.context = context;
         searchTagData = new SearchTagData();
+        fontManager = new FontManager(context);
     }
 
     public void setSearchTagData(SearchTagData searchTagData) {
@@ -58,6 +61,10 @@ public class SearchTagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (searchTagData.searchTagDataList.size() > position) {
                 SearchTagViewHolder searchTagViewHolder = (SearchTagViewHolder) holder;
                 searchTagViewHolder.setSearchTagData(searchTagData.searchTagDataList.get(position), context);
+
+                searchTagViewHolder.tagView.setTypeface(fontManager.getTypefaceMediumInstance());
+                searchTagViewHolder.countView.setTypeface(fontManager.getTypefaceRegularInstance());
+                searchTagViewHolder.countTextView.setTypeface(fontManager.getTypefaceRegularInstance());
                 return;
             }
             position -= searchTagData.searchTagDataList.size();

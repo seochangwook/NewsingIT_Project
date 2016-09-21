@@ -163,6 +163,12 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
                     }
                 }
 
+                uvh.titleView.setTypeface(fontManager.getTypefaceBoldInstance());
+                uvh.ncTitleView.setTypeface(fontManager.getTypefaceMediumInstance());
+                uvh.likeView.setTypeface(fontManager.getTypefaceMediumInstance());
+                uvh.authorView.setTypeface(fontManager.getTypefaceRegularInstance());
+                uvh.dateView.setTypeface(fontManager.getTypefaceRegularInstance());
+
                 return;
             }
 

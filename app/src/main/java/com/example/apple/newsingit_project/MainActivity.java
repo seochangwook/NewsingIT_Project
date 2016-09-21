@@ -5,7 +5,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -56,12 +55,6 @@ public class MainActivity extends AppCompatActivity {
     TextView profile_name_textview;
 
     FontManager fontManager;
-
-    /**
-     * Shraed 저장소 관련 변수
-     **/
-    SharedPreferences mPrefs; //공유 프래퍼런스 정의.(서버가 토큰 비교 후 반환해 준 id를 기존에 저장되어 있는 id값과 비교하기 위해)//
-    SharedPreferences.Editor mEditor; //프래퍼런스 에디터 정의//
 
     String profile_name;
     String profile_imgUrl;

@@ -41,7 +41,6 @@ public class FollowerViewHolder  extends RecyclerView.ViewHolder {
     public void setFollowerData(FollowerData followerData, Context context){
         this.followerData = followerData;
         nameView.setText(followerData.getName());
-        //  introView.setText(followerData.getAboutMe());
 
         String image_Url = followerData.getProfileUrl();
 

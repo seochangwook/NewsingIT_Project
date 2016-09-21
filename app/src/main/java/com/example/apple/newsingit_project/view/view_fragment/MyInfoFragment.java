@@ -95,10 +95,10 @@ public class MyInfoFragment extends Fragment {
 
     static boolean emptyViewFlag = true;
     FontManager fontManager;
+    TextView emptyTextView;
 
     //나의 정보 뷰 관련 변수//
     ImageView profile_imageview;
-    // TextView profile_name_textview;
     TextView profile_my_introduce_textview;
     TextView follower_count_button;
     TextView following_count_button;
@@ -110,7 +110,7 @@ public class MyInfoFragment extends Fragment {
     TextView sffTextView, sffFollowingView, sffFollowerView;
 
     //폴더 관련 변수.//
-    ImageButton folder_add_button;
+    ImageButton folder_add_button, btnCreateFolder;
     FolderData folderData; //폴더 데이터 클래스//
     FolderListAdapter folderListAdapter; //폴더 어댑태 클래스//
     String profileUrl;
@@ -180,6 +180,13 @@ public class MyInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_info, container, false);
+        /** HeaderView 화면 설정 **/
+        final View header_info_view = getActivity().getLayoutInflater().inflate(R.layout.fix_headerview_layout, null);
+
+
+        /** 공유 저장소 초기화 **/
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mEditor = mPrefs.edit();
 
         fontManager = new FontManager(getActivity());
 
@@ -204,6 +211,14 @@ public class MyInfoFragment extends Fragment {
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
+        /** 폴더 데이터 클래스 초기화 및 어댑터 초기화 **/
+        folderData = new FolderData();
+        folderListAdapter = new FolderListAdapter(getActivity());
+
+        Log.d("list", "" + folderListAdapter.getItemCount());
+
+
+
         /** 폴더 리스트뷰 초기화 과정(로딩화면, 자원등록) **/
         folder_recyclerrefreshview.setLoadMoreView(new LoadMoreView(getActivity(), 3));
         folder_recyclerrefreshview.setColorSchemeColors(0xFFFF5000, Color.RED, Color.YELLOW, Color.GREEN);
@@ -213,25 +228,39 @@ public class MyInfoFragment extends Fragment {
         folder_recyclerview.setItemAnimator(new DefaultItemAnimator());
         folder_recyclerview.setHasFixedSize(true);
 
+
         /** EmptyView 화면 설정. **/
         View emptyView;
 
         if (emptyViewFlag) {//폴더가 없는 일반적인 경우
             emptyView = getActivity().getLayoutInflater().inflate(R.layout.my_rv_list_emptyview, null, false);
+
+            emptyTextView = (TextView) emptyView.findViewById(R.id.empty_msg);
+            emptyTextView.setTypeface(fontManager.getTypefaceRegularInstance());
+
+            btnCreateFolder = (ImageButton) emptyView.findViewById(R.id.empty_img);
+
+            btnCreateFolder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), CreateFolderActivity.class);
+
+                    startActivityForResult(intent, RC_EDITFOLDERLIST);
+
+                    folder_recyclerview.addHeaderView(header_info_view);
+                    folder_recyclerview.smoothScrollToPosition(0);
+
+                }
+            });
+
             folder_recyclerview.setEmptyView(emptyView);
+
         } else { //네트워크 오류 시
-            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_folder_error_empty, null, false);
+            emptyView = getActivity().getLayoutInflater().inflate(R.layout.view_network_error_empty, null, false);
             folder_recyclerview.setEmptyView(emptyView);
         }
         folder_recyclerview.setEmptyViewKeepShowHeadOrFooter(true);
 
-        /** 폴더 데이터 클래스 초기화 및 어댑터 초기화 **/
-        folderData = new FolderData();
-        folderListAdapter = new FolderListAdapter(getActivity());
-
-        /** 공유 저장소 초기화 **/
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mEditor = mPrefs.edit();
 
         /** 폴더 리스트뷰 Refresh 이벤트 등록 **/
         folder_recyclerrefreshview.setOnPullRefreshListener(new FamiliarRefreshRecyclerView.OnPullRefreshListener() {
@@ -437,6 +466,11 @@ public class MyInfoFragment extends Fragment {
 
                         folderData.folder_list.add(new_folderdata);
                     }
+                    if (my_folder_list_size > 0) {
+                        folder_add_button.setVisibility(View.VISIBLE);
+                    } else {
+                        folder_add_button.setVisibility(View.GONE);
+                    }
 
                     folderListAdapter.set_FolderDate(folderData);
                 }
@@ -562,6 +596,7 @@ public class MyInfoFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
 
         if (resultCode == getActivity().RESULT_OK) {
             if (requestCode == RC_EDITMYINFO) //나의 정보에 대한 수정응답//

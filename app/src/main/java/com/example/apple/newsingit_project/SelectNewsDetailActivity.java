@@ -27,6 +27,7 @@ import com.example.apple.newsingit_project.data.json_data.newscontentdetail.News
 import com.example.apple.newsingit_project.data.json_data.newsdetailscrapfolderlist.NewsDetailScrapFolderListRequest;
 import com.example.apple.newsingit_project.data.json_data.newsdetailscrapfolderlist.NewsDetailScrapFolderListRequestResults;
 import com.example.apple.newsingit_project.data.view_data.ScrapFolderListData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.ScrapFolderListAdapter;
@@ -78,10 +79,10 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
     /**
      * UI관련 변수
      **/
-    TextView news_headline_title_textview;
-    TextView news_author_textview;
-    TextView news_ntime_textview;
-    TextView news_content_textview;
+    TextView newsTitleTextview;
+    TextView newsAuthorTextview;
+    TextView newsNtimeTextview;
+    TextView newsContentTextview;
     ImageView news_content_imageview;
     String news_imageUrl;
     String news_link;
@@ -93,6 +94,9 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
     String keyword = "";
     String flag = "";
+
+
+    FontManager fontManager;
     /**
      * 네트워크 관련 변수
      **/
@@ -151,6 +155,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_news_detail_activity_layout);
 
+        fontManager = new FontManager(SelectNewsDetailActivity.this);
         btn = (Button) findViewById(R.id.btn_go_detail);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -161,11 +166,16 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         scrap_folder_create_button = (Button) scrap_folderlist_view.findViewById(R.id.create_scrap_folder_button);
         scrap_folder_recyclerrefreshview = (FamiliarRefreshRecyclerView) scrap_folderlist_view.findViewById(R.id.scrap_folder_rv_list);
 
-        news_headline_title_textview = (TextView) findViewById(R.id.text_news_headline);
-        news_author_textview = (TextView) findViewById(R.id.text_news_press);
-        news_content_textview = (TextView) findViewById(R.id.text_news_part);
-        news_ntime_textview = (TextView) findViewById(R.id.text_news_date);
+        newsTitleTextview = (TextView) findViewById(R.id.text_news_headline);
+        newsAuthorTextview = (TextView) findViewById(R.id.text_news_press);
+        newsContentTextview = (TextView) findViewById(R.id.text_news_part);
+        newsNtimeTextview = (TextView) findViewById(R.id.text_news_date);
         news_content_imageview = (ImageView) findViewById(R.id.img_news);
+
+        newsTitleTextview.setTypeface(fontManager.getTypefaceMediumInstance());
+        newsAuthorTextview.setTypeface(fontManager.getTypefaceRegularInstance());
+        newsNtimeTextview.setTypeface(fontManager.getTypefaceRegularInstance());
+        newsContentTextview.setTypeface(fontManager.getTypefaceRegularInstance());
 
         //팝업창 설정.//
         scrap_folder_popup = new PopupWindow(scrap_folderlist_view, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
@@ -294,7 +304,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
             setTitle("뉴스검색");
         }
 
-        news_headline_title_textview.setText(title);
+        newsTitleTextview.setText(title);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -439,9 +449,9 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
                                 .into(news_content_imageview);
                     }
 
-                    news_author_textview.setText(news_author);
-                    news_content_textview.setText(news_content);
-                    news_ntime_textview.setText(news_ntime);
+                    newsAuthorTextview.setText(news_author);
+                    newsContentTextview.setText(news_content);
+                    newsNtimeTextview.setText(news_ntime);
                 }
             });
         }
@@ -478,8 +488,8 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         }
         if (item_id == R.id.share_news) {
 
-            String scrap_title = news_headline_title_textview.getText().toString();
-            String scrap_content = news_content_textview.getText().toString();
+            String scrap_title = newsTitleTextview.getText().toString();
+            String scrap_content = newsContentTextview.getText().toString();
 
             Intent msg = new Intent(Intent.ACTION_SEND);
 

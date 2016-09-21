@@ -27,6 +27,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.squareup.picasso.Picasso;
@@ -60,8 +61,9 @@ public class EditFolderActivity extends AppCompatActivity {
 
     ImageButton image_select_button;
     SwitchButton private_select_switch;
-    TextView nameView;
+    TextView nameView, folderNameView, folderImageTextView, folderPrivateView, deleteView;
 
+    FontManager fontManager;
     /**
      * PopupWindow 화면관련
      **/
@@ -70,8 +72,6 @@ public class EditFolderActivity extends AppCompatActivity {
 
     Button select_gallery_button;
     Button camera_picture_button;
-
-    TextView deleteView;
 
     String folder_id;
     String folder_name;
@@ -152,12 +152,24 @@ public class EditFolderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_folder);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        fontManager = new FontManager(EditFolderActivity.this);
 
         image_select_button = (ImageButton) findViewById(R.id.img_btn_edit_folder_select_img);
         private_select_switch = (SwitchButton) findViewById(R.id.switch_private_folder_edit);
         deleteView = (TextView) findViewById(R.id.delete_folder);
         nameView = (TextView) findViewById(R.id.folder_edit_name_edittext);
         folder_imageview = (ImageView) findViewById(R.id.folder_edit_imageview);
+
+        folderNameView = (TextView) findViewById(R.id.edit_folder_textview2);
+        folderImageTextView = (TextView) findViewById(R.id.edit_folder_textview4);
+        folderPrivateView = (TextView) findViewById(R.id.edit_folder_textview6);
+        deleteView = (TextView) findViewById(R.id.delete_folder);
+
+        folderNameView.setTypeface(fontManager.getTypefaceMediumInstance());
+        folderImageTextView.setTypeface(fontManager.getTypefaceMediumInstance());
+        folderPrivateView.setTypeface(fontManager.getTypefaceMediumInstance());
+        deleteView.setTypeface(fontManager.getTypefaceMediumInstance());
+        nameView.setTypeface(fontManager.getTypefaceRegularInstance());
 
         private_select_switch.setBackColorRes(R.color.switch_background_color);
         private_select_switch.setThumbColorRes(R.color.switch_thumb_color);

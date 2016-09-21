@@ -24,7 +24,7 @@ public class FollowingViewHolder  extends RecyclerView.ViewHolder {
      **/
     private static final String DEFAULT_FACEBOOK_IMG_PATH = "https://graph.facebook.com";
     public FollowingData followingData;
-    public TextView nameView, introView;
+    public TextView nameView;
     public ImageButton btnFollowing;
     public ImageView imgFollowing;
     NetworkManager networkManager;
@@ -32,7 +32,6 @@ public class FollowingViewHolder  extends RecyclerView.ViewHolder {
     public FollowingViewHolder(View itemView) {
         super(itemView);
         nameView = (TextView)itemView.findViewById(R.id.text_fing_name);
-        // introView = (TextView)itemView.findViewById(R.id.text_fing_intro);
         btnFollowing = (ImageButton) itemView.findViewById(R.id.btn_following);
         imgFollowing = (ImageView)itemView.findViewById(R.id.img_following);
     }
@@ -40,7 +39,6 @@ public class FollowingViewHolder  extends RecyclerView.ViewHolder {
     public void setFollowingData(FollowingData followingData, Context context){
         this.followingData = followingData;
         nameView.setText(followingData.getName());
-        //  introView.setText(followingData.getAboutMe());
 
         String image_Url = followingData.getProfileUrl();
 

@@ -16,8 +16,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.squareup.picasso.Picasso;
 
@@ -52,19 +54,15 @@ public class EditMyInfoActivity extends AppCompatActivity {
     /**
      * 필요한 위젯 정의
      **/
-    ImageView profile_fix_imageview;
-    //Button enroll_fix_button;
-    EditText my_name_fix_edit;
-    EditText my_introduce_fix_edit;
-    ImageButton get_image_button;
+    ImageView profile_fix_imageview, get_image_button;
+    EditText myNameEdit, myIntroduceEdit;
+    TextView nameTextVIew, aboutMeTextView;
+    FontManager fontManager;
 
     /**
      * 설정 정보
      **/
-    String my_name;
-    String my_aboutme;
-    String my_imgUrl;
-    String key_default_img;
+    String my_name, my_aboutme, my_imgUrl, key_default_img;
     /**
      * Network관련 변수
      **/
@@ -109,11 +107,20 @@ public class EditMyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.edit_my_info_activity_layout);
 
         networkManager = NetworkManager.getInstance();
+        fontManager = new FontManager(EditMyInfoActivity.this);
 
         profile_fix_imageview = (ImageView) findViewById(R.id.my_profile_imageview);
-        my_name_fix_edit = (EditText) findViewById(R.id.my_name_fix_edittext);
-        my_introduce_fix_edit = (EditText) findViewById(R.id.my_introduce_fix_edit);
+        myNameEdit = (EditText) findViewById(R.id.my_name_fix_edittext);
+        myIntroduceEdit = (EditText) findViewById(R.id.my_introduce_fix_edit);
         get_image_button = (ImageButton) findViewById(R.id.select_gallery_picture);
+
+        nameTextVIew = (TextView) findViewById(R.id.textView5);
+        aboutMeTextView = (TextView) findViewById(R.id.textView6);
+
+        nameTextVIew.setTypeface(fontManager.getTypefaceMediumInstance());
+        aboutMeTextView.setTypeface(fontManager.getTypefaceMediumInstance());
+        myNameEdit.setTypeface(fontManager.getTypefaceRegularInstance());
+        myIntroduceEdit.setTypeface(fontManager.getTypefaceRegularInstance());
 
         //설정된 정보값으로 설정//
         Intent intent = getIntent();
@@ -123,8 +130,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
         my_imgUrl = intent.getStringExtra(KEY_MY_IMG);
         key_default_img = intent.getStringExtra(KEY_IMG_DEFAULT_FLAG);
 
-        my_name_fix_edit.setText(my_name);
-        my_introduce_fix_edit.setText(my_aboutme);
+        myNameEdit.setText(my_name);
+        myIntroduceEdit.setText(my_aboutme);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -171,8 +178,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
 
     public void edit_user() {
         /** 네트워크 작업을 한다 **/
-        String edit_my_name = my_name_fix_edit.getText().toString();
-        String edit_my_introduce = my_introduce_fix_edit.getText().toString();
+        String edit_my_name = myNameEdit.getText().toString();
+        String edit_my_introduce = myIntroduceEdit.getText().toString();
 
         //파일 전송을 위한 설정.//
         MediaType mediaType = MediaType.parse("image/jpeg");

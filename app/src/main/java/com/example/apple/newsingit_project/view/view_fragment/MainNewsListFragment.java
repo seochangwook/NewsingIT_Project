@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.SearchTabActivity;
@@ -46,6 +47,7 @@ import com.example.apple.newsingit_project.data.view_data.Keyword9SectionData;
 import com.example.apple.newsingit_project.data.view_data.KeywordSection;
 import com.example.apple.newsingit_project.data.view_data.NewsContent;
 import com.example.apple.newsingit_project.dialog.KeywordListActivity;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.LoadMoreView;
 import com.example.apple.newsingit_project.widget.adapter.NewsAdapter;
@@ -85,6 +87,9 @@ public class MainNewsListFragment extends Fragment {
     NewsContent newsContent;
     KeywordSection keywordSection;
     NewsAdapter newsAdapter;
+
+    TextView emptyTextView;
+    FontManager fontManager;
 
     ImageButton topup_button;
     float startYPosition = 0; //기본적으로 스크롤은 Y축을 기준으로 계산.//
@@ -146,7 +151,9 @@ public class MainNewsListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main_news_list, container, false);
 
-        setHasOptionsMenu(true); //메뉴를 적용한다.//
+        setHasOptionsMenu(true); //메뉴를 적용한다.//\
+
+        fontManager = new FontManager(getActivity());
 
         mainnews_recyclerrefreshview = (FamiliarRefreshRecyclerView) view.findViewById(R.id.main_rv_list);
         topup_button = (ImageButton) view.findViewById(R.id.btn_floating);
@@ -177,6 +184,9 @@ public class MainNewsListFragment extends Fragment {
 
         /** EmptyView, HeaderView를 설정 **/
         emptyview = getActivity().getLayoutInflater().inflate(R.layout.view_mainnews_empty_layout, null);
+        emptyTextView = (TextView) emptyview.findViewById(R.id.empty_msg_news);
+        emptyTextView.setTypeface(fontManager.getTypefaceRegularInstance());
+
         mainnews_recyclerview.setEmptyView(emptyview, true);
 
         /** 뉴스 리스트 선택 이벤트 설정(개수가 고정되어 있기에 직접할당,일반적으로는 동적할당) **/

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.FollowingData;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 import com.example.apple.newsingit_project.manager.networkmanager.NetworkManager;
 import com.example.apple.newsingit_project.view.view_list.FollowingViewHolder;
 
@@ -31,9 +32,10 @@ import okhttp3.Response;
  */
 public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    //   final boolean[] isOk = {false};
+
     FollowingData followingData;
     Context context;
+    FontManager fontManager;
     NetworkManager networkManager;
     int pos;
     FollowingViewHolder followingViewHolder;
@@ -104,6 +106,7 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
     public FollowingListAdapter(Context context) {
         this.context = context;
         followingData = new FollowingData();
+        fontManager = new FontManager(context);
     }
 
     private void setFollowing(String userId) {
@@ -251,6 +254,9 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
                         notifyDataSetChanged();
                     }
                 });
+
+                followingViewHolder.nameView.setTypeface(fontManager.getTypefaceBoldInstance());
+
 
                 return;
             }

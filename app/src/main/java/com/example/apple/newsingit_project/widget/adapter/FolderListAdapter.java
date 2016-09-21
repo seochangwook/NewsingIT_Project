@@ -123,6 +123,8 @@ public class FolderListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             } else { //잠금 설정//
                 folderViewHolder.folder_private_button.setVisibility(View.GONE);
             }
+
+
             folderViewHolder.folder_name_textview.setTypeface(fontManager.getTypefaceMediumInstance());
 
             folderViewHolder.folder_private_button.setOnClickListener(new View.OnClickListener() {

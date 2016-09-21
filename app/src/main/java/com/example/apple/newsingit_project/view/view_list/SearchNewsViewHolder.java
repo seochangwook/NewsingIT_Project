@@ -13,8 +13,8 @@ import com.example.apple.newsingit_project.data.view_data.SearchNewsData;
  */
 public class SearchNewsViewHolder extends RecyclerView.ViewHolder {
 
+    public TextView titleView, authorView, dateView;
     SearchNewsData searchNewsData;
-    TextView titleView, authorView, dateView;
 
 
     public SearchNewsViewHolder(View itemView) {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.NoticeGroup;
+import com.example.apple.newsingit_project.manager.fontmanager.FontManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +22,12 @@ public class NoticeAdapter extends BaseExpandableListAdapter {
 
     List<NoticeGroup> items = new ArrayList<>();
     Context context;
+    FontManager fontManager;
 
     public NoticeAdapter(List<NoticeGroup> items, Context context) {
         this.items = items;
         this.context = context;
+        fontManager = new FontManager(context);
     }
 
     public void setNoticeData(List<NoticeGroup> items){
@@ -101,6 +104,9 @@ public class NoticeAdapter extends BaseExpandableListAdapter {
             imageView.setImageResource(R.mipmap.ic_arrow_dropdown);
         }
 
+        titleView.setTypeface(fontManager.getTypefaceRegularInstance());
+        dateView.setTypeface(fontManager.getTypefaceRegularInstance());
+
         return view;
     }
 
@@ -120,6 +126,10 @@ public class NoticeAdapter extends BaseExpandableListAdapter {
         }
         childView.setText(items.get(groupPosition).childList.get(childPosition).name);
         childTitleView.setText(items.get(groupPosition).title);
+
+        childView.setTypeface(fontManager.getTypefaceRegularInstance());
+        childTitleView.setTypeface(fontManager.getTypefaceRegularInstance());
+
         return view;
     }
 

@@ -76,15 +76,6 @@
         android:textColor="@color/edit_my_info_input_about_me"
         android:textSize="@dimen/edit_my_info_input_about_me_size" />
 
-    <!--android:background="@color/button_transparent_background"-->
 
-
-    <!--<Button-->
-    <!--android:id="@+id/enroll_fix_button"-->
-    <!--android:layout_width="70dp"-->
-    <!--android:layout_height="50dp"-->
-    <!--android:layout_marginLeft="250dp"-->
-    <!--android:layout_marginTop="460dp"-->
-    <!--android:text="완료" />-->
 
 </RelativeLayout>
