@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.CreateFolderActivity;
 import com.example.apple.newsingit_project.EditFolderActivity;
@@ -488,7 +487,6 @@ public class MyInfoFragment extends Fragment {
         int item_id = item.getItemId();
 
         if (item_id == R.id.search_menu_item) {
-            Toast.makeText(getActivity(), "검색 화면으로 이동", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(getActivity(), SearchTabActivity.class);
 
