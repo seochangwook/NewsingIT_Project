@@ -493,6 +493,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setNcTime(tagDetailListRequestResultsList.get(i).getNc_ntime());
                         newUserScrapCotentData.setLike(tagDetailListRequestResultsList.get(i).getFavorite_cnt());
                         newUserScrapCotentData.setId(tagDetailListRequestResultsList.get(i).getId());
+                        newUserScrapCotentData.setLikeFlag(tagDetailListRequestResultsList.get(i).getFavorite());
 
                         userScrapContentData.userScrapContentDataList.add(newUserScrapCotentData);
                     }
