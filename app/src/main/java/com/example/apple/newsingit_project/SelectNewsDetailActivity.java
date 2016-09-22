@@ -494,14 +494,19 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         if (item_id == R.id.share_news) {
 
             String scrap_title = newsTitleTextview.getText().toString();
-            String scrap_content = newsContentTextview.getText().toString();
+            String news_name = newsAuthorTextview.getText().toString();
 
             Intent msg = new Intent(Intent.ACTION_SEND);
 
+            msg.setType("text/plain"); //텍스트//
             msg.addCategory(Intent.CATEGORY_DEFAULT);
-            msg.putExtra(Intent.EXTRA_SUBJECT, scrap_title);
-            msg.putExtra(Intent.EXTRA_TEXT, scrap_content);
-            msg.setType("text/plain");
+
+            //공유정보 설정.//
+            msg.putExtra(Intent.EXTRA_TEXT,
+                    "[IT, 키워드로 읽다. 뉴스잉 IT]" + "\n\n" +
+                            scrap_title + "\n" +
+                            "*이미지링크: " + news_imageUrl + "\n" +
+                            "*출처: " + news_name + " | " + news_link);
 
             startActivity(Intent.createChooser(msg, "Newsing Share"));
         }
