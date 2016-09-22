@@ -3,9 +3,11 @@ package com.example.apple.newsingit_project;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -80,8 +82,9 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
     String nc_imageUrl = null; //후엔 디폴트 이미지 경로 저장.//
     ImageView img_scrap_like;
     NetworkManager networkManager;
+    String original_news_link;
+    CardView cardView;
     private TagGroup mBeautyTagGroup; //태그를 나타낼 스타일 뷰//
-
     private ProgressDialog pDialog;
 
 
@@ -308,6 +311,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                     ncDateView.setText(result.getNc_ntime());
                     authorView.setText(result.getNc_author());
                     is_favorite = result.getFavorite();
+                    original_news_link = result.getNc_link();
 
                     for (int i = 0; i < result.getTags().length; i++) {
                         tags.add(tagList.get(i));
@@ -365,6 +369,8 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        cardView = (CardView) findViewById(R.id.scrap_content_card_view);
+
         titleView = (TextView) findViewById(R.id.text_scrap_title);
         ncTitleView = (TextView) findViewById(R.id.text_scrap_nctitle);
         ncContentView = (TextView) findViewById(R.id.text_scrap_nccontent);
@@ -383,7 +389,6 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
         ncDateView.setTypeface(fontManager.getTypefaceRegularInstance());
         ncContentView.setTypeface(fontManager.getTypefaceMediumInstance());
         likeView.setTypeface(fontManager.getTypefaceMediumInstance());
-
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
@@ -467,6 +472,17 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
             }
         });
 
+        //카드뷰 클릭 리스너(해당 링크로 이동)//
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String news_link = original_news_link;
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(news_link));
+                startActivity(intent);
+            }
+        });
+
         showpDialog();
 
         getSelectScrapContentNetworkData(scrapId);
@@ -512,13 +528,34 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
 
             String scrap_title = titleView.getText().toString();
             String scrap_content = contentView.getText().toString();
+            String news_title = ncTitleView.getText().toString();
+            String total_content = "";
+
+            //스크랩 내용의 사이즈를 가져온다.//
+            int scrap_text_count = contentView.length();
+
+            Log.d("json data: ", "" + scrap_text_count);
+
+            if (scrap_text_count <= 40) {
+                total_content = scrap_content;
+            } else if (scrap_text_count > 40) {
+                String subStringScrap = scrap_content.substring(0, 30);
+
+                total_content = subStringScrap + "...";
+            }
 
             Intent msg = new Intent(Intent.ACTION_SEND);
 
-            msg.addCategory(Intent.CATEGORY_DEFAULT);
-            msg.putExtra(Intent.EXTRA_SUBJECT, scrap_title);
-            msg.putExtra(Intent.EXTRA_TEXT, scrap_content);
             msg.setType("text/plain");
+
+            msg.addCategory(Intent.CATEGORY_DEFAULT);
+
+            //공유정보 설정.//
+            msg.putExtra(Intent.EXTRA_TEXT,
+                    "[IT, 키워드로 읽다. 뉴스잉 IT]" + "\n\n" +
+                            "*제목: " + scrap_title + "\n" +
+                            total_content + "\n" +
+                            "*관련기사: " + news_title + " / " + original_news_link);
 
             startActivity(Intent.createChooser(msg, "Newsing Share"));
         } else if (item_id == R.id.setting_scrap) {

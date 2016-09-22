@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.view_data.NoticeChild;
 import com.example.apple.newsingit_project.data.view_data.NoticeGroup;
@@ -18,8 +17,8 @@ public class NoticeActivity extends AppCompatActivity {
 
     ExpandableListView expandableListView;
     NoticeAdapter mAdapter;
-    List<NoticeGroup> group = new ArrayList<>();
 
+    List<NoticeGroup> group = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class NoticeActivity extends AppCompatActivity {
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int i) {
-                Toast.makeText(NoticeActivity.this, "그룹 닫힘 " + i, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -59,7 +58,6 @@ public class NoticeActivity extends AppCompatActivity {
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int i) {
-                Toast.makeText(NoticeActivity.this, "그룹 열림 " + i, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -70,8 +68,6 @@ public class NoticeActivity extends AppCompatActivity {
             public boolean onChildClick(ExpandableListView listView, View view, int groupposition, int childposition, long id) {
 
                 String userSelectNotice = group.get(groupposition).childList.get(childposition).name.toString();
-
-                Toast.makeText(NoticeActivity.this, "child click : " + userSelectNotice ,Toast.LENGTH_SHORT ).show();
 
                 return true;
             }
