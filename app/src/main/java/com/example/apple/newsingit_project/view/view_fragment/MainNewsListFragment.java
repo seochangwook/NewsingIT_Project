@@ -1396,47 +1396,47 @@ public class MainNewsListFragment extends Fragment {
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword2SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 2과 같다면 이동할 인덱스는 7//
-            move_position_index = 7;
+            move_position_index = 6;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword3SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 3과 같다면 이동할 인덱스는 14//
-            move_position_index = 15;
+            move_position_index = 14;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword4SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 4과 같다면 이동할 인덱스는 21//
-            move_position_index = 22;
+            move_position_index = 21;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword5SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 5과 같다면 이동할 인덱스는 28//
-            move_position_index = 29;
+            move_position_index = 28;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword6SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 6과 같다면 이동할 인덱스는 35//
-            move_position_index = 36;
+            move_position_index = 35;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword7SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 7과 같다면 이동할 인덱스는 14//
-            move_position_index = 43;
+            move_position_index = 42;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword8SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 8과 같다면 이동할 인덱스는 14//
-            move_position_index = 50;
+            move_position_index = 49;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keyword9SectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 9과 같다면 이동할 인덱스는 14//
-            move_position_index = 57;
+            move_position_index = 56;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         } else if (keywordSection.keywor10dSectionDatas.get(0).get_keyword_text().equals(select_keyword)) {
             //키워드 10과 같다면 이동할 인덱스는 14//
-            move_position_index = 64;
+            move_position_index = 63;
 
             mainnews_recyclerview.smoothScrollToPosition(move_position_index); //리스트의 맨 처음으로 이동//
         }
