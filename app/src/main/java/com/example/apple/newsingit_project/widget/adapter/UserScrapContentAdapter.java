@@ -98,32 +98,25 @@ public class UserScrapContentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
                 //현재 사용자 구분에 따라 나눠준다.//
                 if (whoflag.equals("1")) {
-                    //다른 사람//
+                    //다른 사람(내가 좋아요를 했는지 안했는지에 유무에 따라 결정)//
                     uvh.likeButton.setEnabled(false);
-                    //좋아요를 눌렀을 때와 누르지 않았을 때//
 
-                    int favorite_count = Integer.parseInt("" + uvh.likeView.getText());
+                    //좋아요 유무를 가져온다.//
+                    String like_flag = "" + userScrapContentData.userScrapContentDataList.get(position).getLikeFlag();
 
-                    if (favorite_count == 0) //그 해당사람의 좋아요가 아무도 누르지 않았을 경우//
+                    if (like_flag.equals("false")) //그 해당사람의 좋아요가 아무도 누르지 않았을 경우//
                     {
                         uvh.likeButton.setImageResource(R.mipmap.btn_heart_stroke); //내 스크랩 좋아요는 항상 같은 이미지 사용//
-                    } else if (favorite_count > 0) //해당 사람의 좋아요가 1개이상일 경우//
+                    } else if (like_flag.equals("true")) //해당 사람의 좋아요가 1개이상일 경우//
                     {
                         uvh.likeButton.setImageResource(R.mipmap.btn_heart_fill); //내 스크랩 좋아요는 항상 같은 이미지 사용//
                     }
 
                 } else {
-                    //내 스크랩//
+                    //내 스크랩(현재 내 좋아요의 수에 따라서 0개면 빈하트, 1개이상이면 채워진 하트로 만듬)//
                     uvh.likeButton.setEnabled(false);
-                    //uvh.likeButton.setImageResource(R.mipmap.favorite_on); //내 스크랩 좋아요는 항상 같은 이미지 사용//
 
-                    int favorite_count = Integer.parseInt("" + uvh.likeView.getText());
-
-                    if (favorite_count == 0) {
-                        uvh.likeButton.setImageResource(R.mipmap.btn_heart_stroke); //내 스크랩 좋아요는 항상 같은 이미지 사용//
-                    } else if (favorite_count > 0) {
-                        uvh.likeButton.setImageResource(R.mipmap.btn_heart_fill); //내 스크랩 좋아요는 항상 같은 이미지 사용//
-                    }
+                    uvh.likeButton.setImageResource(R.mipmap.btn_heart_fill); //내 스크랩 좋아요는 항상 같은 이미지 사용//
                 }
 
                 uvh.titleView.setTypeface(fontManager.getTypefaceBoldInstance());

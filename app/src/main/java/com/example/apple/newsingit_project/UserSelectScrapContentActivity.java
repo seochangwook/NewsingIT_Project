@@ -343,14 +343,7 @@ public class UserSelectScrapContentActivity extends AppCompatActivity {
                         }
                     } else if (is_me.equals("0")) //나에 대한 처리는 개수에 따라서 색갈만 판단해주면 된다.//
                     {
-                        //좋아요 수에 따른 하트 초기화//
-                        int favorite_count = Integer.parseInt(likeView.getText().toString());
-
-                        if (favorite_count == 0) {
-                            img_scrap_like.setImageResource(R.mipmap.btn_heart_stroke);
-                        } else if (favorite_count > 0) {
-                            img_scrap_like.setImageResource(R.mipmap.btn_heart_fill);
-                        }
+                        img_scrap_like.setImageResource(R.mipmap.btn_heart_fill);
                     }
                 }
             });

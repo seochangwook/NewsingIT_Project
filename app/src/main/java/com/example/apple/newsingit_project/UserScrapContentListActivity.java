@@ -195,6 +195,7 @@ public class UserScrapContentListActivity extends AppCompatActivity {
                         newUserScrapCotentData.setLike(scrapContentList.get(i).getFavorite_cnt());
                         newUserScrapCotentData.setLock(scrapContentList.get(i).getLock()); //락 설정을 위해서 필요//
                         newUserScrapCotentData.setId(scrapContentList.get(i).getId());
+                        newUserScrapCotentData.setLikeFlag(scrapContentList.get(i).getFavorite());
 
                         if (is_user_my.equals("1")) //다른 사람 스크랩 목록//
                         {
