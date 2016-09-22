@@ -25,7 +25,7 @@ android {
     defaultConfig {
         applicationId "com.example.apple.newsingit_project"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
 
