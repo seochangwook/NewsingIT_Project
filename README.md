@@ -188,7 +188,7 @@
 * SearchUserFragment / SearchNewsFragment / SearchTagFragment간 Flag를 주어 이중검색 방지 - 서창욱 (16/09/20 22:02)
 * FollowingList 정보갱신(Observer Pattern 적용) - 서창욱 (16/09/20 22:02)
 * 전체적인 UI 구조 점검 / Clean code 작업 - 서창욱, 임지수 (16/09/21 16:34)
-* 공유 형식
+* 공유 형식 - 임지수, 서창욱 (16/09/22 13:19)
 <p>
 <img src="https://github.com/seochangwook/NewsingIT_Project/blob/master/share.PNG" />
 </p>
