@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.userfolderlist.UserFolderListRequest;
 import com.example.apple.newsingit_project.data.json_data.userfolderlist.UserFolderListRequestResults;
@@ -369,9 +368,6 @@ public class UserInfoActivity extends AppCompatActivity {
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 String select_user_folder_name = user_folderData.user_folder_list.get(position).get_folder_name();
                 String select_user_folder_id = "" + user_folderData.user_folder_list.get(position).getFolder_id();
-
-                Toast.makeText(UserInfoActivity.this, select_user_folder_name + "폴더로 이동", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(UserInfoActivity.this, UserScrapContentListActivity.class);
 
                 intent.putExtra(KEY_FOLDER_NAME, select_user_folder_name);

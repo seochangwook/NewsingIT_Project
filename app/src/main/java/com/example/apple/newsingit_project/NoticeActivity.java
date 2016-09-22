@@ -96,12 +96,12 @@ public class NoticeActivity extends AppCompatActivity {
                 , "만드느라 힘들었음"};
 
 
-        String[] groupDateList = {"09.20", "09.20", "09.20"};
+        String[] groupDateList = {"09.22", "09.20", "09.20"};
 
         for (int i = 0; i < groupList.length; i++) {
-            NoticeChild new_child = new NoticeChild(childList[i]);
-            NoticeGroup new_group = new NoticeGroup(groupList[i], groupDateList[i], new_child);
-            group.add(new_group);
+            NoticeChild newChild = new NoticeChild(childList[i]);
+            NoticeGroup newGroup = new NoticeGroup(groupList[i], groupDateList[i], newChild);
+            group.add(newGroup);
         }
 
         mAdapter.setNoticeData(group);

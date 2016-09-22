@@ -64,7 +64,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
      **/
     private static final int RC_CREATEFOLDER = 100;
 
-    Button btn;
+    Button btnNewsLink;
     /**
      * Popup관련 변수
      **/
@@ -156,7 +156,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         setContentView(R.layout.select_news_detail_activity_layout);
 
         fontManager = new FontManager(SelectNewsDetailActivity.this);
-        btn = (Button) findViewById(R.id.btn_go_detail);
+        btnNewsLink = (Button) findViewById(R.id.btn_go_detail);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -311,7 +311,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
 
         newsTitleTextview.setText(title);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnNewsLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(news_link));
@@ -467,7 +467,7 @@ public class SelectNewsDetailActivity extends AppCompatActivity {
         super.onResume();
         Log.d("message", "onresume");
 
-        btn.setVisibility(View.VISIBLE);
+        btnNewsLink.setVisibility(View.VISIBLE);
 
     }
 

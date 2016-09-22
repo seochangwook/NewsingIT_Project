@@ -58,7 +58,6 @@ public class FollowingListAdapter  extends RecyclerView.Adapter<RecyclerView.Vie
             if (response.code() == 401) {
 
             } else if (response.code() == 200) {
-                // isOk[0] = true;
                 if (context != null) {
                     ((Activity) context).runOnUiThread(new Runnable() {
                         @Override

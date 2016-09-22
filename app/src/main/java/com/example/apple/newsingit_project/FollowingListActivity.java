@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequest;
 import com.example.apple.newsingit_project.data.json_data.followinglist.FollowingListRequestResults;
@@ -324,8 +323,6 @@ public class FollowingListActivity extends AppCompatActivity {
                 String selectName = followingData.followingDataList.get(position).getName().toString();
                 String selectId = followingData.followingDataList.get(position).getId();
                 String serlect_flag = "" + followingData.followingDataList.get(position).getFlag();
-
-                Toast.makeText(FollowingListActivity.this, "" + selectName, Toast.LENGTH_SHORT).show();
 
                 //해당 사람의 마이 페이지로 이동//
                 Intent intent = new Intent(FollowingListActivity.this, UserInfoActivity.class);

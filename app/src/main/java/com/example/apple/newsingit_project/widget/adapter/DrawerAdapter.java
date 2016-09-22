@@ -10,7 +10,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.apple.newsingit_project.R;
 import com.example.apple.newsingit_project.data.view_data.DrawerGroup;
@@ -299,8 +298,6 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if(checked){
-                            Toast.makeText(context, "새 스크랩 알림 on", Toast.LENGTH_SHORT).show();
-
                             //공유 프래퍼런스의 값도 변경해준다.//
                             PropertyManager.getInstance().set_nt_fs("true");
 
@@ -308,8 +305,6 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                             set_new_scrap_alarm_on();
 
                         }else{
-                            Toast.makeText(context, "새 스크랩 알림 off", Toast.LENGTH_SHORT).show();
-
                             //공유 프래퍼런스의 값도 변경해준다.//
                             PropertyManager.getInstance().set_nt_fs("false");
 
@@ -322,15 +317,11 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if (checked) {
-                            Toast.makeText(context, "내 스크랩 알림 on", Toast.LENGTH_SHORT).show();
-
                             //공유 프래퍼런스의 값도 변경해준다.//
                             PropertyManager.getInstance().set_nt_s("true");
 
                             set_my_scrap_alarm_on();
                         } else {
-                            Toast.makeText(context, "내 스크랩 알림 off", Toast.LENGTH_SHORT).show();
-
                             //공유 프래퍼런스의 값도 변경해준다.//
                             PropertyManager.getInstance().set_nt_s("false");
 
@@ -343,15 +334,11 @@ public class DrawerAdapter extends BaseExpandableListAdapter {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                         if (checked) {
-                            Toast.makeText(context, "마이페이지 알림 on", Toast.LENGTH_SHORT).show();
-
                             //공유 프래퍼런스의 값도 변경해준다.//
                             PropertyManager.getInstance().set_nt_f("true");
 
                             set_my_page_follow_alarm_on();
                         } else {
-                            Toast.makeText(context, "마이페이지 알림 off", Toast.LENGTH_SHORT).show();
-
                             //공유 프래퍼런스의 값도 변경해준다.//
                             PropertyManager.getInstance().set_nt_f("false");
 
